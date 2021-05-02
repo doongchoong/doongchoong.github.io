@@ -6,7 +6,18 @@
     <description>Recent content in 둥충의 코딩 on 둥충코딩</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sun, 02 May 2021 17:02:31 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 May 2021 17:44:40 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>yyjson분석</title>
+      <link>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/yyjson%EB%B6%84%EC%84%9D/</link>
+      <pubDate>Sun, 02 May 2021 17:44:40 +0900</pubDate>
+      
+      <guid>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/yyjson%EB%B6%84%EC%84%9D/</guid>
+      <description>yyjson 분석 yyjson은 현존하는 JSON 파서중 가장 빠르다고 알려져 있는 라이브러리이다. 이 소스코드를 살펴보면서 유용한 것들과 공부할 만한 것 들을 메모한다.
+단 두개 파일 yyjson.c , yyjson.h 단 두개 파일만 제공하여 각 프로젝트에 쉽게 빌드할 수 있도록 하였다.
+CPU 최적화 json 과 같은 텍스트 분석이 필요로 하는 것은 많은 선후 상태 의존성을 필요로 한다. 따라서 병렬로 수행하기 힘들며 수많은 분기가 존재하여 머신의 성능을 이끌어내기 어려운 분야 중 하나. 따라서 yyjson이 어떤 최적화들을 하였는지 유용한 트릭들을 확인하도록 한다.</description>
+    </item>
+    
     <item>
       <title>비트연산</title>
       <link>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</link>
