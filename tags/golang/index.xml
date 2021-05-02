@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>golang on 둥충코딩</title>
+    <link>https://doongchoong.github.io/tags/golang/</link>
+    <description>Recent content in golang on 둥충코딩</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language><atom:link href="https://doongchoong.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang</title>
+      <link>https://doongchoong.github.io/golang/</link>
+      <pubDate>Sun, 02 May 2021 15:18:39 +0900</pubDate>
+      
+      <guid>https://doongchoong.github.io/golang/</guid>
+      <description>고언어 관련된 내용 정리</description>
+    </item>
+    
+  </channel>
+</rss>

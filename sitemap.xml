@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://doongchoong.github.io/golang/</loc>
+    <lastmod>2021-05-02T15:18:39+09:00</lastmod>
+  </url><url>
+    <loc>https://doongchoong.github.io/golang/use_hugo/</loc>
+    <lastmod>2021-05-02T15:18:39+09:00</lastmod>
+  </url><url>
+    <loc>https://doongchoong.github.io/</loc>
+    <lastmod>2021-05-02T15:18:39+09:00</lastmod>
+  </url><url>
+    <loc>https://doongchoong.github.io/categories/</loc>
+  </url><url>
+    <loc>https://doongchoong.github.io/tags/golang/</loc>
+  </url><url>
+    <loc>https://doongchoong.github.io/tags/</loc>
+  </url>
+</urlset>
