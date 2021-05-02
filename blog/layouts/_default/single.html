@@ -1,0 +1,36 @@
+{{define "main"}}
+
+<!--Title-->
+<header>
+<h2>{{.Title}}</h2>
+
+<!--Date-->
+<p class="dt">{{.Date.Format "2006-01-01"}} Updated</p>
+</header>
+
+<!--TOC-->
+{{.TableOfContents}}
+
+<!--Content-->
+<article>
+{{.Content}}
+</article>
+
+<!--Prev/Next-->
+<div>
+{{with .PrevInSection}}Prev <a href="{{.RelPermalink}}">{{.Title}}</a>{{end}}
+{{with .NextInSection}}Next <a href="{{.RelPermalink}}">{{.Title}}</a>{{end}}
+</div>
+
+<!--Tag-->
+<ul  class="tags">
+	{{range (.GetTerms "tags")}}
+	<li><a href="{{.RelPermalink}}">{{.LinkTitle}}</a></li>
+	{{end}}
+</ul>
+
+<!-- list -->
+{{ partial "sections-tree.html" . }}
+
+
+{{end}}

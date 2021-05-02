@@ -1,0 +1,41 @@
+
+<div class="section-tree">
+    <ul>
+	{{ if (and (ne .CurrentSection.IsHome true) (gt (len .CurrentSection.RegularPages) 0)) }}
+	<h3 class="subj">글목록</h3>
+	{{ template "current-section_pages" . }}
+	{{end}}
+	{{ if gt (len .CurrentSection.Sections) 0}}
+	<h3 class="subj">카테고리</h3>
+	{{ template "section-tree-nav" . }}
+	{{end}}
+	{{/* Show root level pages at home page after section tree */}}
+	{{ if (and (eq .CurrentSection.IsHome true) (gt (len .CurrentSection.RegularPages) 0)) }}
+	<h3 class="subj">글목록</h3>
+	{{ template "current-section_pages" . }}
+	{{end}}
+    </ul>
+</div>
+
+{{ define "section-tree-nav" }}
+{{ range .CurrentSection.Sections }}
+<li><h4><a href="{{.Permalink}}">{{ .LinkTitle }}</a></h4></li>
+
+{{ template "current-section_pages" . }} 
+<ul>
+    {{ template "section-tree-nav" . }}
+</ul>
+{{ end }}
+{{ end }}
+
+{{ define "current-section_pages" }}
+<ul>
+    {{ range .CurrentSection.RegularPages }}
+    {{ if (eq $.Permalink .Permalink) }}
+    <li>{{ .LinkTitle }}</li>
+    {{ else }}
+    <li><a href="{{.Permalink}}">{{ .LinkTitle }}</a>{{ with .PublishDate }}<span><small class="mx-1 text-muted"> {{.Format "2006-01-01"}} </small></span>{{ end }}</li>
+    {{ end }}
+    {{ end }}
+</ul>
+{{ end }}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools사용 on 둥충코딩</title>
+    <link>https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/</link>
+    <description>Recent content in Tools사용 on 둥충코딩</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Sun, 02 May 2021 23:30:18 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chocolatey</title>
+      <link>https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/chocolatey/</link>
+      <pubDate>Sun, 02 May 2021 23:30:18 +0900</pubDate>
+      
+      <guid>https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/chocolatey/</guid>
+      <description>Chocolatey 사용 윈도우에서 chocolatey 우분투의 apt, 아치의 pacman 와 같이 패키지를 관리해주는 시스템이다.
+패키지 검색 $ choco search git Chocolatey v0.10.15 git 2.31.1 [Approved] ... 179 packages found. 패키지 설치 $ choco install joplin Installing the following packages: joplin By installing you accept licenses for the packages. joplin v1.7.11 already installed. Use --force to reinstall, specify a version to install, or try upgrade. Chocolatey installed 0/1 packages. See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.</description>
+    </item>
+    
+    <item>
+      <title>Use_hugo</title>
+      <link>https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/use_hugo/</link>
+      <pubDate>Sun, 02 May 2021 15:18:39 +0900</pubDate>
+      
+      <guid>https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/use_hugo/</guid>
+      <description>휴고 사용하기 Gohugo 는 정적 웹페이지를 생성하는 툴이다. 이를 이용하여 Github에 블로그를 구축하는 것을 보고 이 블로그도 hugo로 만들어보기로 하였다.
+설치하기 Hugo Installing 을 참조하여 설치한다. 바이너리를 받아서 설치후 환경변수에 등록하면 된다. 혹은 Chocolately 를 사용 패키지 설치한다.
+$ choco search hugo 사이트 생성하기 사이트(블로그)를 구성하고자 하는 폴더에 가서 아래 명령을 수행한다.
+$ hugo new site blog 나는 블로그를 만들고자 했기때문에 blog 폴더에 각종 폴더 및 파일들이 생성된다.
+archetypes content data layouts public resources server static themes config.</description>
+    </item>
+    
+  </channel>
+</rss>
