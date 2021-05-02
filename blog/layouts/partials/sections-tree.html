@@ -34,7 +34,7 @@
     {{ if (eq $.Permalink .Permalink) }}
     <li>{{ .LinkTitle }}</li>
     {{ else }}
-    <li><a href="{{.Permalink}}">{{ .LinkTitle }}</a>{{ with .PublishDate }}<span><small class="mx-1 text-muted"> {{.Format "2006-01-01"}} </small></span>{{ end }}</li>
+    <li><a href="{{.Permalink}}">{{ .LinkTitle }}</a>{{ with .PublishDate }}<span><small class="mx-1 text-muted"> {{.Format "2006-01-02"}} </small></span>{{ end }}</li>
     {{ end }}
     {{ end }}
 </ul>

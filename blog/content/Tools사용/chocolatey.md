@@ -1,7 +1,7 @@
 ---
 title: "Chocolatey"
 date: 2021-05-02T23:30:18+09:00
-draft: true
+draft: false
 ---
 
 # Chocolatey 사용
