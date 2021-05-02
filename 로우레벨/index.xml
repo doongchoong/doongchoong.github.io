@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>둥충의 코딩 on 둥충코딩</title>
-    <link>https://doongchoong.github.io/</link>
-    <description>Recent content in 둥충의 코딩 on 둥충코딩</description>
+    <title>로우레벨 on 둥충코딩</title>
+    <link>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/</link>
+    <description>Recent content in 로우레벨 on 둥충코딩</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sun, 02 May 2021 17:02:31 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 May 2021 17:02:31 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>비트연산</title>
       <link>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</link>
@@ -17,19 +17,6 @@
 바이트 관련 워드에 0인 바이트가 있는지 확인하기 워드는 프로세서가 기본적으로 처리할수 있는 단위를 말하며 이 문서에선 4bytes를 의미한다. 4bytes 내에 0바이트가 존재하는지 확인하는 것으로서 이를 활용하면 strlen 등을 최적화할 수 있다.
 #define haszero(v) (((v)-0x01010101UL) &amp;amp; ~ (v) &amp;amp; 0x80808080UL) 이 매크로를 사용하면 0인 바이트가 있을때 해당바이트 최상위 비트가 1로 세팅된다.
 리틀엔디언 세번째바이트가 0일 경우 0x800000 첫번째 바이트가 0일 경우 0x80 이런 식으로 결과가 나오게 된다.</description>
-    </item>
-    
-    <item>
-      <title>Use_hugo</title>
-      <link>https://doongchoong.github.io/golang/use_hugo/</link>
-      <pubDate>Sun, 02 May 2021 15:18:39 +0900</pubDate>
-      
-      <guid>https://doongchoong.github.io/golang/use_hugo/</guid>
-      <description>휴고 사용하기 Gohugo 는 정적 웹페이지를 생성하는 툴이다. 이를 이용하여 Github에 블로그를 구축하는 것을 보고 이 블로그도 hugo로 만들어보기로 하였다.
-설치하기 Hugo Installing 을 참조하여 설치한다. 바이너리를 받아서 설치후 환경변수에 등록하면 된다. 혹은 Chocolately 를 사용 패키지 설치한다.
-$ choco search hugo 사이트 생성하기 사이트(블로그)를 구성하고자 하는 폴더에 가서 아래 명령을 수행한다.
-$ hugo new site blog 나는 블로그를 만들고자 했기때문에 blog 폴더에 각종 폴더 및 파일들이 생성된다.
-archetypes content data layouts public resources server static themes config.</description>
     </item>
     
   </channel>
