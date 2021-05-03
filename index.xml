@@ -6,7 +6,20 @@
     <description>Recent content in 둥충의 코딩 on 둥충코딩</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sun, 02 May 2021 23:30:18 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 03 May 2021 19:50:38 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>만델브로트프랙탈</title>
+      <link>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/</link>
+      <pubDate>Mon, 03 May 2021 19:50:38 +0900</pubDate>
+      
+      <guid>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/</guid>
+      <description>만델브로트 프랙탈 프랙탈은 자기유사성으로 알려져있는 일부 조각이 전부를 구성하는 모양이 되는 기하학적 구조를 뜻한다. 그중 만델브로트 집합은 풍뎅이인 특유의 모양으로 잘 알려져 있다.
+WEBGL로 구현
+정의 정의된 수열이 발산하지 않는 성질을 갖도록 하는 복수수 c의 집합으로 정의된다.
+Z0 = 0 Zn+1 = Zn^2 + c  실제로 그리는 방법 사실 이렇게만 써놓으면 잘 감이 오지 않는다. 이를 실수부 , 허수부로 나눈다.
+(X0, Y0) = (0, 0) Xn+1 = Xn^2 - Yn^2 + a Yn+1 = 2 * Xn * Yn + b  이것을 X축은 가로 Y축은 세로로 그대로 대입한다.</description>
+    </item>
+    
     <item>
       <title>Chocolatey</title>
       <link>https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/chocolatey/</link>
