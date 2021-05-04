@@ -4,5 +4,5 @@ blog/data
 blog/public
 blog/resources
 blog/server
-blog/static
+blog/static/img
 blog/themes

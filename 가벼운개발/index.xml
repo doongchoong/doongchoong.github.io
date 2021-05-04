@@ -6,7 +6,19 @@
     <description>Recent content in 가벼운개발 on 둥충코딩</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 03 May 2021 19:50:38 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 04 May 2021 21:34:32 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>M2평탄화</title>
+      <link>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/m2%ED%8F%89%ED%83%84%ED%99%94/</link>
+      <pubDate>Tue, 04 May 2021 21:34:32 +0900</pubDate>
+      
+      <guid>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/m2%ED%8F%89%ED%83%84%ED%99%94/</guid>
+      <description>M2 평탄화 이 페이지에서 말하는 M2란 광의통화를 의미한다. 작년 2020년 코로나가 전세계로 급속도로 번지면서 경제가 급격히 얼어붙었다. 그래서 2020년 3월 미국의 FED에서 돈을 엄청나게 많이 뿌리며 금융 충격에 대비하였고 이에 대부분의 자산은 급격한 반등을 이루게 되었다.
+이 과정에서 M2 통화량 증가분을 제거하면 어느정도 수준으로 반등이 이루어졌는지 파악해볼수 있지 않을까? 하는 아이디어에서 M2 영향도를 제거하는 차트를 그려보는 간단한 개발을 하였다. 이는 작년 9~10월 정도에 python으로 개발하였다.
+M2flat Demo사이트
+데이터 수집하기 먼저 데이터가 필요한데 구할 데이터는 명확하다.</description>
+    </item>
+    
     <item>
       <title>만델브로트프랙탈</title>
       <link>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/</link>

@@ -4,6 +4,7 @@ title = "둥충코딩"
 #theme = "simpleit-hugo-theme"
 theme = "hugo-theme-lhw"
 publishDir = "../"
+staticDir="static"
 
 [markup]
   [markup.highlight]
