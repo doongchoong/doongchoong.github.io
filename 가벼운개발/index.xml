@@ -6,7 +6,17 @@
     <description>Recent content in 가벼운개발 on 둥충코딩</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 04 May 2021 21:34:32 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 May 2021 23:35:07 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>퍼지검색</title>
+      <link>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/</link>
+      <pubDate>Mon, 10 May 2021 23:35:07 +0900</pubDate>
+      
+      <guid>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/</guid>
+      <description>퍼지 검색 Fuzzy-search 검색어가 정확하지 않아도 유사한 항목을 찾아주는 검색 방식이다. 유전정보를 활용하는 생물학 분야 혹은 문자열 검색 등 여러 분야에 쓰이는데 이중 파일명을 검색하거나 함수 메서드등을 검색하는 기능이 아주 유용해 보인다.
+사례 Sublime Text의 검색 기능을 들수 있다. 그리고 이 기능에 대해 궁금한 사람이 있었던 모양이다. 이런 Article 이 있다. 그리고 최근에 발견한 툴인데 fzf 라는 fuzzy-finder 가 있다. 아주 훌륭한 tool이고 정말 멋지다. 이 프로그램은 자기가 필요한 일만 멋지고 충분하게 딱 해내고 Cool하게 끝낸다.</description>
+    </item>
+    
     <item>
       <title>M2평탄화</title>
       <link>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/m2%ED%8F%89%ED%83%84%ED%99%94/</link>
