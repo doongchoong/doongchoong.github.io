@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Python소스설치 | 둥충코딩</title>
+  <meta name="description" content="" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="16x16">  
+  <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="32x32">  
+  <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="96x96"> 
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head><body>
+<div class="home">
+<a href="/">둥충코딩</a>
+
+
+</div><div id="content">
+
+
+<header>
+<h2>Python소스설치</h2>
+
+
+<p class="dt">2021-08-14 03:47 Updated</p>
+</header>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-설치순서">1. 설치순서</a></li>
+    <li><a href="#2-고려할-사항들">2. 고려할 사항들</a>
+      <ul>
+        <li><a href="#21-64비트-시스템">2.1 64비트 시스템</a></li>
+        <li><a href="#22-root계정이-아닌-하위계정">2.2 Root계정이 아닌 하위계정</a></li>
+        <li><a href="#23-상용-컴파일러">2.3 상용 컴파일러</a></li>
+        <li><a href="#24-c-익스텐션">2.4 C 익스텐션</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-설치후-확인">3. 설치후 확인</a></li>
+  </ul>
+</nav>
+
+
+<article>
+<h1 id="python-소스-설치">Python 소스 설치</h1>
+<p>보안이 엄격한 회사에서는 물리적으로 서버망이 분리되어 있을 수도 있다.
+가벼운 목적에서 스크립트 언어를 설치하려고 해도 제약사항이 참 많다.
+특히 설치 패키지가 지원하지 않는 유닉스류 등을 사용하게 되면
+소스 설치가 필요하다. 하지만 생각보다 어렵지 않고 쉬운편이다.</p>
+<h2 id="1-설치순서">1. 설치순서</h2>
+<p><a href="https://www.python.org/downloads/source/">설치소스는 여기서 받는다.</a></p>
+<ol>
+<li>configure 를 통해서 환경에 맞게 옵션을 주어 실행</li>
+<li>Makefile이 생성됨.</li>
+<li>Makefile을 살펴보면서 다시 빌드환경 점검</li>
+<li>make, make install</li>
+</ol>
+<h2 id="2-고려할-사항들">2. 고려할 사항들</h2>
+<h3 id="21-64비트-시스템">2.1 64비트 시스템</h3>
+<p>64비트로 같이 맞추는게 좋다. AIX 류라면</p>
+<blockquote>
+<p><code>export OBJECT_MODE=64</code></p>
+</blockquote>
+<p>그리고 상용 컴파일러를 쓰게 되면 64비트 별도 옵션을 Makefile에
+적혀 있어야 한다.</p>
+<h3 id="22-root계정이-아닌-하위계정">2.2 Root계정이 아닌 하위계정</h3>
+<p>파이썬 설치 위치부터 별도로 지정하는 것이 좋을 것이다.
+특수 용도의 계정에서 별도로 사용하는 것이니까 말이다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">./configure  --prefix<span style="color:#666">=</span>/home/xxxuser/opensources
+</code></pre></div><h3 id="23-상용-컴파일러">2.3 상용 컴파일러</h3>
+<p>파이썬의 configure는 범용적인 옵션이 미리 등록되어 있지만
+상용 컴파일러 인지를 못한다.
+회사에서 별도로 사용하는 컴파일러가 있고 옵션도 별개라면
+Makefile을 점검해서 각종 옵션을 조정해주어야 한다.</p>
+<h3 id="24-c-익스텐션">2.4 C 익스텐션</h3>
+<p>python 설치시 C Extension 개발도 같이 고려하는 경우도 있을 것이다.
+그럼 파이썬 .so 파일이 필요하다. 이를 위해서는
+<code>enable-shared</code> 옵션을 준다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">./configure --enable-shared  --prefix<span style="color:#666">=</span>/home/xxxuser/opensources
+</code></pre></div><p>이렇게 설치하게 되면
+위 prefix 위치에 lib 디렉토리에 python3.x.so  등이 생겨나 있을 것이다.
+include 디렉토리에는 Python3.x.h 헤더가 있어야 한다.</p>
+<h2 id="3-설치후-확인">3. 설치후 확인</h2>
+<p>prefix 의 bin 디렉토리에 바이너리가 있는지 그리고 실행되는지 확인
+include 디렉토리에 Python3.9.h 등이 있는지 확인 (enable-shared)
+lib 디렉토리에 lPython3.9.so 등이 있는지 확인 (enable-shared)
+lib 디렉토리에 python3.9 디렉토리가 있는지 (파이썬의 라이브러리 디렉토리)</p>
+
+</article>
+
+
+<div>
+Prev <a href="/tools%EC%82%AC%EC%9A%A9/chocolatey/">Chocolatey</a>
+
+</div>
+
+
+<ul  class="tags">
+	
+</ul>
+
+
+
+<div class="section-tree">
+    <ul>
+	
+	<h3 class="subj">글목록</h3>
+	
+<ul>
+    
+    
+    <li>Python소스설치</li>
+    
+    
+    
+    <li><a href="https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/chocolatey/">Chocolatey</a><span><small class="mx-1 text-muted"> 2021-05-02 </small></span></li>
+    
+    
+    
+    <li><a href="https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/use_hugo/">Use_hugo</a><span><small class="mx-1 text-muted"> 2021-05-02 </small></span></li>
+    
+    
+</ul>
+
+	
+	
+	
+	
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+	</div>
+
+</body>
+
+</html>
