@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>yyjson분석 | 둥충코딩</title>
+  <meta name="description" content="" />
+  <meta name="google-site-verification" content="8mZLCoE--uWyZhe-U5mUVVMeFC5gD0Pkz-Sm-r0iaYE" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="16x16">  
+  <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="32x32">  
+  <link rel="icon" type="image/png" href="/assets/favicon.png" sizes="96x96"> 
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head><body>
+<div class="home">
+<a href="/">둥충코딩</a>
+
+
+</div><div id="content">
+
+
+<header>
+<h2>yyjson분석</h2>
+
+
+<p class="dt">2021-05-02 05:44 Updated</p>
+</header>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#단-두개-파일">단 두개 파일</a></li>
+    <li><a href="#cpu-최적화">CPU 최적화</a>
+      <ul>
+        <li><a href="#1-loop-unrolling">1. Loop unrolling</a></li>
+        <li><a href="#2-likely-unlikely">2. Likely, Unlikely</a></li>
+        <li><a href="#3-asm-volatile">3. Asm volatile</a></li>
+      </ul>
+    </li>
+    <li><a href="#goto-문">Goto 문</a></li>
+    <li><a href="#bytes-매치">Bytes 매치</a></li>
+    <li><a href="#character-테이블">Character 테이블</a></li>
+  </ul>
+</nav>
+
+
+<article>
+<h1 id="yyjson-분석">yyjson 분석</h1>
+<p><a href="https://github.com/ibireme/yyjson">yyjson</a>은
+현존하는 JSON 파서중 가장 빠르다고 알려져 있는 라이브러리이다.
+이 소스코드를 살펴보면서 유용한 것들과 공부할 만한 것 들을 메모한다.</p>
+<h2 id="단-두개-파일">단 두개 파일</h2>
+<p>yyjson.c , yyjson.h 단 두개 파일만 제공하여
+각 프로젝트에 쉽게 빌드할 수 있도록 하였다.</p>
+<h2 id="cpu-최적화">CPU 최적화</h2>
+<p>json 과 같은 텍스트 분석이 필요로 하는 것은
+많은 선후 상태 의존성을 필요로 한다. 따라서 병렬로 수행하기 힘들며
+수많은 분기가 존재하여 머신의 성능을 이끌어내기 어려운
+분야 중 하나. 따라서 yyjson이 어떤 최적화들을 하였는지
+유용한 트릭들을 확인하도록 한다.</p>
+<h3 id="1-loop-unrolling">1. Loop unrolling</h3>
+<p>루프로 줄여쓸수 있는 코드를 오히려 늘여씀으로서
+반복을 판단하는 조건판단의 수를 줄이는 기법
+<a href="https://en.wikipedia.org/wiki/Duff%27s_device">Duff&rsquo;s Device</a>
+로 알려져 있는 기법이다.
+yyjson에서는 이를 repeat 매크로로 풀어낸다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#080;font-style:italic">/* Macros used for loop unrolling and other purpose. */</span>
+<span style="color:#080">#define repeat2(x)  { x x }
+</span><span style="color:#080">#define repeat3(x)  { x x x }
+</span><span style="color:#080">#define repeat4(x)  { x x x x }
+</span><span style="color:#080">#define repeat8(x)  { x x x x x x x x }
+</span><span style="color:#080">#define repeat16(x) { x x x x x x x x x x x x x x x x }
+</span><span style="color:#080"></span>
+<span style="color:#080">#define repeat4_incr(x)  { x(0) x(1) x(2) x(3) }
+</span><span style="color:#080"></span>
+<span style="color:#080">#define repeat8_incr(x)  { x(0) x(1) x(2) x(3) x(4) x(5) x(6) x(7) }
+</span><span style="color:#080"></span>
+<span style="color:#080">#define repeat16_incr(x) { x(0) x(1) x(2) x(3) x(4) x(5) x(6) x(7) \
+</span><span style="color:#080">                           x(8) x(9) x(10) x(11) x(12) x(13) x(14) x(15) }
+</span><span style="color:#080"></span>
+<span style="color:#080">#define repeat_in_1_18(x) { x(1) x(2) x(3) x(4) x(5) x(6) x(7) \
+</span><span style="color:#080">                            x(8) x(9) x(10) x(11) x(12) x(13) x(14) x(15) \
+</span><span style="color:#080">                            x(16) x(17) x(18) }
+</span></code></pre></div><p>이는 소스코드에선 하나의 코드를 쓰지만 repeat 매크로를 사용하여
+자동으로 반복되도록 확장하는 일종의 snippets 이다.</p>
+<h3 id="2-likely-unlikely">2. Likely, Unlikely</h3>
+<p>likely, unlikely 매크로는 리눅스 커널 소스코드에서 사용했다고 알려져있는데
+이는 Branch 가 발생되는 부분에서 힌트를 주는 것이다.
+true 가 많이 발생할 경우는 likely , false가 많이 발생할 경우는
+unlikely 등으로 사용한다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#080;font-style:italic">/* likely */</span>
+<span style="color:#080">#ifndef yyjson_likely
+</span><span style="color:#080">#   if yyjson_has_builtin(__builtin_expect) || YYJSON_GCC_VER &gt;= 4
+</span><span style="color:#080">#       define yyjson_likely(expr) __builtin_expect(!!(expr), 1)
+</span><span style="color:#080">#   else
+</span><span style="color:#080">#       define yyjson_likely(expr) (expr)
+</span><span style="color:#080">#   endif
+</span><span style="color:#080">#endif
+</span><span style="color:#080"></span>
+<span style="color:#080;font-style:italic">/* unlikely */</span>
+<span style="color:#080">#ifndef yyjson_unlikely
+</span><span style="color:#080">#   if yyjson_has_builtin(__builtin_expect) || YYJSON_GCC_VER &gt;= 4
+</span><span style="color:#080">#       define yyjson_unlikely(expr) __builtin_expect(!!(expr), 0)
+</span><span style="color:#080">#   else
+</span><span style="color:#080">#       define yyjson_unlikely(expr) (expr)
+</span><span style="color:#080">#   endif
+</span><span style="color:#080">#endif
+</span></code></pre></div><p>사실 위 매크로중 중요한 것은 <code>__builtin_expect(!!(expr), 0)</code> 이것이다.
+1이면 likely , 0이면 unlikely이다. 이를 지원하는 컴파일러에 여부에 따라
+위처럼 묶어준뒤 .c 파일에서</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#080;font-style:italic">/* Macros used to provide branch prediction information for compiler. */</span>
+<span style="color:#080">#undef  likely
+</span><span style="color:#080">#define likely(x)       yyjson_likely(x)
+</span><span style="color:#080">#undef  unlikely
+</span><span style="color:#080">#define unlikely(x)     yyjson_unlikely(x)
+</span></code></pre></div><p>이렇게 축약하여 사용한다. 지원하지 않는 컴파일러라면 성능이 급격히 떨어지게 되므로
+될 수 있는 한 해당 기능을 지원하는 컴파일러를 쓰는 것이 좋다. 위 코드처럼
+GCC 4 버젼이상, 그리고 개인적으로 검색해본 결과
+<a href="https://llvm.org/docs/BranchWeightMetadata.html">LLVM도 지원</a>
+한다.</p>
+<p>위 두 매크로를 정의한 뒤에 어휘분석에서 발생하는 모든 if문에서
+likely , unlikely를 적당히 버무려 사용하면 된다.</p>
+<h3 id="3-asm-volatile">3. Asm volatile</h3>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    
+<span style="color:#a0a000">skip_ascii_end</span>:
+    
+    <span style="color:#080;font-style:italic">/*
+</span><span style="color:#080;font-style:italic">     GCC may store src[i] in a register at each line of expr_jump(i) above.
+</span><span style="color:#080;font-style:italic">     These instructions are useless and will degrade performance.
+</span><span style="color:#080;font-style:italic">     This inline asm is a hint for gcc: &#34;the memory has been modified,
+</span><span style="color:#080;font-style:italic">     do not cache it&#34;.
+</span><span style="color:#080;font-style:italic">     */</span>
+<span style="color:#080">#if YYJSON_IS_REAL_GCC
+</span><span style="color:#080"></span>    <span style="color:#a2f;font-weight:bold">__asm</span> <span style="color:#a2f;font-weight:bold">volatile</span>(<span style="color:#b44">&#34;&#34;</span><span style="color:#666">:</span><span style="color:#b44">&#34;=m&#34;</span>(<span style="color:#666">*</span>src)<span style="color:#666">::</span>);
+<span style="color:#080">#endif
+</span><span style="color:#080"></span>    <span style="color:#a2f;font-weight:bold">if</span> (likely(<span style="color:#666">*</span>src <span style="color:#666">==</span> <span style="color:#b44">&#39;&#34;&#39;</span>)) {
+        val<span style="color:#666">-&gt;</span>tag <span style="color:#666">=</span> ((u64)(src <span style="color:#666">-</span> cur) <span style="color:#666">&lt;&lt;</span> YYJSON_TAG_BIT) <span style="color:#666">|</span> YYJSON_TYPE_STR;
+        val<span style="color:#666">-&gt;</span>uni.str <span style="color:#666">=</span> (<span style="color:#a2f;font-weight:bold">const</span> <span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">*</span>)cur;
+        <span style="color:#666">*</span>src <span style="color:#666">=</span> <span style="color:#b44">&#39;\0&#39;</span>;
+        <span style="color:#666">*</span>end <span style="color:#666">=</span> src <span style="color:#666">+</span> <span style="color:#666">1</span>;
+        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+    }
+</code></pre></div><p>매우 난해한 코드이다. 인라인 어셈블리로 주석을 잘 읽어보자.</p>
+<h2 id="goto-문">Goto 문</h2>
+<p>lexer를 제작할때는 상태머신(FSM)을 작성해서 구현하는 경우가 많은데
+이때 goto를 사용할 수 있다.
+일반적인 goto 문은 로직을 어지럽게 하며 최적화하기도 힘들지만
+이런 상태머신을 구현할 때는 오히려 좋은 케이스라고 할 수 있다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">static_inline <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">read_string</span>(u8 <span style="color:#666">*</span>cur,
+                               u8 <span style="color:#666">**</span>end,
+                               yyjson_val <span style="color:#666">*</span>val,
+                               <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">**</span>msg) {
+
+<span style="color:#080;font-style:italic">// ... 수많은 코드 ...
+</span><span style="color:#080;font-style:italic"></span>
+<span style="color:#a0a000">skip_ascii</span>:
+    <span style="color:#080;font-style:italic">/* Most strings have no escaped characters, so we can jump them quickly. */</span>
+    
+<span style="color:#a0a000">skip_ascii_begin</span>:
+    <span style="color:#080;font-style:italic">/*
+</span><span style="color:#080;font-style:italic">     We want to make loop unrolling, as shown in the following code. Some
+</span><span style="color:#080;font-style:italic">     compiler may not generate instructions as expected, so we rewrite it with
+</span><span style="color:#080;font-style:italic">     explicit goto statements. We hope the compiler can generate instructions
+</span><span style="color:#080;font-style:italic">     like this: https://godbolt.org/z/8vjsYq
+</span><span style="color:#080;font-style:italic">     
+</span><span style="color:#080;font-style:italic">         while (true) repeat16({
+</span><span style="color:#080;font-style:italic">            if (likely(!(char_is_ascii_stop(*src)))) src++;
+</span><span style="color:#080;font-style:italic">            else break;
+</span><span style="color:#080;font-style:italic">         });
+</span><span style="color:#080;font-style:italic">     */</span>
+<span style="color:#080">#define expr_jump(i) \
+</span><span style="color:#080">    if (likely(!char_is_ascii_stop(src[i]))) {} \
+</span><span style="color:#080">    else goto skip_ascii_stop##i;
+</span><span style="color:#080"></span>    
+<span style="color:#080">#define expr_stop(i) \
+</span><span style="color:#080">    skip_ascii_stop##i: \
+</span><span style="color:#080">    src += i; \
+</span><span style="color:#080">    goto skip_ascii_end;
+</span><span style="color:#080"></span>    
+    repeat16_incr(expr_jump);
+    src <span style="color:#666">+=</span> <span style="color:#666">16</span>;
+    <span style="color:#a2f;font-weight:bold">goto</span> skip_ascii_begin;
+    repeat16_incr(expr_stop);
+    
+<span style="color:#080">#undef expr_jump
+</span><span style="color:#080">#undef expr_stop
+</span><span style="color:#080"></span>    
+<span style="color:#a0a000">skip_ascii_end</span>:
+
+
+<span style="color:#080;font-style:italic">// ... 수많은 코드 ...
+</span><span style="color:#080;font-style:italic"></span>
+}
+</code></pre></div><p><code>skip_ascii</code>, <code>skip_ascii_begin</code>, <code>skip_ascii_end</code>
+등을 라벨을 사용하여 goto문으로 상태이동을 표현하였다.</p>
+<p>이때 재밌는 점은 위에서 설명한 loop unrolling, likely 매크로
+등이 쓰인다는 점이다. loop Unrolling 매크로가 풀릴때 코드는 대략
+아래 모양으로 만들어진다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+<span style="color:#a0a000">skip_ascii_begin</span>:
+
+<span style="color:#080;font-style:italic">// repeat16_incr(expr_jump); // 이게 풀리면
+</span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">if</span> (likely(<span style="color:#666">!</span>char_is_ascii_stop(src[<span style="color:#666">0</span>]))) {}
+    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">goto</span> skip_ascii_stop0;
+<span style="color:#a2f;font-weight:bold">if</span> (likely(<span style="color:#666">!</span>char_is_ascii_stop(src[<span style="color:#666">1</span>]))) {}
+    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">goto</span> skip_ascii_stop1;
+<span style="color:#a2f;font-weight:bold">if</span> (likely(<span style="color:#666">!</span>char_is_ascii_stop(src[<span style="color:#666">2</span>]))) {}
+    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">goto</span> skip_ascii_stop2;
+<span style="color:#a2f;font-weight:bold">if</span> (likely(<span style="color:#666">!</span>char_is_ascii_stop(src[<span style="color:#666">3</span>]))) {}
+    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">goto</span> skip_ascii_stop3;
+....
+<span style="color:#a2f;font-weight:bold">if</span> (likely(<span style="color:#666">!</span>char_is_ascii_stop(src[<span style="color:#666">15</span>]))) {}
+    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">goto</span> skip_ascii_stop15;
+
+src <span style="color:#666">+=</span> <span style="color:#666">16</span>;
+<span style="color:#a2f;font-weight:bold">goto</span> skip_ascii_begin;
+
+
+<span style="color:#a0a000">skip_ascii_stop0</span>: 
+src <span style="color:#666">+=</span> <span style="color:#666">0</span>; 
+<span style="color:#a2f;font-weight:bold">goto</span> skip_ascii_end;
+
+<span style="color:#a0a000">skip_ascii_stop1</span>: 
+src <span style="color:#666">+=</span> <span style="color:#666">1</span>; 
+<span style="color:#a2f;font-weight:bold">goto</span> skip_ascii_end;
+	
+<span style="color:#080;font-style:italic">// ... 수많은 코드 ...
+</span><span style="color:#080;font-style:italic"></span>
+</code></pre></div><p>무려 if문이 16번이나 연속 되므로 분기가 많아 느릴것 같아보이지만
+if문 안에는 전부 likely매크로가 달려 있어 CPU에 true 힌트를 준다.
+즉 힌트를 받은대로 전부 true로 예측하며 빠르게 진행된다.</p>
+<h2 id="bytes-매치">Bytes 매치</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#080;font-style:italic">/** 16/32/64-bit vector union, used for unaligned memory access on modern CPU */</span>
+<span style="color:#a2f;font-weight:bold">typedef</span> <span style="color:#a2f;font-weight:bold">union</span> v16_uni { v16 v; u16 u; } v16_uni;
+<span style="color:#a2f;font-weight:bold">typedef</span> <span style="color:#a2f;font-weight:bold">union</span> v32_uni { v32 v; u32 u; } v32_uni;
+<span style="color:#a2f;font-weight:bold">typedef</span> <span style="color:#a2f;font-weight:bold">union</span> v64_uni { v64 v; u64 u; } v64_uni;
+
+static_inline <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">byte_match_4</span>(<span style="color:#0b0;font-weight:bold">void</span> <span style="color:#666">*</span>buf, <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#0b0;font-weight:bold">char</span> <span style="color:#666">*</span>pat) {
+    v32_uni u1, u2;
+    u1.v <span style="color:#666">=</span> <span style="color:#666">*</span>(v32 <span style="color:#666">*</span>)pat;
+    u2.v <span style="color:#666">=</span> <span style="color:#666">*</span>(v32 <span style="color:#666">*</span>)buf;
+    <span style="color:#a2f;font-weight:bold">return</span> u1.u <span style="color:#666">==</span> u2.u;
+}
+
+</code></pre></div><p>json 에서  &lsquo;true&rsquo;, &lsquo;null&rsquo; 등의 토큰은 사실 바이트단위로
+4번이나 비교할 필요가 없다. 4바이트이므로 그냥 바로 통째로
+4바이트 비교를 하면 된다.</p>
+<h2 id="character-테이블">Character 테이블</h2>
+<p>1바이트문자는 0~255 범위의 값을 가지므로
+256개의 테이블을 미리 만들어둔뒤 개별 문자가 지닌 분류 해놓으면
+빠르게 개별 char 의 범위를 조건문에서 체크할 필요없이
+바로 비교 가능하다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#a2f;font-weight:bold">if</span>( <span style="color:#b44">&#39;{&#39;</span> <span style="color:#666">==</span> ch <span style="color:#666">||</span> <span style="color:#b44">&#39;[&#39;</span> <span style="color:#666">==</span> ch ) {
+	<span style="color:#080;font-style:italic">// char type Container
+</span><span style="color:#080;font-style:italic"></span>}
+
+<span style="color:#a2f;font-weight:bold">switch</span>(ch)
+{
+	<span style="color:#a2f;font-weight:bold">case</span> <span style="color:#b44">&#39;\n&#39;</span><span style="color:#666">:</span>
+	<span style="color:#a2f;font-weight:bold">case</span> <span style="color:#b44">&#39;\r&#39;</span><span style="color:#666">:</span>
+	<span style="color:#a2f;font-weight:bold">case</span> <span style="color:#b44">&#39;\0&#39;</span><span style="color:#666">:</span>
+		<span style="color:#080;font-style:italic">// char type line END
+</span><span style="color:#080;font-style:italic"></span>		<span style="color:#a2f;font-weight:bold">break</span>;
+}
+</code></pre></div><p>위 소스는 분기 및 비교가 많다.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#080;font-style:italic">/** Whitespace character: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
+<span style="color:#a2f;font-weight:bold">static</span> <span style="color:#a2f;font-weight:bold">const</span> char_type CHAR_TYPE_SPACE      <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">0</span>;
+
+<span style="color:#080;font-style:italic">/** Number character: &#39;-&#39;, [0-9]. */</span>
+<span style="color:#a2f;font-weight:bold">static</span> <span style="color:#a2f;font-weight:bold">const</span> char_type CHAR_TYPE_NUMBER     <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">1</span>;
+
+<span style="color:#080;font-style:italic">/** JSON Escaped character: &#39;&#34;&#39;, &#39;\&#39;, [0x00-0x1F]. */</span>
+<span style="color:#a2f;font-weight:bold">static</span> <span style="color:#a2f;font-weight:bold">const</span> char_type CHAR_TYPE_ESC_ASCII  <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">2</span>;
+
+<span style="color:#080;font-style:italic">/** Non-ASCII character: [0x80-0xFF]. */</span>
+<span style="color:#a2f;font-weight:bold">static</span> <span style="color:#a2f;font-weight:bold">const</span> char_type CHAR_TYPE_NON_ASCII  <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">3</span>;
+
+<span style="color:#080;font-style:italic">/** JSON container character: &#39;{&#39;, &#39;[&#39;. */</span>
+<span style="color:#a2f;font-weight:bold">static</span> <span style="color:#a2f;font-weight:bold">const</span> char_type CHAR_TYPE_CONTAINER  <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">4</span>;
+
+<span style="color:#080;font-style:italic">/** Comment character: &#39;/&#39;. */</span>
+<span style="color:#a2f;font-weight:bold">static</span> <span style="color:#a2f;font-weight:bold">const</span> char_type CHAR_TYPE_COMMENT    <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">5</span>;
+
+<span style="color:#080;font-style:italic">/** Line end character &#39;\\n&#39;, &#39;\\r&#39;, &#39;\0&#39;. */</span>
+<span style="color:#a2f;font-weight:bold">static</span> <span style="color:#a2f;font-weight:bold">const</span> char_type CHAR_TYPE_LINE_END   <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">6</span>;
+
+<span style="color:#080;font-style:italic">/** Character type table (generate with misc/make_tables.c) */</span>
+<span style="color:#a2f;font-weight:bold">static</span> <span style="color:#a2f;font-weight:bold">const</span> char_type char_table[<span style="color:#666">256</span>] <span style="color:#666">=</span> {
+    <span style="color:#666">0x44</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>,
+    <span style="color:#666">0x04</span>, <span style="color:#666">0x05</span>, <span style="color:#666">0x45</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x45</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>,
+    <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>, <span style="color:#666">0x04</span>,
+<span style="color:#080;font-style:italic">//...
+</span><span style="color:#080;font-style:italic">//... 256 개의 사전 정의된 types
+</span><span style="color:#080;font-style:italic"></span>};
+
+<span style="color:#080;font-style:italic">/** Match a character with specified type. */</span>
+static_inline <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">char_is_type</span>(u8 c, char_type type) {
+    <span style="color:#a2f;font-weight:bold">return</span> (char_table[c] <span style="color:#666">&amp;</span> type) <span style="color:#666">!=</span> <span style="color:#666">0</span>;
+}
+
+<span style="color:#080;font-style:italic">/** Match a whitespace: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
+static_inline <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">char_is_space</span>(u8 c) {
+    <span style="color:#a2f;font-weight:bold">return</span> char_is_type(c, CHAR_TYPE_SPACE);
+}
+
+<span style="color:#080;font-style:italic">/** Match a whitespace or comment: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;, &#39;/&#39;. */</span>
+static_inline <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">char_is_space_or_comment</span>(u8 c) {
+    <span style="color:#a2f;font-weight:bold">return</span> char_is_type(c, CHAR_TYPE_SPACE <span style="color:#666">|</span> CHAR_TYPE_COMMENT);
+}
+
+</code></pre></div><p>위 코드처럼 사전정의된 테이블을 가지고 문자의 종류 판단을 하게 된다.
+비트Mask를 활용한 것도 유용하다.</p>
+
+</article>
+
+
+<div>
+Prev <a href="/%EB%B6%84%EC%84%9D/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/">비트연산</a>
+Next <a href="/%EB%B6%84%EC%84%9D/curses/">Curses</a>
+</div>
+
+
+<ul  class="tags">
+	
+</ul>
+
+
+
+<div class="section-tree">
+    <ul>
+	
+	<h3 class="subj">글목록</h3>
+	
+<ul>
+    
+    
+    <li><a href="https://doongchoong.github.io/%EB%B6%84%EC%84%9D/curses/">Curses</a><span><small class="mx-1 text-muted"> 2021-05-29 </small></span></li>
+    
+    
+    
+    <li>yyjson분석</li>
+    
+    
+    
+    <li><a href="https://doongchoong.github.io/%EB%B6%84%EC%84%9D/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/">비트연산</a><span><small class="mx-1 text-muted"> 2021-05-02 </small></span></li>
+    
+    
+</ul>
+
+	
+	
+	
+	
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+	</div>
+
+</body>
+
+</html>

@@ -6,7 +6,19 @@
     <description>Recent content in 둥충의 코딩 on 둥충코딩</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sat, 14 Aug 2021 15:47:59 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Feb 2023 18:36:21 +0900</lastBuildDate><atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dustscrap</title>
+      <link>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/dustscrap/</link>
+      <pubDate>Sat, 11 Feb 2023 18:36:21 +0900</pubDate>
+      
+      <guid>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/dustscrap/</guid>
+      <description>Dustscrap 미세먼지의 확산을 영상으로 보기 위해서 어스널스쿨 을 시간별로 캡쳐하여 영상으로 만드는 프로그램을 개발 했다.
+레포는 https://github.com/doongchoong/dustscrap 이다.
+URL 분석 어스널스쿨은 굉장히 URL 설계가 잘 되어 있다. 과거 특정 시점의 상황을 보고싶을때 열어보면 URL이 다음과 같이 보인다.
+site: https://earth.nullschool.net/ time: #2023/02/11/0800Z/ mode: particulates/surface/level/anim=off/overlay=pm2.5/ view: orthographic=-229.43,42.28,546 시간은 1시간 단위이며 모드는 미세먼지를 PM2.5나 PM10으로 바꿀때 혹은 COSC 등으로 바꿀때마다 해당 정보에 따라 변경되는 값이다. 뷰는 지도를 보는 방식인데 기본값인 Orthographic 모드가 지구본을 보는것과 같은 뷰로 보게 된다.</description>
+    </item>
+    
     <item>
       <title>Python소스설치</title>
       <link>https://doongchoong.github.io/tools%EC%82%AC%EC%9A%A9/python%EC%86%8C%EC%8A%A4%EC%84%A4%EC%B9%98/</link>
@@ -20,30 +32,30 @@
     
     <item>
       <title>Curses</title>
-      <link>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/curses/</link>
+      <link>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/curses/</link>
       <pubDate>Sat, 29 May 2021 20:53:40 +0900</pubDate>
       
-      <guid>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/curses/</guid>
+      <guid>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/curses/</guid>
       <description>Curses curses란 유닉스 계열 운영체제에서 터미널 환경 제어하는 라이브러리를 말한다. 본인이 fzc를 만드는 데 사용하였다. 기본적인 사용법은 간단히 검색을 하면 나오는데 그 외 좀 검색하기 어려웠던 내용을 적어보고자 한다.
 검색하기 힘들었던 내용 표준출력과 혼용하여 사용하기 Curses는 기본적인 방식으로 로직을 구성하면 표준입출력을 사용하기 때문에 표준출력을 별도의 용도로 사용하기 어렵다. fzc를 만드는데 화면의 내용은 퍼지검색 리스트 표출이지만 파일을 선택하고 나서는 표준출력으로 선택한 파일 내용을 표출해야했기 때문에 필요했다. 이는 많은 검색을 통해 initscr을 호출하는 대신 new term을 구성하는 방식을 사용하면 되는 내용을 찾았다.</description>
     </item>
     
     <item>
       <title>퍼지검색</title>
-      <link>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/</link>
+      <link>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/</link>
       <pubDate>Mon, 10 May 2021 23:35:07 +0900</pubDate>
       
-      <guid>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/</guid>
+      <guid>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/</guid>
       <description>퍼지 검색 Fuzzy-search 검색어가 정확하지 않아도 유사한 항목을 찾아주는 검색 방식이다. 유전정보를 활용하는 생물학 분야 혹은 문자열 검색 등 여러 분야에 쓰이는데 이중 파일명을 검색하거나 함수 메서드등을 검색하는 기능이 아주 유용해 보인다.
 사례 Sublime Text의 검색 기능을 들수 있다. 그리고 이 기능에 대해 궁금한 사람이 있었던 모양이다. 이런 Article 이 있다. 그리고 최근에 발견한 툴인데 fzf 라는 fuzzy-finder 가 있다. 아주 훌륭한 tool이고 정말 멋지다. 이 프로그램은 자기가 필요한 일만 멋지고 충분하게 딱 해내고 Cool하게 끝낸다.</description>
     </item>
     
     <item>
       <title>M2평탄화</title>
-      <link>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/m2%ED%8F%89%ED%83%84%ED%99%94/</link>
+      <link>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/m2%ED%8F%89%ED%83%84%ED%99%94/</link>
       <pubDate>Tue, 04 May 2021 21:34:32 +0900</pubDate>
       
-      <guid>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/m2%ED%8F%89%ED%83%84%ED%99%94/</guid>
+      <guid>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/m2%ED%8F%89%ED%83%84%ED%99%94/</guid>
       <description>M2 평탄화 이 페이지에서 말하는 M2란 광의통화를 의미한다. 작년 2020년 코로나가 전세계로 급속도로 번지면서 경제가 급격히 얼어붙었다. 그래서 2020년 3월 미국의 FED에서 돈을 엄청나게 많이 뿌리며 금융 충격에 대비하였고 이에 대부분의 자산은 급격한 반등을 이루게 되었다.
 이 과정에서 M2 통화량 증가분을 제거하면 어느정도 수준으로 반등이 이루어졌는지 파악해볼수 있지 않을까? 하는 아이디어에서 M2 영향도를 제거하는 차트를 그려보는 간단한 개발을 하였다. 이는 작년 9~10월 정도에 python으로 개발하였다.
 M2flat Demo사이트
@@ -52,10 +64,10 @@ M2flat Demo사이트
     
     <item>
       <title>만델브로트프랙탈</title>
-      <link>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/</link>
+      <link>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/</link>
       <pubDate>Mon, 03 May 2021 19:50:38 +0900</pubDate>
       
-      <guid>https://doongchoong.github.io/%EA%B0%80%EB%B2%BC%EC%9A%B4%EA%B0%9C%EB%B0%9C/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/</guid>
+      <guid>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/</guid>
       <description>만델브로트 프랙탈 프랙탈은 자기유사성으로 알려져있는 일부 조각이 전부를 구성하는 모양이 되는 기하학적 구조를 뜻한다. 그중 만델브로트 집합은 풍뎅이인 특유의 모양으로 잘 알려져 있다.
 WEBGL로 구현
 정의 정의된 수열이 발산하지 않는 성질을 갖도록 하는 복수수 c의 집합으로 정의된다.
@@ -75,10 +87,10 @@ Z0 = 0 Zn+1 = Zn^2 + c  실제로 그리는 방법 사실 이렇게만 써놓으
     
     <item>
       <title>yyjson분석</title>
-      <link>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/yyjson%EB%B6%84%EC%84%9D/</link>
+      <link>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/yyjson%EB%B6%84%EC%84%9D/</link>
       <pubDate>Sun, 02 May 2021 17:44:40 +0900</pubDate>
       
-      <guid>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/yyjson%EB%B6%84%EC%84%9D/</guid>
+      <guid>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/yyjson%EB%B6%84%EC%84%9D/</guid>
       <description>yyjson 분석 yyjson은 현존하는 JSON 파서중 가장 빠르다고 알려져 있는 라이브러리이다. 이 소스코드를 살펴보면서 유용한 것들과 공부할 만한 것 들을 메모한다.
 단 두개 파일 yyjson.c , yyjson.h 단 두개 파일만 제공하여 각 프로젝트에 쉽게 빌드할 수 있도록 하였다.
 CPU 최적화 json 과 같은 텍스트 분석이 필요로 하는 것은 많은 선후 상태 의존성을 필요로 한다. 따라서 병렬로 수행하기 힘들며 수많은 분기가 존재하여 머신의 성능을 이끌어내기 어려운 분야 중 하나. 따라서 yyjson이 어떤 최적화들을 하였는지 유용한 트릭들을 확인하도록 한다.</description>
@@ -86,10 +98,10 @@ CPU 최적화 json 과 같은 텍스트 분석이 필요로 하는 것은 많은
     
     <item>
       <title>비트연산</title>
-      <link>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</link>
+      <link>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</link>
       <pubDate>Sun, 02 May 2021 17:02:31 +0900</pubDate>
       
-      <guid>https://doongchoong.github.io/%EB%A1%9C%EC%9A%B0%EB%A0%88%EB%B2%A8/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</guid>
+      <guid>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</guid>
       <description>비트연산 Bit Twiddling Hacks 에서 정리되어 있는 비트 관련 내용 몇 가지 감명 받거나 유용해보이는 것 위주로 정리
 바이트 관련 워드에 0인 바이트가 있는지 확인하기 워드는 프로세서가 기본적으로 처리할수 있는 단위를 말하며 이 문서에선 4bytes를 의미한다. 4bytes 내에 0바이트가 존재하는지 확인하는 것으로서 이를 활용하면 strlen 등을 최적화할 수 있다.
 #define haszero(v) (((v)-0x01010101UL) &amp;amp; ~ (v) &amp;amp; 0x80808080UL) 이 매크로를 사용하면 0인 바이트가 있을때 해당바이트 최상위 비트가 1로 세팅된다.
