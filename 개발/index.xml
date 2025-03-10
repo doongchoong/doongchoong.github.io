@@ -6,8 +6,15 @@
     <description>Recent content in 개발 on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sat, 11 Feb 2023 18:36:21 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 09 Mar 2025 19:50:38 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>대체거래소후기</title>
+      <link>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/</link>
+      <pubDate>Sun, 09 Mar 2025 19:50:38 +0900</pubDate>
+      <guid>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/</guid>
+      <description>&lt;h1 id=&#34;대체거래소후기&#34;&gt;대체거래소후기&lt;/h1&gt;&#xA;&lt;p&gt;나는 증권사 IT 매매팀에 꽤 오래있었다. 여태까지 내가 작성한 코드들이 이제 거의 모든 로직에 들어가 있다.&lt;/p&gt;&#xA;&lt;p&gt;작년부터 대체거래소 NXT 적용하기 위해  역대급으로 바쁜 프로젝트를 얼마전 끝냈다.&#xA;시스템을 깊이 아는 상태였어도 이 프로젝트를 진행하는게 상당히 힘들었기 때문에 굉장히 인상적이였다.&#xA;그래서 후기를 남기고자 한다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;sor&#34;&gt;SOR&lt;/h2&gt;&#xA;&lt;p&gt;NXT 거래소가 생기면서 특이하게  SOR주문이 생겼다. 각 증권사가 해야할 일은 고객에게 최대한 유리하도록 주문집행 하는 시스템을 갖추는 것이다.&#xA;상황에 따라 KRX, NXT 양 거래소로 분할되거나 둘 중 하나를 선택하여 주식주문을 집행하게 된다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Dustscrap</title>
       <link>https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/dustscrap/</link>
