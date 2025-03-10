@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Analysis on 둥충코딩</title>
-    <link>http://localhost:1313/tags/analysis/</link>
+    <link>https://doongchoong.github.io/tags/analysis/</link>
     <description>Recent content in Analysis on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/analysis/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://doongchoong.github.io/tags/analysis/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

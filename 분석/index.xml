@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>분석 on 둥충코딩</title>
-    <link>http://localhost:1313/%EB%B6%84%EC%84%9D/</link>
+    <link>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/</link>
     <description>Recent content in 분석 on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
     <lastBuildDate>Sat, 29 May 2021 20:53:40 +0900</lastBuildDate>
-    <atom:link href="http://localhost:1313/%EB%B6%84%EC%84%9D/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://doongchoong.github.io/%EB%B6%84%EC%84%9D/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Curses</title>
-      <link>http://localhost:1313/%EB%B6%84%EC%84%9D/curses/</link>
+      <link>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/curses/</link>
       <pubDate>Sat, 29 May 2021 20:53:40 +0900</pubDate>
-      <guid>http://localhost:1313/%EB%B6%84%EC%84%9D/curses/</guid>
+      <guid>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/curses/</guid>
       <description>&lt;h1 id=&#34;curses&#34;&gt;Curses&lt;/h1&gt;&#xA;&lt;p&gt;curses란 유닉스 계열 운영체제에서 터미널 환경 제어하는 라이브러리를 말한다.&#xA;본인이 &lt;a href=&#34;https://github.com/doongchoong/fzc&#34;&gt;fzc&lt;/a&gt;를 만드는 데 사용하였다.&#xA;기본적인 사용법은 간단히 검색을 하면 나오는데 그 외 좀 검색하기 어려웠던&#xA;내용을 적어보고자 한다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;검색하기-힘들었던-내용&#34;&gt;검색하기 힘들었던 내용&lt;/h2&gt;&#xA;&lt;h3 id=&#34;표준출력과-혼용하여-사용하기&#34;&gt;표준출력과 혼용하여 사용하기&lt;/h3&gt;&#xA;&lt;p&gt;Curses는 기본적인 방식으로 로직을 구성하면&#xA;표준입출력을 사용하기 때문에 표준출력을 별도의 용도로 사용하기 어렵다.&#xA;&lt;a href=&#34;https://github.com/doongchoong/fzc&#34;&gt;fzc&lt;/a&gt;를 만드는데 화면의 내용은 퍼지검색 리스트 표출이지만&#xA;파일을 선택하고 나서는 표준출력으로 선택한 파일 내용을 표출해야했기 때문에&#xA;필요했다. 이는 많은 검색을 통해&#xA;initscr을 호출하는 대신 new term을 구성하는 방식을 사용하면 되는 내용을 찾았다.&#xA;&lt;a href=&#34;https://stackoverflow.com/questions/8371877/ncurses-and-linux-pipeline&#34;&gt;검색한 Stackoverflow 내용&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>yyjson분석</title>
-      <link>http://localhost:1313/%EB%B6%84%EC%84%9D/yyjson%EB%B6%84%EC%84%9D/</link>
+      <link>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/yyjson%EB%B6%84%EC%84%9D/</link>
       <pubDate>Sun, 02 May 2021 17:44:40 +0900</pubDate>
-      <guid>http://localhost:1313/%EB%B6%84%EC%84%9D/yyjson%EB%B6%84%EC%84%9D/</guid>
+      <guid>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/yyjson%EB%B6%84%EC%84%9D/</guid>
       <description>&lt;h1 id=&#34;yyjson-분석&#34;&gt;yyjson 분석&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/ibireme/yyjson&#34;&gt;yyjson&lt;/a&gt;은&#xA;현존하는 JSON 파서중 가장 빠르다고 알려져 있는 라이브러리이다.&#xA;이 소스코드를 살펴보면서 유용한 것들과 공부할 만한 것 들을 메모한다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;단-두개-파일&#34;&gt;단 두개 파일&lt;/h2&gt;&#xA;&lt;p&gt;yyjson.c , yyjson.h 단 두개 파일만 제공하여&#xA;각 프로젝트에 쉽게 빌드할 수 있도록 하였다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;cpu-최적화&#34;&gt;CPU 최적화&lt;/h2&gt;&#xA;&lt;p&gt;json 과 같은 텍스트 분석이 필요로 하는 것은&#xA;많은 선후 상태 의존성을 필요로 한다. 따라서 병렬로 수행하기 힘들며&#xA;수많은 분기가 존재하여 머신의 성능을 이끌어내기 어려운&#xA;분야 중 하나. 따라서 yyjson이 어떤 최적화들을 하였는지&#xA;유용한 트릭들을 확인하도록 한다.&lt;/p&gt;</description>
     </item>
     <item>
       <title>비트연산</title>
-      <link>http://localhost:1313/%EB%B6%84%EC%84%9D/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</link>
+      <link>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</link>
       <pubDate>Sun, 02 May 2021 17:02:31 +0900</pubDate>
-      <guid>http://localhost:1313/%EB%B6%84%EC%84%9D/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</guid>
+      <guid>https://doongchoong.github.io/%EB%B6%84%EC%84%9D/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</guid>
       <description>&lt;h1 id=&#34;비트연산&#34;&gt;비트연산&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://graphics.stanford.edu/~seander/bithacks.html&#34;&gt;Bit Twiddling Hacks&lt;/a&gt;&#xA;에서 정리되어 있는 비트 관련 내용&#xA;몇 가지 감명 받거나 유용해보이는 것 위주로 정리&lt;/p&gt;&#xA;&lt;h2 id=&#34;바이트-관련&#34;&gt;바이트 관련&lt;/h2&gt;&#xA;&lt;h3 id=&#34;워드에-0인-바이트가-있는지-확인하기&#34;&gt;워드에 0인 바이트가 있는지 확인하기&lt;/h3&gt;&#xA;&lt;p&gt;워드는 프로세서가 기본적으로 처리할수 있는 단위를 말하며&#xA;이 문서에선 4bytes를 의미한다. 4bytes 내에 0바이트가 존재하는지 확인하는&#xA;것으로서 이를 활용하면&#xA;strlen 등을 최적화할 수 있다.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080&#34;&gt;#define haszero(v) (((v)-0x01010101UL) &amp;amp; ~ (v) &amp;amp; 0x80808080UL)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 매크로를 사용하면 0인 바이트가 있을때 해당바이트 최상위 비트가&#xA;1로 세팅된다.&lt;br&gt;&#xA;리틀엔디언 세번째바이트가 0일 경우 0x800000&#xA;첫번째 바이트가 0일 경우 0x80  이런 식으로 결과가 나오게 된다.&lt;/p&gt;</description>
     </item>
   </channel>

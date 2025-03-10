@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 둥충코딩</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://doongchoong.github.io/tags/</link>
     <description>Recent content in Tags on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
     <lastBuildDate>Sun, 09 Mar 2025 19:50:38 +0900</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://doongchoong.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dev</title>
-      <link>http://localhost:1313/tags/dev/</link>
+      <link>https://doongchoong.github.io/tags/dev/</link>
       <pubDate>Sun, 09 Mar 2025 19:50:38 +0900</pubDate>
-      <guid>http://localhost:1313/tags/dev/</guid>
+      <guid>https://doongchoong.github.io/tags/dev/</guid>
       <description></description>
     </item>
     <item>
       <title>Tools</title>
-      <link>http://localhost:1313/tags/tools/</link>
+      <link>https://doongchoong.github.io/tags/tools/</link>
       <pubDate>Sat, 14 Aug 2021 15:47:59 +0900</pubDate>
-      <guid>http://localhost:1313/tags/tools/</guid>
+      <guid>https://doongchoong.github.io/tags/tools/</guid>
       <description></description>
     </item>
     <item>
       <title>Analysis</title>
-      <link>http://localhost:1313/tags/analysis/</link>
+      <link>https://doongchoong.github.io/tags/analysis/</link>
       <pubDate>Sat, 29 May 2021 20:53:40 +0900</pubDate>
-      <guid>http://localhost:1313/tags/analysis/</guid>
+      <guid>https://doongchoong.github.io/tags/analysis/</guid>
       <description></description>
     </item>
   </channel>
