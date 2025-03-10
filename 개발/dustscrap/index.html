@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dustscrap | 둥충코딩</title>
@@ -67,11 +67,11 @@
 <p>어스널스쿨은 굉장히 URL 설계가 잘 되어 있다.
 과거 특정 시점의 상황을 보고싶을때
 열어보면 URL이 다음과 같이 보인다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">site: https://earth.nullschool.net/
-time: #2023/02/11/0800Z/
-mode: particulates/surface/level/anim=off/overlay=pm2.5/
-view: orthographic=-229.43,42.28,546
-</code></pre></div><p>시간은 1시간 단위이며 모드는 미세먼지를 PM2.5나 PM10으로 바꿀때 혹은 COSC 등으로 바꿀때마다 해당 정보에 따라 변경되는 값이다. 뷰는 지도를 보는 방식인데 기본값인 Orthographic 모드가 지구본을 보는것과 같은 뷰로 보게 된다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>site: https://earth.nullschool.net/
+</span></span><span style="display:flex;"><span>time: #2023/02/11/0800Z/
+</span></span><span style="display:flex;"><span>mode: particulates/surface/level/anim=off/overlay=pm2.5/
+</span></span><span style="display:flex;"><span>view: orthographic=-229.43,42.28,546
+</span></span></code></pre></div><p>시간은 1시간 단위이며 모드는 미세먼지를 PM2.5나 PM10으로 바꿀때 혹은 COSC 등으로 바꿀때마다 해당 정보에 따라 변경되는 값이다. 뷰는 지도를 보는 방식인데 기본값인 Orthographic 모드가 지구본을 보는것과 같은 뷰로 보게 된다.</p>
 <p>따라서 영상으로 제작하기 위해 시간을 시간단위로 계속 캡쳐를 하려면</p>
 <ol>
 <li>시간을 생성해서 URL을 생성한다.</li>
@@ -82,49 +82,49 @@ view: orthographic=-229.43,42.28,546
 <p>URL의 시간은 뭔가 잘 알려진 포맷은 아니므로
 부분부분 잘라내어 정식 스트링 포맷으로 변경하고 파싱한다.
 이러면 타임 객체를 얻는다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">fromTim, err <span style="color:#666">:=</span> time.<span style="color:#00a000">Parse</span>(time.RFC3339,
-    fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;%s-%s-%sT%s:00:00+00:00&#34;</span>,
-        conf.From_url[<span style="color:#666">1</span>:<span style="color:#666">5</span>],
-        conf.From_url[<span style="color:#666">6</span>:<span style="color:#666">8</span>],
-        conf.From_url[<span style="color:#666">9</span>:<span style="color:#666">11</span>],
-        conf.From_url[<span style="color:#666">12</span>:<span style="color:#666">14</span>]))
-<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">nil</span>, err
-}
-toTim, err <span style="color:#666">:=</span> time.<span style="color:#00a000">Parse</span>(time.RFC3339,
-    fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;%s-%s-%sT%s:00:00+00:00&#34;</span>,
-        conf.To_url[<span style="color:#666">1</span>:<span style="color:#666">5</span>],
-        conf.To_url[<span style="color:#666">6</span>:<span style="color:#666">8</span>],
-        conf.To_url[<span style="color:#666">9</span>:<span style="color:#666">11</span>],
-        conf.To_url[<span style="color:#666">12</span>:<span style="color:#666">14</span>]))
-</code></pre></div><p>From-To를 얻은 뒤에는 이 정보를 이용하여
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>fromTim, err <span style="color:#666">:=</span> time.<span style="color:#00a000">Parse</span>(time.RFC3339,
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;%s-%s-%sT%s:00:00+00:00&#34;</span>,
+</span></span><span style="display:flex;"><span>        conf.From_url[<span style="color:#666">1</span>:<span style="color:#666">5</span>],
+</span></span><span style="display:flex;"><span>        conf.From_url[<span style="color:#666">6</span>:<span style="color:#666">8</span>],
+</span></span><span style="display:flex;"><span>        conf.From_url[<span style="color:#666">9</span>:<span style="color:#666">11</span>],
+</span></span><span style="display:flex;"><span>        conf.From_url[<span style="color:#666">12</span>:<span style="color:#666">14</span>]))
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>toTim, err <span style="color:#666">:=</span> time.<span style="color:#00a000">Parse</span>(time.RFC3339,
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;%s-%s-%sT%s:00:00+00:00&#34;</span>,
+</span></span><span style="display:flex;"><span>        conf.To_url[<span style="color:#666">1</span>:<span style="color:#666">5</span>],
+</span></span><span style="display:flex;"><span>        conf.To_url[<span style="color:#666">6</span>:<span style="color:#666">8</span>],
+</span></span><span style="display:flex;"><span>        conf.To_url[<span style="color:#666">9</span>:<span style="color:#666">11</span>],
+</span></span><span style="display:flex;"><span>        conf.To_url[<span style="color:#666">12</span>:<span style="color:#666">14</span>]))
+</span></span></code></pre></div><p>From-To를 얻은 뒤에는 이 정보를 이용하여
 시간객체에 time.Hour 값을 더해 가면서 URL을 연속적으로 생성할 수 있다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a2f;font-weight:bold">for</span> {
-		tt = tt.<span style="color:#00a000">Add</span>(time.Hour)
-		<span style="color:#a2f;font-weight:bold">if</span> tt.<span style="color:#00a000">After</span>(toTim) {
-			<span style="color:#a2f;font-weight:bold">break</span>
-		}
-		url = fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;https://earth.nullschool.net/%s/%s/%s&#34;</span>,
-			fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;#%d/%02d/%02d/%02d00Z&#34;</span>, tt.<span style="color:#00a000">Year</span>(), tt.<span style="color:#00a000">Month</span>(), tt.<span style="color:#00a000">Day</span>(), tt.<span style="color:#00a000">Hour</span>()),
-			conf.Mode_url,
-			conf.Projection_url,
-		)
-		ret = <span style="color:#a2f">append</span>(ret, url)
-	}
-</code></pre></div><h3 id="config-파일">Config 파일</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> {
+</span></span><span style="display:flex;"><span>		tt = tt.<span style="color:#00a000">Add</span>(time.Hour)
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">if</span> tt.<span style="color:#00a000">After</span>(toTim) {
+</span></span><span style="display:flex;"><span>			<span style="color:#a2f;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		url = fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;https://earth.nullschool.net/%s/%s/%s&#34;</span>,
+</span></span><span style="display:flex;"><span>			fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;#%d/%02d/%02d/%02d00Z&#34;</span>, tt.<span style="color:#00a000">Year</span>(), tt.<span style="color:#00a000">Month</span>(), tt.<span style="color:#00a000">Day</span>(), tt.<span style="color:#00a000">Hour</span>()),
+</span></span><span style="display:flex;"><span>			conf.Mode_url,
+</span></span><span style="display:flex;"><span>			conf.Projection_url,
+</span></span><span style="display:flex;"><span>		)
+</span></span><span style="display:flex;"><span>		ret = <span style="color:#a2f">append</span>(ret, url)
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><h3 id="config-파일">Config 파일</h3>
 <p>위와 같이 From-To 정보나 모드와 같이 여러 설정을
 파일 형태로 저장해두고 로드하도록 하면 더 편할 것이다.
 따라서 json 포맷으로 아래와 같은 형태 사용하게 하였다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-	<span style="color:#008000;font-weight:bold">&#34;from_url&#34;</span> : <span style="color:#b44">&#34;#2023/01/05/0100Z&#34;</span>,
-	<span style="color:#008000;font-weight:bold">&#34;to_url&#34;</span> : <span style="color:#b44">&#34;#2023/02/09/0000Z&#34;</span>,
-	<span style="color:#008000;font-weight:bold">&#34;mode_url&#34;</span> : <span style="color:#b44">&#34;particulates/surface/level/anim=off/overlay=pm2.5&#34;</span>,
-	<span style="color:#008000;font-weight:bold">&#34;projection_url&#34;</span> : <span style="color:#b44">&#34;orthographic=-234.04,36.14,1377&#34;</span>,
-	<span style="color:#008000;font-weight:bold">&#34;wait_seconds&#34;</span>: <span style="color:#666">1</span>,
-	<span style="color:#008000;font-weight:bold">&#34;frames_path&#34;</span> : <span style="color:#b44">&#34;../frm_pm25&#34;</span>,
-	<span style="color:#008000;font-weight:bold">&#34;time_stamp&#34;</span>: <span style="color:#a2f;font-weight:bold">true</span>
-}
-</code></pre></div><p>이미지들이 저장될 폴더와 그리고 타임스탬프 찍는 기능 여부도 설정하도록 한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">&#34;from_url&#34;</span> : <span style="color:#b44">&#34;#2023/01/05/0100Z&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">&#34;to_url&#34;</span> : <span style="color:#b44">&#34;#2023/02/09/0000Z&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">&#34;mode_url&#34;</span> : <span style="color:#b44">&#34;particulates/surface/level/anim=off/overlay=pm2.5&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">&#34;projection_url&#34;</span> : <span style="color:#b44">&#34;orthographic=-234.04,36.14,1377&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">&#34;wait_seconds&#34;</span>: <span style="color:#666">1</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">&#34;frames_path&#34;</span> : <span style="color:#b44">&#34;../frm_pm25&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#008000;font-weight:bold">&#34;time_stamp&#34;</span>: <span style="color:#a2f;font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>이미지들이 저장될 폴더와 그리고 타임스탬프 찍는 기능 여부도 설정하도록 한다.</p>
 <p>wait_seconds 는 이미지를 한번 찍고 나서 대기하는 시간이다.
 이는 Scraping을 할때 점검을 해봐야 할 사항이다.
 이러한 제한을 두지 않는다면 DDos에 준하는 속도로 상대 서버에 부하를 주게 된다.
@@ -134,13 +134,13 @@ toTim, err <span style="color:#666">:=</span> time.<span style="color:#00a000">P
 <h2 id="scraping">Scraping</h2>
 <p>URL을 생성 했다면 이제는 생성한 URL을 방문한 뒤에 렌더링된 화면을 캡쳐하면 된다. 이를 위해 예전에는 셀레니움을 사용했었는데 요즘 잘 업데이트 안되고 있다고 하여 <a href="https://github.com/chromedp/chromedp">chromedp</a> 라는 라이브러리를 사용했다. 이 라이브러리는 셀레니움과는 다르게 별도 바이너리가 필요 없다. 직접 Chrome Devtool Protocol을 사용한다.</p>
 <h3 id="chrome-구동">Chrome 구동</h3>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#080;font-style:italic">// create context
-</span><span style="color:#080;font-style:italic"></span>	ctx, cancel <span style="color:#666">:=</span> chromedp.<span style="color:#00a000">NewContext</span>(
-		context.<span style="color:#00a000">Background</span>(),
-		<span style="color:#080;font-style:italic">// chromedp.WithDebugf(log.Printf),
-</span><span style="color:#080;font-style:italic"></span>	)
-	<span style="color:#a2f;font-weight:bold">defer</span> <span style="color:#00a000">cancel</span>()
-</code></pre></div><p>새로운 컨텍스트를 만드는데 아마도 이 시점에서 크롬을 <strong>Headless</strong>로 실행하는 것 같다. 사실 보이지만 않을 뿐이지 크롬 브라우져가 구동되어 있고
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#080;font-style:italic">// create context</span>
+</span></span><span style="display:flex;"><span>	ctx, cancel <span style="color:#666">:=</span> chromedp.<span style="color:#00a000">NewContext</span>(
+</span></span><span style="display:flex;"><span>		context.<span style="color:#00a000">Background</span>(),
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic">// chromedp.WithDebugf(log.Printf),</span>
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">defer</span> <span style="color:#00a000">cancel</span>()
+</span></span></code></pre></div><p>새로운 컨텍스트를 만드는데 아마도 이 시점에서 크롬을 <strong>Headless</strong>로 실행하는 것 같다. 사실 보이지만 않을 뿐이지 크롬 브라우져가 구동되어 있고
 이 숨겨진 브라우져와 통신한다.</p>
 <h3 id="navigate-and-waiting">Navigate and Waiting</h3>
 <p>chromedp의 예제를 보면 Run 함수에 여러 Task들을 나열하여
@@ -152,121 +152,121 @@ toTim, err <span style="color:#666">:=</span> time.<span style="color:#00a000">P
 별도의 Waiting 작업을 추가한다.</p>
 <p>Chromedp의 내장된 Wait* 함수로는 이런류의 작업이 없기 때문에
 이런식으로 장황하게 구현하였다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#080;font-style:italic">// URL 순회
-</span><span style="color:#080;font-style:italic"></span>	<span style="color:#a2f;font-weight:bold">for</span> _, url <span style="color:#666">:=</span> <span style="color:#a2f;font-weight:bold">range</span> urls {
-
-		log.<span style="color:#00a000">Print</span>(<span style="color:#b44">&#34;Try capture :&#34;</span> <span style="color:#666">+</span> url)
-
-		<span style="color:#080;font-style:italic">// url 이동
-</span><span style="color:#080;font-style:italic"></span>		<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">:=</span> chromedp.<span style="color:#00a000">Run</span>(ctx, chromedp.<span style="color:#00a000">Navigate</span>(url)); err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-			log.<span style="color:#00a000">Fatal</span>(err)
-		}
-		<span style="color:#080;font-style:italic">// 렌더링을 기다린다.
-</span><span style="color:#080;font-style:italic"></span>		<span style="color:#a2f;font-weight:bold">for</span> cnt <span style="color:#666">:=</span> <span style="color:#666">0</span>; cnt &lt; <span style="color:#666">500</span>; cnt<span style="color:#666">++</span> {
-			<span style="color:#a2f;font-weight:bold">var</span> res <span style="color:#0b0;font-weight:bold">string</span>
-			<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">:=</span> chromedp.<span style="color:#00a000">Run</span>(ctx, chromedp.<span style="color:#00a000">Text</span>(<span style="color:#b44">&#34;.field&#34;</span>, <span style="color:#666">&amp;</span>res, chromedp.ByQuery)); err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-				log.<span style="color:#00a000">Fatal</span>(err)
-			}
-			time.<span style="color:#00a000">Sleep</span>(time.Millisecond)
-			<span style="color:#a2f;font-weight:bold">if</span> strings.<span style="color:#00a000">Contains</span>(res, <span style="color:#b44">&#34;Download&#34;</span>) {
-				<span style="color:#a2f;font-weight:bold">continue</span>
-			}
-			<span style="color:#a2f;font-weight:bold">if</span> strings.<span style="color:#00a000">Contains</span>(res, <span style="color:#b44">&#34;Rendering&#34;</span>) {
-				<span style="color:#a2f;font-weight:bold">continue</span>
-			}
-			<span style="color:#a2f;font-weight:bold">break</span>
-		}
-
-		<span style="color:#080;font-style:italic">// 스크린샷을 찍는다.
-</span><span style="color:#080;font-style:italic"></span>		<span style="color:#a2f;font-weight:bold">var</span> buf []<span style="color:#0b0;font-weight:bold">byte</span>
-
-		err <span style="color:#666">:=</span> chromedp.<span style="color:#00a000">Run</span>(ctx, chromedp.<span style="color:#00a000">FullScreenshot</span>(<span style="color:#666">&amp;</span>buf, <span style="color:#666">100</span>))
-		<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-			log.<span style="color:#00a000">Fatal</span>(err)
-		}
-</code></pre></div><h3 id="timestamp">Timestamp</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#080;font-style:italic">// URL 순회</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">for</span> _, url <span style="color:#666">:=</span> <span style="color:#a2f;font-weight:bold">range</span> urls {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		log.<span style="color:#00a000">Print</span>(<span style="color:#b44">&#34;Try capture :&#34;</span> <span style="color:#666">+</span> url)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic">// url 이동</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">:=</span> chromedp.<span style="color:#00a000">Run</span>(ctx, chromedp.<span style="color:#00a000">Navigate</span>(url)); err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>			log.<span style="color:#00a000">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic">// 렌더링을 기다린다.</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">for</span> cnt <span style="color:#666">:=</span> <span style="color:#666">0</span>; cnt &lt; <span style="color:#666">500</span>; cnt<span style="color:#666">++</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a2f;font-weight:bold">var</span> res <span style="color:#0b0;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">:=</span> chromedp.<span style="color:#00a000">Run</span>(ctx, chromedp.<span style="color:#00a000">Text</span>(<span style="color:#b44">&#34;.field&#34;</span>, <span style="color:#666">&amp;</span>res, chromedp.ByQuery)); err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>				log.<span style="color:#00a000">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			time.<span style="color:#00a000">Sleep</span>(time.Millisecond)
+</span></span><span style="display:flex;"><span>			<span style="color:#a2f;font-weight:bold">if</span> strings.<span style="color:#00a000">Contains</span>(res, <span style="color:#b44">&#34;Download&#34;</span>) {
+</span></span><span style="display:flex;"><span>				<span style="color:#a2f;font-weight:bold">continue</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#a2f;font-weight:bold">if</span> strings.<span style="color:#00a000">Contains</span>(res, <span style="color:#b44">&#34;Rendering&#34;</span>) {
+</span></span><span style="display:flex;"><span>				<span style="color:#a2f;font-weight:bold">continue</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#a2f;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#080;font-style:italic">// 스크린샷을 찍는다.</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">var</span> buf []<span style="color:#0b0;font-weight:bold">byte</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		err <span style="color:#666">:=</span> chromedp.<span style="color:#00a000">Run</span>(ctx, chromedp.<span style="color:#00a000">FullScreenshot</span>(<span style="color:#666">&amp;</span>buf, <span style="color:#666">100</span>))
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>			log.<span style="color:#00a000">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>		}
+</span></span></code></pre></div><h3 id="timestamp">Timestamp</h3>
 <p>원하는 것은 본래 이미지에  스트링을 위에다가 그리는 것이다.
 간단하게 처리하려고 해도 찾기가 좀 어려웠다.
 그냥 구글링 끝에 스택오버플로우 있는 내용으로 구현했다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#080;font-style:italic">// input byt: png bytes =&gt;  output byt: png bytes
-</span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">func</span> <span style="color:#00a000">AddTimeStamp</span>(byt []<span style="color:#0b0;font-weight:bold">byte</span>, x, y, size <span style="color:#0b0;font-weight:bold">int</span>, color color.Color, label <span style="color:#0b0;font-weight:bold">string</span>) ([]<span style="color:#0b0;font-weight:bold">byte</span>, <span style="color:#0b0;font-weight:bold">error</span>) {
-	img, err <span style="color:#666">:=</span> png.<span style="color:#00a000">Decode</span>(bytes.<span style="color:#00a000">NewReader</span>(byt))
-	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-		<span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">nil</span>, err
-	}
-	font, err <span style="color:#666">:=</span> truetype.<span style="color:#00a000">Parse</span>(goregular.TTF)
-	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-		<span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">nil</span>, err
-	}
-	face <span style="color:#666">:=</span> truetype.<span style="color:#00a000">NewFace</span>(font, <span style="color:#666">&amp;</span>truetype.Options{Size: <span style="color:#a2f">float64</span>(size)})
-
-	w <span style="color:#666">:=</span> img.<span style="color:#00a000">Bounds</span>().<span style="color:#00a000">Size</span>().X
-	h <span style="color:#666">:=</span> img.<span style="color:#00a000">Bounds</span>().<span style="color:#00a000">Size</span>().Y
-
-	dc <span style="color:#666">:=</span> gg.<span style="color:#00a000">NewContext</span>(w, h)
-	dc.<span style="color:#00a000">DrawImage</span>(img, <span style="color:#666">0</span>, <span style="color:#666">0</span>)
-	dc.<span style="color:#00a000">SetFontFace</span>(face)
-	r, g, b, _ <span style="color:#666">:=</span> color.<span style="color:#00a000">RGBA</span>()
-	dc.<span style="color:#00a000">SetRGB</span>(
-		<span style="color:#a2f">float64</span>(r)<span style="color:#666">/</span><span style="color:#a2f">float64</span>(<span style="color:#666">0xff</span>),
-		<span style="color:#a2f">float64</span>(g)<span style="color:#666">/</span><span style="color:#a2f">float64</span>(<span style="color:#666">0xff</span>),
-		<span style="color:#a2f">float64</span>(b)<span style="color:#666">/</span><span style="color:#a2f">float64</span>(<span style="color:#666">0xff</span>),
-	)
-	dc.<span style="color:#00a000">DrawStringAnchored</span>(label, <span style="color:#a2f">float64</span>(x), <span style="color:#a2f">float64</span>(y), <span style="color:#666">0</span>, <span style="color:#666">0.5</span>)
-
-	img = dc.<span style="color:#00a000">Image</span>()
-
-	buf <span style="color:#666">:=</span> <span style="color:#a2f">new</span>(bytes.Buffer)
-	err = png.<span style="color:#00a000">Encode</span>(buf, img)
-
-	<span style="color:#a2f;font-weight:bold">return</span> buf.<span style="color:#00a000">Bytes</span>(), <span style="color:#a2f;font-weight:bold">nil</span>
-}
-</code></pre></div><h2 id="이미지들로-영상-만들기">이미지들로 영상 만들기</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#080;font-style:italic">// input byt: png bytes =&gt;  output byt: png bytes</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">func</span> <span style="color:#00a000">AddTimeStamp</span>(byt []<span style="color:#0b0;font-weight:bold">byte</span>, x, y, size <span style="color:#0b0;font-weight:bold">int</span>, color color.Color, label <span style="color:#0b0;font-weight:bold">string</span>) ([]<span style="color:#0b0;font-weight:bold">byte</span>, <span style="color:#0b0;font-weight:bold">error</span>) {
+</span></span><span style="display:flex;"><span>	img, err <span style="color:#666">:=</span> png.<span style="color:#00a000">Decode</span>(bytes.<span style="color:#00a000">NewReader</span>(byt))
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	font, err <span style="color:#666">:=</span> truetype.<span style="color:#00a000">Parse</span>(goregular.TTF)
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	face <span style="color:#666">:=</span> truetype.<span style="color:#00a000">NewFace</span>(font, <span style="color:#666">&amp;</span>truetype.Options{Size: <span style="color:#a2f">float64</span>(size)})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	w <span style="color:#666">:=</span> img.<span style="color:#00a000">Bounds</span>().<span style="color:#00a000">Size</span>().X
+</span></span><span style="display:flex;"><span>	h <span style="color:#666">:=</span> img.<span style="color:#00a000">Bounds</span>().<span style="color:#00a000">Size</span>().Y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	dc <span style="color:#666">:=</span> gg.<span style="color:#00a000">NewContext</span>(w, h)
+</span></span><span style="display:flex;"><span>	dc.<span style="color:#00a000">DrawImage</span>(img, <span style="color:#666">0</span>, <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>	dc.<span style="color:#00a000">SetFontFace</span>(face)
+</span></span><span style="display:flex;"><span>	r, g, b, _ <span style="color:#666">:=</span> color.<span style="color:#00a000">RGBA</span>()
+</span></span><span style="display:flex;"><span>	dc.<span style="color:#00a000">SetRGB</span>(
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f">float64</span>(r)<span style="color:#666">/</span><span style="color:#a2f">float64</span>(<span style="color:#666">0xff</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f">float64</span>(g)<span style="color:#666">/</span><span style="color:#a2f">float64</span>(<span style="color:#666">0xff</span>),
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f">float64</span>(b)<span style="color:#666">/</span><span style="color:#a2f">float64</span>(<span style="color:#666">0xff</span>),
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>	dc.<span style="color:#00a000">DrawStringAnchored</span>(label, <span style="color:#a2f">float64</span>(x), <span style="color:#a2f">float64</span>(y), <span style="color:#666">0</span>, <span style="color:#666">0.5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	img = dc.<span style="color:#00a000">Image</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	buf <span style="color:#666">:=</span> <span style="color:#a2f">new</span>(bytes.Buffer)
+</span></span><span style="display:flex;"><span>	err = png.<span style="color:#00a000">Encode</span>(buf, img)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">return</span> buf.<span style="color:#00a000">Bytes</span>(), <span style="color:#a2f;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="이미지들로-영상-만들기">이미지들로 영상 만들기</h2>
 <p>이미지들을 사용하여 영상을 만들어 내기 위해 <a href="https://ffmpeg.org/">FFmpeg</a> 사용하여 영상을 만든다.
 이때 Window 버젼에선 심각한 문제가 있는데 파일 Glob 패턴을 사용할 수 없다는 점이다.
 그래서 아래와 같은 명령으로 사용해야 한다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ffmpeg -f image2 -r <span style="color:#666">24</span> -i <span style="color:#b44">&#34;../frm_pm25/img%04d.png&#34;</span> -q:v <span style="color:#666">1</span> output.avi
-</code></pre></div><p>즉 %04d 같은 일련번호 패턴만 먹힌다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ffmpeg -f image2 -r <span style="color:#666">24</span> -i <span style="color:#b44">&#34;../frm_pm25/img%04d.png&#34;</span> -q:v <span style="color:#666">1</span> output.avi
+</span></span></code></pre></div><p>즉 %04d 같은 일련번호 패턴만 먹힌다.</p>
 <p>하지만 이미지는 일자+시간 형태로 저장되어 있으므로
 프로그램을 작성해서 이미지 파일명을 임시로 변경했다가 다시 돌려놓는
 작업을 하도록 만들었다.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a2f;font-weight:bold">var</span> err <span style="color:#0b0;font-weight:bold">error</span>
-	err = <span style="color:#00a000">RollbackImageSequence</span>(<span style="color:#666">*</span>imgpath)
-	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-		<span style="color:#a2f">panic</span>(err)
-	}
-	err = <span style="color:#00a000">RenameImageSequence</span>(<span style="color:#666">*</span>imgpath, <span style="color:#666">*</span>start, <span style="color:#666">*</span>end)
-	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-		<span style="color:#a2f">panic</span>(err)
-	}
-	err = <span style="color:#00a000">GenVideoByFFMPEG</span>(<span style="color:#666">*</span>outputf, <span style="color:#666">*</span>binpath, <span style="color:#666">*</span>imgpath, <span style="color:#666">*</span>quality, <span style="color:#666">*</span>scale)
-	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-		<span style="color:#a2f">panic</span>(err)
-	}
-	err = <span style="color:#00a000">RollbackImageSequence</span>(<span style="color:#666">*</span>imgpath)
-	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-		<span style="color:#a2f">panic</span>(err)
-	}
-</code></pre></div><h3 id="ffmpeg-명령-실행하기">FFmpeg 명령 실행하기</h3>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">cmd = exec.<span style="color:#00a000">Command</span>(
-    binpath,
-    <span style="color:#b44">&#34;-f&#34;</span>, <span style="color:#b44">&#34;image2&#34;</span>,
-    <span style="color:#b44">&#34;-r&#34;</span>, <span style="color:#b44">&#34;24&#34;</span>,
-    <span style="color:#b44">&#34;-i&#34;</span>, filepath.<span style="color:#00a000">Join</span>(imgpath, file_fmt),
-    <span style="color:#b44">&#34;-q:v&#34;</span>, fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;%d&#34;</span>, quality), <span style="color:#080;font-style:italic">//  1 (lossless), 4 (quard
-</span><span style="color:#080;font-style:italic"></span>    <span style="color:#080;font-style:italic">//&#34;-vf&#34;, fmt.Sprintf(&#34;scale=-1:%d&#34;, scale),
-</span><span style="color:#080;font-style:italic"></span>    outputf,
-)
-
-cmd.Stdout = os.Stdout
-cmd.Stdin = os.Stdin
-cmd.Stderr = os.Stderr
-fmt.<span style="color:#00a000">Println</span>(<span style="color:#b44">&#34;start&#34;</span>)
-err <span style="color:#666">:=</span> cmd.<span style="color:#00a000">Run</span>()
-<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
-    <span style="color:#a2f;font-weight:bold">return</span> err
-}
-</code></pre></div><p>위 와 같이 GO언어에서 명령을 그대로 실행할 수 있는데 여기에 표준입/출력/에러 까지 설정하게 되면 완벽히 대신 실행하게 되는 상황이다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">var</span> err <span style="color:#0b0;font-weight:bold">error</span>
+</span></span><span style="display:flex;"><span>	err = <span style="color:#00a000">RollbackImageSequence</span>(<span style="color:#666">*</span>imgpath)
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f">panic</span>(err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	err = <span style="color:#00a000">RenameImageSequence</span>(<span style="color:#666">*</span>imgpath, <span style="color:#666">*</span>start, <span style="color:#666">*</span>end)
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f">panic</span>(err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	err = <span style="color:#00a000">GenVideoByFFMPEG</span>(<span style="color:#666">*</span>outputf, <span style="color:#666">*</span>binpath, <span style="color:#666">*</span>imgpath, <span style="color:#666">*</span>quality, <span style="color:#666">*</span>scale)
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f">panic</span>(err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	err = <span style="color:#00a000">RollbackImageSequence</span>(<span style="color:#666">*</span>imgpath)
+</span></span><span style="display:flex;"><span>	<span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a2f">panic</span>(err)
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><h3 id="ffmpeg-명령-실행하기">FFmpeg 명령 실행하기</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>cmd = exec.<span style="color:#00a000">Command</span>(
+</span></span><span style="display:flex;"><span>    binpath,
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;-f&#34;</span>, <span style="color:#b44">&#34;image2&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;-r&#34;</span>, <span style="color:#b44">&#34;24&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;-i&#34;</span>, filepath.<span style="color:#00a000">Join</span>(imgpath, file_fmt),
+</span></span><span style="display:flex;"><span>    <span style="color:#b44">&#34;-q:v&#34;</span>, fmt.<span style="color:#00a000">Sprintf</span>(<span style="color:#b44">&#34;%d&#34;</span>, quality), <span style="color:#080;font-style:italic">//  1 (lossless), 4 (quard</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">//&#34;-vf&#34;, fmt.Sprintf(&#34;scale=-1:%d&#34;, scale),</span>
+</span></span><span style="display:flex;"><span>    outputf,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cmd.Stdout = os.Stdout
+</span></span><span style="display:flex;"><span>cmd.Stdin = os.Stdin
+</span></span><span style="display:flex;"><span>cmd.Stderr = os.Stderr
+</span></span><span style="display:flex;"><span>fmt.<span style="color:#00a000">Println</span>(<span style="color:#b44">&#34;start&#34;</span>)
+</span></span><span style="display:flex;"><span>err <span style="color:#666">:=</span> cmd.<span style="color:#00a000">Run</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> err <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> err
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>위 와 같이 GO언어에서 명령을 그대로 실행할 수 있는데 여기에 표준입/출력/에러 까지 설정하게 되면 완벽히 대신 실행하게 되는 상황이다.</p>
 <h2 id="영상후기">영상후기</h2>
 <p>1시간 단위로 캡쳐를 한뒤 1초에 24프레임으로 영상을 만들었으니
 1초에 하루가 지나간다.
@@ -298,7 +298,7 @@ err <span style="color:#666">:=</span> cmd.<span style="color:#00a000">Run</span
 
 <div>
 Prev <a href="/%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/">퍼지검색</a>
-
+Next <a href="/%EA%B0%9C%EB%B0%9C/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/">대체거래소후기</a>
 </div>
 
 
@@ -316,19 +316,23 @@ Prev <a href="/%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/">퍼지�
 <ul>
     
     
+    <li><a href="http://localhost:1313/%EA%B0%9C%EB%B0%9C/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/">대체거래소후기</a><span><small class="mx-1 text-muted"> 2025-03-09 </small></span></li>
+    
+    
+    
     <li>Dustscrap</li>
     
     
     
-    <li><a href="https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/">퍼지검색</a><span><small class="mx-1 text-muted"> 2021-05-10 </small></span></li>
+    <li><a href="http://localhost:1313/%EA%B0%9C%EB%B0%9C/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/">퍼지검색</a><span><small class="mx-1 text-muted"> 2021-05-10 </small></span></li>
     
     
     
-    <li><a href="https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/m2%ED%8F%89%ED%83%84%ED%99%94/">M2평탄화</a><span><small class="mx-1 text-muted"> 2021-05-04 </small></span></li>
+    <li><a href="http://localhost:1313/%EA%B0%9C%EB%B0%9C/m2%ED%8F%89%ED%83%84%ED%99%94/">M2평탄화</a><span><small class="mx-1 text-muted"> 2021-05-04 </small></span></li>
     
     
     
-    <li><a href="https://doongchoong.github.io/%EA%B0%9C%EB%B0%9C/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/">만델브로트프랙탈</a><span><small class="mx-1 text-muted"> 2021-05-03 </small></span></li>
+    <li><a href="http://localhost:1313/%EA%B0%9C%EB%B0%9C/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/">만델브로트프랙탈</a><span><small class="mx-1 text-muted"> 2021-05-03 </small></span></li>
     
     
 </ul>
