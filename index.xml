@@ -6,8 +6,15 @@
     <description>Recent content on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sun, 09 Mar 2025 19:50:38 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 19 Mar 2025 22:01:39 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Markdown업무레포</title>
+      <link>https://doongchoong.github.io/posts/markdown%EC%97%85%EB%AC%B4%EB%A0%88%ED%8F%AC/</link>
+      <pubDate>Wed, 19 Mar 2025 22:01:39 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/markdown%EC%97%85%EB%AC%B4%EB%A0%88%ED%8F%AC/</guid>
+      <description>&lt;h1 id=&#34;markdown업무레포&#34;&gt;Markdown업무레포&lt;/h1&gt;&#xA;&lt;p&gt;마크다운은 가벼운 마크업 언어로서 간단한 문법으로 문서를 만들어낼수 있다.&#xA;회사에서는 주류로 쓰이지는 않지만 보고용 문서를 제외하고 간단하게&#xA;업무 및 개발내용을 적는 기술문서나 간단한 메모등에 매우 편리하다.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Gitlab&lt;/li&gt;&#xA;&lt;li&gt;Mermaidjs&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;gitlab-을-사용하여-업무레포-공유&#34;&gt;Gitlab 을 사용하여 업무레포 공유&lt;/h2&gt;&#xA;&lt;p&gt;회사에서 일부 프로그램 배포를 위해 Gitlab이 도입되어 있는데&#xA;이때 업무용으로 레포를 부탁하여 생성했다.&lt;/p&gt;&#xA;&lt;p&gt;이 레포는 Markdown 문서가 대부분이고 때론 Txt파일 또는 업무외 별도 개발 소스를 관리한다.&lt;/p&gt;&#xA;&lt;h3 id=&#34;git브랜치&#34;&gt;Git브랜치&lt;/h3&gt;&#xA;&lt;p&gt;몇명 되지는 않지만 여러사람이 한 레포를 공유한다.&#xA;하지만 이는 단지 업무문서를 관리하는 것이므로 거창한 브랜치 전략이 필요없다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>대체거래소후기</title>
       <link>https://doongchoong.github.io/posts/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/</link>

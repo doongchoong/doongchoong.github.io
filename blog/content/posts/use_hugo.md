@@ -2,7 +2,8 @@
 title: "Use_hugo"
 date: 2021-05-02T15:18:39+09:00
 draft: false
-
+toc : true
+tocBorder : true
 ---
 
 # 휴고 사용하기
