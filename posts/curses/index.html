@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko-kr"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="Curses
+curses란 유닉스 계열 운영체제에서 터미널 환경 제어하는 라이브러리를 말한다.
+본인이 fzc를 만드는 데 사용하였다.
+기본적인 사용법은 간단히 검색을 하면 나오는데 그 외 좀 검색하기 어려웠던
+내용을 적어보고자 한다.
+검색하기 힘들었던 내용
+표준출력과 혼용하여 사용하기
+Curses는 기본적인 방식으로 로직을 구성하면
+표준입출력을 사용하기 때문에 표준출력을 별도의 용도로 사용하기 어렵다.
+fzc를 만드는데 화면의 내용은 퍼지검색 리스트 표출이지만
+파일을 선택하고 나서는 표준출력으로 선택한 파일 내용을 표출해야했기 때문에
+필요했다. 이는 많은 검색을 통해
+initscr을 호출하는 대신 new term을 구성하는 방식을 사용하면 되는 내용을 찾았다.
+검색한 Stackoverflow 내용">  
+  <meta name="google-site-verification" content="8mZLCoE--uWyZhe-U5mUVVMeFC5gD0Pkz-Sm-r0iaYE" />
+
+  <title>
+    
+      Curses
+    
+  </title>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.edfa7da52f4fb66a948a9573b5366aac1d612528eaa01419ee85581c07a80f6921681254e1d3a0237f7d3f24e1099cc5541e823b4df6688535bf4f3708a4e185.css" integrity="sha512-7fp9pS9PtmqUipVztTZqrB1hJSjqoBQZ7oVYHAeoD2khaBJU4dOgI399PyThCZzFVB6CO032aIU1v083CKThhQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">둥충코딩</a>
+
+                    <p>
+                        <time datetime="2021-05-29 20:53:40 &#43;0900 KST">
+                            2021-05-29
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>Curses</h1>
+
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#검색하기-힘들었던-내용">검색하기 힘들었던 내용</a>
+      <ul>
+        <li><a href="#표준출력과-혼용하여-사용하기">표준출력과 혼용하여 사용하기</a></li>
+        <li><a href="#xterm-키-시퀀스">Xterm 키 시퀀스</a></li>
+        <li><a href="#화면이-깜빡일-경우-clear-대신-erase를-사용">화면이 깜빡일 경우 clear 대신 erase를 사용</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </aside>
+    
+
+    <h1 id="curses">Curses</h1>
+<p>curses란 유닉스 계열 운영체제에서 터미널 환경 제어하는 라이브러리를 말한다.
+본인이 <a href="https://github.com/doongchoong/fzc">fzc</a>를 만드는 데 사용하였다.
+기본적인 사용법은 간단히 검색을 하면 나오는데 그 외 좀 검색하기 어려웠던
+내용을 적어보고자 한다.</p>
+<h2 id="검색하기-힘들었던-내용">검색하기 힘들었던 내용</h2>
+<h3 id="표준출력과-혼용하여-사용하기">표준출력과 혼용하여 사용하기</h3>
+<p>Curses는 기본적인 방식으로 로직을 구성하면
+표준입출력을 사용하기 때문에 표준출력을 별도의 용도로 사용하기 어렵다.
+<a href="https://github.com/doongchoong/fzc">fzc</a>를 만드는데 화면의 내용은 퍼지검색 리스트 표출이지만
+파일을 선택하고 나서는 표준출력으로 선택한 파일 내용을 표출해야했기 때문에
+필요했다. 이는 많은 검색을 통해
+initscr을 호출하는 대신 new term을 구성하는 방식을 사용하면 되는 내용을 찾았다.
+<a href="https://stackoverflow.com/questions/8371877/ncurses-and-linux-pipeline">검색한 Stackoverflow 내용</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#34;/dev/tty&#34;</span>, <span style="color:#e6db74">&#34;rb+&#34;</span>);
+</span></span><span style="display:flex;"><span>SCREEN <span style="color:#f92672">*</span>screen <span style="color:#f92672">=</span> <span style="color:#a6e22e">newterm</span>(NULL, f, f);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">set_term</span>(screen);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">endwin</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">delscreen</span>(screen);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fclose</span>(f);
+</span></span></code></pre></div><h3 id="xterm-키-시퀀스">Xterm 키 시퀀스</h3>
+<p>오래전부터 프로그래밍을 해오지 않은 이상, 터미널 발전의 역사를 모른채로 터미널을 접할 것이다.
+터미널의 종류는 많았고 그동안 여러가지 종류가 있었지만 현재는 거진 xterm 으로 쓰고 있는 것 같다.
+xterm이 사실 어떤 종류라고만 알았지 정확히 뭔지 몰랐다가.
+<a href="https://github.com/doongchoong/fzc">fzc</a> 를 만들면서 입력키 처리하면서 조사하다가 대략적인 내용을 알게 되었다.
+<a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI escape code wiki</a></p>
+<p>사실 curses에서 특수입력키 (화살표키, Ins, Home, End 등등) 등을 사용하려면
+<code>keypad(, TRUE);</code> 함수를 쓰곤 했는데
+예전버젼의 유닉스 curses에서는 특수키를 입력하면 마치 raw모드로만 입력이 되는 현상이 일어났다.</p>
+<p>걍 대놓고 현상만 얘기하자면 keypad를 쓰면 curses에서 정의된 KEY_UP , KEY_DOWN 등을 사용 가능해야했는데 옛날 유닉스에서는 KEY_UP KEY_DOWN을 누르면 ESC키와 조합되는 여러 키가 입력되는 것처럼 보이는 현상이 일었다.
+이게 raw 모드였다. 특수키 들은 여러 키가 동시에 입력이 되는 식으로 처리가 된며 이는 xterm 규약에 따라 처리되는 것이다.</p>
+<p>Raw 모드로 밖에 사용을 할수 없었다 보니 근본적으로 키 조합이 어떻게 들어오는지
+조사가 필요하였다.
+따라서 아래와 같은 프로그램을 짜고 입력 키에 대응해서 어떤 시퀀스가 들어오는지 조사했다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ctype.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;ncurses.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> g_ascii_code[<span style="color:#ae81ff">16</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> control_codes[] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&lt;NUL&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;SOH&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;STX&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;ETX&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;EOT&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;ENQ&gt;&#34;</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&lt;ACK&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;BEL&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;BS&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;HT&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;LF&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;VT&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;FF&gt;&#34;</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&lt;CR&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;SO&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;SI&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;DLE&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;DC1&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;DC2&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;DC3&gt;&#34;</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&lt;DC4&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;NAK&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;SYN&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;ETB&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;CAN&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;EM&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;SUB&gt;&#34;</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&lt;ESC&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;FS&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;GS&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;RS&gt;&#34;</span>, <span style="color:#e6db74">&#34;&lt;US&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">get_ascii_nm</span>(<span style="color:#66d9ef">int</span> c)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(<span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> c <span style="color:#f92672">&amp;&amp;</span> c <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0x20</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> control_codes[c];
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>( <span style="color:#ae81ff">0x20</span> <span style="color:#f92672">&lt;=</span> c <span style="color:#f92672">&amp;&amp;</span> c <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0x7f</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">sprintf</span>(g_ascii_code, <span style="color:#e6db74">&#34;&#39;%c&#39;&#34;</span>, c);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> g_ascii_code;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>( c <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0x7f</span> )
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&lt;DEL&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Get key-sequence in raw mode
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Pressed arrow up and down key at the same time : 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">First:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        &lt;ESC&gt; &#39;[&#39; &#39;A&#39; &lt;ESC&gt; &#39;[&#39; &#39;B&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">          *  ------&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    - Save all key-sequence in &#39;kbuf&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    - Seperate a first key-sequence and put it &#39;seq&#39; array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Seconds:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        &lt;ESC&gt; &#39;[&#39; &#39;A&#39; &lt;ESC&gt; &#39;[&#39; &#39;B&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                        *  ------&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    - Seperate a seconds key-sequence and put it &#39;seq&#39; array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define KEY_SEQ_SIZE (8)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">raw_keys</span>(<span style="color:#66d9ef">int</span> kbuf[], <span style="color:#66d9ef">int</span> buflen, <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> buf_idx, <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> err_cnt, <span style="color:#66d9ef">int</span> seq[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>( kbuf[<span style="color:#f92672">*</span>buf_idx] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> key, cnt<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">*</span>buf_idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">memset</span>(kbuf, <span style="color:#ae81ff">0x00</span>, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span> buflen);
+</span></span><span style="display:flex;"><span>        key <span style="color:#f92672">=</span> <span style="color:#a6e22e">getch</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(key <span style="color:#f92672">==</span> ERR)
+</span></span><span style="display:flex;"><span>        {  <span style="color:#75715e">/* meaningless ERR key skip , found it old unix */</span>
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>; key <span style="color:#f92672">=</span> <span style="color:#a6e22e">getch</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">*</span>err_cnt <span style="color:#f92672">=</span> cnt;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">128</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">usleep</span>(<span style="color:#ae81ff">50</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        kbuf[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> key;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(key <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x1b</span>) <span style="color:#75715e">/* ESC */</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">timeout</span>(<span style="color:#ae81ff">0</span>); <span style="color:#75715e">/* non-blocking */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> ; i <span style="color:#f92672">&lt;</span> buflen; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                key <span style="color:#f92672">=</span> <span style="color:#a6e22e">getch</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> key <span style="color:#f92672">==</span> ERR)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">/* ESC KEY */</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(key <span style="color:#f92672">==</span> ERR)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                kbuf[i] <span style="color:#f92672">=</span> key;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">timeout</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>); <span style="color:#75715e">/* blocking */</span>
+</span></span><span style="display:flex;"><span>        }		
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> is_esc <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> seq_idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">memset</span>(seq, <span style="color:#ae81ff">0x00</span>, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span> KEY_SEQ_SIZE);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span> <span style="color:#f92672">*</span>buf_idx; i <span style="color:#f92672">&lt;</span> buflen <span style="color:#f92672">&amp;&amp;</span> kbuf[i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(is_esc)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>( kbuf[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x1b</span> )  <span style="color:#75715e">/* ESC :   ESC [ A  (here) ESC  */</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            seq[seq_idx<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> kbuf[i];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>( kbuf[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x7e</span> )  <span style="color:#75715e">/* ~   :   ESC [ 1 5 ~  (here) */</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            seq[seq_idx<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> kbuf[i];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>( kbuf[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x1b</span> ) <span style="color:#75715e">/* ESC :  start escape sequence */</span>
+</span></span><span style="display:flex;"><span>                is_esc <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(seq[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x1b</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">*</span>buf_idx  <span style="color:#f92672">+=</span> seq_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">*</span>buf_idx <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> kbufs[<span style="color:#ae81ff">64</span>] <span style="color:#f92672">=</span>{<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> kbuf_idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> err_cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> seqs[KEY_SEQ_SIZE] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#34;/dev/tty&#34;</span>, <span style="color:#e6db74">&#34;rb+&#34;</span>);
+</span></span><span style="display:flex;"><span>	SCREEN <span style="color:#f92672">*</span>screen <span style="color:#f92672">=</span> <span style="color:#a6e22e">newterm</span>(NULL, f, f);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">set_term</span>(screen);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">start_color</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">init_pair</span>(<span style="color:#ae81ff">1</span>, COLOR_CYAN, COLOR_BLACK);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">curs_set</span>(<span style="color:#ae81ff">0</span>); <span style="color:#75715e">/* no cursor */</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">noecho</span>();   <span style="color:#75715e">/* no echo */</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">raw</span>();      <span style="color:#75715e">/*  raw input */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span>(<span style="color:#a6e22e">raw_keys</span>(kbufs, <span style="color:#ae81ff">64</span>, <span style="color:#f92672">&amp;</span>kbuf_idx, <span style="color:#f92672">&amp;</span>err_cnt, seqs )) <span style="color:#75715e">/* ESC key exit */</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">clear</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(seqs[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x1b</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(seqs[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x5b</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(seqs[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x41</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">mvaddstr</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;Press Up-key&#34;</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(seqs[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x42</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">mvaddstr</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;Press Down-key&#34;</span>);    
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> KEY_SEQ_SIZE; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">mvprintw</span>(<span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> i, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;key[%d]: %4d %-9x %s&#34;</span>, 
+</span></span><span style="display:flex;"><span>					i, seqs[i], seqs[i], <span style="color:#a6e22e">get_ascii_nm</span>(seqs[i])
+</span></span><span style="display:flex;"><span>			);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">refresh</span>();
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">endwin</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">delscreen</span>(screen);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fclose</span>(f);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>만일 키를 엄청나게 빠르게 거의 동시에 같은키를 누르면 터미널 프로그램에서는
+여러키를 한번에 잡아서 단번에 입력을 시도한다.  getch() 함수로
+블로킹 대기하도록 기대 했지만 사실 여러키가 한번에 입력되기 때문에 의도한
+getch대로 동작하지 않을 수 있다.</p>
+<p>그래서 위의 <code>raw_keys</code> 함수를 만든것이다.
+기본적으로는 ESC 시퀀스를 대비하되 동시키 입력을 대비해서 버퍼에 담아둔뒤에
+차례차례 하나의 키에 대응되는 시퀀스까지만 발라내서 output에 담는 함수이다.</p>
+<p>실제로 화살표 키를 입력해보면</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span> Press Down-key
+</span></span><span style="display:flex;"><span> key[0]:   27 1b        &lt;ESC&gt;
+</span></span><span style="display:flex;"><span> key[1]:   91 5b        &#39;[&#39;
+</span></span><span style="display:flex;"><span> key[2]:   66 42        &#39;B&#39;
+</span></span><span style="display:flex;"><span> key[3]:    0 0         &lt;NUL&gt;
+</span></span><span style="display:flex;"><span> key[4]:    0 0         &lt;NUL&gt;
+</span></span><span style="display:flex;"><span> key[5]:    0 0         &lt;NUL&gt;
+</span></span><span style="display:flex;"><span> key[6]:    0 0         &lt;NUL&gt;
+</span></span><span style="display:flex;"><span> key[7]:    0 0         &lt;NUL&gt;
+</span></span></code></pre></div><p>F5키 입력시</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span> key[0]:   27 1b        &lt;ESC&gt;
+</span></span><span style="display:flex;"><span> key[1]:   91 5b        &#39;[&#39;
+</span></span><span style="display:flex;"><span> key[2]:   49 31        &#39;1&#39;
+</span></span><span style="display:flex;"><span> key[3]:   53 35        &#39;5&#39;
+</span></span><span style="display:flex;"><span> key[4]:  126 7e        &#39;~&#39;
+</span></span><span style="display:flex;"><span> key[5]:    0 0         &lt;NUL&gt;
+</span></span><span style="display:flex;"><span> key[6]:    0 0         &lt;NUL&gt;
+</span></span><span style="display:flex;"><span> key[7]:    0 0         &lt;NUL&gt;
+</span></span></code></pre></div><p>즉 xterm이라는 터미널 규약은 화살표 아래키 입력을 받으면
+ESC &lsquo;[&rsquo; &lsquo;B&rsquo; 문자 세개를 연달아서 입력되는 것이다.
+F5키를 입력하면 ESC &lsquo;[&rsquo; &lsquo;5&rsquo; &lsquo;~&rsquo; 이렇게 네개 문자가 연속으로 입력된다.</p>
+<h3 id="화면이-깜빡일-경우-clear-대신-erase를-사용">화면이 깜빡일 경우 clear 대신 erase를 사용</h3>
+<p>curses의 프로그램 구성은 입력을 블로킹으로 대기하다가
+입력 내용에 따라서 대응을 하되<br>
+화면을 지우고 그린 뒤에 refresh를 해서 화면을 갱신할 것이다.
+이때 지우는 방법을 clear 대신 erase를 사용하면
+깜박이는 현상이 없어지고 좀더 부드러워 진다.
+이는 clear가 내부적으로 ok를 하는 단계가 더 존재하기 때문이라고 한다.</p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>

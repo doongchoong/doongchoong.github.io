@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko-kr"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="비트연산
+Bit Twiddling Hacks
+에서 정리되어 있는 비트 관련 내용
+몇 가지 감명 받거나 유용해보이는 것 위주로 정리
+바이트 관련
+워드에 0인 바이트가 있는지 확인하기
+워드는 프로세서가 기본적으로 처리할수 있는 단위를 말하며
+이 문서에선 4bytes를 의미한다. 4bytes 내에 0바이트가 존재하는지 확인하는
+것으로서 이를 활용하면
+strlen 등을 최적화할 수 있다.
+#define haszero(v) (((v)-0x01010101UL) &amp; ~ (v) &amp; 0x80808080UL)
+이 매크로를 사용하면 0인 바이트가 있을때 해당바이트 최상위 비트가
+1로 세팅된다.
+리틀엔디언 세번째바이트가 0일 경우 0x800000
+첫번째 바이트가 0일 경우 0x80  이런 식으로 결과가 나오게 된다.">  
+  <meta name="google-site-verification" content="8mZLCoE--uWyZhe-U5mUVVMeFC5gD0Pkz-Sm-r0iaYE" />
+
+  <title>
+    
+      비트연산
+    
+  </title>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.edfa7da52f4fb66a948a9573b5366aac1d612528eaa01419ee85581c07a80f6921681254e1d3a0237f7d3f24e1099cc5541e823b4df6688535bf4f3708a4e185.css" integrity="sha512-7fp9pS9PtmqUipVztTZqrB1hJSjqoBQZ7oVYHAeoD2khaBJU4dOgI399PyThCZzFVB6CO032aIU1v083CKThhQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">둥충코딩</a>
+
+                    <p>
+                        <time datetime="2021-05-02 17:02:31 &#43;0900 KST">
+                            2021-05-02
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>비트연산</h1>
+
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#바이트-관련">바이트 관련</a>
+      <ul>
+        <li><a href="#워드에-0인-바이트가-있는지-확인하기">워드에 0인 바이트가 있는지 확인하기</a></li>
+        <li><a href="#워드에-n보다-작은-바이트가-있는지-확인하기">워드에 N보다 작은 바이트가 있는지 확인하기</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </aside>
+    
+
+    <h1 id="비트연산">비트연산</h1>
+<p><a href="https://graphics.stanford.edu/~seander/bithacks.html">Bit Twiddling Hacks</a>
+에서 정리되어 있는 비트 관련 내용
+몇 가지 감명 받거나 유용해보이는 것 위주로 정리</p>
+<h2 id="바이트-관련">바이트 관련</h2>
+<h3 id="워드에-0인-바이트가-있는지-확인하기">워드에 0인 바이트가 있는지 확인하기</h3>
+<p>워드는 프로세서가 기본적으로 처리할수 있는 단위를 말하며
+이 문서에선 4bytes를 의미한다. 4bytes 내에 0바이트가 존재하는지 확인하는
+것으로서 이를 활용하면
+strlen 등을 최적화할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#define haszero(v) (((v)-0x01010101UL) &amp; ~ (v) &amp; 0x80808080UL)
+</span></span></span></code></pre></div><p>이 매크로를 사용하면 0인 바이트가 있을때 해당바이트 최상위 비트가
+1로 세팅된다.<br>
+리틀엔디언 세번째바이트가 0일 경우 0x800000
+첫번째 바이트가 0일 경우 0x80  이런 식으로 결과가 나오게 된다.</p>
+<p>그럼 glibc/strlen.c 의 소스코드를 보자</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>  <span style="color:#75715e">/* Instead of the traditional loop which tests each character,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     we will test a longword at a time.  The tricky part is testing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     if *any of the four* bytes in the longword in question are zero.  */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (;;)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      longword <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>longword_ptr<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (((longword <span style="color:#f92672">-</span> lomagic) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>longword <span style="color:#f92672">&amp;</span> himagic) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>	  <span style="color:#75715e">/* Which of the bytes was the zero?  If none of them were, it was
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	     a misfire; continue the search.  */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>cp <span style="color:#f92672">=</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>) (longword_ptr <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">if</span> (cp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> cp <span style="color:#f92672">-</span> str;
+</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">if</span> (cp[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> cp <span style="color:#f92672">-</span> str <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">if</span> (cp[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> cp <span style="color:#f92672">-</span> str <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">if</span> (cp[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> cp <span style="color:#f92672">-</span> str <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>;
+</span></span></code></pre></div><p>if 문 안의 조건문을 보면 <code>lomagic</code> 이랑 <code>himagic</code> 위 매크로의 패턴과 같다.
+워드 단위 즉 4바이트 씩 포인터를 증가시키면서 단지 4 Operation 만으로
+4바이트씩 건너뛰며 0이 있는지 검사하여 매우 빨라진다.
+Loop은  포인터를 증가시킨뒤 4 Operation을 수행하고 0이 아닌지 비교하기 때문에
+분기예측 적중률도 매우 높을 것이다.</p>
+<h3 id="워드에-n보다-작은-바이트가-있는지-확인하기">워드에 N보다 작은 바이트가 있는지 확인하기</h3>
+<p>사실 위의 0인 바이트를 찾아내는 것은  지금 얘기하고자 하는 것의
+부분집합이라고 할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#define hasless(x, n) (((x)-~ 0UL / 255 * (n)) &amp; ~ (x) &amp; ~ 0UL / 255 * 128)
+</span></span></span></code></pre></div><p>특정 N값 보다 작은 바이트가 존재하는지 찾는
+매크로는 위와 같다. 이때 각 부분을 미리 풀어보면 &lsquo;0과 같은 바이트를 찾기&rsquo; 와
+매우 유사하다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#f92672">~</span> <span style="color:#ae81ff">0UL</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">255</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">0x01</span>) <span style="color:#75715e">// 0x01010101 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">~</span> <span style="color:#ae81ff">0UL</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">255</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">128</span>    <span style="color:#75715e">// 0x80808080
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">hasless</span>(x, <span style="color:#ae81ff">0x01</span>) (((x)<span style="color:#f92672">-</span><span style="color:#ae81ff">0x01010101</span>) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span> (x) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x80808080</span>)
+</span></span></code></pre></div><p>0x01 보다 작은 바이트를 찾는다고 하면 사실 0인 바이트를 찾는 것과
+같은 것이다.
+위를 응용하여 0x20 보다 작은 문자들을 찾는 예를 들수 있다.
+<a href="https://ko.wikipedia.org/wiki/ASCII">ascii code</a> 에서 0x20 은 &lsquo;space&rsquo; 문자이며
+이보다 작은 문자들은 제어문자들로서 &lsquo;\t&rsquo;, &lsquo;\n&rsquo;, &lsquo;\r&rsquo; 과 같은 문자들도 포함되어 있다.
+readline 등과 같은 빠른 구현을 할때 활용할 수 있다.</p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>

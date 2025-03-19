@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko-kr"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="휴고 사용하기
+Gohugo 는 정적 웹페이지를 생성하는 툴이다.
+이를 이용하여 Github에 블로그를 구축하는 것을 보고
+이 블로그도 hugo로 만들어보기로 하였다.
+설치하기
+Hugo Installing 을 참조하여 설치한다.
+바이너리를 받아서 설치후 환경변수에 등록하면 된다.
+혹은 Chocolately 를 사용 패키지 설치한다.
+
+$ choco search hugo
+사이트 생성하기
+사이트(블로그)를 구성하고자 하는 폴더에 가서 아래 명령을 수행한다.
+
+$ hugo new site blog
+나는 블로그를 만들고자 했기때문에 blog 폴더에 각종
+폴더 및 파일들이 생성된다.">  
+  <meta name="google-site-verification" content="8mZLCoE--uWyZhe-U5mUVVMeFC5gD0Pkz-Sm-r0iaYE" />
+
+  <title>
+    
+      Use_hugo
+    
+  </title>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.edfa7da52f4fb66a948a9573b5366aac1d612528eaa01419ee85581c07a80f6921681254e1d3a0237f7d3f24e1099cc5541e823b4df6688535bf4f3708a4e185.css" integrity="sha512-7fp9pS9PtmqUipVztTZqrB1hJSjqoBQZ7oVYHAeoD2khaBJU4dOgI399PyThCZzFVB6CO032aIU1v083CKThhQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">둥충코딩</a>
+
+                    <p>
+                        <time datetime="2021-05-02 15:18:39 &#43;0900 KST">
+                            2021-05-02
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>Use_hugo</h1>
+
+    
+
+    <h1 id="휴고-사용하기">휴고 사용하기</h1>
+<p><a href="https://gohugo.io/">Gohugo</a> 는 정적 웹페이지를 생성하는 툴이다.
+이를 이용하여 Github에 블로그를 구축하는 것을 보고
+이 블로그도 hugo로 만들어보기로 하였다.</p>
+<h2 id="설치하기">설치하기</h2>
+<p>Hugo Installing 을 참조하여 설치한다.
+바이너리를 받아서 설치후 환경변수에 등록하면 된다.
+혹은 Chocolately 를 사용 패키지 설치한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ choco search hugo
+</span></span></code></pre></div><h2 id="사이트-생성하기">사이트 생성하기</h2>
+<p>사이트(블로그)를 구성하고자 하는 폴더에 가서 아래 명령을 수행한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ hugo new site blog
+</span></span></code></pre></div><p>나는 블로그를 만들고자 했기때문에 blog 폴더에 각종
+폴더 및 파일들이 생성된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>archetypes
+</span></span><span style="display:flex;"><span>content
+</span></span><span style="display:flex;"><span>data
+</span></span><span style="display:flex;"><span>layouts
+</span></span><span style="display:flex;"><span>public
+</span></span><span style="display:flex;"><span>resources
+</span></span><span style="display:flex;"><span>server
+</span></span><span style="display:flex;"><span>static
+</span></span><span style="display:flex;"><span>themes
+</span></span><span style="display:flex;"><span>config.toml
+</span></span><span style="display:flex;"><span>syntax.css
+</span></span></code></pre></div><p>content 는 md파일이 모여있는 곳으로
+웹페이지로 렌더링 된다. 글을 쓸때 여기에 md파일을 작성하게
+될 것이다.
+themes 폴더는  테마를 받아서 디자인을 꾸밀수 있다.</p>
+<h2 id="테마-받기">테마 받기</h2>
+<p><a href="https://themes.gohugo.io/">휴고테마링크</a> 에 가서
+맘에 드는 테마를 고른뒤에 받아서 설치한다.
+대부분 테마는 github 리파지토리이다. 따라서
+아래 명령처럼 git clone을 사용하여 받으면 된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ cd themes
+</span></span><span style="display:flex;"><span>$ git clone https://github.com/......
+</span></span></code></pre></div><h2 id="포스트-쓰기">포스트 쓰기</h2>
+<p>Markdown 파일로 포스트를 작성한다.
+파일을 직접 만들어도 되지만 hugo의 정보도 같이 생성하기
+위해 아래 명령어로 추가해도 된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ hugo new post/first-post.md
+</span></span></code></pre></div><h2 id="로컬에서-확인하기">로컬에서 확인하기</h2>
+<p>정적웹페이지들을 github등으로 올리기 전에
+어떻게 보이는지 확인할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ hugo -D server
+</span></span></code></pre></div><p><code>-D</code>옵션은 특히 Draft 모드인 글까지도 볼 수 있다.</p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>둥충코딩</title>
-    <link>https://doongchoong.github.io/</link>
-    <description>Recent content on 둥충코딩</description>
+    <title>Posts on 둥충코딩</title>
+    <link>https://doongchoong.github.io/posts/</link>
+    <description>Recent content in Posts on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
     <lastBuildDate>Sun, 09 Mar 2025 19:50:38 +0900</lastBuildDate>
-    <atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://doongchoong.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>대체거래소후기</title>
       <link>https://doongchoong.github.io/posts/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/</link>

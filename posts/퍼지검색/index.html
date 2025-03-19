@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko-kr"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="퍼지 검색
+Fuzzy-search 검색어가 정확하지 않아도 유사한 항목을 찾아주는 검색 방식이다.
+유전정보를 활용하는 생물학 분야 혹은 문자열 검색
+등 여러 분야에 쓰이는데
+이중 파일명을 검색하거나 함수 메서드등을 검색하는
+기능이 아주 유용해 보인다.
+사례
+Sublime Text의
+검색 기능을 들수 있다.
+그리고 이 기능에 대해 궁금한 사람이 있었던 모양이다.
+이런 Article
+이 있다.
+그리고 최근에 발견한 툴인데 fzf
+라는 fuzzy-finder 가 있다.
+아주 훌륭한 tool이고 정말 멋지다.
+이 프로그램은 자기가 필요한 일만 멋지고 충분하게 딱 해내고 Cool하게 끝낸다. 정말 대단한 프로그램이다. 이건 한국사람이 만들었다.">  
+  <meta name="google-site-verification" content="8mZLCoE--uWyZhe-U5mUVVMeFC5gD0Pkz-Sm-r0iaYE" />
+
+  <title>
+    
+      퍼지검색
+    
+  </title>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.edfa7da52f4fb66a948a9573b5366aac1d612528eaa01419ee85581c07a80f6921681254e1d3a0237f7d3f24e1099cc5541e823b4df6688535bf4f3708a4e185.css" integrity="sha512-7fp9pS9PtmqUipVztTZqrB1hJSjqoBQZ7oVYHAeoD2khaBJU4dOgI399PyThCZzFVB6CO032aIU1v083CKThhQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">둥충코딩</a>
+
+                    <p>
+                        <time datetime="2021-05-10 23:35:07 &#43;0900 KST">
+                            2021-05-10
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>퍼지검색</h1>
+
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#사례">사례</a></li>
+    <li><a href="#알고리즘">알고리즘?</a>
+      <ul>
+        <li><a href="#재귀적인-방법">재귀적인 방법</a></li>
+        <li><a href="#fzf-의-알고리즘">fzf 의 알고리즘</a></li>
+      </ul>
+    </li>
+    <li><a href="#설계하기">설계하기</a>
+      <ul>
+        <li><a href="#패턴을-전부-매칭시키는-방법">패턴을 전부 매칭시키는 방법</a></li>
+        <li><a href="#최대값을-어떻게-선택하는가">최대값을 어떻게 선택하는가</a></li>
+        <li><a href="#보너스-점수는-어떻게-정하고-더하는가">보너스 점수는 어떻게 정하고 더하는가</a></li>
+        <li><a href="#연속-매칭">연속 매칭</a></li>
+      </ul>
+    </li>
+    <li><a href="#구현하기">구현하기</a>
+      <ul>
+        <li><a href="#점수배열은-가로세로-하나-크게-작성">점수배열은 가로,세로 하나 크게 작성</a></li>
+        <li><a href="#보너스-사전정보">보너스 사전정보</a></li>
+        <li><a href="#각-row에서-첫번째-col-정하기">각 Row에서 첫번째 col 정하기</a></li>
+        <li><a href="#대각선-왼쪽-선택하기">대각선, 왼쪽 선택하기</a></li>
+        <li><a href="#연속처리">연속처리</a></li>
+        <li><a href="#역추적해서-패턴-위치-알아내기">역추적해서 패턴 위치 알아내기</a></li>
+      </ul>
+    </li>
+    <li><a href="#구현결과">구현결과</a></li>
+    <li><a href="#그-외-생각할-것들">그 외 생각할 것들</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+    <h1 id="퍼지-검색">퍼지 검색</h1>
+<p>Fuzzy-search 검색어가 정확하지 않아도 유사한 항목을 찾아주는 검색 방식이다.
+유전정보를 활용하는 생물학 분야 혹은 문자열 검색
+등 여러 분야에 쓰이는데
+이중 파일명을 검색하거나 함수 메서드등을 검색하는
+기능이 아주 유용해 보인다.</p>
+<h2 id="사례">사례</h2>
+<p><a href="https://www.sublimetext.com/">Sublime Text</a>의
+검색 기능을 들수 있다.
+그리고 이 기능에 대해 궁금한 사람이 있었던 모양이다.
+이런 <a href="https://www.forrestthewoods.com/blog/reverse_engineering_sublime_texts_fuzzy_match/">Article</a>
+이 있다.
+그리고 최근에 발견한 툴인데 <a href="https://github.com/junegunn/fzf">fzf</a>
+라는 fuzzy-finder 가 있다.
+아주 훌륭한 tool이고 정말 멋지다.
+이 프로그램은 자기가 필요한 일만 멋지고 충분하게 딱 해내고 Cool하게 끝낸다. 정말 대단한 프로그램이다. 이건 한국사람이 만들었다.</p>
+<h2 id="알고리즘">알고리즘?</h2>
+<p><a href="https://www.sublimetext.com/">Sublime Text</a> 관련 분석 블로그의 글에서 구현한 <a href="https://github.com/forrestthewoods/lib_fts/blob/master/code/fts_fuzzy_match.h">소스코드</a>
+는 구체적으로 어떤 알고리즘을 썼는지 명확하진 않다.
+재귀호출로 처리하고 있다.</p>
+<h3 id="재귀적인-방법">재귀적인 방법</h3>
+<p>자세히 이해하지 말고 대략적인 느낌만 살펴보자</p>
+<ol>
+<li>문자열을 하나씩 살피면서 패턴의 맨 앞글자와 비교</li>
+<li>일치하지 않으면 다음 문자 확인</li>
+<li>일치하는 경우 문자열 하나 증가시켜서 재귀호출한다.</li>
+<li>재귀호출결과중 가장 좋은 점수를 고른다.</li>
+<li>현재 매칭을 기록하고 패턴문자 하나 증가</li>
+<li>패턴문자가 NULL문자를 만났을때 match</li>
+<li>그러면 각 매칭된 부분을 읽고 스코어 기준에 따라 점수를 매김</li>
+</ol>
+<p>대략적으로 코드를 파악해본 결과는 위와 같다.
+<strong>재귀적으로 가능한 패턴 위치를 탐색해서 가능 모든 조합에 대해서 점수를 매긴다.</strong>
+가장 좋은 점수를 재귀호출 결과에서 계속적으로 업데이트한다.
+이때 점수는 몇가지 기준에 따라서 매기게 된다.</p>
+<ol>
+<li>일치하는 문자 + 0</li>
+<li>연속 일치 문자 +5</li>
+<li>시작거리 -1</li>
+<li>구분기호 뒤 문자 + 10</li>
+<li>대문자 (CamelCase) + 10</li>
+</ol>
+<p>이런식으로 각 경우에 따라서 점수를 매기는데 차감도 가능하다.</p>
+<h3 id="fzf-의-알고리즘">fzf 의 알고리즘</h3>
+<p><a href="https://github.com/junegunn/fzf">fzf</a>는 매우 친절하다. 소스코드 <a href="https://github.com/junegunn/fzf/blob/master/src/algo/algo.go">algo 부분</a>
+찾아 들어가면 알고리즘에 대해서 자세히 나온다.
+<a href="https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm">Smith-Waterman algorithm</a>을 수정하여 사용하는 것으로 나온다.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Smith-Waterman-Algorithm-Example-En.gif" alt="algo"></p>
+<p>알고리즘을 시각화 하면 대략 위 GIF와 같은 느낌으로 진행이 된다.
+저건 마치 일부 <a href="https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95">Dynamic Programming</a> 해법 같아 보인다.
+왼쪽으로 이동시 값이 차감되는 것을 볼 수 있는데
+이걸 Gap-penalty 라고 한다.
+즉 일치하는 부분이 멀리 떨어질수록 점수를 점점 낮춰버리는 효과를 주는 것이다.</p>
+<p><a href="https://github.com/junegunn/fzf">fzf</a>는 위 알고리즘 외에도 여러가지 구현이 있고 unicode 및 각종 케이스를 감안한
+로직이 있어서 이해하기 난해한 면이 있다.
+하지만 위 <a href="https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm">Smith-Waterman algorithm</a>이 핵심 로직이라는 사실을 이해하고 살펴보면
+될 것 같다.</p>
+<h2 id="설계하기">설계하기</h2>
+<p><a href="https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm">Smith-Waterman algorithm</a>을 응용해서 구현하는게 간단하면서도 빠른성능을 보여줄 것 같다.
+원래 염기서열의 부분 일치 등을 찾는 알고리즘 이지만
+이를 텍스트에서 부분일치 패턴과  매치를 시키기 위해 몇가지 사항을 고려해 보자</p>
+<ul>
+<li>패턴 길이가 검색 대상 문자열보다 짧다.</li>
+<li>패턴 문자는 전부 매칭되어야 한다.</li>
+<li>텍스트에서 특정부분은 보너스 점수를 얻는다.</li>
+<li>연속 매칭되는 부분을 좀더 우위를 준다.</li>
+</ul>
+<p>위 fzf의 gif 그림파일로도 알수 있듯이 왼쪽 상단부터  오른쪽 하단 방향으로 어떤 점수를 기록하고 비교해서 큰것을 입력하면서
+내려온뒤에 전부 다 기록이 된뒤 거꾸로 큰 값을 기준으로 거꾸로 찾아 올라가며 경로를 찾아낸다.
+이건 완전히 점화식이 몇가지 방향으로 분리되는 <a href="https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95">Dynamic Programming</a> 방식이다.
+이때 패턴문자가 전부 매칭되어야 한다는 사실을 생각해보고 row에 패턴문자를 column에 텍스트 문자를 배치시켜보자</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>    pat:[rr]
+</span></span><span style="display:flex;"><span>    txt:[ReadMe]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    | R, e, a, d, M, e
+</span></span><span style="display:flex;"><span>   -+-----------------
+</span></span><span style="display:flex;"><span>   r|
+</span></span><span style="display:flex;"><span>   r|
+</span></span></code></pre></div><h3 id="패턴을-전부-매칭시키는-방법">패턴을 전부 매칭시키는 방법</h3>
+<p>방법은 위로가는 방향은 빼고  대각선, 왼쪽 두방향으로만 검색해서 최대값을 기록해 나가면 된다.
+위로 올라가는 방향은 없으니 패턴은 항상 매칭이 될 수 밖에 없다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>     --t--tt---t-----tt
+</span></span><span style="display:flex;"><span>    r-&gt;\
+</span></span><span style="display:flex;"><span>    r----&gt;\
+</span></span><span style="display:flex;"><span>    r      \--------&gt;\
+</span></span><span style="display:flex;"><span>    r           \----&gt;\
+</span></span></code></pre></div><p>대략 위와 같은 느낌으로 이해하면 된다.
+패턴문자(row)는 하나도 빠짐없이 매칭 되며  매칭되었을때는 대각선으로 하강한다.
+텍스트문자는 중간중간 건너 뛰는 것을 볼 수 있다. 이를 Gap이라고 부르며
+멀리 떨어질수록 Penalty 를 받게 된다.</p>
+<h3 id="최대값을-어떻게-선택하는가">최대값을 어떻게 선택하는가</h3>
+<p>위와 같은 상황에서 어떤 r번째 row와  c번째 col 상황을 가정해보자
+이때 대각선 위의 값을 T(r-1, c-1) 이라고 가정하고 왼쪽을 T(r , c-1) 이라고 하자.
+현재 T(r,c) 값을  두 값중 큰 값으로 선택한다고 했을때  T(r-1, c-1) 이 값도 사실
+그 이전에 큰 값으로 선택해온 값이다.
+T(r, c-1) 도 마찬가지다. 이는 재귀적 구조를 지니고 있어 <a href="https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95">Dynamic Programming</a>문제라고 할 수 있다.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center"></th>
+          <th style="text-align: center">r-2</th>
+          <th style="text-align: center">r-1</th>
+          <th style="text-align: center">r</th>
+          <th style="text-align: center">r+1</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">c-2</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">c-1</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">T(r-1, c-1)</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">c</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">T(r  , c-1)</td>
+          <td style="text-align: center">큰값을 선택</td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">c+1</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+          <td style="text-align: center">&hellip;</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="보너스-점수는-어떻게-정하고-더하는가">보너스 점수는 어떻게 정하고 더하는가</h3>
+<p>보너스 점수는 파일경로와 같은 텍스트를 찾을때 디렉토리를 구분해주는 구분문자 그리고 파일명 디렉토리명에서 CamelCase
+등에 좀더 매칭이 잘되게 하고 싶을때 보너스점수를 주는 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span> pat:    tic
+</span></span><span style="display:flex;"><span> txt:    /thits/iis/testcCase
+</span></span><span style="display:flex;"><span> result: /[t]hits/[i]is/testc[C]ase
+</span></span></code></pre></div><p>위와 같은 사례를 보면 앞 디렉토리명에서 t 는 두번 나오지만 /t 와 같이 경계에 붙어있는 문자로 선택을 하도록 유도한다.
+testcCase 도 마찬가지로 대문자C 앞에 소문자c가 먼저 나왔지만 CamelCase 를 더 선호하기 때문에 C를 선택한다.</p>
+<p>fzf의 각종 점수는 다음과 같다.</p>
+<ol>
+<li>match 되었을 경우 : 16점</li>
+<li>경계문자 :  8점</li>
+<li>워드가 아닌 문자: 8점</li>
+<li>CamelCase :  7점</li>
+<li>연속매칭 : 4점</li>
+<li>갭페널티(최초발생) : -3점</li>
+<li>갭페널티 : -1점</li>
+</ol>
+<p>연속 매칭은 좀더 특수한 경우이다.</p>
+<h3 id="연속-매칭">연속 매칭</h3>
+<p>연속이 발생하면 보너스를 주는 식으로 만들게 되면 어느 순간 너무 과도하게 연속에만 붙어버리는 현상이 관찰되었다.
+이를 어떻게 해결하였을지 <a href="https://github.com/junegunn/fzf">fzf</a>를 살펴본 결과..  현재보너스값, 연속매칭보너스값,  최초시작문자의보너스값
+중 최대를 고른다.  계속 누적시키지 않았다!!
+이런 것은 많은 실험을 거치면서 조정된 값들이라 믿을만 한 것 같다.</p>
+<h2 id="구현하기">구현하기</h2>
+<h3 id="점수배열은-가로세로-하나-크게-작성">점수배열은 가로,세로 하나 크게 작성</h3>
+<p>대각선과 왼쪽 값을 비교하는 로직이 있기 때문에 이 로직을 자연스럽게 반영하기 위해
+matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번째 col은 비워두는 것이 좋아보인다.
+사실 2차원 배열로 하지 않고 1차원배열로 만든뒤 인덱싱을 해서 구현했다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> colsize <span style="color:#f92672">=</span> <span style="color:#a6e22e">strlen</span>(txt) <span style="color:#f92672">+</span> START_IDX;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> rowsize <span style="color:#f92672">=</span> <span style="color:#a6e22e">strlen</span>(pat) <span style="color:#f92672">+</span> START_IDX;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define IDX(r,c) (((r) * colsize) + (c))
+</span></span></span></code></pre></div><h3 id="보너스-사전정보">보너스 사전정보</h3>
+<p>경계문자, CamelCase, no-alnum 등은 사실 입력텍스트만 보고도 기록해 놓을 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#75715e">/* 보너스 계산 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> t_cur, t_pre <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> col <span style="color:#f92672">=</span> START_IDX; col <span style="color:#f92672">&lt;</span> colsize; col<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        t_cur <span style="color:#f92672">=</span> txt[col<span style="color:#f92672">-</span>START_IDX];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isalnum</span>(t_pre) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">isalnum</span>(t_cur))
+</span></span><span style="display:flex;"><span>            bonus[col] <span style="color:#f92672">=</span> g_bonus_boundary;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">isalnum</span>(t_cur) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            bonus[col] <span style="color:#f92672">=</span> g_bonus_no_alnum;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">islower</span>(t_pre) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">isupper</span>(t_cur))
+</span></span><span style="display:flex;"><span>            bonus[col] <span style="color:#f92672">=</span> g_bonus_camel;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        t_pre <span style="color:#f92672">=</span> t_cur;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h3 id="각-row에서-첫번째-col-정하기">각 Row에서 첫번째 col 정하기</h3>
+<p>첫번째 패턴문자를 일치부분을 끝내고 그 다음 패턴문자를 가지고 작업할때
+사실 첫번째 row를 사용했기 때문에 첫번째 매칭 col 이후부터 시작하면 된다.
+이는 대략적으로 절반 정도 탐색 공간을 줄여준다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> first_col_in_a_row <span style="color:#f92672">=</span> START_IDX;
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> row<span style="color:#f92672">=</span>START_IDX; row <span style="color:#f92672">&lt;</span> rowsize; row<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> is_first <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">/* false */</span>
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> col <span style="color:#f92672">=</span> first_col_in_a_row; col <span style="color:#f92672">&lt;</span> colsize; col<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* match */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">tolower</span>(p_cur) <span style="color:#f92672">==</span> <span style="color:#a6e22e">tolower</span>(t_cur))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/* 첫번째 시작 col 기록 */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(is_first <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                is_first <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>                first_col_in_a_row <span style="color:#f92672">=</span> col<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><h3 id="대각선-왼쪽-선택하기">대각선, 왼쪽 선택하기</h3>
+<p>위에서 설계한 대로 고르되 중요한 점은 <strong>대각선을 선택할 시에는 지금 패턴을 매칭하였을 때</strong> 인 것이고
+왼쪽을 선택할 시에는 <strong>매칭하지 않고 갭 페널티까지 적용되었을 때</strong> 인 것이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* 왼쪽 점수 결정 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(is_gap)
+</span></span><span style="display:flex;"><span>    left_score <span style="color:#f92672">+=</span> g_penalty_ingap;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    left_score <span style="color:#f92672">+=</span> g_penalty_firstgap; <span style="color:#75715e">/* 첫 연속 실패시 패널티가 크다. */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 매칭시 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">tolower</span>(p_cur) <span style="color:#f92672">==</span> <span style="color:#a6e22e">tolower</span>(t_cur))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 대각선 */</span>
+</span></span><span style="display:flex;"><span>    diag_score <span style="color:#f92672">+=</span> g_score_match;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 보너스 결정 */</span>
+</span></span><span style="display:flex;"><span>    bonus_score <span style="color:#f92672">=</span> bonus[col];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 대각선이 더 큰경우 패턴 선택 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(left_score <span style="color:#f92672">&lt;</span> diag_score <span style="color:#f92672">+</span> bonus_score)
+</span></span><span style="display:flex;"><span>        is_select <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">/* true */</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 선택되면 대각선, 안될경우 왼쪽 선택한다. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(is_select)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    is_gap <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">/* false */</span>
+</span></span><span style="display:flex;"><span>    matrix[<span style="color:#a6e22e">IDX</span>(row, col)] <span style="color:#f92672">=</span> diag_score <span style="color:#f92672">+</span> bonus_score;
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    is_gap <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">/* true */</span>
+</span></span><span style="display:flex;"><span>    matrix[<span style="color:#a6e22e">IDX</span>(row  , col)] <span style="color:#f92672">=</span> left_score ;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 음수값 처리 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(matrix[<span style="color:#a6e22e">IDX</span>(row  , col)] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    matrix[<span style="color:#a6e22e">IDX</span>(row  , col)] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><h3 id="연속처리">연속처리</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* 연속 개수 선정 */</span>
+</span></span><span style="display:flex;"><span>cont_cnt <span style="color:#f92672">=</span> cont[<span style="color:#a6e22e">IDX</span>(row<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, col<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 대각선 */</span>
+</span></span><span style="display:flex;"><span>diag_score <span style="color:#f92672">+=</span> g_score_match;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 보너스 결정 */</span>
+</span></span><span style="display:flex;"><span>bonus_score <span style="color:#f92672">=</span> bonus[col];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cont_cnt <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 연속이면 현재보너스, 연속보너스점수, 연속시작문자보너스 중 최대값을 선정해서 정함 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(bonus_score <span style="color:#f92672">&lt;</span> g_bonus_continuous)
+</span></span><span style="display:flex;"><span>        bonus_score <span style="color:#f92672">=</span> g_bonus_continuous;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(bonus_score <span style="color:#f92672">&lt;</span> bonus[col <span style="color:#f92672">-</span> cont_cnt <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        bonus_score <span style="color:#f92672">=</span> bonus[col <span style="color:#f92672">-</span> cont_cnt <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    bonus_score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="역추적해서-패턴-위치-알아내기">역추적해서 패턴 위치 알아내기</h3>
+<p>기록해온 것의 반대방향으로 하면 된다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#75715e">/* 역추적 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> back_row <span style="color:#f92672">=</span> rowsize <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> back_col <span style="color:#f92672">=</span> max_col;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(back_row <span style="color:#f92672">&gt;=</span> START_IDX)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(matrix[<span style="color:#a6e22e">IDX</span>(back_row, back_col<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)] <span style="color:#f92672">&lt;=</span> matrix[<span style="color:#a6e22e">IDX</span>(back_row, back_col)])
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            back_row<span style="color:#f92672">--</span>; 
+</span></span><span style="display:flex;"><span>            position[back_col <span style="color:#f92672">-</span> START_IDX] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        back_col <span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="구현결과">구현결과</h2>
+<p><a href="https://github.com/doongchoong/fzc">fzc</a> 라는 툴을 만들었다.
+파일을 퍼지검색으로 찾아내는 유틸이다.
+C언어로 작성하였다. unix , linux 등에서 사용할 수 있다.
+curses와 디렉토리 순회 등의 기능을 구현하여 유틸로 만들었다.</p>
+<h2 id="그-외-생각할-것들">그 외 생각할 것들</h2>
+<ul>
+<li>유니코드 지원, 멀티바이트 문자</li>
+</ul>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko-kr"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="yyjson 분석
+yyjson은
+현존하는 JSON 파서중 가장 빠르다고 알려져 있는 라이브러리이다.
+이 소스코드를 살펴보면서 유용한 것들과 공부할 만한 것 들을 메모한다.
+단 두개 파일
+yyjson.c , yyjson.h 단 두개 파일만 제공하여
+각 프로젝트에 쉽게 빌드할 수 있도록 하였다.
+CPU 최적화
+json 과 같은 텍스트 분석이 필요로 하는 것은
+많은 선후 상태 의존성을 필요로 한다. 따라서 병렬로 수행하기 힘들며
+수많은 분기가 존재하여 머신의 성능을 이끌어내기 어려운
+분야 중 하나. 따라서 yyjson이 어떤 최적화들을 하였는지
+유용한 트릭들을 확인하도록 한다.">  
+  <meta name="google-site-verification" content="8mZLCoE--uWyZhe-U5mUVVMeFC5gD0Pkz-Sm-r0iaYE" />
+
+  <title>
+    
+      yyjson분석
+    
+  </title>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.edfa7da52f4fb66a948a9573b5366aac1d612528eaa01419ee85581c07a80f6921681254e1d3a0237f7d3f24e1099cc5541e823b4df6688535bf4f3708a4e185.css" integrity="sha512-7fp9pS9PtmqUipVztTZqrB1hJSjqoBQZ7oVYHAeoD2khaBJU4dOgI399PyThCZzFVB6CO032aIU1v083CKThhQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                <div class="post-meta">
+                    <a href="/">둥충코딩</a>
+
+                    <p>
+                        <time datetime="2021-05-02 17:44:40 &#43;0900 KST">
+                            2021-05-02
+                        </time>
+                    </p>
+                </div>
+
+<article>
+    <h1>yyjson분석</h1>
+
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#단-두개-파일">단 두개 파일</a></li>
+    <li><a href="#cpu-최적화">CPU 최적화</a>
+      <ul>
+        <li><a href="#1-loop-unrolling">1. Loop unrolling</a></li>
+        <li><a href="#2-likely-unlikely">2. Likely, Unlikely</a></li>
+        <li><a href="#3-asm-volatile">3. Asm volatile</a></li>
+      </ul>
+    </li>
+    <li><a href="#goto-문">Goto 문</a></li>
+    <li><a href="#bytes-매치">Bytes 매치</a></li>
+    <li><a href="#character-테이블">Character 테이블</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+    <h1 id="yyjson-분석">yyjson 분석</h1>
+<p><a href="https://github.com/ibireme/yyjson">yyjson</a>은
+현존하는 JSON 파서중 가장 빠르다고 알려져 있는 라이브러리이다.
+이 소스코드를 살펴보면서 유용한 것들과 공부할 만한 것 들을 메모한다.</p>
+<h2 id="단-두개-파일">단 두개 파일</h2>
+<p>yyjson.c , yyjson.h 단 두개 파일만 제공하여
+각 프로젝트에 쉽게 빌드할 수 있도록 하였다.</p>
+<h2 id="cpu-최적화">CPU 최적화</h2>
+<p>json 과 같은 텍스트 분석이 필요로 하는 것은
+많은 선후 상태 의존성을 필요로 한다. 따라서 병렬로 수행하기 힘들며
+수많은 분기가 존재하여 머신의 성능을 이끌어내기 어려운
+분야 중 하나. 따라서 yyjson이 어떤 최적화들을 하였는지
+유용한 트릭들을 확인하도록 한다.</p>
+<h3 id="1-loop-unrolling">1. Loop unrolling</h3>
+<p>루프로 줄여쓸수 있는 코드를 오히려 늘여씀으로서
+반복을 판단하는 조건판단의 수를 줄이는 기법
+<a href="https://en.wikipedia.org/wiki/Duff%27s_device">Duff&rsquo;s Device</a>
+로 알려져 있는 기법이다.
+yyjson에서는 이를 repeat 매크로로 풀어낸다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* Macros used for loop unrolling and other purpose. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define repeat2(x)  { x x }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define repeat3(x)  { x x x }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define repeat4(x)  { x x x x }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define repeat8(x)  { x x x x x x x x }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define repeat16(x) { x x x x x x x x x x x x x x x x }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define repeat4_incr(x)  { x(0) x(1) x(2) x(3) }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define repeat8_incr(x)  { x(0) x(1) x(2) x(3) x(4) x(5) x(6) x(7) }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define repeat16_incr(x) { x(0) x(1) x(2) x(3) x(4) x(5) x(6) x(7) \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                           x(8) x(9) x(10) x(11) x(12) x(13) x(14) x(15) }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define repeat_in_1_18(x) { x(1) x(2) x(3) x(4) x(5) x(6) x(7) \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                            x(8) x(9) x(10) x(11) x(12) x(13) x(14) x(15) \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                            x(16) x(17) x(18) }
+</span></span></span></code></pre></div><p>이는 소스코드에선 하나의 코드를 쓰지만 repeat 매크로를 사용하여
+자동으로 반복되도록 확장하는 일종의 snippets 이다.</p>
+<h3 id="2-likely-unlikely">2. Likely, Unlikely</h3>
+<p>likely, unlikely 매크로는 리눅스 커널 소스코드에서 사용했다고 알려져있는데
+이는 Branch 가 발생되는 부분에서 힌트를 주는 것이다.
+true 가 많이 발생할 경우는 likely , false가 많이 발생할 경우는
+unlikely 등으로 사용한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* likely */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifndef yyjson_likely
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#   if yyjson_has_builtin(__builtin_expect) || YYJSON_GCC_VER &gt;= 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#       define yyjson_likely(expr) __builtin_expect(!!(expr), 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#   else
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#       define yyjson_likely(expr) (expr)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#   endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* unlikely */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifndef yyjson_unlikely
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#   if yyjson_has_builtin(__builtin_expect) || YYJSON_GCC_VER &gt;= 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#       define yyjson_unlikely(expr) __builtin_expect(!!(expr), 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#   else
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#       define yyjson_unlikely(expr) (expr)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#   endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span></code></pre></div><p>사실 위 매크로중 중요한 것은 <code>__builtin_expect(!!(expr), 0)</code> 이것이다.
+1이면 likely , 0이면 unlikely이다. 이를 지원하는 컴파일러에 여부에 따라
+위처럼 묶어준뒤 .c 파일에서</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* Macros used to provide branch prediction information for compiler. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#undef  likely
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define likely(x)       yyjson_likely(x)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#undef  unlikely
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define unlikely(x)     yyjson_unlikely(x)
+</span></span></span></code></pre></div><p>이렇게 축약하여 사용한다. 지원하지 않는 컴파일러라면 성능이 급격히 떨어지게 되므로
+될 수 있는 한 해당 기능을 지원하는 컴파일러를 쓰는 것이 좋다. 위 코드처럼
+GCC 4 버젼이상, 그리고 개인적으로 검색해본 결과
+<a href="https://llvm.org/docs/BranchWeightMetadata.html">LLVM도 지원</a>
+한다.</p>
+<p>위 두 매크로를 정의한 뒤에 어휘분석에서 발생하는 모든 if문에서
+likely , unlikely를 적당히 버무려 사용하면 된다.</p>
+<h3 id="3-asm-volatile">3. Asm volatile</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>skip_ascii_end:
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     GCC may store src[i] in a register at each line of expr_jump(i) above.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     These instructions are useless and will degrade performance.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     This inline asm is a hint for gcc: &#34;the memory has been modified,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     do not cache it&#34;.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#if YYJSON_IS_REAL_GCC
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">__asm</span> <span style="color:#66d9ef">volatile</span>(<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;=m&#34;</span>(<span style="color:#f92672">*</span>src)<span style="color:#f92672">::</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">likely</span>(<span style="color:#f92672">*</span>src <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;&#34;&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        val<span style="color:#f92672">-&gt;</span>tag <span style="color:#f92672">=</span> ((u64)(src <span style="color:#f92672">-</span> cur) <span style="color:#f92672">&lt;&lt;</span> YYJSON_TAG_BIT) <span style="color:#f92672">|</span> YYJSON_TYPE_STR;
+</span></span><span style="display:flex;"><span>        val<span style="color:#f92672">-&gt;</span>uni.str <span style="color:#f92672">=</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)cur;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">*</span>src <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">*</span>end <span style="color:#f92672">=</span> src <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>매우 난해한 코드이다. 인라인 어셈블리로 주석을 잘 읽어보자.</p>
+<h2 id="goto-문">Goto 문</h2>
+<p>lexer를 제작할때는 상태머신(FSM)을 작성해서 구현하는 경우가 많은데
+이때 goto를 사용할 수 있다.
+일반적인 goto 문은 로직을 어지럽게 하며 최적화하기도 힘들지만
+이런 상태머신을 구현할 때는 오히려 좋은 케이스라고 할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>static_inline <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">read_string</span>(u8 <span style="color:#f92672">*</span>cur,
+</span></span><span style="display:flex;"><span>                               u8 <span style="color:#f92672">**</span>end,
+</span></span><span style="display:flex;"><span>                               yyjson_val <span style="color:#f92672">*</span>val,
+</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>msg) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ... 수많은 코드 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>skip_ascii:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Most strings have no escaped characters, so we can jump them quickly. */</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>skip_ascii_begin:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     We want to make loop unrolling, as shown in the following code. Some
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     compiler may not generate instructions as expected, so we rewrite it with
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     explicit goto statements. We hope the compiler can generate instructions
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     like this: https://godbolt.org/z/8vjsYq
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">         while (true) repeat16({
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            if (likely(!(char_is_ascii_stop(*src)))) src++;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            else break;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">         });
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define expr_jump(i) \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    if (likely(!char_is_ascii_stop(src[i]))) {} \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    else goto skip_ascii_stop##i;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define expr_stop(i) \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    skip_ascii_stop##i: \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    src += i; \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    goto skip_ascii_end;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">repeat16_incr</span>(expr_jump);
+</span></span><span style="display:flex;"><span>    src <span style="color:#f92672">+=</span> <span style="color:#ae81ff">16</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">goto</span> skip_ascii_begin;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">repeat16_incr</span>(expr_stop);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#undef expr_jump
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#undef expr_stop
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>skip_ascii_end:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ... 수많은 코드 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><code>skip_ascii</code>, <code>skip_ascii_begin</code>, <code>skip_ascii_end</code>
+등을 라벨을 사용하여 goto문으로 상태이동을 표현하였다.</p>
+<p>이때 재밌는 점은 위에서 설명한 loop unrolling, likely 매크로
+등이 쓰인다는 점이다. loop Unrolling 매크로가 풀릴때 코드는 대략
+아래 모양으로 만들어진다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>skip_ascii_begin:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// repeat16_incr(expr_jump); // 이게 풀리면
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">likely</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">char_is_ascii_stop</span>(src[<span style="color:#ae81ff">0</span>]))) {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">goto</span> skip_ascii_stop0;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">likely</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">char_is_ascii_stop</span>(src[<span style="color:#ae81ff">1</span>]))) {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">goto</span> skip_ascii_stop1;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">likely</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">char_is_ascii_stop</span>(src[<span style="color:#ae81ff">2</span>]))) {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">goto</span> skip_ascii_stop2;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">likely</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">char_is_ascii_stop</span>(src[<span style="color:#ae81ff">3</span>]))) {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">goto</span> skip_ascii_stop3;
+</span></span><span style="display:flex;"><span>....
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">likely</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">char_is_ascii_stop</span>(src[<span style="color:#ae81ff">15</span>]))) {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">goto</span> skip_ascii_stop15;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>src <span style="color:#f92672">+=</span> <span style="color:#ae81ff">16</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">goto</span> skip_ascii_begin;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>skip_ascii_stop0: 
+</span></span><span style="display:flex;"><span>src <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">goto</span> skip_ascii_end;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>skip_ascii_stop1: 
+</span></span><span style="display:flex;"><span>src <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">goto</span> skip_ascii_end;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ... 수많은 코드 ...
+</span></span></span></code></pre></div><p>무려 if문이 16번이나 연속 되므로 분기가 많아 느릴것 같아보이지만
+if문 안에는 전부 likely매크로가 달려 있어 CPU에 true 힌트를 준다.
+즉 힌트를 받은대로 전부 true로 예측하며 빠르게 진행된다.</p>
+<h2 id="bytes-매치">Bytes 매치</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/** 16/32/64-bit vector union, used for unaligned memory access on modern CPU */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">union</span> v16_uni { v16 v; u16 u; } v16_uni;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">union</span> v32_uni { v32 v; u32 u; } v32_uni;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">union</span> v64_uni { v64 v; u64 u; } v64_uni;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>static_inline <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">byte_match_4</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>buf, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>pat) {
+</span></span><span style="display:flex;"><span>    v32_uni u1, u2;
+</span></span><span style="display:flex;"><span>    u1.v <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(v32 <span style="color:#f92672">*</span>)pat;
+</span></span><span style="display:flex;"><span>    u2.v <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(v32 <span style="color:#f92672">*</span>)buf;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> u1.u <span style="color:#f92672">==</span> u2.u;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>json 에서  &rsquo;true&rsquo;, &rsquo;null&rsquo; 등의 토큰은 사실 바이트단위로
+4번이나 비교할 필요가 없다. 4바이트이므로 그냥 바로 통째로
+4바이트 비교를 하면 된다.</p>
+<h2 id="character-테이블">Character 테이블</h2>
+<p>1바이트문자는 0~255 범위의 값을 가지므로
+256개의 테이블을 미리 만들어둔뒤 개별 문자가 지닌 분류 해놓으면
+빠르게 개별 char 의 범위를 조건문에서 체크할 필요없이
+바로 비교 가능하다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>( <span style="color:#e6db74">&#39;{&#39;</span> <span style="color:#f92672">==</span> ch <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;[&#39;</span> <span style="color:#f92672">==</span> ch ) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// char type Container
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">switch</span>(ch)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;\r&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;\0&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// char type line END
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>위 소스는 분기 및 비교가 많다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/** Whitespace character: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> char_type CHAR_TYPE_SPACE      <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** Number character: &#39;-&#39;, [0-9]. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> char_type CHAR_TYPE_NUMBER     <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** JSON Escaped character: &#39;&#34;&#39;, &#39;\&#39;, [0x00-0x1F]. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> char_type CHAR_TYPE_ESC_ASCII  <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** Non-ASCII character: [0x80-0xFF]. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> char_type CHAR_TYPE_NON_ASCII  <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** JSON container character: &#39;{&#39;, &#39;[&#39;. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> char_type CHAR_TYPE_CONTAINER  <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** Comment character: &#39;/&#39;. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> char_type CHAR_TYPE_COMMENT    <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** Line end character &#39;\\n&#39;, &#39;\\r&#39;, &#39;\0&#39;. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> char_type CHAR_TYPE_LINE_END   <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">6</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** Character type table (generate with misc/make_tables.c) */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> char_type char_table[<span style="color:#ae81ff">256</span>] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x44</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x05</span>, <span style="color:#ae81ff">0x45</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x45</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>, <span style="color:#ae81ff">0x04</span>,
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//... 256 개의 사전 정의된 types
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** Match a character with specified type. */</span>
+</span></span><span style="display:flex;"><span>static_inline <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">char_is_type</span>(u8 c, char_type type) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (char_table[c] <span style="color:#f92672">&amp;</span> type) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** Match a whitespace: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
+</span></span><span style="display:flex;"><span>static_inline <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">char_is_space</span>(u8 c) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">char_is_type</span>(c, CHAR_TYPE_SPACE);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/** Match a whitespace or comment: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;, &#39;/&#39;. */</span>
+</span></span><span style="display:flex;"><span>static_inline <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">char_is_space_or_comment</span>(u8 c) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">char_is_type</span>(c, CHAR_TYPE_SPACE <span style="color:#f92672">|</span> CHAR_TYPE_COMMENT);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>위 코드처럼 사전정의된 테이블을 가지고 문자의 종류 판단을 하게 된다.
+비트Mask를 활용한 것도 유용하다.</p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>
