@@ -1,2 +1,3 @@
 User-agent: *
+Allow: /
 Sitemap: https://doongchoong.github.io/sitemap.xml
