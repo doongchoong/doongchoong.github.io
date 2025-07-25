@@ -1,7 +1,7 @@
 ---
 title: "블로그에GPT대화넣기"
 date: 2025-07-26T00:36:49+09:00
-draft: true
+draft: false
 toc : true
 tocBorder : true
 ---
