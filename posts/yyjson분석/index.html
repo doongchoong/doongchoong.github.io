@@ -217,6 +217,12 @@
         margin-top: -1em;
         margin-bottom: 1.5em;
       }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+  }
+
     </style>
   </head>
   <body>
@@ -308,6 +314,26 @@
     <div class="post-date">May 2, 2021</div>
   </div>
   
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#단-두개-파일">단 두개 파일</a></li>
+    <li><a href="#cpu-최적화">CPU 최적화</a>
+      <ul>
+        <li><a href="#1-loop-unrolling">1. Loop unrolling</a></li>
+        <li><a href="#2-likely-unlikely">2. Likely, Unlikely</a></li>
+        <li><a href="#3-asm-volatile">3. Asm volatile</a></li>
+      </ul>
+    </li>
+    <li><a href="#goto-문">Goto 문</a></li>
+    <li><a href="#bytes-매치">Bytes 매치</a></li>
+    <li><a href="#character-테이블">Character 테이블</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
   <div class="post-content">
     <h1 id="yyjson-분석">yyjson 분석</h1>
 <p><a href="https://github.com/ibireme/yyjson">yyjson</a>은

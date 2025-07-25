@@ -217,6 +217,12 @@
         margin-top: -1em;
         margin-bottom: 1.5em;
       }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+  }
+
     </style>
   </head>
   <body>
@@ -308,6 +314,42 @@
     <div class="post-date">May 10, 2021</div>
   </div>
   
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#사례">사례</a></li>
+    <li><a href="#알고리즘">알고리즘?</a>
+      <ul>
+        <li><a href="#재귀적인-방법">재귀적인 방법</a></li>
+        <li><a href="#fzf-의-알고리즘">fzf 의 알고리즘</a></li>
+      </ul>
+    </li>
+    <li><a href="#설계하기">설계하기</a>
+      <ul>
+        <li><a href="#패턴을-전부-매칭시키는-방법">패턴을 전부 매칭시키는 방법</a></li>
+        <li><a href="#최대값을-어떻게-선택하는가">최대값을 어떻게 선택하는가</a></li>
+        <li><a href="#보너스-점수는-어떻게-정하고-더하는가">보너스 점수는 어떻게 정하고 더하는가</a></li>
+        <li><a href="#연속-매칭">연속 매칭</a></li>
+      </ul>
+    </li>
+    <li><a href="#구현하기">구현하기</a>
+      <ul>
+        <li><a href="#점수배열은-가로세로-하나-크게-작성">점수배열은 가로,세로 하나 크게 작성</a></li>
+        <li><a href="#보너스-사전정보">보너스 사전정보</a></li>
+        <li><a href="#각-row에서-첫번째-col-정하기">각 Row에서 첫번째 col 정하기</a></li>
+        <li><a href="#대각선-왼쪽-선택하기">대각선, 왼쪽 선택하기</a></li>
+        <li><a href="#연속처리">연속처리</a></li>
+        <li><a href="#역추적해서-패턴-위치-알아내기">역추적해서 패턴 위치 알아내기</a></li>
+      </ul>
+    </li>
+    <li><a href="#구현결과">구현결과</a></li>
+    <li><a href="#그-외-생각할-것들">그 외 생각할 것들</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
   <div class="post-content">
     <h1 id="퍼지-검색">퍼지 검색</h1>
 <p>Fuzzy-search 검색어가 정확하지 않아도 유사한 항목을 찾아주는 검색 방식이다.
