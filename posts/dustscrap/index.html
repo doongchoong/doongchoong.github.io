@@ -1,98 +1,314 @@
-<!DOCTYPE html>
-<html lang="ko-kr"><head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <meta name="description" content="Dustscrap
-미세먼지의 확산을 영상으로 보기 위해서 어스널스쿨
-을 시간별로 캡쳐하여 영상으로 만드는 프로그램을 개발 했다.
-레포는 https://github.com/doongchoong/dustscrap
-이다.
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dustscrap | 둥충코딩</title>
+    <meta name="description" content="" />
 
-URL 분석
-어스널스쿨은 굉장히 URL 설계가 잘 되어 있다.
-과거 특정 시점의 상황을 보고싶을때
-열어보면 URL이 다음과 같이 보인다.
-site: https://earth.nullschool.net/
-time: #2023/02/11/0800Z/
-mode: particulates/surface/level/anim=off/overlay=pm2.5/
-view: orthographic=-229.43,42.28,546
-시간은 1시간 단위이며 모드는 미세먼지를 PM2.5나 PM10으로 바꿀때 혹은 COSC 등으로 바꿀때마다 해당 정보에 따라 변경되는 값이다. 뷰는 지도를 보는 방식인데 기본값인 Orthographic 모드가 지구본을 보는것과 같은 뷰로 보게 된다.">  
-  
-  <title>
     
-      Dustscrap
-    
-  </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/" />
-  
-  
-  
-  <link rel="stylesheet" href="/css/main.edfa7da52f4fb66a948a9573b5366aac1d612528eaa01419ee85581c07a80f6921681254e1d3a0237f7d3f24e1099cc5541e823b4df6688535bf4f3708a4e185.css" integrity="sha512-7fp9pS9PtmqUipVztTZqrB1hJSjqoBQZ7oVYHAeoD2khaBJU4dOgI399PyThCZzFVB6CO032aIU1v083CKThhQ==" />
-  
-
-
-  
+      
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
 
-</head>
-<body a="auto">
-        <main class="page-content" aria-label="Content">
-            <div class="w">
-                <div class="post-meta">
-                    <a href="/">둥충코딩</a>
+    <style>
 
-                    <p>
-                        <time datetime="2023-02-11 18:36:21 &#43;0900 KST">
-                            2023-02-11
-                        </time>
-                    </p>
-                </div>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
 
-<article>
-    <h1>Dustscrap</h1>
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
 
-    
-        <aside  class="toc" >
-            <nav id="TableOfContents">
-  <ul>
-    <li><a href="#url-분석">URL 분석</a>
-      <ul>
-        <li><a href="#time-파싱">Time 파싱</a></li>
-        <li><a href="#config-파일">Config 파일</a></li>
-      </ul>
-    </li>
-    <li><a href="#scraping">Scraping</a>
-      <ul>
-        <li><a href="#chrome-구동">Chrome 구동</a></li>
-        <li><a href="#navigate-and-waiting">Navigate and Waiting</a></li>
-        <li><a href="#timestamp">Timestamp</a></li>
-      </ul>
-    </li>
-    <li><a href="#이미지들로-영상-만들기">이미지들로 영상 만들기</a>
-      <ul>
-        <li><a href="#ffmpeg-명령-실행하기">FFmpeg 명령 실행하기</a></li>
-      </ul>
-    </li>
-    <li><a href="#영상후기">영상후기</a>
-      <ul>
-        <li><a href="#생각할-만한-포인트">생각할 만한 포인트</a></li>
-        <li><a href="#응용할-만한-것">응용할 만한 것</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-        </aside>
-    
+      .container {
+        max-width: 580px;  
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
 
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 16px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 580px;  
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <h1 class="post-title">Dustscrap</h1>
+    <div class="post-date">February 11, 2023</div>
+  </div>
+  
+  <div class="post-content">
     <h1 id="dustscrap">Dustscrap</h1>
 <p>미세먼지의 확산을 영상으로 보기 위해서 <a href="https://earth.nullschool.net/">어스널스쿨</a>
 을 시간별로 캡쳐하여 영상으로 만드는 프로그램을 개발 했다.</p>
@@ -329,8 +545,27 @@ view: orthographic=-229.43,42.28,546
 미세먼지에 대한 뉴스가 나올때  &lsquo;자생적&rsquo; 요인이 50% &lsquo;외부적&rsquo; 요인이 50% 라는 뉴스가 나왔다. 아마도 많은 사람들은 이에 동의하지 못하는 듯하다.</p>
 <p>어스널스쿨을 관찰했을때 느끼는 점은 하늘이 뿌옇게 흐려저 체감이 되는 상황은 Cosc 모드의 농도가 진할 때였다. 따라서 개인적으로는 cosc가 외부적인 요인으로 생각이 든다. 이러한 가정하에 정말로 &lsquo;자생적&rsquo; 인 요인이 얼마나 발생하는지를 관찰하려면  cosc PM2.5 PM10 등의 농도를 수치화 하고 정규화 한다. 그 뒤에  PM2.5에서 COSC를 차감한 영상을 구하여 확인 할 수 있을 것이다.</p>
 
-</article>
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
 
-            </div>
-        </main>
-    </body></html>
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>

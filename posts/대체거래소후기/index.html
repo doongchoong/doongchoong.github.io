@@ -1,103 +1,314 @@
-<!DOCTYPE html>
-<html lang="ko-kr"><head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <meta name="description" content="대체거래소후기
-나는 증권사 IT 매매팀에 꽤 오래있었다. 여태까지 내가 작성한 코드들이 이제 거의 모든 로직에 들어가 있다.
-작년부터 대체거래소 NXT 적용하기 위해  역대급으로 바쁜 프로젝트를 얼마전 끝냈다.
-시스템을 깊이 아는 상태였어도 이 프로젝트를 진행하는게 상당히 힘들었기 때문에 굉장히 인상적이였다.
-그래서 후기를 남기고자 한다.
-SOR
-NXT 거래소가 생기면서 특이하게  SOR주문이 생겼다. 각 증권사가 해야할 일은 고객에게 최대한 유리하도록 주문집행 하는 시스템을 갖추는 것이다.
-상황에 따라 KRX, NXT 양 거래소로 분할되거나 둘 중 하나를 선택하여 주식주문을 집행하게 된다.">  
-  
-  <title>
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>대체거래소후기 | 둥충코딩</title>
+    <meta name="description" content="" />
+
     
-      대체거래소후기
-    
-  </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/" />
-  
-  
-  
-  <link rel="stylesheet" href="/css/main.edfa7da52f4fb66a948a9573b5366aac1d612528eaa01419ee85581c07a80f6921681254e1d3a0237f7d3f24e1099cc5541e823b4df6688535bf4f3708a4e185.css" integrity="sha512-7fp9pS9PtmqUipVztTZqrB1hJSjqoBQZ7oVYHAeoD2khaBJU4dOgI399PyThCZzFVB6CO032aIU1v083CKThhQ==" />
-  
-
-
-  
+      
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
 
-</head>
-<body a="auto">
-        <main class="page-content" aria-label="Content">
-            <div class="w">
-                <div class="post-meta">
-                    <a href="/">둥충코딩</a>
+    <style>
 
-                    <p>
-                        <time datetime="2025-03-09 19:50:38 &#43;0900 KST">
-                            2025-03-09
-                        </time>
-                    </p>
-                </div>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
 
-<article>
-    <h1>대체거래소후기</h1>
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
 
-    
-        <aside  class="toc" >
-            <nav id="TableOfContents">
-  <ul>
-    <li><a href="#sor">SOR</a>
-      <ul>
-        <li><a href="#주문집행의-역할은">주문집행의 역할은?</a></li>
-        <li><a href="#주문관리">주문관리</a></li>
-        <li><a href="#자동테스트">자동테스트</a></li>
-      </ul>
-    </li>
-    <li><a href="#프로젝트">프로젝트</a>
-      <ul>
-        <li><a href="#팀워크">팀워크</a></li>
-        <li><a href="#nxt">NXT</a></li>
-        <li><a href="#nxt2">NXT.2</a></li>
-        <li><a href="#무한굴레의-테스터들">무한굴레의 테스터들</a></li>
-        <li><a href="#market-making-과-금감원">Market Making 과 금감원</a></li>
-      </ul>
-    </li>
-    <li><a href="#부하">부하</a>
-      <ul>
-        <li><a href="#최대-tps-가-도대체-뭐지">최대 TPS? 가 도대체 뭐지?</a></li>
-        <li><a href="#db락-속도는-성능지표에-포함되어야-하나-그리고-대역폭">DB락 속도는 성능지표에 포함되어야 하나? 그리고 대역폭</a></li>
-        <li><a href="#뮤텍스와-lock-free">뮤텍스와 Lock-Free</a></li>
-      </ul>
-    </li>
-    <li><a href="#장애">장애</a>
-      <ul>
-        <li><a href="#예측된-장애위험-그리고-lb">예측된 장애위험 그리고 LB</a></li>
-        <li><a href="#상호불신이-안전하다">상호불신이 안전하다.</a></li>
-        <li><a href="#불신의-끝-postgre-sql-과--데드튜플">불신의 끝, Postgre SQL 과  데드튜플</a></li>
-      </ul>
-    </li>
-    <li><a href="#이행--첫날">이행 , 첫날</a>
-      <ul>
-        <li><a href="#이행일날-이슈">이행일날 이슈</a></li>
-        <li><a href="#첫날">첫날</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-        </aside>
-    
+      .container {
+        max-width: 580px;  
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
 
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 16px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 580px;  
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <h1 class="post-title">대체거래소후기</h1>
+    <div class="post-date">March 9, 2025</div>
+  </div>
+  
+  <div class="post-content">
     <h1 id="대체거래소후기">대체거래소후기</h1>
 <p>나는 증권사 IT 매매팀에 꽤 오래있었다. 여태까지 내가 작성한 코드들이 이제 거의 모든 로직에 들어가 있다.</p>
 <p>작년부터 대체거래소 NXT 적용하기 위해  역대급으로 바쁜 프로젝트를 얼마전 끝냈다.
@@ -425,8 +636,27 @@ PSQL 기반인 시스템인데 내 특유의 의심병이 도지면서 불안감
 첫빠따가 되는것을 원치 않을 것이다.</p>
 <p>몇 증권사에 대한 노골적인 악의가 보이는 기사를 보며 참 기분나쁘겠다는 생각도 들었다.</p>
 
-</article>
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
 
-            </div>
-        </main>
-    </body></html>
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>

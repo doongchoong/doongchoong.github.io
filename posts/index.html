@@ -1,110 +1,429 @@
-<!DOCTYPE html>
-<html lang="ko-kr"><head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  
-  <title>
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Posts | 둥충코딩</title>
+    <meta name="description" content="" />
+
     
-      Posts
-    
-  </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/" />
-  
-  
-  
-  <link rel="stylesheet" href="/css/main.edfa7da52f4fb66a948a9573b5366aac1d612528eaa01419ee85581c07a80f6921681254e1d3a0237f7d3f24e1099cc5541e823b4df6688535bf4f3708a4e185.css" integrity="sha512-7fp9pS9PtmqUipVztTZqrB1hJSjqoBQZ7oVYHAeoD2khaBJU4dOgI399PyThCZzFVB6CO032aIU1v083CKThhQ==" />
-  
-
-
-  
+      
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
 
-</head>
-<body a="auto">
-        <main class="page-content" aria-label="Content">
-            <div class="w">
-                <div class="post-meta">
-                    <a href="/">둥충코딩</a>
+    <style>
 
-                    <p>
-                        <time datetime="2025-03-19 22:01:39 &#43;0900 KST">
-                            2025-03-19
-                        </time>
-                    </p>
-                </div>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
 
-<h1>Posts</h1>
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
 
+      .container {
+        max-width: 580px;  
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
 
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
 
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
 
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
 
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 16px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .posts-container {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .posts-header {
+    margin-bottom: 40px;
+  }
+  
+  .posts-title {
+    margin-bottom: 20px;
+    color: #4a4b4f;
+  }
+  
+  .posts-description {
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  .post-list {
+    margin-bottom: 40px;
+  }
+  
+  .post-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .post-item:last-child {
+    border-bottom: none;
+  }
+  
+  .post-link {
+    display: block;
+    text-decoration: none;
+    color: #4a4b4f;
+  }
+  
+  .post-link:hover .post-item-title {
+    color: #8f6a60;
+  }
+  
+  .post-item-title {
+    margin-bottom: 8px;
+    transition: color 0.2s;
+  }
+  
+  .post-item-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  .post-item-description {
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="posts-container">
+  <div class="posts-header">
+    <h1 class="posts-title">Posts</h1>
     
-    <ul><li>
-            <span>2025-03-19</span>
-            <a href="/posts/markdown%EC%97%85%EB%AC%B4%EB%A0%88%ED%8F%AC/">Markdown업무레포</a>
-        </li>
-        <li>
-            <span>2025-03-09</span>
-            <a href="/posts/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/">대체거래소후기</a>
-        </li>
-        <li>
-            <span>2023-02-11</span>
-            <a href="/posts/dustscrap/">Dustscrap</a>
-        </li>
-        <li>
-            <span>2021-08-14</span>
-            <a href="/posts/python%EC%86%8C%EC%8A%A4%EC%84%A4%EC%B9%98/">Python소스설치</a>
-        </li>
-        <li>
-            <span>2021-05-29</span>
-            <a href="/posts/curses/">Curses</a>
-        </li>
-        <li>
-            <span>2021-05-10</span>
-            <a href="/posts/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/">퍼지검색</a>
-        </li>
-        <li>
-            <span>2021-05-04</span>
-            <a href="/posts/m2%ED%8F%89%ED%83%84%ED%99%94/">M2평탄화</a>
-        </li>
-        <li>
-            <span>2021-05-03</span>
-            <a href="/posts/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/">만델브로트프랙탈</a>
-        </li>
-        <li>
-            <span>2021-05-02</span>
-            <a href="/posts/chocolatey/">Chocolatey</a>
-        </li>
-        <li>
-            <span>2021-05-02</span>
-            <a href="/posts/yyjson%EB%B6%84%EC%84%9D/">yyjson분석</a>
-        </li>
-        <li>
-            <span>2021-05-02</span>
-            <a href="/posts/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/">비트연산</a>
-        </li>
-        <li>
-            <span>2021-05-02</span>
-            <a href="/posts/use_hugo/">Use_hugo</a>
-        </li>
-        
-    </ul>
+  </div>
+  
+  <div class="post-list">
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/markdown%EC%97%85%EB%AC%B4%EB%A0%88%ED%8F%AC/" class="post-link">
+        <h2 class="post-item-title">Markdown업무레포</h2>
+        <div class="post-item-date">March 19, 2025</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/" class="post-link">
+        <h2 class="post-item-title">대체거래소후기</h2>
+        <div class="post-item-date">March 9, 2025</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/dustscrap/" class="post-link">
+        <h2 class="post-item-title">Dustscrap</h2>
+        <div class="post-item-date">February 11, 2023</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/python%EC%86%8C%EC%8A%A4%EC%84%A4%EC%B9%98/" class="post-link">
+        <h2 class="post-item-title">Python소스설치</h2>
+        <div class="post-item-date">August 14, 2021</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/curses/" class="post-link">
+        <h2 class="post-item-title">Curses</h2>
+        <div class="post-item-date">May 29, 2021</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/" class="post-link">
+        <h2 class="post-item-title">퍼지검색</h2>
+        <div class="post-item-date">May 10, 2021</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/m2%ED%8F%89%ED%83%84%ED%99%94/" class="post-link">
+        <h2 class="post-item-title">M2평탄화</h2>
+        <div class="post-item-date">May 4, 2021</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/" class="post-link">
+        <h2 class="post-item-title">만델브로트프랙탈</h2>
+        <div class="post-item-date">May 3, 2021</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/chocolatey/" class="post-link">
+        <h2 class="post-item-title">Chocolatey</h2>
+        <div class="post-item-date">May 2, 2021</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/yyjson%EB%B6%84%EC%84%9D/" class="post-link">
+        <h2 class="post-item-title">yyjson분석</h2>
+        <div class="post-item-date">May 2, 2021</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/" class="post-link">
+        <h2 class="post-item-title">비트연산</h2>
+        <div class="post-item-date">May 2, 2021</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+    <div class="post-item">
+      <a href="https://doongchoong.github.io/posts/use_hugo/" class="post-link">
+        <h2 class="post-item-title">Use_hugo</h2>
+        <div class="post-item-date">May 2, 2021</div>
+        <div class="post-item-description"></div>
+      </a>
+    </div>
+    
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
 
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
-
-
-
-            </div>
-        </main>
-    </body></html>
+  </body>
+</html>

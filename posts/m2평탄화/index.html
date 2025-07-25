@@ -1,89 +1,314 @@
-<!DOCTYPE html>
-<html lang="ko-kr"><head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <meta name="description" content="M2 평탄화
-이 페이지에서 말하는 M2란 광의통화를 의미한다.
-작년 2020년 코로나가 전세계로 급속도로 번지면서 경제가 급격히 얼어붙었다.
-그래서 2020년 3월 미국의 FED에서 돈을 엄청나게 많이 뿌리며
-금융 충격에 대비하였고 이에 대부분의 자산은 급격한 반등을 이루게 되었다.
-이 과정에서 M2 통화량 증가분을 제거하면 어느정도 수준으로 반등이 이루어졌는지
-파악해볼수 있지 않을까? 하는 아이디어에서 M2 영향도를 제거하는
-차트를 그려보는 간단한 개발을 하였다. 이는 작년 9~10월 정도에
-python으로 개발하였다.
-M2flat Demo사이트
-데이터 수집하기
-먼저 데이터가 필요한데 구할 데이터는 명확하다. M2, 그리고 각 지수 데이터이다.
-M2는 FRED 사이트에서
-지수데이터는 Yahoo finance에서 구한다.
-CSV형태로 바로 다운받을 수 있게 제공하고 있다.">  
-  
-  <title>
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M2평탄화 | 둥충코딩</title>
+    <meta name="description" content="" />
+
     
-      M2평탄화
-    
-  </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/" />
-  
-  
-  
-  <link rel="stylesheet" href="/css/main.edfa7da52f4fb66a948a9573b5366aac1d612528eaa01419ee85581c07a80f6921681254e1d3a0237f7d3f24e1099cc5541e823b4df6688535bf4f3708a4e185.css" integrity="sha512-7fp9pS9PtmqUipVztTZqrB1hJSjqoBQZ7oVYHAeoD2khaBJU4dOgI399PyThCZzFVB6CO032aIU1v083CKThhQ==" />
-  
-
-
-  
+      
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
 
-</head>
-<body a="auto">
-        <main class="page-content" aria-label="Content">
-            <div class="w">
-                <div class="post-meta">
-                    <a href="/">둥충코딩</a>
+    <style>
 
-                    <p>
-                        <time datetime="2021-05-04 21:34:32 &#43;0900 KST">
-                            2021-05-04
-                        </time>
-                    </p>
-                </div>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
 
-<article>
-    <h1>M2평탄화</h1>
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
 
-    
-        <aside  class="toc" >
-            <nav id="TableOfContents">
-  <ul>
-    <li><a href="#데이터-수집하기">데이터 수집하기</a>
-      <ul>
-        <li><a href="#m2-구하기">M2 구하기</a></li>
-        <li><a href="#지수-구하기">지수 구하기</a></li>
-      </ul>
-    </li>
-    <li><a href="#m2평탄화-하기">M2평탄화 하기</a>
-      <ul>
-        <li><a href="#데이터-merge">데이터 Merge</a></li>
-        <li><a href="#interpolation">Interpolation</a></li>
-        <li><a href="#새로운-열-구하기">새로운 열 구하기</a></li>
-      </ul>
-    </li>
-    <li><a href="#차트-그리기">차트 그리기</a></li>
-    <li><a href="#개인적-생각">개인적 생각</a></li>
-  </ul>
-</nav>
-        </aside>
-    
+      .container {
+        max-width: 580px;  
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
 
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 16px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 580px;  
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <h1 class="post-title">M2평탄화</h1>
+    <div class="post-date">May 4, 2021</div>
+  </div>
+  
+  <div class="post-content">
     <h1 id="m2-평탄화">M2 평탄화</h1>
 <p>이 페이지에서 말하는 M2란 광의통화를 의미한다.
 작년 2020년 코로나가 전세계로 급속도로 번지면서 경제가 급격히 얼어붙었다.
@@ -367,8 +592,27 @@ ixic가 더 조밀한 데이터이므로 m2는 더 드물게 나타난다.</p>
 <p>적어도 이런 지속적인 유동성 유입으로 하나는 알 수 있다.
 &lsquo;시장을 역행하는 인버스 베팅은 불리한 게임&rsquo; 이라는 것이다.</p>
 
-</article>
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
 
-            </div>
-        </main>
-    </body></html>
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>

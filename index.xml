@@ -92,5 +92,12 @@
       <guid>https://doongchoong.github.io/posts/use_hugo/</guid>
       <description>&lt;h1 id=&#34;휴고-사용하기&#34;&gt;휴고 사용하기&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://gohugo.io/&#34;&gt;Gohugo&lt;/a&gt; 는 정적 웹페이지를 생성하는 툴이다.&#xA;이를 이용하여 Github에 블로그를 구축하는 것을 보고&#xA;이 블로그도 hugo로 만들어보기로 하였다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;설치하기&#34;&gt;설치하기&lt;/h2&gt;&#xA;&lt;p&gt;Hugo Installing 을 참조하여 설치한다.&#xA;바이너리를 받아서 설치후 환경변수에 등록하면 된다.&#xA;혹은 Chocolately 를 사용 패키지 설치한다.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ choco search hugo&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;사이트-생성하기&#34;&gt;사이트 생성하기&lt;/h2&gt;&#xA;&lt;p&gt;사이트(블로그)를 구성하고자 하는 폴더에 가서 아래 명령을 수행한다.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ hugo new site blog&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;나는 블로그를 만들고자 했기때문에 blog 폴더에 각종&#xA;폴더 및 파일들이 생성된다.&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>둥충코딩</title>
+      <link>https://doongchoong.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://doongchoong.github.io/about/</guid>
+      <description>&lt;p&gt;각종 코딩하며 알게된 것들 및 이것저것 생각들 정리&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

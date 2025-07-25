@@ -1,6 +1,6 @@
 baseURL = "https://doongchoong.github.io"
 languageCode = "ko-kr"
 title = "둥충코딩"
-theme = "hugo-theme-nostyleplease" 
+theme = "ritzy" 
 publishDir = "../"
 staticDir="static"
