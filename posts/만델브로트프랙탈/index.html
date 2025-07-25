@@ -33,7 +33,7 @@
       }
 
       .container {
-        max-width: 580px;  
+        max-width: 780px;  
         margin: 0 auto;
         padding: 60px 20px;
       }
@@ -224,13 +224,98 @@
   }
 
     </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+  background-color: #cdcdcd;
+  border-radius: 16px 16px 0 16px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #cdcdcd;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+    </style>
   </head>
   <body>
     <div class="container">
       
 <style>
   .post-container {
-    max-width: 580px;  
+    max-width: 780px;  
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -362,21 +447,21 @@ Yn+1 = 2 * Xn * Yn + b
 처음으로 벗어나는 순간 카운트를 세고
 해당 카운트를 기반으로 색상을 칠한다.</p>
 <h3 id="의사코드">의사코드</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> cx;
-</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> cy;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>x <span style="color:#0550ae">=</span> cx<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#0550ae">=</span> cy<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1024</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1024</span>; i<span style="color:#f92672">++</span>){
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>(x<span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> y<span style="color:#f92672">*</span>y <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4.0</span>){
-</span></span><span style="display:flex;"><span>		cnt <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	nx <span style="color:#f92672">=</span> x<span style="color:#f92672">*</span>x <span style="color:#f92672">-</span> y<span style="color:#f92672">*</span>y <span style="color:#f92672">+</span> cx;
-</span></span><span style="display:flex;"><span>	ny <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>y <span style="color:#f92672">+</span> cy;
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">int</span> cnt <span style="color:#0550ae">=</span> <span style="color:#0550ae">1024</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> i<span style="color:#0550ae">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> i <span style="color:#0550ae">&lt;</span> <span style="color:#0550ae">1024</span><span style="color:#1f2328">;</span> i<span style="color:#0550ae">++</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>x<span style="color:#0550ae">*</span>x <span style="color:#0550ae">+</span> y<span style="color:#0550ae">*</span>y <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">4.0</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>		cnt <span style="color:#0550ae">=</span> i<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#cf222e">break</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>	nx <span style="color:#0550ae">=</span> x<span style="color:#0550ae">*</span>x <span style="color:#0550ae">-</span> y<span style="color:#0550ae">*</span>y <span style="color:#0550ae">+</span> cx<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	ny <span style="color:#0550ae">=</span> <span style="color:#0550ae">2.0</span><span style="color:#0550ae">*</span>x<span style="color:#0550ae">*</span>y <span style="color:#0550ae">+</span> cy<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	x <span style="color:#f92672">=</span> nx;
-</span></span><span style="display:flex;"><span>	y <span style="color:#f92672">=</span> ny;
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>	x <span style="color:#0550ae">=</span> nx<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	y <span style="color:#0550ae">=</span> ny<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></div><p>1024번으로 구간을 정했으므로
 1024단계의 색상을 입혀서 칠하면 된다.</p>
 <h3 id="opengl로-구현하기">OPENGL로 구현하기</h3>
@@ -396,7 +481,7 @@ Fragment Shader를 통해 픽셀마다 반복계산을
 자동으로 해준다.</p>
 <p>그래도 각 픽셀은 다른 픽셀에 영향을 주지 않고
 자신만 계산하면 되므로 병렬계산을 쉽게 활용할 수 있는 주제이다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>+--------------------------------+
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>+--------------------------------+
 </span></span><span style="display:flex;"><span>|(0,0)                           |
 </span></span><span style="display:flex;"><span>|                                |
 </span></span><span style="display:flex;"><span>|                                |
@@ -415,22 +500,22 @@ Fragment Shader를 통해 픽셀마다 반복계산을
 </span></span><span style="display:flex;"><span>해당 경계값을 가지고 색상을 정함
 </span></span></code></pre></div><p>이를 <a href="https://doongchoong.github.io/toys/mandel.html">WEBGL로 구현</a>
 하여 토이프로젝트로 올렸다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// {x:-2.0, y:-1.0, w:3.0, h:2.0}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">plot_vertices</span> <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">-</span><span style="color:#ae81ff">2.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">-</span><span style="color:#ae81ff">2.0</span>,  <span style="color:#ae81ff">1.0</span>,
-</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">1.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>,
-</span></span><span style="display:flex;"><span>     <span style="color:#ae81ff">1.0</span>,  <span style="color:#ae81ff">1.0</span>
-</span></span><span style="display:flex;"><span>];
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// plot
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">plotPosBuf</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">createBuffer</span>();
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">bindBuffer</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">ARRAY_BUFFER</span>, <span style="color:#a6e22e">plotPosBuf</span>);
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">bufferData</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">ARRAY_BUFFER</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">plot_vertices</span>), <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">STATIC_DRAW</span>);
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">vertexAttribPointer</span>(<span style="color:#a6e22e">plotPos</span>, <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">FLOAT</span>, <span style="color:#66d9ef">false</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#57606a">// {x:-2.0, y:-1.0, w:3.0, h:2.0}
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">var</span> <span style="color:#1f2328">plot_vertices</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">-</span><span style="color:#0550ae">2.0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">-</span><span style="color:#0550ae">1.0</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">-</span><span style="color:#0550ae">2.0</span><span style="color:#1f2328">,</span>  <span style="color:#0550ae">1.0</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#0550ae">1.0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">-</span><span style="color:#0550ae">1.0</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#0550ae">1.0</span><span style="color:#1f2328">,</span>  <span style="color:#0550ae">1.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// plot
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">var</span> <span style="color:#1f2328">plotPosBuf</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">createBuffer</span><span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">bindBuffer</span><span style="color:#1f2328">(</span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">ARRAY_BUFFER</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">plotPosBuf</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">bufferData</span><span style="color:#1f2328">(</span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">ARRAY_BUFFER</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">new</span> <span style="color:#1f2328">Float32Array</span><span style="color:#1f2328">(</span><span style="color:#1f2328">plot_vertices</span><span style="color:#1f2328">),</span> <span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">STATIC_DRAW</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">vertexAttribPointer</span><span style="color:#1f2328">(</span><span style="color:#1f2328">plotPos</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FLOAT</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">drawArrays</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TRIANGLE_STRIP</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">drawArrays</span><span style="color:#1f2328">(</span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">TRIANGLE_STRIP</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">);</span>
 </span></span></code></pre></div><p>위 Javascript 소스는 만델브로토 집합 좌표계의 버텍스들을 넘겨주어
 그리라고 지시한 것이다.
 canvas의 좌표계를 신경쓸 필요가 없다. GL이 알아서 해준다.
@@ -441,52 +526,52 @@ canvas의 좌표계를 신경쓸 필요가 없다. GL이 알아서 해준다.
 <p>프랙탈의 색상을 부드럽게 만드는 방법이다.
 <a href="https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set">Continuous Smooth Coloring</a>
 부분을 참조</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>){
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> nx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> ny <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">void</span> <span style="color:#6639ba">main</span><span style="color:#1f2328">(</span><span style="color:#cf222e">void</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> x <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> y <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> nx <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> ny <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> cx <span style="color:#f92672">=</span> fragPos.x;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> cy <span style="color:#f92672">=</span> fragPos.y;
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> cx <span style="color:#0550ae">=</span> fragPos<span style="color:#1f2328">.</span>x<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> cy <span style="color:#0550ae">=</span> fragPos<span style="color:#1f2328">.</span>y<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> zn <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> nu <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> zn <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> nu <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> t <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	vec3 color1;
-</span></span><span style="display:flex;"><span>	vec3 color2;
+</span></span><span style="display:flex;"><span>	vec3 color1<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	vec3 color2<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	x <span style="color:#f92672">=</span> cx;
-</span></span><span style="display:flex;"><span>	y <span style="color:#f92672">=</span> cy;
+</span></span><span style="display:flex;"><span>	x <span style="color:#0550ae">=</span> cx<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	y <span style="color:#0550ae">=</span> cy<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1024</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1024</span>; i<span style="color:#f92672">++</span>){
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span>(x<span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> y<span style="color:#f92672">*</span>y <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4.0</span>){
-</span></span><span style="display:flex;"><span>			cnt <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>		nx <span style="color:#f92672">=</span> x<span style="color:#f92672">*</span>x <span style="color:#f92672">-</span> y<span style="color:#f92672">*</span>y <span style="color:#f92672">+</span> cx;
-</span></span><span style="display:flex;"><span>		ny <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0</span><span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>y <span style="color:#f92672">+</span> cy;
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">int</span> cnt <span style="color:#0550ae">=</span> <span style="color:#0550ae">1024</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> i<span style="color:#0550ae">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> i <span style="color:#0550ae">&lt;</span> <span style="color:#0550ae">1024</span><span style="color:#1f2328">;</span> i<span style="color:#0550ae">++</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>x<span style="color:#0550ae">*</span>x <span style="color:#0550ae">+</span> y<span style="color:#0550ae">*</span>y <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">4.0</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>			cnt <span style="color:#0550ae">=</span> i<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#cf222e">break</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>		nx <span style="color:#0550ae">=</span> x<span style="color:#0550ae">*</span>x <span style="color:#0550ae">-</span> y<span style="color:#0550ae">*</span>y <span style="color:#0550ae">+</span> cx<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>		ny <span style="color:#0550ae">=</span> <span style="color:#0550ae">2.0</span><span style="color:#0550ae">*</span>x<span style="color:#0550ae">*</span>y <span style="color:#0550ae">+</span> cy<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>		x <span style="color:#f92672">=</span> nx;
-</span></span><span style="display:flex;"><span>		y <span style="color:#f92672">=</span> ny;
-</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>		x <span style="color:#0550ae">=</span> nx<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>		y <span style="color:#0550ae">=</span> ny<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 부드러운 색상 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	zn <span style="color:#f92672">=</span> <span style="color:#a6e22e">sqrt</span>(x<span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> y<span style="color:#f92672">*</span>y);
-</span></span><span style="display:flex;"><span>	nu <span style="color:#f92672">=</span> <span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">log</span>(zn) <span style="color:#f92672">/</span> <span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">2.0</span>)) <span style="color:#f92672">/</span> <span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">2.0</span>);
-</span></span><span style="display:flex;"><span>	t  <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> nu;
+</span></span><span style="display:flex;"><span>	<span style="color:#57606a">// 부드러운 색상 
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>	zn <span style="color:#0550ae">=</span> <span style="color:#6639ba">sqrt</span><span style="color:#1f2328">(</span>x<span style="color:#0550ae">*</span>x <span style="color:#0550ae">+</span> y<span style="color:#0550ae">*</span>y<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>	nu <span style="color:#0550ae">=</span> <span style="color:#6639ba">log</span><span style="color:#1f2328">(</span><span style="color:#6639ba">log</span><span style="color:#1f2328">(</span>zn<span style="color:#1f2328">)</span> <span style="color:#0550ae">/</span> <span style="color:#6639ba">log</span><span style="color:#1f2328">(</span><span style="color:#0550ae">2.0</span><span style="color:#1f2328">))</span> <span style="color:#0550ae">/</span> <span style="color:#6639ba">log</span><span style="color:#1f2328">(</span><span style="color:#0550ae">2.0</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>	t  <span style="color:#0550ae">=</span> <span style="color:#0550ae">1.0</span> <span style="color:#0550ae">-</span> nu<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	color1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">coloring</span>(cnt);
-</span></span><span style="display:flex;"><span>	color2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">coloring</span>(cnt<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	color1 <span style="color:#0550ae">=</span> <span style="color:#6639ba">coloring</span><span style="color:#1f2328">(</span>cnt<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>	color2 <span style="color:#0550ae">=</span> <span style="color:#6639ba">coloring</span><span style="color:#1f2328">(</span>cnt<span style="color:#0550ae">+</span><span style="color:#0550ae">1</span><span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	color1.r <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> t) <span style="color:#f92672">*</span> color1.r <span style="color:#f92672">+</span> t <span style="color:#f92672">*</span> color2.r;
-</span></span><span style="display:flex;"><span>	color1.g <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> t) <span style="color:#f92672">*</span> color1.g <span style="color:#f92672">+</span> t <span style="color:#f92672">*</span> color2.g;
-</span></span><span style="display:flex;"><span>	color1.b <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> t) <span style="color:#f92672">*</span> color1.b <span style="color:#f92672">+</span> t <span style="color:#f92672">*</span> color2.b;
+</span></span><span style="display:flex;"><span>	color1<span style="color:#1f2328">.</span>r <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">1.0</span> <span style="color:#0550ae">-</span> t<span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> color1<span style="color:#1f2328">.</span>r <span style="color:#0550ae">+</span> t <span style="color:#0550ae">*</span> color2<span style="color:#1f2328">.</span>r<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	color1<span style="color:#1f2328">.</span>g <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">1.0</span> <span style="color:#0550ae">-</span> t<span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> color1<span style="color:#1f2328">.</span>g <span style="color:#0550ae">+</span> t <span style="color:#0550ae">*</span> color2<span style="color:#1f2328">.</span>g<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	color1<span style="color:#1f2328">.</span>b <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">1.0</span> <span style="color:#0550ae">-</span> t<span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> color1<span style="color:#1f2328">.</span>b <span style="color:#0550ae">+</span> t <span style="color:#0550ae">*</span> color2<span style="color:#1f2328">.</span>b<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	gl_FragColor <span style="color:#f92672">=</span> <span style="color:#a6e22e">vec4</span>(color1, <span style="color:#ae81ff">1.0</span>);      
-</span></span><span style="display:flex;"><span>}	
+</span></span><span style="display:flex;"><span>	gl_FragColor <span style="color:#0550ae">=</span> <span style="color:#6639ba">vec4</span><span style="color:#1f2328">(</span>color1<span style="color:#1f2328">,</span> <span style="color:#0550ae">1.0</span><span style="color:#1f2328">);</span>      
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>	
 </span></span></code></pre></div><h2 id="생각해볼만한-주제">생각해볼만한 주제</h2>
 <p>WEBGL의 한계로 인해 float 은 32비트 부동소수점 숫자로
 계산된다.

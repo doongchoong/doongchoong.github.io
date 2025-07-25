@@ -33,7 +33,7 @@
       }
 
       .container {
-        max-width: 580px;  
+        max-width: 780px;  
         margin: 0 auto;
         padding: 60px 20px;
       }
@@ -224,13 +224,98 @@
   }
 
     </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+  background-color: #cdcdcd;
+  border-radius: 16px 16px 0 16px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #cdcdcd;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+    </style>
   </head>
   <body>
     <div class="container">
       
 <style>
   .post-container {
-    max-width: 580px;  
+    max-width: 780px;  
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -362,7 +447,7 @@ M2의 대한 그래프가 나온다.</p>
 (2021.05.04 현재 데이터 제공 중단. <a href="https://fred.stlouisfed.org/series/M2SL">한달간격의 데이터로 변경됨</a>)</p>
 <p>2020년 3월에 급격히 증가한 M2를 보면 유동성 공급이 얼마나 어마어마 했는지 알수 있다.</p>
 <p>위에서 Download-&gt;CSV-Data 에 링크를 얻어보자</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23e1e9f0&amp;chart_type=line
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>https://fred.stlouisfed.org/graph/fredgraph.csv?bgcolor=%23e1e9f0&amp;chart_type=line
 </span></span><span style="display:flex;"><span>&amp;drp=0&amp;fo=open%20sans&amp;graph_bgcolor=%23ffffff
 </span></span><span style="display:flex;"><span>&amp;height=450&amp;mode=fred&amp;recession_bars=on&amp;txtcolor=%23444444&amp;ts=12&amp;tts=12&amp;width=1168&amp;nt=0&amp;thu=0
 </span></span><span style="display:flex;"><span>&amp;trc=0&amp;show_legend=yes&amp;show_axis_titles=yes&amp;show_tooltip=yes&amp;id=M2&amp;scale=left
@@ -374,20 +459,20 @@ M2의 대한 그래프가 나온다.</p>
 이라고 한다. 서버에서는 Key,value값을 이용하여 적당히 가공을 하여 요청에 응답을 주게 된다.
 이중에 1980년도의 일자는 왠지 from 날짜 같고 2021년도 일자들은 to날짜에 가까워 보인다.
 따라서 요즘 날짜들을 구하여 포맷팅으로 넣을수 있도록 날짜를 <code>%s</code> 로 대치한다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>furl <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://fred.stlouisfed.org/graph/fredgraph.csv?b...긴URL&#39;</span>
-</span></span><span style="display:flex;"><span>tdy <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>today()<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>)
-</span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> furl<span style="color:#f92672">%</span>(tdy,tdy,tdy,tdy)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>furl <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;https://fred.stlouisfed.org/graph/fredgraph.csv?b...긴URL&#39;</span>
+</span></span><span style="display:flex;"><span>tdy <span style="color:#0550ae">=</span> datetime<span style="color:#0550ae">.</span>datetime<span style="color:#0550ae">.</span>today<span style="color:#1f2328">()</span><span style="color:#0550ae">.</span>strftime<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;%Y-%m-</span><span style="color:#0a3069">%d</span><span style="color:#0a3069">&#39;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>url <span style="color:#0550ae">=</span> furl<span style="color:#0550ae">%</span><span style="color:#1f2328">(</span>tdy<span style="color:#1f2328">,</span>tdy<span style="color:#1f2328">,</span>tdy<span style="color:#1f2328">,</span>tdy<span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> urllib<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>urlopen(url) <span style="color:#66d9ef">as</span> response:
-</span></span><span style="display:flex;"><span>	html <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>read()
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;M2.csv&#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> save_file:
-</span></span><span style="display:flex;"><span>		save_file<span style="color:#f92672">.</span>write(html)
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">with</span> urllib<span style="color:#0550ae">.</span>request<span style="color:#0550ae">.</span>urlopen<span style="color:#1f2328">(</span>url<span style="color:#1f2328">)</span> <span style="color:#cf222e">as</span> response<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>	html <span style="color:#0550ae">=</span> response<span style="color:#0550ae">.</span>read<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">with</span> <span style="color:#6639ba">open</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;M2.csv&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;wb&#39;</span><span style="color:#1f2328">)</span> <span style="color:#cf222e">as</span> save_file<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>		save_file<span style="color:#0550ae">.</span>write<span style="color:#1f2328">(</span>html<span style="color:#1f2328">)</span>
 </span></span></code></pre></div><p>이런식으로 오늘일자를 넣어 조립하게 되면 항상 최신날짜로 url이 생성될 것이다.
 python의 with문은 syntax sugar에 가깝다. <code>__enter__, __exit__</code> 메소드를 구현하면
 시작될 때와 끝날 때 자동으로 호출되게 된다.
 IO 작업시  열고-닫는 한 과정을 감싸는 형태의 패턴으로 많이 사용한다.
 URL open IO 그리고 파일IO 두개를 사용한다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>DATE,M2
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>DATE,M2
 </span></span><span style="display:flex;"><span>1980-11-03,1591.4
 </span></span><span style="display:flex;"><span>1980-11-10,1592.9
 </span></span><span style="display:flex;"><span>1980-11-17,1596.3
@@ -403,27 +488,27 @@ URL open IO 그리고 파일IO 두개를 사용한다.</p>
 <h3 id="지수-구하기">지수 구하기</h3>
 <p>Yahoo finance에서 <a href="https://finance.yahoo.com/quote/%5EIXIC/history?p=%5EIXIC">IXIC(나스닥) Historical Data</a>
 눌러서 보면 Download 링크가 있다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>https://query1.finance.yahoo.com/v7/finance/download/%5EIXIC?
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>https://query1.finance.yahoo.com/v7/finance/download/%5EIXIC?
 </span></span><span style="display:flex;"><span>period1=1588599485&amp;period2=1620135485&amp;interval=1d
 </span></span><span style="display:flex;"><span>&amp;events=history&amp;includeAdjustedClose=true
 </span></span></code></pre></div><p>period1, period2 가 From, To 역할을 하는것으로 보이며 시간이 숫자형태로 나와있는데
 저런 경우는 십중팔구 Unix-time 이다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>stime <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
-</span></span><span style="display:flex;"><span>etime <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> datetime<span style="color:#f92672">.</span>timedelta(days<span style="color:#f92672">=</span><span style="color:#ae81ff">365</span>)
-</span></span><span style="display:flex;"><span>print(stime, etime)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>stime <span style="color:#0550ae">=</span> datetime<span style="color:#0550ae">.</span>datetime<span style="color:#0550ae">.</span>now<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>etime <span style="color:#0550ae">=</span> datetime<span style="color:#0550ae">.</span>datetime<span style="color:#0550ae">.</span>now<span style="color:#1f2328">()</span> <span style="color:#0550ae">-</span> datetime<span style="color:#0550ae">.</span>timedelta<span style="color:#1f2328">(</span>days<span style="color:#0550ae">=</span><span style="color:#0550ae">365</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">print</span><span style="color:#1f2328">(</span>stime<span style="color:#1f2328">,</span> etime<span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ustime <span style="color:#f92672">=</span> int(stime<span style="color:#f92672">.</span>timestamp())
-</span></span><span style="display:flex;"><span>uetime <span style="color:#f92672">=</span> int(etime<span style="color:#f92672">.</span>timestamp())
-</span></span><span style="display:flex;"><span>print(ustime, uetime)
+</span></span><span style="display:flex;"><span>ustime <span style="color:#0550ae">=</span> <span style="color:#6639ba">int</span><span style="color:#1f2328">(</span>stime<span style="color:#0550ae">.</span>timestamp<span style="color:#1f2328">())</span>
+</span></span><span style="display:flex;"><span>uetime <span style="color:#0550ae">=</span> <span style="color:#6639ba">int</span><span style="color:#1f2328">(</span>etime<span style="color:#0550ae">.</span>timestamp<span style="color:#1f2328">())</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">print</span><span style="color:#1f2328">(</span>ustime<span style="color:#1f2328">,</span> uetime<span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>furl <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://query1.finance.yahoo.com/v7/finance/download/</span><span style="color:#e6db74">%%</span><span style="color:#e6db74">5E</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">?period1=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&amp;period2=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&amp;interval=1d&amp;events=history&#39;</span>
+</span></span><span style="display:flex;"><span>furl <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;https://query1.finance.yahoo.com/v7/finance/download/</span><span style="color:#0a3069">%%</span><span style="color:#0a3069">5E</span><span style="color:#0a3069">%s</span><span style="color:#0a3069">?period1=</span><span style="color:#0a3069">%s</span><span style="color:#0a3069">&amp;period2=</span><span style="color:#0a3069">%s</span><span style="color:#0a3069">&amp;interval=1d&amp;events=history&#39;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(furl<span style="color:#f92672">%</span>(symbol, uetime, ustime))
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">print</span><span style="color:#1f2328">(</span>furl<span style="color:#0550ae">%</span><span style="color:#1f2328">(</span>symbol<span style="color:#1f2328">,</span> uetime<span style="color:#1f2328">,</span> ustime<span style="color:#1f2328">))</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> urllib<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>urlopen(furl<span style="color:#f92672">%</span>(symbol, uetime, ustime)) <span style="color:#66d9ef">as</span> response:
-</span></span><span style="display:flex;"><span>	html <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>read()
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">with</span> open(symbol <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.csv&#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> save_file:
-</span></span><span style="display:flex;"><span>		save_file<span style="color:#f92672">.</span>write(html)
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">with</span> urllib<span style="color:#0550ae">.</span>request<span style="color:#0550ae">.</span>urlopen<span style="color:#1f2328">(</span>furl<span style="color:#0550ae">%</span><span style="color:#1f2328">(</span>symbol<span style="color:#1f2328">,</span> uetime<span style="color:#1f2328">,</span> ustime<span style="color:#1f2328">))</span> <span style="color:#cf222e">as</span> response<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>	html <span style="color:#0550ae">=</span> response<span style="color:#0550ae">.</span>read<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">with</span> <span style="color:#6639ba">open</span><span style="color:#1f2328">(</span>symbol <span style="color:#0550ae">+</span> <span style="color:#0a3069">&#39;.csv&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;wb&#39;</span><span style="color:#1f2328">)</span> <span style="color:#cf222e">as</span> save_file<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>		save_file<span style="color:#0550ae">.</span>write<span style="color:#1f2328">(</span>html<span style="color:#1f2328">)</span>
 </span></span></code></pre></div><p>현재시간을 구하고 현재시간에서 365일전 시간을 구한뒤에
 각각의 timestamp를 구하고 이를 url 에 넣어 조립한다.
 그뒤 URL Open , 파일저장 순이다.</p>
@@ -432,7 +517,7 @@ URL open IO 그리고 파일IO 두개를 사용한다.</p>
 참조하면 된다.
 주의해야할 점은 파이썬의 String에서 % 문자는  포맷팅을 지시하는데 쓰이므로 %문자 자체로
 보여지게 하려면 %를 escape시켜줘야한다. 간단하게 %% 두번 쓰면 % 하나로 인식되게 된다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Date,Open,High,Low,Close,Adj Close,Volume
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Date,Open,High,Low,Close,Adj Close,Volume
 </span></span><span style="display:flex;"><span>2019-10-31,8314.379883,8321.799805,8248.809570,8292.360352,8292.360352,2258270000
 </span></span><span style="display:flex;"><span>2019-11-01,8335.049805,8386.750000,8326.559570,8386.400391,8386.400391,2057310000
 </span></span><span style="display:flex;"><span>2019-11-04,8445.500000,8451.370117,8421.299805,8433.200195,8433.200195,2149910000
@@ -462,18 +547,18 @@ M2의 일자들을 사용하여 Weekly 기준 지수 &lsquo;시고저종&rsquo;�
 두개의 다른 데이터를  합쳐야 할 때 어떻게 할 것인가? 의문이 들었을때
 늙은 프로그래머인 본인은 SQL에서 Left Outer Join 방식이 떠올랐다.
 비슷한게 Pandas에 있다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>m2 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;M2.csv&#39;</span>)
-</span></span><span style="display:flex;"><span>m2<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Date&#39;</span>, <span style="color:#e6db74">&#39;M2&#39;</span>]
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>m2 <span style="color:#0550ae">=</span> pd<span style="color:#0550ae">.</span>read_csv<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;M2.csv&#39;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>m2<span style="color:#0550ae">.</span>columns <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Date&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">]</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>ixic <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;IXIC.csv&#39;</span>)
+</span></span><span style="display:flex;"><span>ixic <span style="color:#0550ae">=</span> pd<span style="color:#0550ae">.</span>read_csv<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;IXIC.csv&#39;</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 일봉 기준으로 병합 </span>
-</span></span><span style="display:flex;"><span>merged <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>merge(ixic, m2, on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Date&#39;</span>, how<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;left&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 일봉 기준으로 병합 </span>
+</span></span><span style="display:flex;"><span>merged <span style="color:#0550ae">=</span> pd<span style="color:#0550ae">.</span>merge<span style="color:#1f2328">(</span>ixic<span style="color:#1f2328">,</span> m2<span style="color:#1f2328">,</span> on<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;Date&#39;</span><span style="color:#1f2328">,</span> how<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;left&#39;</span><span style="color:#1f2328">)</span>
 </span></span></code></pre></div><p>그냥 직관적으로 merge를 하면 된다. 이때 기준점은 컬럼 Date이며
 이를 위해 M2의 컬럼명을 IXIC의 컬럼명과 일치 시켰다.
 그리고 how=left 를 통해 ixic 기준으로 m2가 합쳐지도록 했다.
 ixic가 더 조밀한 데이터이므로 m2는 더 드물게 나타난다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>          Date         Open  ...     Volume       M2
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>          Date         Open  ...     Volume       M2
 </span></span><span style="display:flex;"><span>0   2019-09-23  8106.490234  ... 1780160000  15045.7
 </span></span><span style="display:flex;"><span>1   2019-09-24  8147.229980  ... 2302600000      NaN
 </span></span><span style="display:flex;"><span>2   2019-09-25  7990.660156  ... 2015270000      NaN
@@ -499,11 +584,11 @@ ixic가 더 조밀한 데이터이므로 m2는 더 드물게 나타난다.</p>
 <h3 id="interpolation">Interpolation</h3>
 <p>M2가 중간 결측값이 있으므로 이를 채워주는 방법이 필요하다.
 이를 보간처리 한다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># 결측값은 Nan이므로 보간처리한다.</span>
-</span></span><span style="display:flex;"><span>merged[<span style="color:#e6db74">&#39;M2&#39;</span>] <span style="color:#f92672">=</span> merged[<span style="color:#e6db74">&#39;M2&#39;</span>]<span style="color:#f92672">.</span>interpolate(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;values&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#57606a"># 결측값은 Nan이므로 보간처리한다.</span>
+</span></span><span style="display:flex;"><span>merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">]</span><span style="color:#0550ae">.</span>interpolate<span style="color:#1f2328">(</span>method<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;values&#39;</span><span style="color:#1f2328">)</span>
 </span></span></code></pre></div><p>여기서 Pandas의 위대함이 드러난다. 단지 M2 &lsquo;열&rsquo;에 대해서 보간하라고 알려주었을 뿐이다.
 이 라이브러리는 알아서 사이와 사이에 보간값을 채워준다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>          Date         Open ...     Volume        M2
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>          Date         Open ...     Volume        M2
 </span></span><span style="display:flex;"><span>0   2019-09-23  8106.490234 ... 1780160000  15045.70
 </span></span><span style="display:flex;"><span>1   2019-09-24  8147.229980 ... 2302600000  15053.84
 </span></span><span style="display:flex;"><span>2   2019-09-25  7990.660156 ... 2015270000  15061.98
@@ -529,16 +614,16 @@ ixic가 더 조밀한 데이터이므로 m2는 더 드물게 나타난다.</p>
 <p>첫 행을 기준점으로 잡은 뒤에  현재의 M2값에서 기준점의 M2가
 얼마의 비중을 차지하는지 계산 후 각 가격에 곱하여
 영향도가 제거된 차트를 구한다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># M2 Flatting </span>
-</span></span><span style="display:flex;"><span>base_m2 <span style="color:#f92672">=</span> merged<span style="color:#f92672">.</span>loc[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;M2&#39;</span>]
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#57606a"># M2 Flatting </span>
+</span></span><span style="display:flex;"><span>base_m2 <span style="color:#0550ae">=</span> merged<span style="color:#0550ae">.</span>loc<span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">][</span><span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">]</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>merged[<span style="color:#e6db74">&#39;Open_1&#39;</span>] <span style="color:#f92672">=</span> (merged[<span style="color:#e6db74">&#39;Open&#39;</span>] <span style="color:#f92672">*</span> base_m2 <span style="color:#f92672">/</span> merged[<span style="color:#e6db74">&#39;M2&#39;</span>])<span style="color:#f92672">.</span>round(<span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>merged[<span style="color:#e6db74">&#39;High_1&#39;</span>] <span style="color:#f92672">=</span> (merged[<span style="color:#e6db74">&#39;High&#39;</span>] <span style="color:#f92672">*</span> base_m2 <span style="color:#f92672">/</span> merged[<span style="color:#e6db74">&#39;M2&#39;</span>])<span style="color:#f92672">.</span>round(<span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>merged[<span style="color:#e6db74">&#39;Low_1&#39;</span> ] <span style="color:#f92672">=</span> (merged[<span style="color:#e6db74">&#39;Low&#39;</span> ] <span style="color:#f92672">*</span> base_m2 <span style="color:#f92672">/</span> merged[<span style="color:#e6db74">&#39;M2&#39;</span>])<span style="color:#f92672">.</span>round(<span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>merged[<span style="color:#e6db74">&#39;Close_1&#39;</span>] <span style="color:#f92672">=</span> (merged[<span style="color:#e6db74">&#39;Close&#39;</span>] <span style="color:#f92672">*</span> base_m2 <span style="color:#f92672">/</span> merged[<span style="color:#e6db74">&#39;M2&#39;</span>])<span style="color:#f92672">.</span>round(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Open_1&#39;</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Open&#39;</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">*</span> base_m2 <span style="color:#0550ae">/</span> merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">])</span><span style="color:#0550ae">.</span>round<span style="color:#1f2328">(</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;High_1&#39;</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;High&#39;</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">*</span> base_m2 <span style="color:#0550ae">/</span> merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">])</span><span style="color:#0550ae">.</span>round<span style="color:#1f2328">(</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Low_1&#39;</span> <span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Low&#39;</span> <span style="color:#1f2328">]</span> <span style="color:#0550ae">*</span> base_m2 <span style="color:#0550ae">/</span> merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">])</span><span style="color:#0550ae">.</span>round<span style="color:#1f2328">(</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Close_1&#39;</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Close&#39;</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">*</span> base_m2 <span style="color:#0550ae">/</span> merged<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">])</span><span style="color:#0550ae">.</span>round<span style="color:#1f2328">(</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span>
 </span></span></code></pre></div><p>단지 dictionary에 key value 추가하는 것처럼 쉽게 된다.
 실제로는 &lsquo;열&rsquo;이 추가가 되었으며 모든 행에 대해서 계산되게 된다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>          Date         Open         High          Low  ...   Open_1   High_1    Low_1  Close_1
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>          Date         Open         High          Low  ...   Open_1   High_1    Low_1  Close_1
 </span></span><span style="display:flex;"><span>0   2019-09-23  8106.490234  8135.810059  8085.339844  ...  8106.49  8135.81  8085.34  8112.46     
 </span></span><span style="display:flex;"><span>1   2019-09-24  8147.229980  8158.830078  7969.649902  ...  8142.82  8154.42  7965.34  7989.31     
 </span></span><span style="display:flex;"><span>2   2019-09-25  7990.660156  8095.000000  7935.569824  ...  7982.02  8086.25  7926.99  8068.65     
@@ -569,39 +654,39 @@ ixic가 더 조밀한 데이터이므로 m2는 더 드물게 나타난다.</p>
 <p>결국 <a href="https://plotly.com/python/">Ploty</a> 라이브러리를 선택하여
 차트를 그렸지만 사실 지금와서 생각해보면 <a href="https://github.com/tradingview/lightweight-charts">TradingView의 lightweight chart</a>
 를 이용해서 그리는게 더 나을 것 같다는 생각이 든다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>tr1 <span style="color:#f92672">=</span> go<span style="color:#f92672">.</span>Candlestick(x<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;Date&#39;</span>],
-</span></span><span style="display:flex;"><span>				open<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;Open_1&#39;</span>],
-</span></span><span style="display:flex;"><span>				high<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;High_1&#39;</span>],
-</span></span><span style="display:flex;"><span>				low<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;Low_1&#39;</span>],
-</span></span><span style="display:flex;"><span>				close<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;Close_1&#39;</span>],
-</span></span><span style="display:flex;"><span>				name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;M2-Flat&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>tr1 <span style="color:#0550ae">=</span> go<span style="color:#0550ae">.</span>Candlestick<span style="color:#1f2328">(</span>x<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Date&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#6639ba">open</span><span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Open_1&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				high<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;High_1&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				low<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Low_1&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				close<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Close_1&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				name<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;M2-Flat&#39;</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>tr2 <span style="color:#f92672">=</span> go<span style="color:#f92672">.</span>Scatter(x<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;Date&#39;</span>],
-</span></span><span style="display:flex;"><span>				y<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;M2&#39;</span>],
-</span></span><span style="display:flex;"><span>				name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;M2&#39;</span>,
-</span></span><span style="display:flex;"><span>				yaxis<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y2&#39;</span>)
+</span></span><span style="display:flex;"><span>tr2 <span style="color:#0550ae">=</span> go<span style="color:#0550ae">.</span>Scatter<span style="color:#1f2328">(</span>x<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Date&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				y<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				name<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;M2&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>				yaxis<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;y2&#39;</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>tr3 <span style="color:#f92672">=</span> go<span style="color:#f92672">.</span>Candlestick(x<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;Date&#39;</span>],
-</span></span><span style="display:flex;"><span>				open<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;Open&#39;</span>],
-</span></span><span style="display:flex;"><span>				high<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;High&#39;</span>],
-</span></span><span style="display:flex;"><span>				low<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;Low&#39;</span>],
-</span></span><span style="display:flex;"><span>				close<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;Close&#39;</span>],
-</span></span><span style="display:flex;"><span>				name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;original&#39;</span>,
-</span></span><span style="display:flex;"><span>				increasing_line_color<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;gray&#39;</span>, decreasing_line_color<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;magenta&#39;</span>)
+</span></span><span style="display:flex;"><span>tr3 <span style="color:#0550ae">=</span> go<span style="color:#0550ae">.</span>Candlestick<span style="color:#1f2328">(</span>x<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Date&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#6639ba">open</span><span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Open&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				high<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;High&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				low<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Low&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				close<span style="color:#0550ae">=</span>df<span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;Close&#39;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>				name<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;original&#39;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>				increasing_line_color<span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;gray&#39;</span><span style="color:#1f2328">,</span> decreasing_line_color<span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;magenta&#39;</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> make_subplots(specs<span style="color:#f92672">=</span>[[{<span style="color:#e6db74">&#39;secondary_y&#39;</span>: <span style="color:#66d9ef">True</span>}]])
-</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>add_trace(tr1)
-</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>add_trace(tr2, secondary_y<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>add_trace(tr3)
+</span></span><span style="display:flex;"><span>fig <span style="color:#0550ae">=</span> make_subplots<span style="color:#1f2328">(</span>specs<span style="color:#0550ae">=</span><span style="color:#1f2328">[[{</span><span style="color:#0a3069">&#39;secondary_y&#39;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">True</span><span style="color:#1f2328">}]])</span>
+</span></span><span style="display:flex;"><span>fig<span style="color:#0550ae">.</span>add_trace<span style="color:#1f2328">(</span>tr1<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>fig<span style="color:#0550ae">.</span>add_trace<span style="color:#1f2328">(</span>tr2<span style="color:#1f2328">,</span> secondary_y<span style="color:#0550ae">=</span><span style="color:#cf222e">True</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>fig<span style="color:#0550ae">.</span>add_trace<span style="color:#1f2328">(</span>tr3<span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">##</span>
-</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>update_layout(
-</span></span><span style="display:flex;"><span>	xaxis_rangeslider_visible<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>,
-</span></span><span style="display:flex;"><span>	title_text<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;IXIC-M2&#39;</span>
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>xaxis<span style="color:#f92672">.</span>type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;category&#39;</span>
-</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>write_html(<span style="color:#e6db74">&#39;IXIC_M2.html&#39;</span>, auto_open<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#57606a">##</span>
+</span></span><span style="display:flex;"><span>fig<span style="color:#0550ae">.</span>update_layout<span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>	xaxis_rangeslider_visible<span style="color:#0550ae">=</span><span style="color:#cf222e">False</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>	title_text<span style="color:#0550ae">=</span><span style="color:#0a3069">&#39;IXIC-M2&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>fig<span style="color:#0550ae">.</span>layout<span style="color:#0550ae">.</span>xaxis<span style="color:#0550ae">.</span>type <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;category&#39;</span>
+</span></span><span style="display:flex;"><span>fig<span style="color:#0550ae">.</span>write_html<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;IXIC_M2.html&#39;</span><span style="color:#1f2328">,</span> auto_open<span style="color:#0550ae">=</span><span style="color:#cf222e">False</span><span style="color:#1f2328">)</span>
 </span></span></code></pre></div><p>굳이 차트라이브러리를 익힐 필요는 없는 것 같다. 필요할 때 가져다가 응용할수 있을 정도면 될것 같다.</p>
 <h2 id="개인적-생각">개인적 생각</h2>
 <p>위 모든 내용이 반영된 레포는

@@ -33,7 +33,7 @@
       }
 
       .container {
-        max-width: 580px;  
+        max-width: 780px;  
         margin: 0 auto;
         padding: 60px 20px;
       }
@@ -224,13 +224,98 @@
   }
 
     </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+  background-color: #cdcdcd;
+  border-radius: 16px 16px 0 16px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #cdcdcd;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+    </style>
   </head>
   <body>
     <div class="container">
       
 <style>
   .post-container {
-    max-width: 580px;  
+    max-width: 780px;  
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -340,34 +425,34 @@
 이 문서에선 4bytes를 의미한다. 4bytes 내에 0바이트가 존재하는지 확인하는
 것으로서 이를 활용하면
 strlen 등을 최적화할 수 있다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#define haszero(v) (((v)-0x01010101UL) &amp; ~ (v) &amp; 0x80808080UL)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">#define haszero(v) (((v)-0x01010101UL) &amp; ~ (v) &amp; 0x80808080UL)
 </span></span></span></code></pre></div><p>이 매크로를 사용하면 0인 바이트가 있을때 해당바이트 최상위 비트가
 1로 세팅된다.<br>
 리틀엔디언 세번째바이트가 0일 경우 0x800000
 첫번째 바이트가 0일 경우 0x80  이런 식으로 결과가 나오게 된다.</p>
 <p>그럼 glibc/strlen.c 의 소스코드를 보자</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>  <span style="color:#75715e">/* Instead of the traditional loop which tests each character,
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     we will test a longword at a time.  The tricky part is testing
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     if *any of the four* bytes in the longword in question are zero.  */</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (;;)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>      longword <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>longword_ptr<span style="color:#f92672">++</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>  <span style="color:#57606a">/* Instead of the traditional loop which tests each character,
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     we will test a longword at a time.  The tricky part is testing
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     if *any of the four* bytes in the longword in question are zero.  */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">for</span> <span style="color:#1f2328">(;;)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      longword <span style="color:#0550ae">=</span> <span style="color:#0550ae">*</span>longword_ptr<span style="color:#0550ae">++</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (((longword <span style="color:#f92672">-</span> lomagic) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>longword <span style="color:#f92672">&amp;</span> himagic) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>	{
-</span></span><span style="display:flex;"><span>	  <span style="color:#75715e">/* Which of the bytes was the zero?  If none of them were, it was
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	     a misfire; continue the search.  */</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cf222e">if</span> <span style="color:#1f2328">(((</span>longword <span style="color:#0550ae">-</span> lomagic<span style="color:#1f2328">)</span> <span style="color:#0550ae">&amp;</span> <span style="color:#0550ae">~</span>longword <span style="color:#0550ae">&amp;</span> himagic<span style="color:#1f2328">)</span> <span style="color:#0550ae">!=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	  <span style="color:#57606a">/* Which of the bytes was the zero?  If none of them were, it was
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">	     a misfire; continue the search.  */</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>cp <span style="color:#f92672">=</span> (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>) (longword_ptr <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	  <span style="color:#cf222e">const</span> <span style="color:#cf222e">char</span> <span style="color:#0550ae">*</span>cp <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">const</span> <span style="color:#cf222e">char</span> <span style="color:#0550ae">*</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(</span>longword_ptr <span style="color:#0550ae">-</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">if</span> (cp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> cp <span style="color:#f92672">-</span> str;
-</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">if</span> (cp[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> cp <span style="color:#f92672">-</span> str <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">if</span> (cp[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> cp <span style="color:#f92672">-</span> str <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">if</span> (cp[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">return</span> cp <span style="color:#f92672">-</span> str <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>	  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>cp<span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#cf222e">return</span> cp <span style="color:#0550ae">-</span> str<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>cp<span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#cf222e">return</span> cp <span style="color:#0550ae">-</span> str <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>cp<span style="color:#1f2328">[</span><span style="color:#0550ae">2</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#cf222e">return</span> cp <span style="color:#0550ae">-</span> str <span style="color:#0550ae">+</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>cp<span style="color:#1f2328">[</span><span style="color:#0550ae">3</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#cf222e">return</span> cp <span style="color:#0550ae">-</span> str <span style="color:#0550ae">+</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">;</span>
 </span></span></code></pre></div><p>if 문 안의 조건문을 보면 <code>lomagic</code> 이랑 <code>himagic</code> 위 매크로의 패턴과 같다.
 워드 단위 즉 4바이트 씩 포인터를 증가시키면서 단지 4 Operation 만으로
 4바이트씩 건너뛰며 0이 있는지 검사하여 매우 빨라진다.
@@ -376,13 +461,13 @@ Loop은  포인터를 증가시킨뒤 4 Operation을 수행하고 0이 아닌지
 <h3 id="워드에-n보다-작은-바이트가-있는지-확인하기">워드에 N보다 작은 바이트가 있는지 확인하기</h3>
 <p>사실 위의 0인 바이트를 찾아내는 것은  지금 얘기하고자 하는 것의
 부분집합이라고 할 수 있다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#define hasless(x, n) (((x)-~ 0UL / 255 * (n)) &amp; ~ (x) &amp; ~ 0UL / 255 * 128)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">#define hasless(x, n) (((x)-~ 0UL / 255 * (n)) &amp; ~ (x) &amp; ~ 0UL / 255 * 128)
 </span></span></span></code></pre></div><p>특정 N값 보다 작은 바이트가 존재하는지 찾는
 매크로는 위와 같다. 이때 각 부분을 미리 풀어보면 &lsquo;0과 같은 바이트를 찾기&rsquo; 와
 매우 유사하다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#f92672">~</span> <span style="color:#ae81ff">0UL</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">255</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">0x01</span>) <span style="color:#75715e">// 0x01010101 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">~</span> <span style="color:#ae81ff">0UL</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">255</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">128</span>    <span style="color:#75715e">// 0x80808080
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">hasless</span>(x, <span style="color:#ae81ff">0x01</span>) (((x)<span style="color:#f92672">-</span><span style="color:#ae81ff">0x01010101</span>) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span> (x) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x80808080</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#0550ae">~</span> <span style="color:#0550ae">0UL</span> <span style="color:#0550ae">/</span> <span style="color:#0550ae">255</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">0x01</span><span style="color:#1f2328">)</span> <span style="color:#57606a">// 0x01010101 
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#0550ae">~</span> <span style="color:#0550ae">0UL</span> <span style="color:#0550ae">/</span> <span style="color:#0550ae">255</span> <span style="color:#0550ae">*</span> <span style="color:#0550ae">128</span>    <span style="color:#57606a">// 0x80808080
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#6639ba">hasless</span><span style="color:#1f2328">(</span>x<span style="color:#1f2328">,</span> <span style="color:#0550ae">0x01</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">(((</span>x<span style="color:#1f2328">)</span><span style="color:#0550ae">-</span><span style="color:#0550ae">0x01010101</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">&amp;</span> <span style="color:#0550ae">~</span> <span style="color:#1f2328">(</span>x<span style="color:#1f2328">)</span> <span style="color:#0550ae">&amp;</span> <span style="color:#0550ae">0x80808080</span><span style="color:#1f2328">)</span>
 </span></span></code></pre></div><p>0x01 보다 작은 바이트를 찾는다고 하면 사실 0인 바이트를 찾는 것과
 같은 것이다.
 위를 응용하여 0x20 보다 작은 문자들을 찾는 예를 들수 있다.

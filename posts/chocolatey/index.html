@@ -33,7 +33,7 @@
       }
 
       .container {
-        max-width: 580px;  
+        max-width: 780px;  
         margin: 0 auto;
         padding: 60px 20px;
       }
@@ -224,13 +224,98 @@
   }
 
     </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+  background-color: #cdcdcd;
+  border-radius: 16px 16px 0 16px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #cdcdcd;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+    </style>
   </head>
   <body>
     <div class="container">
       
 <style>
   .post-container {
-    max-width: 580px;  
+    max-width: 780px;  
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -331,44 +416,44 @@
     <h1 id="chocolatey-사용">Chocolatey 사용</h1>
 <p>윈도우에서 <a href="https://chocolatey.org/">chocolatey</a> 우분투의 apt, 아치의 pacman 와 같이 패키지를 관리해주는 시스템이다.</p>
 <h2 id="패키지-검색">패키지 검색</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco search git
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco search git
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Chocolatey v0.10.15
-</span></span><span style="display:flex;"><span>git 2.31.1 <span style="color:#f92672">[</span>Approved<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>git 2.31.1 <span style="color:#0550ae">[</span>Approved<span style="color:#0550ae">]</span>
 </span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">179</span> packages found.
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">179</span> packages found.
 </span></span></code></pre></div><h2 id="패키지-설치">패키지 설치</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco install joplin
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco install joplin
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Installing the following packages:
 </span></span><span style="display:flex;"><span>joplin
-</span></span><span style="display:flex;"><span>By installing you accept licenses <span style="color:#66d9ef">for</span> the packages.
+</span></span><span style="display:flex;"><span>By installing you accept licenses <span style="color:#cf222e">for</span> the packages.
 </span></span><span style="display:flex;"><span>joplin v1.7.11 already installed.
 </span></span><span style="display:flex;"><span> Use --force to reinstall, specify a version to install, or try upgrade.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Chocolatey installed 0/1 packages.
-</span></span><span style="display:flex;"><span> See the log <span style="color:#66d9ef">for</span> details <span style="color:#f92672">(</span>C:<span style="color:#ae81ff">\P</span>rogramData<span style="color:#ae81ff">\c</span>hocolatey<span style="color:#ae81ff">\l</span>ogs<span style="color:#ae81ff">\c</span>hocolatey.log<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span> See the log <span style="color:#cf222e">for</span> details <span style="color:#0550ae">(</span>C:<span style="color:#0a3069">\P</span>rogramData<span style="color:#0a3069">\c</span>hocolatey<span style="color:#0a3069">\l</span>ogs<span style="color:#0a3069">\c</span>hocolatey.log<span style="color:#0550ae">)</span>.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Warnings:
 </span></span><span style="display:flex;"><span> - joplin - joplin v1.7.11 already installed.
 </span></span><span style="display:flex;"><span> Use --force to reinstall, specify a version to install, or try upgrade.
 </span></span></code></pre></div><h2 id="패키지-정보보기">패키지 정보보기</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco info googlechrome
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco info googlechrome
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Installing the following packages:
 </span></span><span style="display:flex;"><span>joplin
-</span></span><span style="display:flex;"><span>By installing you accept licenses <span style="color:#66d9ef">for</span> the packages.
+</span></span><span style="display:flex;"><span>By installing you accept licenses <span style="color:#cf222e">for</span> the packages.
 </span></span><span style="display:flex;"><span>joplin v1.7.11 already installed.
 </span></span><span style="display:flex;"><span> Use --force to reinstall, specify a version to install, or try upgrade.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Chocolatey installed 0/1 packages.
-</span></span><span style="display:flex;"><span> See the log <span style="color:#66d9ef">for</span> details <span style="color:#f92672">(</span>C:<span style="color:#ae81ff">\P</span>rogramData<span style="color:#ae81ff">\c</span>hocolatey<span style="color:#ae81ff">\l</span>ogs<span style="color:#ae81ff">\c</span>hocolatey.log<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span> See the log <span style="color:#cf222e">for</span> details <span style="color:#0550ae">(</span>C:<span style="color:#0a3069">\P</span>rogramData<span style="color:#0a3069">\c</span>hocolatey<span style="color:#0a3069">\l</span>ogs<span style="color:#0a3069">\c</span>hocolatey.log<span style="color:#0550ae">)</span>.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Warnings:
 </span></span><span style="display:flex;"><span> - joplin - joplin v1.7.11 already installed.
 </span></span><span style="display:flex;"><span> Use --force to reinstall, specify a version to install, or try upgrade.
 </span></span></code></pre></div><h2 id="그-외-명령들">그 외 명령들</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco uninstall 패키지  삭제
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco uninstall 패키지  삭제
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>설치된 패키지 검색
 </span></span><span style="display:flex;"><span>$ choco search -l   
@@ -379,7 +464,7 @@
 </span></span><span style="display:flex;"><span>cmake.install 3.20.1
 </span></span><span style="display:flex;"><span>hugo 0.82.1
 </span></span><span style="display:flex;"><span>joplin 1.7.11
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span> packages installed.
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">5</span> packages installed.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ choco upgrade 패키지
 </span></span></code></pre></div>

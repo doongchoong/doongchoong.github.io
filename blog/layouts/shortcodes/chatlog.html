@@ -1,0 +1,11 @@
+{{ $content := .Inner | markdownify }}
+
+{{/* 이제 HTML 안에서 <strong>User</strong> 찾기 */}}
+{{ $pattern := `<strong>User</strong>\.?\s*([^<]*)` }}
+{{ $replace := `<div class="user-bubble"><strong>User</strong>. $1</div>` }}
+
+{{ $final := replaceRE $pattern $replace $content }}
+
+<div class="chatlog">
+  {{ $final | safeHTML }}
+</div>

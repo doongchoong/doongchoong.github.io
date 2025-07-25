@@ -4,3 +4,15 @@ title = "둥충코딩"
 theme = "ritzy" 
 publishDir = "../"
 staticDir="static"
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "github"
+    tabWidth = 4

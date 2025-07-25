@@ -33,7 +33,7 @@
       }
 
       .container {
-        max-width: 580px;  
+        max-width: 780px;  
         margin: 0 auto;
         padding: 60px 20px;
       }
@@ -224,13 +224,98 @@
   }
 
     </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+  background-color: #cdcdcd;
+  border-radius: 16px 16px 0 16px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #cdcdcd;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+    </style>
   </head>
   <body>
     <div class="container">
       
 <style>
   .post-container {
-    max-width: 580px;  
+    max-width: 780px;  
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -337,15 +422,15 @@
 <p>Hugo Installing 을 참조하여 설치한다.
 바이너리를 받아서 설치후 환경변수에 등록하면 된다.
 혹은 Chocolately 를 사용 패키지 설치한다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ choco search hugo
 </span></span></code></pre></div><h2 id="사이트-생성하기">사이트 생성하기</h2>
 <p>사이트(블로그)를 구성하고자 하는 폴더에 가서 아래 명령을 수행한다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ hugo new site blog
 </span></span></code></pre></div><p>나는 블로그를 만들고자 했기때문에 blog 폴더에 각종
 폴더 및 파일들이 생성된다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>archetypes
 </span></span><span style="display:flex;"><span>content
 </span></span><span style="display:flex;"><span>data
@@ -366,19 +451,19 @@ themes 폴더는  테마를 받아서 디자인을 꾸밀수 있다.</p>
 맘에 드는 테마를 고른뒤에 받아서 설치한다.
 대부분 테마는 github 리파지토리이다. 따라서
 아래 명령처럼 git clone을 사용하여 받으면 된다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ cd themes
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ <span style="color:#6639ba">cd</span> themes
 </span></span><span style="display:flex;"><span>$ git clone https://github.com/......
 </span></span></code></pre></div><h2 id="포스트-쓰기">포스트 쓰기</h2>
 <p>Markdown 파일로 포스트를 작성한다.
 파일을 직접 만들어도 되지만 hugo의 정보도 같이 생성하기
 위해 아래 명령어로 추가해도 된다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ hugo new post/first-post.md
 </span></span></code></pre></div><h2 id="로컬에서-확인하기">로컬에서 확인하기</h2>
 <p>정적웹페이지들을 github등으로 올리기 전에
 어떻게 보이는지 확인할 수 있다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ hugo -D server
 </span></span></code></pre></div><p><code>-D</code>옵션은 특히 Draft 모드인 글까지도 볼 수 있다.</p>
 
