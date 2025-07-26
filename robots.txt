@@ -1,3 +1,1 @@
 User-agent: *
-Disallow:
-Sitemap: https://doongchoong.github.io/sitemap.xml

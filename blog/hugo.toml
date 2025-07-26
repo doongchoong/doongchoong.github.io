@@ -1,9 +1,11 @@
 baseURL = "https://doongchoong.github.io"
+enableRobotsTXT = true
 languageCode = "ko-kr"
 title = "둥충코딩"
 theme = "ritzy" 
 publishDir = "../"
 staticDir="static"
+
 
 [markup]
   [markup.highlight]
