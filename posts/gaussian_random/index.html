@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gaussian_Random | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 16px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 20px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+  }
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+  background-color: #cdcdcd;
+  border-radius: 16px 16px 0 16px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #cdcdcd;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <h1 class="post-title">Gaussian_Random</h1>
+    <div class="post-date">August 6, 2013</div>
+  </div>
+  
+    
+
+  <div class="post-content">
+    
+<canvas id="normal_dist_canvas" width="660" height="480"></canvas>
+	<script type="text/javascript">
+		var normal_dist_canvas = document.getElementById('normal_dist_canvas');
+		var normal_dist_ctx = normal_dist_canvas.getContext('2d');
+
+		function box_muller_generator(){
+			var x1 = Math.random();
+			var x2 = Math.random();
+
+			var u1 = Math.sqrt(-2 * Math.log(x1)) 
+					* Math.cos( Math.PI * x2);
+			var u2 = Math.sqrt(-2 * Math.log(x1)) 
+					* Math.sin( Math.PI * x2);
+			return u1;
+		}
+
+		function normal_dist_draw_line(x1,y1, x2,y2){
+			normal_dist_ctx.beginPath();
+			normal_dist_ctx.moveTo(x1,y1);
+			normal_dist_ctx.lineTo(x2, y2);
+			normal_dist_ctx.strokeStyle = '#000000';
+			normal_dist_ctx.stroke();
+			normal_dist_ctx.closePath();	
+		}
+
+		function normal_dist_draw_txt(txt, x, y){
+			normal_dist_ctx.textBaseline = 'top';
+			normal_dist_ctx.textAlign = 'center';
+			normal_dist_ctx.fillText(txt, x, y);
+		}
+		// initialize
+		var normal_dist_slice = new Array(60);
+		for(var i=0; i < normal_dist_slice.length; i++){
+			normal_dist_slice[i] = 0;
+		}
+		var normal_dist_cnt = 0;
+
+
+
+		setInterval(function(){
+			
+			// gen numbers
+			for(var i=0; i < 25; i++){
+				var rnd = box_muller_generator();
+
+				var bottom = -3;
+				var top    = 3;
+				var step = (top - bottom) / normal_dist_slice.length;
+
+				for(var j=0; j < normal_dist_slice.length; j++){
+					var from = step * j     + bottom;
+					var to   = step * (j+1) + bottom;
+					if(rnd >= from && rnd < to){
+						normal_dist_slice[j]++;
+					}
+				}
+
+			}
+
+			// draw
+			normal_dist_canvas.width = normal_dist_canvas.width;
+
+			for(var i=0; i < normal_dist_slice.length-1; i++){
+				var width = normal_dist_canvas.width;
+				var height= normal_dist_canvas.height;
+
+				var x = width * 0.1;
+				var y = height* 0.9;
+
+				normal_dist_draw_line(
+					x + (width*0.8/normal_dist_slice.length)*i    , y - normal_dist_slice[i],
+					x + (width*0.8/normal_dist_slice.length)*(i+1), y - normal_dist_slice[i+1]
+				);
+				normal_dist_draw_line(
+					x + (width*0.8/normal_dist_slice.length)*i    , y - normal_dist_slice[i],
+					x + (width*0.8/normal_dist_slice.length)*(i), y 
+				);
+
+
+			}
+
+
+
+
+			normal_dist_draw_txt('-3', width*0.1, height*0.9);
+			normal_dist_draw_txt('0', width*0.5, height*0.9);
+			normal_dist_draw_txt('3', width*0.885, height*0.9);
+
+
+
+
+
+			normal_dist_cnt++;
+
+
+			// clear
+			if(normal_dist_cnt == 240){
+				
+				
+				// clear
+				for(var i=0; i < normal_dist_slice.length; i++){
+					normal_dist_slice[i] = 0;
+				}
+				normal_dist_cnt = 0;
+			}
+
+		}, 1000/60);
+
+	</script>
+
+<p>이전 블로그 내용 백업</p>
+<p>위 예제는 가우시안 랜덤을 보여준다. 랜덤 숫자를 생성할시 대부분의 언어에서는 (0-1] 사이의 랜덤한 숫자를 뽑을수 있다. 하지만 이런 랜덤함수는 linear 한 분포의 랜덤값을 뿌리게 된다.</p>
+<p>Box-muller transform 을 이용하면 정규분포를 따르는 랜덤값을 생성 가능하다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#cf222e">function</span> <span style="color:#1f2328">box_muller_generator</span><span style="color:#1f2328">(){</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#cf222e">var</span> <span style="color:#1f2328">x1</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">random</span><span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#cf222e">var</span> <span style="color:#1f2328">x2</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">random</span><span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#cf222e">var</span> <span style="color:#1f2328">u1</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">sqrt</span><span style="color:#1f2328">(</span><span style="color:#0550ae">-</span><span style="color:#0550ae">2</span> <span style="color:#0550ae">*</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#1f2328">x1</span><span style="color:#1f2328">))</span> 
+</span></span><span style="display:flex;"><span>				<span style="color:#0550ae">*</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">cos</span><span style="color:#1f2328">(</span><span style="color:#0550ae">2</span> <span style="color:#0550ae">*</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">PI</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">x2</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#cf222e">var</span> <span style="color:#1f2328">u2</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">sqrt</span><span style="color:#1f2328">(</span><span style="color:#0550ae">-</span><span style="color:#0550ae">2</span> <span style="color:#0550ae">*</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">log</span><span style="color:#1f2328">(</span><span style="color:#1f2328">x1</span><span style="color:#1f2328">))</span> 
+</span></span><span style="display:flex;"><span>				<span style="color:#0550ae">*</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">sin</span><span style="color:#1f2328">(</span><span style="color:#0550ae">2</span> <span style="color:#0550ae">*</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">PI</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">x2</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#cf222e">return</span> <span style="color:#1f2328">u1</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
+</span></span></code></pre></div>
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>
