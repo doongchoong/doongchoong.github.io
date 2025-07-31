@@ -1,5 +1,4 @@
 baseURL = "https://doongchoong.github.io"
-enableRobotsTXT = true
 languageCode = "ko-kr"
 title = "둥충코딩"
 theme = "ritzy" 
@@ -18,3 +17,8 @@ staticDir="static"
     noClasses = true
     style = "github"
     tabWidth = 4
+
+[sitemap]
+  changefreq = 'daily'
+  filename = 'sitemap.xml'
+  priority = 0.5

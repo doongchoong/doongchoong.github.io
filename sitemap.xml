@@ -2,67 +2,111 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://doongchoong.github.io/posts/</loc>
     <lastmod>2025-07-26T00:36:49+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://doongchoong.github.io/</loc>
     <lastmod>2025-07-26T00:36:49+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EC%97%90gpt%EB%8C%80%ED%99%94%EB%84%A3%EA%B8%B0/</loc>
+    <loc>https://doongchoong.github.io/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EC%97%90gpt%EB%8C%80%ED%99%94%EB%84%A3%EA%B8%B0/</loc>
     <lastmod>2025-07-26T00:36:49+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/markdown%EC%97%85%EB%AC%B4%EB%A0%88%ED%8F%AC/</loc>
+    <loc>https://doongchoong.github.io/posts/markdown%EC%97%85%EB%AC%B4%EB%A0%88%ED%8F%AC/</loc>
     <lastmod>2025-03-19T22:01:39+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/</loc>
+    <loc>https://doongchoong.github.io/posts/%EB%8C%80%EC%B2%B4%EA%B1%B0%EB%9E%98%EC%86%8C%ED%9B%84%EA%B8%B0/</loc>
     <lastmod>2025-03-09T19:50:38+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/dustscrap/</loc>
+    <loc>https://doongchoong.github.io/posts/dustscrap/</loc>
     <lastmod>2023-02-11T18:36:21+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/python%EC%86%8C%EC%8A%A4%EC%84%A4%EC%B9%98/</loc>
+    <loc>https://doongchoong.github.io/posts/python%EC%86%8C%EC%8A%A4%EC%84%A4%EC%B9%98/</loc>
     <lastmod>2021-08-14T15:47:59+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/curses/</loc>
+    <loc>https://doongchoong.github.io/posts/curses/</loc>
     <lastmod>2021-05-29T20:53:40+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/</loc>
+    <loc>https://doongchoong.github.io/posts/%ED%8D%BC%EC%A7%80%EA%B2%80%EC%83%89/</loc>
     <lastmod>2021-05-10T23:35:07+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/m2%ED%8F%89%ED%83%84%ED%99%94/</loc>
+    <loc>https://doongchoong.github.io/posts/m2%ED%8F%89%ED%83%84%ED%99%94/</loc>
     <lastmod>2021-05-04T21:34:32+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/</loc>
+    <loc>https://doongchoong.github.io/posts/%EB%A7%8C%EB%8D%B8%EB%B8%8C%EB%A1%9C%ED%8A%B8%ED%94%84%EB%9E%99%ED%83%88/</loc>
     <lastmod>2021-05-03T19:50:38+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/chocolatey/</loc>
+    <loc>https://doongchoong.github.io/posts/chocolatey/</loc>
     <lastmod>2021-05-02T23:30:18+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/yyjson%EB%B6%84%EC%84%9D/</loc>
+    <loc>https://doongchoong.github.io/posts/yyjson%EB%B6%84%EC%84%9D/</loc>
     <lastmod>2021-05-02T17:44:40+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</loc>
+    <loc>https://doongchoong.github.io/posts/%EB%B9%84%ED%8A%B8%EC%97%B0%EC%82%B0/</loc>
     <lastmod>2021-05-02T17:02:31+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/use_hugo/</loc>
+    <loc>https://doongchoong.github.io/posts/use_hugo/</loc>
     <lastmod>2021-05-02T15:18:39+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/%EB%93%A4%EB%A1%9C%EB%84%A4%EC%82%BC%EA%B0%81%ED%99%94/</loc>
+    <loc>https://doongchoong.github.io/posts/%EB%93%A4%EB%A1%9C%EB%84%A4%EC%82%BC%EA%B0%81%ED%99%94/</loc>
     <lastmod>2013-11-30T19:28:38+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/%EA%B8%B0%ED%95%98%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%A3%BC%EA%B0%80%EB%AA%A8%ED%98%95/</loc>
+    <loc>https://doongchoong.github.io/posts/%EA%B8%B0%ED%95%98%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%A3%BC%EA%B0%80%EB%AA%A8%ED%98%95/</loc>
     <lastmod>2013-10-09T00:15:54+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/gaussian_random/</loc>
+    <loc>https://doongchoong.github.io/posts/gaussian_random/</loc>
     <lastmod>2013-08-06T23:55:58+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/posts/cut_water/</loc>
+    <loc>https://doongchoong.github.io/posts/cut_water/</loc>
     <lastmod>2013-07-21T00:10:41+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://doongchoong.github.io/categories/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://doongchoong.github.io/tags/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://doongchoong.github.io/about/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>
