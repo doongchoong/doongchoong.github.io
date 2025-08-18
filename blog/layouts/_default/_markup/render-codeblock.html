@@ -1,0 +1,8 @@
+{{- $lang := .Type  -}}
+
+<div class="code-block-wrapper">
+  <div class="code-title">{{ $lang | upper  }}</div>
+  <div class="highlight_wrap">
+    {{ highlight .Inner $lang "" }}
+  </div>
+</div>

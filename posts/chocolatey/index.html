@@ -136,10 +136,10 @@
        
       pre {
         background-color: #f5f5f5;
-        padding: 16px;
+        padding: 4px;
         border-radius: 4px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 0px 0;
       }
       
       code {
@@ -270,12 +270,12 @@
  
 .chatlog pre {
   background-color: #f5f5f7;
-  padding: 1rem;
+  padding: 4px;
   overflow-x: auto;
   border-radius: 6px;
   font-size: 0.92rem;
   line-height: 1.6;
-  margin: 1.5rem 0;
+  margin: 4px;
 }
 
 .chatlog code {
@@ -311,6 +311,37 @@
 
 .gpt-line {
   margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
 }
     </style>
   </head>
@@ -420,14 +451,21 @@
     <h1 id="chocolatey-사용">Chocolatey 사용</h1>
 <p>윈도우에서 <a href="https://chocolatey.org/">chocolatey</a> 우분투의 apt, 아치의 pacman 와 같이 패키지를 관리해주는 시스템이다.</p>
 <h2 id="패키지-검색">패키지 검색</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco search git
+<div class="code-block-wrapper">
+  <div class="code-title">SH</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco search git
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Chocolatey v0.10.15
 </span></span><span style="display:flex;"><span>git 2.31.1 <span style="color:#0550ae">[</span>Approved<span style="color:#0550ae">]</span>
 </span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span><span style="color:#0550ae">179</span> packages found.
-</span></span></code></pre></div><h2 id="패키지-설치">패키지 설치</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco install joplin
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">179</span> packages found.</span></span></code></pre></div>
+  </div>
+</div><h2 id="패키지-설치">패키지 설치</h2>
+<div class="code-block-wrapper">
+  <div class="code-title">SH</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco install joplin
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Installing the following packages:
 </span></span><span style="display:flex;"><span>joplin
@@ -440,9 +478,13 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Warnings:
 </span></span><span style="display:flex;"><span> - joplin - joplin v1.7.11 already installed.
-</span></span><span style="display:flex;"><span> Use --force to reinstall, specify a version to install, or try upgrade.
-</span></span></code></pre></div><h2 id="패키지-정보보기">패키지 정보보기</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco info googlechrome
+</span></span><span style="display:flex;"><span> Use --force to reinstall, specify a version to install, or try upgrade.</span></span></code></pre></div>
+  </div>
+</div><h2 id="패키지-정보보기">패키지 정보보기</h2>
+<div class="code-block-wrapper">
+  <div class="code-title">SH</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco info googlechrome
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Installing the following packages:
 </span></span><span style="display:flex;"><span>joplin
@@ -455,9 +497,13 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Warnings:
 </span></span><span style="display:flex;"><span> - joplin - joplin v1.7.11 already installed.
-</span></span><span style="display:flex;"><span> Use --force to reinstall, specify a version to install, or try upgrade.
-</span></span></code></pre></div><h2 id="그-외-명령들">그 외 명령들</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco uninstall 패키지  삭제
+</span></span><span style="display:flex;"><span> Use --force to reinstall, specify a version to install, or try upgrade.</span></span></code></pre></div>
+  </div>
+</div><h2 id="그-외-명령들">그 외 명령들</h2>
+<div class="code-block-wrapper">
+  <div class="code-title">SH</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ choco uninstall 패키지  삭제
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>설치된 패키지 검색
 </span></span><span style="display:flex;"><span>$ choco search -l   
@@ -470,8 +516,9 @@
 </span></span><span style="display:flex;"><span>joplin 1.7.11
 </span></span><span style="display:flex;"><span><span style="color:#0550ae">5</span> packages installed.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ choco upgrade 패키지
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>$ choco upgrade 패키지</span></span></code></pre></div>
+  </div>
+</div>
   </div>
   
   <a href="/" class="back-link">← Back to home</a>

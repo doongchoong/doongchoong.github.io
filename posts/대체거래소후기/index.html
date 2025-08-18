@@ -136,10 +136,10 @@
        
       pre {
         background-color: #f5f5f5;
-        padding: 16px;
+        padding: 4px;
         border-radius: 4px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 0px 0;
       }
       
       code {
@@ -270,12 +270,12 @@
  
 .chatlog pre {
   background-color: #f5f5f7;
-  padding: 1rem;
+  padding: 4px;
   overflow-x: auto;
   border-radius: 6px;
   font-size: 0.92rem;
   line-height: 1.6;
-  margin: 1.5rem 0;
+  margin: 4px;
 }
 
 .chatlog code {
@@ -311,6 +311,37 @@
 
 .gpt-line {
   margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
 }
     </style>
   </head>
@@ -472,10 +503,14 @@
 <p>K를 선택시 SOR주문의 자녀주문 관리는 원장에서 직접 하여야 한다.
 SOR시스템의 판단을 받고 이후 주문관리를 시작하게 되는데 여기서
 SOR 첫 도입시 이슈가 되었던 Split 정정에 대한 이슈가 있다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>SOR주문 30주 ( KRX  20주 , NXT  10주 )
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>SOR주문 30주 ( KRX  20주 , NXT  10주 )
 </span></span><span style="display:flex;"><span>=&gt; 정정판단  KRX 10주, NXT 20주 
-</span></span><span style="display:flex;"><span>SOR정정 30주 ( KRX 10,  KRX10취소 -&gt; NXT신규,  NXT정정10) 
-</span></span></code></pre></div><p>이 내용은 SOR정정시에 자녀주문에 대해 2-&gt;3개로 Split 되며 정정이 반복될때<br>
+</span></span><span style="display:flex;"><span>SOR정정 30주 ( KRX 10,  KRX10취소 -&gt; NXT신규,  NXT정정10) </span></span></code></pre></div>
+  </div>
+</div><p>이 내용은 SOR정정시에 자녀주문에 대해 2-&gt;3개로 Split 되며 정정이 반복될때<br>
 계속 Split 이 될수 있다는 내용이다. 이론상으로는 주문수량만큼 전부 Split이다. (100주면 자녀주문 100개)</p>
 <p>사실 이 내용은 취소 -&gt; 신규(Merge) 를 정정으로 본다면
 주문 1개에 대해 상수개의 자녀주문으로 고정된다. 심지어는 걍 부모주문 레코드에 전부 담아
@@ -491,7 +526,10 @@ SOR 첫 도입시 이슈가 되었던 Split 정정에 대한 이슈가 있다.</
 </ol>
 <p>생 파이썬으로 테스트 스크립트를 작성했다.
 주문과 전문 순서는 json 으로 정의한다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+<div class="code-block-wrapper">
+  <div class="code-title">JSON</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;title&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;New Order Case 1&#34;</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;desc&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;..... &#34;</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;prgm&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
@@ -510,8 +548,9 @@ SOR 첫 도입시 이슈가 되었던 Split 정정에 대한 이슈가 있다.</
 </span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;qty&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">5</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><ul>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><ul>
 <li>매수주문 10주 분할 50%</li>
 <li>KRX 확인 5</li>
 <li>NXT 확인 5</li>
@@ -550,8 +589,12 @@ SOR관리모듈을 만들어놓고 보니 모든 잔여전문들이 완료되어
 <li>스펙문서를 웹에서 바로 조회할수 있도록 만들겠다.</li>
 </ol>
 <p>이를 위해 파이썬을 사용했는데 openpyxl을 쓰니 쉽게 되었다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Excel -&gt; Json -&gt; Html 
-</span></span></code></pre></div><ul>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Excel -&gt; Json -&gt; Html </span></span></code></pre></div>
+  </div>
+</div><ul>
 <li>vscode 등에서 venv 모드로 설치하면 깔끔하게 해당 라이브러리만 세팅 가능</li>
 </ul>
 <p>이 과정을 거쳐 웹페이지를 만들고 서버에 올렸다.
@@ -603,12 +646,16 @@ NXT 측에서 부하를 발생시켜 달라고 요청했고
 심지어 멀티스레드로도 제어하기 힘들다. Non-blocking 요청을 해야한다.
 이후에 다시 한번에 응답을 받아 주문번호를 모은뒤에
 다시 Async로 한번에 날리면 일제 취소가 된다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Cleaning 알고리즘
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Cleaning 알고리즘
 </span></span><span style="display:flex;"><span>1. 내가 깔아놓을 매도호가 건수만큼 많은 매수 주문수량을 채워서 순차적으로 위로 올린다.
 </span></span><span style="display:flex;"><span>2. 위로 올라간 위치 (매도10호가)에서 다시 매도수량을 채워서 순차적으로 아래로 내린다.
 </span></span><span style="display:flex;"><span>3. 아래 위치(매수10호가)에서 다시 올린다. 
-</span></span><span style="display:flex;"><span>4. 일제 취소  
-</span></span></code></pre></div><ul>
+</span></span><span style="display:flex;"><span>4. 일제 취소  </span></span></code></pre></div>
+  </div>
+</div><ul>
 <li>VI가 걸리지 말아야 한다.</li>
 <li>현재가는 유지시킨다.</li>
 </ul>
@@ -619,12 +666,16 @@ NXT 측에서 부하를 발생시켜 달라고 요청했고
 <h2 id="부하">부하</h2>
 <p>처음에는 거대한 프로젝트의 격?을 세우기 위해 솔직히 그럴싸해 보이기 위해
 접근했던 마음이 있었지만,  테스트를 진행하면서 마음이 바뀌게 된다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>        - Read =&gt; 0
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>        - Read =&gt; 0
 </span></span><span style="display:flex;"><span>-------+- Read =&gt; 0
 </span></span><span style="display:flex;"><span>0000000 - Read =&gt;
 </span></span><span style="display:flex;"><span>-------+- Read =&gt; 0
-</span></span><span style="display:flex;"><span>        - Read =&gt; 
-</span></span></code></pre></div><h3 id="최대-tps-가-도대체-뭐지">최대 TPS? 가 도대체 뭐지?</h3>
+</span></span><span style="display:flex;"><span>        - Read =&gt; </span></span></code></pre></div>
+  </div>
+</div><h3 id="최대-tps-가-도대체-뭐지">최대 TPS? 가 도대체 뭐지?</h3>
 <p>&ldquo;버틸수 있는 최대한계&rdquo; 이런 말은 관점에 따라 참 다양한 것 같다.
 이런 테스트를 진행하면 시니어의 &ldquo;실제로 해봤어?&rdquo; 물음에 참 할말이 없어지는 부분이다.</p>
 <p>주문서버 1대에 수십만TPS 가 가능할까?
@@ -666,11 +717,15 @@ NXT 측에서 부하를 발생시켜 달라고 요청했고
 <p>SOR과 통신하는 프로세스는 TCP로 바로 붙는데
 주문이 끝나버린 것이 아니므로 이 요청은 Sync로 동작한다. 결국 Send, Recv는 짝을 이뤄야 하며
 SOR 서버 헬스체크를 하는 백그라운드 스레드랑 경합한다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6639ba">lock</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>mutex<span style="color:#1f2328">);</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6639ba">lock</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>mutex<span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">send</span><span style="color:#1f2328">(...);</span>
 </span></span><span style="display:flex;"><span><span style="color:#6639ba">recv</span><span style="color:#1f2328">(...);</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">unlock</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>mutex<span style="color:#1f2328">);</span>
-</span></span></code></pre></div><p>간단하게 뮤텍스 가드로 처리후 평상시나  적당한 강도로 주문집행시에도 문제없음을 확인했으나
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">unlock</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>mutex<span style="color:#1f2328">);</span></span></span></code></pre></div>
+  </div>
+</div><p>간단하게 뮤텍스 가드로 처리후 평상시나  적당한 강도로 주문집행시에도 문제없음을 확인했으나
 대규모 부하를 발생시키니 0.001% 확률로 TCP버퍼가 깨지는 이상한 현상이 발생했다.</p>
 <p>가드를 뚫고 짝이 맞지 않게 Send 된것을 발견했다.</p>
 <p><strong>재현불가, 하지만 현상은 있다.</strong></p>
@@ -690,8 +745,12 @@ SOR 서버 헬스체크를 하는 백그라운드 스레드랑 경합한다.</p>
 <p>SOR과 통신하는 각 개별 프로세스들은 연결이 끊어지면 스스로 복구하기 위해 최대한 노력한다.
 이게 바로 상태이다. 특별히 상태값을 정의하지 않아도 노력하는 행위자체가 상태가 된다. 이는 자연스럽게
 LB와 연관된다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>&#34;노오력하세요~&#34; 
-</span></span></code></pre></div><p><strong>준비된 자가 쟁취한다.</strong>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>&#34;노오력하세요~&#34; </span></span></code></pre></div>
+  </div>
+</div><p><strong>준비된 자가 쟁취한다.</strong>
 연결이 끊어진 친구는 복구중이라 준비가 되지 않았다. 남은 친구들이 경쟁하여 SOR요청을 받아가는데
 부분/전체 장애가 있더라도 최대한 경쟁적으로 쟁취를 하다보면 자연스럽게 효율적으로 배분이 된다.</p>
 <p>예측된 부분은 참 터무니없다. 이는 &ldquo;보고&quot;와 관련이 깊은데 보고전략중 하나는

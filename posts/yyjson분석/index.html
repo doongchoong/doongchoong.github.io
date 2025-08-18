@@ -136,10 +136,10 @@
        
       pre {
         background-color: #f5f5f5;
-        padding: 16px;
+        padding: 4px;
         border-radius: 4px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 0px 0;
       }
       
       code {
@@ -270,12 +270,12 @@
  
 .chatlog pre {
   background-color: #f5f5f7;
-  padding: 1rem;
+  padding: 4px;
   overflow-x: auto;
   border-radius: 6px;
   font-size: 0.92rem;
   line-height: 1.6;
-  margin: 1.5rem 0;
+  margin: 4px;
 }
 
 .chatlog code {
@@ -311,6 +311,37 @@
 
 .gpt-line {
   margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
 }
     </style>
   </head>
@@ -443,7 +474,10 @@
 <a href="https://en.wikipedia.org/wiki/Duff%27s_device">Duff&rsquo;s Device</a>
 로 알려져 있는 기법이다.
 yyjson에서는 이를 repeat 매크로로 풀어낸다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* Macros used for loop unrolling and other purpose. */</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* Macros used for loop unrolling and other purpose. */</span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat2(x)  { x x }
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat3(x)  { x x x }
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat4(x)  { x x x x }
@@ -459,15 +493,19 @@ yyjson에서는 이를 repeat 매크로로 풀어낸다.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat_in_1_18(x) { x(1) x(2) x(3) x(4) x(5) x(6) x(7) \
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">                            x(8) x(9) x(10) x(11) x(12) x(13) x(14) x(15) \
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">                            x(16) x(17) x(18) }
-</span></span></span></code></pre></div><p>이는 소스코드에선 하나의 코드를 쓰지만 repeat 매크로를 사용하여
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">                            x(16) x(17) x(18) }</span></span></span></code></pre></div>
+  </div>
+</div><p>이는 소스코드에선 하나의 코드를 쓰지만 repeat 매크로를 사용하여
 자동으로 반복되도록 확장하는 일종의 snippets 이다.</p>
 <h3 id="2-likely-unlikely">2. Likely, Unlikely</h3>
 <p>likely, unlikely 매크로는 리눅스 커널 소스코드에서 사용했다고 알려져있는데
 이는 Branch 가 발생되는 부분에서 힌트를 주는 것이다.
 true 가 많이 발생할 경우는 likely , false가 많이 발생할 경우는
 unlikely 등으로 사용한다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* likely */</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* likely */</span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">#ifndef yyjson_likely
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">#   if yyjson_has_builtin(__builtin_expect) || YYJSON_GCC_VER &gt;= 4
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">#       define yyjson_likely(expr) __builtin_expect(!!(expr), 1)
@@ -483,16 +521,21 @@ unlikely 등으로 사용한다.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">#   else
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">#       define yyjson_unlikely(expr) (expr)
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">#   endif
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#endif
-</span></span></span></code></pre></div><p>사실 위 매크로중 중요한 것은 <code>__builtin_expect(!!(expr), 0)</code> 이것이다.
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#endif</span></span></span></code></pre></div>
+  </div>
+</div><p>사실 위 매크로중 중요한 것은 <code>__builtin_expect(!!(expr), 0)</code> 이것이다.
 1이면 likely , 0이면 unlikely이다. 이를 지원하는 컴파일러에 여부에 따라
 위처럼 묶어준뒤 .c 파일에서</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* Macros used to provide branch prediction information for compiler. */</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* Macros used to provide branch prediction information for compiler. */</span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">#undef  likely
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define likely(x)       yyjson_likely(x)
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a">#undef  unlikely
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define unlikely(x)     yyjson_unlikely(x)
-</span></span></span></code></pre></div><p>이렇게 축약하여 사용한다. 지원하지 않는 컴파일러라면 성능이 급격히 떨어지게 되므로
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define unlikely(x)     yyjson_unlikely(x)</span></span></span></code></pre></div>
+  </div>
+</div><p>이렇게 축약하여 사용한다. 지원하지 않는 컴파일러라면 성능이 급격히 떨어지게 되므로
 될 수 있는 한 해당 기능을 지원하는 컴파일러를 쓰는 것이 좋다. 위 코드처럼
 GCC 4 버젼이상, 그리고 개인적으로 검색해본 결과
 <a href="https://llvm.org/docs/BranchWeightMetadata.html">LLVM도 지원</a>
@@ -500,7 +543,10 @@ GCC 4 버젼이상, 그리고 개인적으로 검색해본 결과
 <p>위 두 매크로를 정의한 뒤에 어휘분석에서 발생하는 모든 if문에서
 likely , unlikely를 적당히 버무려 사용하면 된다.</p>
 <h3 id="3-asm-volatile">3. Asm volatile</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">skip_ascii_end</span><span style="color:#1f2328">:</span>
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#57606a">/*
@@ -518,14 +564,18 @@ likely , unlikely를 적당히 버무려 사용하면 된다.</p>
 </span></span><span style="display:flex;"><span>        <span style="color:#0550ae">*</span>src <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;\0&#39;</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#0550ae">*</span>end <span style="color:#0550ae">=</span> src <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#cf222e">return</span> <span style="color:#6639ba">true</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>매우 난해한 코드이다. 인라인 어셈블리로 주석을 잘 읽어보자.</p>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p>매우 난해한 코드이다. 인라인 어셈블리로 주석을 잘 읽어보자.</p>
 <h2 id="goto-문">Goto 문</h2>
 <p>lexer를 제작할때는 상태머신(FSM)을 작성해서 구현하는 경우가 많은데
 이때 goto를 사용할 수 있다.
 일반적인 goto 문은 로직을 어지럽게 하며 최적화하기도 힘들지만
 이런 상태머신을 구현할 때는 오히려 좋은 케이스라고 할 수 있다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>static_inline <span style="color:#cf222e">bool</span> <span style="color:#6639ba">read_string</span><span style="color:#1f2328">(</span>u8 <span style="color:#0550ae">*</span>cur<span style="color:#1f2328">,</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>static_inline <span style="color:#cf222e">bool</span> <span style="color:#6639ba">read_string</span><span style="color:#1f2328">(</span>u8 <span style="color:#0550ae">*</span>cur<span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>                               u8 <span style="color:#0550ae">**</span>end<span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>                               yyjson_val <span style="color:#0550ae">*</span>val<span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>                               <span style="color:#cf222e">const</span> <span style="color:#cf222e">char</span> <span style="color:#0550ae">**</span>msg<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
@@ -569,13 +619,17 @@ likely , unlikely를 적당히 버무려 사용하면 된다.</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">// ... 수많은 코드 ...
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p><code>skip_ascii</code>, <code>skip_ascii_begin</code>, <code>skip_ascii_end</code>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p><code>skip_ascii</code>, <code>skip_ascii_begin</code>, <code>skip_ascii_end</code>
 등을 라벨을 사용하여 goto문으로 상태이동을 표현하였다.</p>
 <p>이때 재밌는 점은 위에서 설명한 loop unrolling, likely 매크로
 등이 쓰인다는 점이다. loop Unrolling 매크로가 풀릴때 코드는 대략
 아래 모양으로 만들어진다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">skip_ascii_begin</span><span style="color:#1f2328">:</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">// repeat16_incr(expr_jump); // 이게 풀리면
@@ -604,11 +658,16 @@ likely , unlikely를 적당히 버무려 사용하면 된다.</p>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">goto</span> skip_ascii_end<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>	
 </span></span><span style="display:flex;"><span><span style="color:#57606a">// ... 수많은 코드 ...
-</span></span></span></code></pre></div><p>무려 if문이 16번이나 연속 되므로 분기가 많아 느릴것 같아보이지만
+</span></span></span></code></pre></div>
+  </div>
+</div><p>무려 if문이 16번이나 연속 되므로 분기가 많아 느릴것 같아보이지만
 if문 안에는 전부 likely매크로가 달려 있어 CPU에 true 힌트를 준다.
 즉 힌트를 받은대로 전부 true로 예측하며 빠르게 진행된다.</p>
 <h2 id="bytes-매치">Bytes 매치</h2>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/** 16/32/64-bit vector union, used for unaligned memory access on modern CPU */</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/** 16/32/64-bit vector union, used for unaligned memory access on modern CPU */</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">typedef</span> <span style="color:#cf222e">union</span> v16_uni <span style="color:#1f2328">{</span> v16 v<span style="color:#1f2328">;</span> u16 u<span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span> v16_uni<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">typedef</span> <span style="color:#cf222e">union</span> v32_uni <span style="color:#1f2328">{</span> v32 v<span style="color:#1f2328">;</span> u32 u<span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span> v32_uni<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">typedef</span> <span style="color:#cf222e">union</span> v64_uni <span style="color:#1f2328">{</span> v64 v<span style="color:#1f2328">;</span> u64 u<span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span> v64_uni<span style="color:#1f2328">;</span>
@@ -618,8 +677,9 @@ if문 안에는 전부 likely매크로가 달려 있어 CPU에 true 힌트를 �
 </span></span><span style="display:flex;"><span>    u1<span style="color:#1f2328">.</span>v <span style="color:#0550ae">=</span> <span style="color:#0550ae">*</span><span style="color:#1f2328">(</span>v32 <span style="color:#0550ae">*</span><span style="color:#1f2328">)</span>pat<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>    u2<span style="color:#1f2328">.</span>v <span style="color:#0550ae">=</span> <span style="color:#0550ae">*</span><span style="color:#1f2328">(</span>v32 <span style="color:#0550ae">*</span><span style="color:#1f2328">)</span>buf<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> u1<span style="color:#1f2328">.</span>u <span style="color:#0550ae">==</span> u2<span style="color:#1f2328">.</span>u<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>json 에서  &rsquo;true&rsquo;, &rsquo;null&rsquo; 등의 토큰은 사실 바이트단위로
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p>json 에서  &rsquo;true&rsquo;, &rsquo;null&rsquo; 등의 토큰은 사실 바이트단위로
 4번이나 비교할 필요가 없다. 4바이트이므로 그냥 바로 통째로
 4바이트 비교를 하면 된다.</p>
 <h2 id="character-테이블">Character 테이블</h2>
@@ -627,7 +687,10 @@ if문 안에는 전부 likely매크로가 달려 있어 CPU에 true 힌트를 �
 256개의 테이블을 미리 만들어둔뒤 개별 문자가 지닌 분류 해놓으면
 빠르게 개별 char 의 범위를 조건문에서 체크할 필요없이
 바로 비교 가능하다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span> <span style="color:#0a3069">&#39;{&#39;</span> <span style="color:#0550ae">==</span> ch <span style="color:#0550ae">||</span> <span style="color:#0a3069">&#39;[&#39;</span> <span style="color:#0550ae">==</span> ch <span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span> <span style="color:#0a3069">&#39;{&#39;</span> <span style="color:#0550ae">==</span> ch <span style="color:#0550ae">||</span> <span style="color:#0a3069">&#39;[&#39;</span> <span style="color:#0550ae">==</span> ch <span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#57606a">// char type Container
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>
@@ -638,9 +701,13 @@ if문 안에는 전부 likely매크로가 달려 있어 CPU에 true 힌트를 �
 </span></span><span style="display:flex;"><span>	<span style="color:#cf222e">case</span> <span style="color:#0a3069">&#39;\0&#39;</span><span style="color:#0550ae">:</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#57606a">// char type line END
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>		<span style="color:#cf222e">break</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>위 소스는 분기 및 비교가 많다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/** Whitespace character: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p>위 소스는 분기 및 비교가 많다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/** Whitespace character: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">const</span> char_type CHAR_TYPE_SPACE      <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">/** Number character: &#39;-&#39;, [0-9]. */</span>
@@ -683,8 +750,9 @@ if문 안에는 전부 likely매크로가 달려 있어 CPU에 true 힌트를 �
 </span></span><span style="display:flex;"><span><span style="color:#57606a">/** Match a whitespace or comment: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;, &#39;/&#39;. */</span>
 </span></span><span style="display:flex;"><span>static_inline <span style="color:#cf222e">bool</span> <span style="color:#6639ba">char_is_space_or_comment</span><span style="color:#1f2328">(</span>u8 c<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#6639ba">char_is_type</span><span style="color:#1f2328">(</span>c<span style="color:#1f2328">,</span> CHAR_TYPE_SPACE <span style="color:#0550ae">|</span> CHAR_TYPE_COMMENT<span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>위 코드처럼 사전정의된 테이블을 가지고 문자의 종류 판단을 하게 된다.
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p>위 코드처럼 사전정의된 테이블을 가지고 문자의 종류 판단을 하게 된다.
 비트Mask를 활용한 것도 유용하다.</p>
 
   </div>

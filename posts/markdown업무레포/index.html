@@ -136,10 +136,10 @@
        
       pre {
         background-color: #f5f5f5;
-        padding: 16px;
+        padding: 4px;
         border-radius: 4px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 0px 0;
       }
       
       code {
@@ -270,12 +270,12 @@
  
 .chatlog pre {
   background-color: #f5f5f7;
-  padding: 1rem;
+  padding: 4px;
   overflow-x: auto;
   border-radius: 6px;
   font-size: 0.92rem;
   line-height: 1.6;
-  margin: 1.5rem 0;
+  margin: 4px;
 }
 
 .chatlog code {
@@ -311,6 +311,37 @@
 
 .gpt-line {
   margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
 }
     </style>
   </head>
@@ -479,16 +510,23 @@ gitGraph
 <p>개발에 필요하거나 진행하면서 발생한 이슈,적용포인트 등 모든것을 적으며 배포ID 등까지도 관리.
 이는 기존 회사에서 보고용으로 쓰는 잘-정형화된 문서 스타일은 아니며. 자유롭게 상황에 따라 맞춰 메모용으로 작성한다.</p>
 <p>gitignore 문서에  &ldquo;진행중&quot;인 폴더를 적고, 업무레포에는 &ldquo;완료된&rdquo; 폴더를 추가한다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>// gitignore
-</span></span><span style="display:flex;"><span>/진행중/*
-</span></span></code></pre></div><ul>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>// gitignore
+</span></span><span style="display:flex;"><span>/진행중/*</span></span></code></pre></div>
+  </div>
+</div><ul>
 <li>&ldquo;진행중&quot;에 관리하던 메모문서가 개발이 완료되면 &ldquo;완료된&rdquo; 폴더로 옮겨서 커밋, 푸시, 병합</li>
 <li>추후 비슷한 개발건이 있을때 검색하여 같은 팀원(혹은 본인)이 작성했던 메모를 보고 힌트를 얻는다.</li>
 </ul>
 <h2 id="개발진행문서-템플릿">개발진행문서 템플릿</h2>
 <p>진행문서는 포맷이 자유로워야 하지만 너무 자유롭다면 어떻게 작성해야할지 막막할 수 있다.
 따라서 팀에 따라 알맞게 어느정도는 템플릿을 제공한다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-md" data-lang="md"><span style="display:flex;"><span># 개발요청
+<div class="code-block-wrapper">
+  <div class="code-title">MD</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-md" data-lang="md"><span style="display:flex;"><span># 개발요청
 </span></span><span style="display:flex;"><span>어떤 개발인지 간단한 설명
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>## 1. 일정
@@ -517,8 +555,9 @@ gitGraph
 </span></span><span style="display:flex;"><span>ID나 종류등을 관리 PM이면 각 개발자 것까지 관리
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>## 6. 참고
-</span></span><span style="display:flex;"><span>이슈사항 및 대화내용, 녹취, 트러블등 모든것을 적음. 
-</span></span></code></pre></div><p>위는 일종의 틀이며 중간내용은 원하는대로 마음대로 바꾸어도 된다.</p>
+</span></span><span style="display:flex;"><span>이슈사항 및 대화내용, 녹취, 트러블등 모든것을 적음. </span></span></code></pre></div>
+  </div>
+</div><p>위는 일종의 틀이며 중간내용은 원하는대로 마음대로 바꾸어도 된다.</p>
 <ul>
 <li>메일이나 쪽지, 통화 등의 문답 내용은 그 자체를 백업하는 것만으로도 당시 상황을 짐작할수 있다.</li>
 <li>특히 현업의 말바꾸기 등을 고려하여 항시 증거를 남길 것.</li>
@@ -534,10 +573,14 @@ gitGraph
 <li>DB와 연관된 그림을 그리기 좋다.</li>
 <li>배치Job 등을 그리기에 더 알맞다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>graph LR
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>graph LR
 </span></span><span style="display:flex;"><span>FileA -.-&gt; |Read| Batch1 --&gt; | insert | Table1[(Table1)]
-</span></span><span style="display:flex;"><span>Batch1 --&gt; | insert | Table2[(Table2)]
-</span></span></code></pre></div><div class="mermaid">
+</span></span><span style="display:flex;"><span>Batch1 --&gt; | insert | Table2[(Table2)]</span></span></code></pre></div>
+  </div>
+</div><div class="mermaid">
     
 graph LR
 FileA -.-> |Read| Batch1 --> | insert | Table1[(Table1)]
@@ -568,7 +611,10 @@ Server1 -.- RelyServer
 <li>현업을 한 객체로 두고 표현해도 좋음</li>
 <li>강조하고 싶은 부분을 좀더 세분화해도 됨</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>sequenceDiagram
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>sequenceDiagram
 </span></span><span style="display:flex;"><span>autonumber
 </span></span><span style="display:flex;"><span>participant 현업
 </span></span><span style="display:flex;"><span>participant 서버
@@ -578,8 +624,9 @@ Server1 -.- RelyServer
 </span></span><span style="display:flex;"><span>note over 서버 : DB에서 데이터를 읽어 파일생성
 </span></span><span style="display:flex;"><span>서버 -&gt;&gt; 외부기관 : 파일 Faxxxxx0001.dat 전송
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>외부기관 -&gt;&gt; 서버 : 정상응답 R000
-</span></span></code></pre></div><div class="mermaid">
+</span></span><span style="display:flex;"><span>외부기관 -&gt;&gt; 서버 : 정상응답 R000</span></span></code></pre></div>
+  </div>
+</div><div class="mermaid">
     
 sequenceDiagram
 autonumber
@@ -605,7 +652,10 @@ note over 서버 : DB에서 데이터를 읽어 파일생성
 Time-Line 별로 설명하는게 좋을 것이다.
 또 기술적인 부분과 비즈니스적인 2가지 부분으로 나누면 좋다.
 이때 위에서 설명한 다이어그램을 적극적으로 활용하여 그림으로 설명한다. (이해가 쉽다)</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span># ~~업무
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span># ~~업무
 </span></span><span style="display:flex;"><span>~~ 업무는 ~로 인해 도입되었다.  
 </span></span><span style="display:flex;"><span>문서버젼 1.0 ~~~작성  25.03.20
 </span></span><span style="display:flex;"><span>
@@ -631,8 +681,9 @@ Time-Line 별로 설명하는게 좋을 것이다.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>### 2.3. 21:00 마감 및 후처리 
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>다이어그램 및 코드로 설명
-</span></span></code></pre></div><h2 id="한계">한계</h2>
+</span></span><span style="display:flex;"><span>다이어그램 및 코드로 설명</span></span></code></pre></div>
+  </div>
+</div><h2 id="한계">한계</h2>
 <ul>
 <li>사람마다 생각이 다르다.</li>
 <li>각 개인 툴에 너무 적응하여 공동작업이 익숙하지 않을 수 있다.</li>

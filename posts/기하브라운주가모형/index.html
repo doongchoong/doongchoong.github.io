@@ -136,10 +136,10 @@
        
       pre {
         background-color: #f5f5f5;
-        padding: 16px;
+        padding: 4px;
         border-radius: 4px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 0px 0;
       }
       
       code {
@@ -270,12 +270,12 @@
  
 .chatlog pre {
   background-color: #f5f5f7;
-  padding: 1rem;
+  padding: 4px;
   overflow-x: auto;
   border-radius: 6px;
   font-size: 0.92rem;
   line-height: 1.6;
-  margin: 1.5rem 0;
+  margin: 4px;
 }
 
 .chatlog code {
@@ -311,6 +311,37 @@
 
 .gpt-line {
   margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
 }
     </style>
   </head>
@@ -880,7 +911,10 @@ setInterval(function(){
 <h3 id="주가모형에-대해">주가모형에 대해</h3>
 <p>위 차트의 가격데이터는 랜덤으로 만들어진 데이터일뿐 실제 주식과는 아무 상관이 없다. 다만 이 기하브라운 주가모형으로 생성되는 주가경로는 실제 주가의 양상이랑 다른경우가 많은것 같다 (체감적으로) 이 주가모형은 한 봉의 가격의 움직임은 전봉이랑 전혀 상관이 없으나(독립) 실제 주식세상에서는 가격 그 자체가 시장참여자들에게 중대한 의미를 주기도 하며 어느정도 경향성을 준다. 고로 이 모형은 그렇게 쓸데가 있어보이진 않지만 변동성이 얼마나 중요한가에 대한 의미는 있는것 같다.</p>
 <p>원래 주가모형은 종가만을 생성하므로 위 차트에 맞게 시고저종의 데이터를 생성할 필요가 있다. 이는 간단하게 해결했는데 상하한가 +-15% 이내의 범위에서 세개의 가격을 구한뒤 종가를 미리 지정하고 정렬하여 고가, 저가를 정해주면 시고저종을 만들수 있다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#cf222e">function</span> <span style="color:#1f2328">stock_process</span><span style="color:#1f2328">(</span><span style="color:#1f2328">s</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">mu</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">vol</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">t</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">n</span><span style="color:#1f2328">){</span>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>	<span style="color:#cf222e">function</span> <span style="color:#1f2328">stock_process</span><span style="color:#1f2328">(</span><span style="color:#1f2328">s</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">mu</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">vol</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">t</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">n</span><span style="color:#1f2328">){</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>		<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">s</span>   <span style="color:#0550ae">=</span> <span style="color:#1f2328">s</span> <span style="color:#0550ae">||</span> <span style="color:#0550ae">100.0</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">mu</span>  <span style="color:#0550ae">=</span> <span style="color:#1f2328">mu</span><span style="color:#0550ae">||</span> <span style="color:#0550ae">0.1</span><span style="color:#1f2328">;</span>
@@ -948,8 +982,9 @@ setInterval(function(){
 </span></span><span style="display:flex;"><span>			<span style="color:#cf222e">return</span> <span style="color:#1f2328">ret</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div>
   </div>
   
   <a href="/" class="back-link">← Back to home</a>

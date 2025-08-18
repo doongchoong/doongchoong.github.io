@@ -136,10 +136,10 @@
        
       pre {
         background-color: #f5f5f5;
-        padding: 16px;
+        padding: 4px;
         border-radius: 4px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 0px 0;
       }
       
       code {
@@ -270,12 +270,12 @@
  
 .chatlog pre {
   background-color: #f5f5f7;
-  padding: 1rem;
+  padding: 4px;
   overflow-x: auto;
   border-radius: 6px;
   font-size: 0.92rem;
   line-height: 1.6;
-  margin: 1.5rem 0;
+  margin: 4px;
 }
 
 .chatlog code {
@@ -311,6 +311,37 @@
 
 .gpt-line {
   margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
 }
     </style>
   </head>
@@ -511,22 +542,30 @@
 내려온뒤에 전부 다 기록이 된뒤 거꾸로 큰 값을 기준으로 거꾸로 찾아 올라가며 경로를 찾아낸다.
 이건 완전히 점화식이 몇가지 방향으로 분리되는 <a href="https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95">Dynamic Programming</a> 방식이다.
 이때 패턴문자가 전부 매칭되어야 한다는 사실을 생각해보고 row에 패턴문자를 column에 텍스트 문자를 배치시켜보자</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>    pat:[rr]
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>    pat:[rr]
 </span></span><span style="display:flex;"><span>    txt:[ReadMe]
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    | R, e, a, d, M, e
 </span></span><span style="display:flex;"><span>   -+-----------------
 </span></span><span style="display:flex;"><span>   r|
-</span></span><span style="display:flex;"><span>   r|
-</span></span></code></pre></div><h3 id="패턴을-전부-매칭시키는-방법">패턴을 전부 매칭시키는 방법</h3>
+</span></span><span style="display:flex;"><span>   r|</span></span></code></pre></div>
+  </div>
+</div><h3 id="패턴을-전부-매칭시키는-방법">패턴을 전부 매칭시키는 방법</h3>
 <p>방법은 위로가는 방향은 빼고  대각선, 왼쪽 두방향으로만 검색해서 최대값을 기록해 나가면 된다.
 위로 올라가는 방향은 없으니 패턴은 항상 매칭이 될 수 밖에 없다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>     --t--tt---t-----tt
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>     --t--tt---t-----tt
 </span></span><span style="display:flex;"><span>    r-&gt;\
 </span></span><span style="display:flex;"><span>    r----&gt;\
 </span></span><span style="display:flex;"><span>    r      \--------&gt;\
-</span></span><span style="display:flex;"><span>    r           \----&gt;\
-</span></span></code></pre></div><p>대략 위와 같은 느낌으로 이해하면 된다.
+</span></span><span style="display:flex;"><span>    r           \----&gt;\</span></span></code></pre></div>
+  </div>
+</div><p>대략 위와 같은 느낌으로 이해하면 된다.
 패턴문자(row)는 하나도 빠짐없이 매칭 되며  매칭되었을때는 대각선으로 하강한다.
 텍스트문자는 중간중간 건너 뛰는 것을 볼 수 있다. 이를 Gap이라고 부르며
 멀리 떨어질수록 Penalty 를 받게 된다.</p>
@@ -580,10 +619,14 @@ T(r, c-1) 도 마찬가지다. 이는 재귀적 구조를 지니고 있어 <a hr
 <h3 id="보너스-점수는-어떻게-정하고-더하는가">보너스 점수는 어떻게 정하고 더하는가</h3>
 <p>보너스 점수는 파일경로와 같은 텍스트를 찾을때 디렉토리를 구분해주는 구분문자 그리고 파일명 디렉토리명에서 CamelCase
 등에 좀더 매칭이 잘되게 하고 싶을때 보너스점수를 주는 것이다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span> pat:    tic
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span> pat:    tic
 </span></span><span style="display:flex;"><span> txt:    /thits/iis/testcCase
-</span></span><span style="display:flex;"><span> result: /[t]hits/[i]is/testc[C]ase
-</span></span></code></pre></div><p>위와 같은 사례를 보면 앞 디렉토리명에서 t 는 두번 나오지만 /t 와 같이 경계에 붙어있는 문자로 선택을 하도록 유도한다.
+</span></span><span style="display:flex;"><span> result: /[t]hits/[i]is/testc[C]ase</span></span></code></pre></div>
+  </div>
+</div><p>위와 같은 사례를 보면 앞 디렉토리명에서 t 는 두번 나오지만 /t 와 같이 경계에 붙어있는 문자로 선택을 하도록 유도한다.
 testcCase 도 마찬가지로 대문자C 앞에 소문자c가 먼저 나왔지만 CamelCase 를 더 선호하기 때문에 C를 선택한다.</p>
 <p>fzf의 각종 점수는 다음과 같다.</p>
 <ol>
@@ -606,12 +649,19 @@ testcCase 도 마찬가지로 대문자C 앞에 소문자c가 먼저 나왔지�
 <p>대각선과 왼쪽 값을 비교하는 로직이 있기 때문에 이 로직을 자연스럽게 반영하기 위해
 matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번째 col은 비워두는 것이 좋아보인다.
 사실 2차원 배열로 하지 않고 1차원배열로 만든뒤 인덱싱을 해서 구현했다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> colsize <span style="color:#0550ae">=</span> <span style="color:#6639ba">strlen</span><span style="color:#1f2328">(</span>txt<span style="color:#1f2328">)</span> <span style="color:#0550ae">+</span> START_IDX<span style="color:#1f2328">;</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> colsize <span style="color:#0550ae">=</span> <span style="color:#6639ba">strlen</span><span style="color:#1f2328">(</span>txt<span style="color:#1f2328">)</span> <span style="color:#0550ae">+</span> START_IDX<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> rowsize <span style="color:#0550ae">=</span> <span style="color:#6639ba">strlen</span><span style="color:#1f2328">(</span>pat<span style="color:#1f2328">)</span> <span style="color:#0550ae">+</span> START_IDX<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#define IDX(r,c) (((r) * colsize) + (c))
-</span></span></span></code></pre></div><h3 id="보너스-사전정보">보너스 사전정보</h3>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#define IDX(r,c) (((r) * colsize) + (c))</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="보너스-사전정보">보너스 사전정보</h3>
 <p>경계문자, CamelCase, no-alnum 등은 사실 입력텍스트만 보고도 기록해 놓을 수 있다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#57606a">/* 보너스 계산 */</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#57606a">/* 보너스 계산 */</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">char</span> t_cur<span style="color:#1f2328">,</span> t_pre <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> col <span style="color:#0550ae">=</span> START_IDX<span style="color:#1f2328">;</span> col <span style="color:#0550ae">&lt;</span> colsize<span style="color:#1f2328">;</span> col<span style="color:#0550ae">++</span><span style="color:#1f2328">)</span>
@@ -626,12 +676,16 @@ matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번�
 </span></span><span style="display:flex;"><span>            bonus<span style="color:#1f2328">[</span>col<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> g_bonus_camel<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        t_pre <span style="color:#0550ae">=</span> t_cur<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h3 id="각-row에서-첫번째-col-정하기">각 Row에서 첫번째 col 정하기</h3>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="각-row에서-첫번째-col-정하기">각 Row에서 첫번째 col 정하기</h3>
 <p>첫번째 패턴문자를 일치부분을 끝내고 그 다음 패턴문자를 가지고 작업할때
 사실 첫번째 row를 사용했기 때문에 첫번째 매칭 col 이후부터 시작하면 된다.
 이는 대략적으로 절반 정도 탐색 공간을 줄여준다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">int</span> first_col_in_a_row <span style="color:#0550ae">=</span> START_IDX<span style="color:#1f2328">;</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">int</span> first_col_in_a_row <span style="color:#0550ae">=</span> START_IDX<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">...</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> row<span style="color:#0550ae">=</span>START_IDX<span style="color:#1f2328">;</span> row <span style="color:#0550ae">&lt;</span> rowsize<span style="color:#1f2328">;</span> row<span style="color:#0550ae">++</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
@@ -649,11 +703,15 @@ matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번�
 </span></span><span style="display:flex;"><span>            <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>                is_first <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>                first_col_in_a_row <span style="color:#0550ae">=</span> col<span style="color:#0550ae">+</span><span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h3 id="대각선-왼쪽-선택하기">대각선, 왼쪽 선택하기</h3>
+</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="대각선-왼쪽-선택하기">대각선, 왼쪽 선택하기</h3>
 <p>위에서 설계한 대로 고르되 중요한 점은 <strong>대각선을 선택할 시에는 지금 패턴을 매칭하였을 때</strong> 인 것이고
 왼쪽을 선택할 시에는 <strong>매칭하지 않고 갭 페널티까지 적용되었을 때</strong> 인 것이다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* 왼쪽 점수 결정 */</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* 왼쪽 점수 결정 */</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>is_gap<span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>    left_score <span style="color:#0550ae">+=</span> g_penalty_ingap<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">else</span>
@@ -690,9 +748,13 @@ matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번�
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">/* 음수값 처리 */</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>matrix<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>row  <span style="color:#1f2328">,</span> col<span style="color:#1f2328">)]</span> <span style="color:#0550ae">&lt;</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    matrix<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>row  <span style="color:#1f2328">,</span> col<span style="color:#1f2328">)]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
-</span></span></code></pre></div><h3 id="연속처리">연속처리</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* 연속 개수 선정 */</span>
+</span></span><span style="display:flex;"><span>    matrix<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>row  <span style="color:#1f2328">,</span> col<span style="color:#1f2328">)]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="연속처리">연속처리</h3>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* 연속 개수 선정 */</span>
 </span></span><span style="display:flex;"><span>cont_cnt <span style="color:#0550ae">=</span> cont<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>row<span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> col<span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)]</span> <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#57606a">/* 대각선 */</span>
@@ -708,10 +770,14 @@ matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번�
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>bonus_score <span style="color:#0550ae">&lt;</span> bonus<span style="color:#1f2328">[</span>col <span style="color:#0550ae">-</span> cont_cnt <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">])</span>
 </span></span><span style="display:flex;"><span>        bonus_score <span style="color:#0550ae">=</span> bonus<span style="color:#1f2328">[</span>col <span style="color:#0550ae">-</span> cont_cnt <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">];</span>
 </span></span><span style="display:flex;"><span>    bonus_score <span style="color:#0550ae">+=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h3 id="역추적해서-패턴-위치-알아내기">역추적해서 패턴 위치 알아내기</h3>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="역추적해서-패턴-위치-알아내기">역추적해서 패턴 위치 알아내기</h3>
 <p>기록해온 것의 반대방향으로 하면 된다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#57606a">/* 역추적 */</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#57606a">/* 역추적 */</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> back_row <span style="color:#0550ae">=</span> rowsize <span style="color:#0550ae">-</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> back_col <span style="color:#0550ae">=</span> max_col<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">while</span><span style="color:#1f2328">(</span>back_row <span style="color:#0550ae">&gt;=</span> START_IDX<span style="color:#1f2328">)</span>
@@ -722,8 +788,9 @@ matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번�
 </span></span><span style="display:flex;"><span>            position<span style="color:#1f2328">[</span>back_col <span style="color:#0550ae">-</span> START_IDX<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>        back_col <span style="color:#0550ae">--</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h2 id="구현결과">구현결과</h2>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h2 id="구현결과">구현결과</h2>
 <p><a href="https://github.com/doongchoong/fzc">fzc</a> 라는 툴을 만들었다.
 파일을 퍼지검색으로 찾아내는 유틸이다.
 C언어로 작성하였다. unix , linux 등에서 사용할 수 있다.

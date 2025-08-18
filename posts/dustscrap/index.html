@@ -136,10 +136,10 @@
        
       pre {
         background-color: #f5f5f5;
-        padding: 16px;
+        padding: 4px;
         border-radius: 4px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 0px 0;
       }
       
       code {
@@ -270,12 +270,12 @@
  
 .chatlog pre {
   background-color: #f5f5f7;
-  padding: 1rem;
+  padding: 4px;
   overflow-x: auto;
   border-radius: 6px;
   font-size: 0.92rem;
   line-height: 1.6;
-  margin: 1.5rem 0;
+  margin: 4px;
 }
 
 .chatlog code {
@@ -311,6 +311,37 @@
 
 .gpt-line {
   margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
 }
     </style>
   </head>
@@ -447,11 +478,15 @@
 <p>어스널스쿨은 굉장히 URL 설계가 잘 되어 있다.
 과거 특정 시점의 상황을 보고싶을때
 열어보면 URL이 다음과 같이 보인다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>site: https://earth.nullschool.net/
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>site: https://earth.nullschool.net/
 </span></span><span style="display:flex;"><span>time: #2023/02/11/0800Z/
 </span></span><span style="display:flex;"><span>mode: particulates/surface/level/anim=off/overlay=pm2.5/
-</span></span><span style="display:flex;"><span>view: orthographic=-229.43,42.28,546
-</span></span></code></pre></div><p>시간은 1시간 단위이며 모드는 미세먼지를 PM2.5나 PM10으로 바꿀때 혹은 COSC 등으로 바꿀때마다 해당 정보에 따라 변경되는 값이다. 뷰는 지도를 보는 방식인데 기본값인 Orthographic 모드가 지구본을 보는것과 같은 뷰로 보게 된다.</p>
+</span></span><span style="display:flex;"><span>view: orthographic=-229.43,42.28,546</span></span></code></pre></div>
+  </div>
+</div><p>시간은 1시간 단위이며 모드는 미세먼지를 PM2.5나 PM10으로 바꿀때 혹은 COSC 등으로 바꿀때마다 해당 정보에 따라 변경되는 값이다. 뷰는 지도를 보는 방식인데 기본값인 Orthographic 모드가 지구본을 보는것과 같은 뷰로 보게 된다.</p>
 <p>따라서 영상으로 제작하기 위해 시간을 시간단위로 계속 캡쳐를 하려면</p>
 <ol>
 <li>시간을 생성해서 URL을 생성한다.</li>
@@ -462,7 +497,10 @@
 <p>URL의 시간은 뭔가 잘 알려진 포맷은 아니므로
 부분부분 잘라내어 정식 스트링 포맷으로 변경하고 파싱한다.
 이러면 타임 객체를 얻는다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#1f2328">fromTim</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">err</span> <span style="color:#0550ae">:=</span> <span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Parse</span><span style="color:#1f2328">(</span><span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#1f2328">RFC3339</span><span style="color:#1f2328">,</span>
+<div class="code-block-wrapper">
+  <div class="code-title">GO</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#1f2328">fromTim</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">err</span> <span style="color:#0550ae">:=</span> <span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Parse</span><span style="color:#1f2328">(</span><span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#1f2328">RFC3339</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#1f2328">fmt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Sprintf</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;%s-%s-%sT%s:00:00+00:00&#34;</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">From_url</span><span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">:</span><span style="color:#0550ae">5</span><span style="color:#1f2328">],</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">From_url</span><span style="color:#1f2328">[</span><span style="color:#0550ae">6</span><span style="color:#1f2328">:</span><span style="color:#0550ae">8</span><span style="color:#1f2328">],</span>
@@ -476,10 +514,14 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">To_url</span><span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">:</span><span style="color:#0550ae">5</span><span style="color:#1f2328">],</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">To_url</span><span style="color:#1f2328">[</span><span style="color:#0550ae">6</span><span style="color:#1f2328">:</span><span style="color:#0550ae">8</span><span style="color:#1f2328">],</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">To_url</span><span style="color:#1f2328">[</span><span style="color:#0550ae">9</span><span style="color:#1f2328">:</span><span style="color:#0550ae">11</span><span style="color:#1f2328">],</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">To_url</span><span style="color:#1f2328">[</span><span style="color:#0550ae">12</span><span style="color:#1f2328">:</span><span style="color:#0550ae">14</span><span style="color:#1f2328">]))</span>
-</span></span></code></pre></div><p>From-To를 얻은 뒤에는 이 정보를 이용하여
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">To_url</span><span style="color:#1f2328">[</span><span style="color:#0550ae">12</span><span style="color:#1f2328">:</span><span style="color:#0550ae">14</span><span style="color:#1f2328">]))</span></span></span></code></pre></div>
+  </div>
+</div><p>From-To를 얻은 뒤에는 이 정보를 이용하여
 시간객체에 time.Hour 값을 더해 가면서 URL을 연속적으로 생성할 수 있다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#cf222e">for</span> <span style="color:#1f2328">{</span>
+<div class="code-block-wrapper">
+  <div class="code-title">GO</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#cf222e">for</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#1f2328">tt</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">tt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Add</span><span style="color:#1f2328">(</span><span style="color:#1f2328">time</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Hour</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#cf222e">if</span> <span style="color:#1f2328">tt</span><span style="color:#1f2328">.</span><span style="color:#6639ba">After</span><span style="color:#1f2328">(</span><span style="color:#1f2328">toTim</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>			<span style="color:#cf222e">break</span>
@@ -490,12 +532,16 @@
 </span></span><span style="display:flex;"><span>			<span style="color:#1f2328">conf</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Projection_url</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#1f2328">ret</span> <span style="color:#1f2328">=</span> <span style="color:#6639ba">append</span><span style="color:#1f2328">(</span><span style="color:#1f2328">ret</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">url</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h3 id="config-파일">Config 파일</h3>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="config-파일">Config 파일</h3>
 <p>위와 같이 From-To 정보나 모드와 같이 여러 설정을
 파일 형태로 저장해두고 로드하도록 하면 더 편할 것이다.
 따라서 json 포맷으로 아래와 같은 형태 사용하게 하였다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+<div class="code-block-wrapper">
+  <div class="code-title">JSON</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#0550ae">&#34;from_url&#34;</span> <span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;#2023/01/05/0100Z&#34;</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#0550ae">&#34;to_url&#34;</span> <span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;#2023/02/09/0000Z&#34;</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#0550ae">&#34;mode_url&#34;</span> <span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;particulates/surface/level/anim=off/overlay=pm2.5&#34;</span><span style="color:#1f2328">,</span>
@@ -503,8 +549,9 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#0550ae">&#34;wait_seconds&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#0550ae">&#34;frames_path&#34;</span> <span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;../frm_pm25&#34;</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#0550ae">&#34;time_stamp&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">true</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>이미지들이 저장될 폴더와 그리고 타임스탬프 찍는 기능 여부도 설정하도록 한다.</p>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p>이미지들이 저장될 폴더와 그리고 타임스탬프 찍는 기능 여부도 설정하도록 한다.</p>
 <p>wait_seconds 는 이미지를 한번 찍고 나서 대기하는 시간이다.
 이는 Scraping을 할때 점검을 해봐야 할 사항이다.
 이러한 제한을 두지 않는다면 DDos에 준하는 속도로 상대 서버에 부하를 주게 된다.
@@ -514,13 +561,17 @@
 <h2 id="scraping">Scraping</h2>
 <p>URL을 생성 했다면 이제는 생성한 URL을 방문한 뒤에 렌더링된 화면을 캡쳐하면 된다. 이를 위해 예전에는 셀레니움을 사용했었는데 요즘 잘 업데이트 안되고 있다고 하여 <a href="https://github.com/chromedp/chromedp">chromedp</a> 라는 라이브러리를 사용했다. 이 라이브러리는 셀레니움과는 다르게 별도 바이너리가 필요 없다. 직접 Chrome Devtool Protocol을 사용한다.</p>
 <h3 id="chrome-구동">Chrome 구동</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#57606a">// create context</span>
+<div class="code-block-wrapper">
+  <div class="code-title">GO</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#57606a">// create context</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#1f2328">ctx</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">cancel</span> <span style="color:#0550ae">:=</span> <span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewContext</span><span style="color:#1f2328">(</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#1f2328">context</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Background</span><span style="color:#1f2328">(),</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#57606a">// chromedp.WithDebugf(log.Printf),</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">defer</span> <span style="color:#6639ba">cancel</span><span style="color:#1f2328">()</span>
-</span></span></code></pre></div><p>새로운 컨텍스트를 만드는데 아마도 이 시점에서 크롬을 <strong>Headless</strong>로 실행하는 것 같다. 사실 보이지만 않을 뿐이지 크롬 브라우져가 구동되어 있고
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">defer</span> <span style="color:#6639ba">cancel</span><span style="color:#1f2328">()</span></span></span></code></pre></div>
+  </div>
+</div><p>새로운 컨텍스트를 만드는데 아마도 이 시점에서 크롬을 <strong>Headless</strong>로 실행하는 것 같다. 사실 보이지만 않을 뿐이지 크롬 브라우져가 구동되어 있고
 이 숨겨진 브라우져와 통신한다.</p>
 <h3 id="navigate-and-waiting">Navigate and Waiting</h3>
 <p>chromedp의 예제를 보면 Run 함수에 여러 Task들을 나열하여
@@ -532,7 +583,10 @@
 별도의 Waiting 작업을 추가한다.</p>
 <p>Chromedp의 내장된 Wait* 함수로는 이런류의 작업이 없기 때문에
 이런식으로 장황하게 구현하였다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#57606a">// URL 순회</span>
+<div class="code-block-wrapper">
+  <div class="code-title">GO</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#57606a">// URL 순회</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#cf222e">for</span> <span style="color:#1f2328">_</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">url</span> <span style="color:#0550ae">:=</span> <span style="color:#cf222e">range</span> <span style="color:#1f2328">urls</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>		<span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Print</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Try capture :&#34;</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">url</span><span style="color:#1f2328">)</span>
@@ -563,12 +617,16 @@
 </span></span><span style="display:flex;"><span>		<span style="color:#1f2328">err</span> <span style="color:#0550ae">:=</span> <span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Run</span><span style="color:#1f2328">(</span><span style="color:#1f2328">ctx</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">chromedp</span><span style="color:#1f2328">.</span><span style="color:#6639ba">FullScreenshot</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span><span style="color:#1f2328">buf</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">100</span><span style="color:#1f2328">))</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#cf222e">if</span> <span style="color:#1f2328">err</span> <span style="color:#0550ae">!=</span> <span style="color:#cf222e">nil</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>			<span style="color:#1f2328">log</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Fatal</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>		<span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h3 id="timestamp">Timestamp</h3>
+</span></span><span style="display:flex;"><span>		<span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="timestamp">Timestamp</h3>
 <p>원하는 것은 본래 이미지에  스트링을 위에다가 그리는 것이다.
 간단하게 처리하려고 해도 찾기가 좀 어려웠다.
 그냥 구글링 끝에 스택오버플로우 있는 내용으로 구현했다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#57606a">// input byt: png bytes =&gt;  output byt: png bytes</span>
+<div class="code-block-wrapper">
+  <div class="code-title">GO</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#57606a">// input byt: png bytes =&gt;  output byt: png bytes</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">func</span> <span style="color:#6639ba">AddTimeStamp</span><span style="color:#1f2328">(</span><span style="color:#1f2328">byt</span> <span style="color:#1f2328">[]</span><span style="color:#cf222e">byte</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">x</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">y</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">size</span> <span style="color:#cf222e">int</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">color</span> <span style="color:#1f2328">color</span><span style="color:#1f2328">.</span><span style="color:#1f2328">Color</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">label</span> <span style="color:#cf222e">string</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">([]</span><span style="color:#cf222e">byte</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">error</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#1f2328">img</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">err</span> <span style="color:#0550ae">:=</span> <span style="color:#1f2328">png</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Decode</span><span style="color:#1f2328">(</span><span style="color:#1f2328">bytes</span><span style="color:#1f2328">.</span><span style="color:#6639ba">NewReader</span><span style="color:#1f2328">(</span><span style="color:#1f2328">byt</span><span style="color:#1f2328">))</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#cf222e">if</span> <span style="color:#1f2328">err</span> <span style="color:#0550ae">!=</span> <span style="color:#cf222e">nil</span> <span style="color:#1f2328">{</span>
@@ -600,17 +658,25 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#1f2328">err</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">png</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Encode</span><span style="color:#1f2328">(</span><span style="color:#1f2328">buf</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">img</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#cf222e">return</span> <span style="color:#1f2328">buf</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Bytes</span><span style="color:#1f2328">(),</span> <span style="color:#cf222e">nil</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h2 id="이미지들로-영상-만들기">이미지들로 영상 만들기</h2>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h2 id="이미지들로-영상-만들기">이미지들로 영상 만들기</h2>
 <p>이미지들을 사용하여 영상을 만들어 내기 위해 <a href="https://ffmpeg.org/">FFmpeg</a> 사용하여 영상을 만든다.
 이때 Window 버젼에선 심각한 문제가 있는데 파일 Glob 패턴을 사용할 수 없다는 점이다.
 그래서 아래와 같은 명령으로 사용해야 한다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ffmpeg -f image2 -r <span style="color:#0550ae">24</span> -i <span style="color:#0a3069">&#34;../frm_pm25/img%04d.png&#34;</span> -q:v <span style="color:#0550ae">1</span> output.avi
-</span></span></code></pre></div><p>즉 %04d 같은 일련번호 패턴만 먹힌다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">SH</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ffmpeg -f image2 -r <span style="color:#0550ae">24</span> -i <span style="color:#0a3069">&#34;../frm_pm25/img%04d.png&#34;</span> -q:v <span style="color:#0550ae">1</span> output.avi</span></span></code></pre></div>
+  </div>
+</div><p>즉 %04d 같은 일련번호 패턴만 먹힌다.</p>
 <p>하지만 이미지는 일자+시간 형태로 저장되어 있으므로
 프로그램을 작성해서 이미지 파일명을 임시로 변경했다가 다시 돌려놓는
 작업을 하도록 만들었다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">err</span> <span style="color:#cf222e">error</span>
+<div class="code-block-wrapper">
+  <div class="code-title">GO</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#cf222e">var</span> <span style="color:#1f2328">err</span> <span style="color:#cf222e">error</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#1f2328">err</span> <span style="color:#1f2328">=</span> <span style="color:#6639ba">RollbackImageSequence</span><span style="color:#1f2328">(</span><span style="color:#0550ae">*</span><span style="color:#1f2328">imgpath</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#cf222e">if</span> <span style="color:#1f2328">err</span> <span style="color:#0550ae">!=</span> <span style="color:#cf222e">nil</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#6639ba">panic</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span>
@@ -626,9 +692,13 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#1f2328">err</span> <span style="color:#1f2328">=</span> <span style="color:#6639ba">RollbackImageSequence</span><span style="color:#1f2328">(</span><span style="color:#0550ae">*</span><span style="color:#1f2328">imgpath</span><span style="color:#1f2328">)</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#cf222e">if</span> <span style="color:#1f2328">err</span> <span style="color:#0550ae">!=</span> <span style="color:#cf222e">nil</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>		<span style="color:#6639ba">panic</span><span style="color:#1f2328">(</span><span style="color:#1f2328">err</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h3 id="ffmpeg-명령-실행하기">FFmpeg 명령 실행하기</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#1f2328">cmd</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">exec</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Command</span><span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="ffmpeg-명령-실행하기">FFmpeg 명령 실행하기</h3>
+<div class="code-block-wrapper">
+  <div class="code-title">GO</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#1f2328">cmd</span> <span style="color:#1f2328">=</span> <span style="color:#1f2328">exec</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Command</span><span style="color:#1f2328">(</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#1f2328">binpath</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#0a3069">&#34;-f&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;image2&#34;</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#0a3069">&#34;-r&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;24&#34;</span><span style="color:#1f2328">,</span>
@@ -645,8 +715,9 @@
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">err</span> <span style="color:#0550ae">:=</span> <span style="color:#1f2328">cmd</span><span style="color:#1f2328">.</span><span style="color:#6639ba">Run</span><span style="color:#1f2328">()</span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">err</span> <span style="color:#0550ae">!=</span> <span style="color:#cf222e">nil</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#1f2328">err</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>위 와 같이 GO언어에서 명령을 그대로 실행할 수 있는데 여기에 표준입/출력/에러 까지 설정하게 되면 완벽히 대신 실행하게 되는 상황이다.</p>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p>위 와 같이 GO언어에서 명령을 그대로 실행할 수 있는데 여기에 표준입/출력/에러 까지 설정하게 되면 완벽히 대신 실행하게 되는 상황이다.</p>
 <h2 id="영상후기">영상후기</h2>
 <p>1시간 단위로 캡쳐를 한뒤 1초에 24프레임으로 영상을 만들었으니
 1초에 하루가 지나간다.

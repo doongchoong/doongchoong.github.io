@@ -136,10 +136,10 @@
        
       pre {
         background-color: #f5f5f5;
-        padding: 16px;
+        padding: 4px;
         border-radius: 4px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 0px 0;
       }
       
       code {
@@ -270,12 +270,12 @@
  
 .chatlog pre {
   background-color: #f5f5f7;
-  padding: 1rem;
+  padding: 4px;
   overflow-x: auto;
   border-radius: 6px;
   font-size: 0.92rem;
   line-height: 1.6;
-  margin: 1.5rem 0;
+  margin: 4px;
 }
 
 .chatlog code {
@@ -311,6 +311,37 @@
 
 .gpt-line {
   margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
 }
     </style>
   </head>
@@ -451,7 +482,10 @@ Yn+1 = 2 * Xn * Yn + b
 처음으로 벗어나는 순간 카운트를 세고
 해당 카운트를 기반으로 색상을 칠한다.</p>
 <h3 id="의사코드">의사코드</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>x <span style="color:#0550ae">=</span> cx<span style="color:#1f2328">;</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>x <span style="color:#0550ae">=</span> cx<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>y <span style="color:#0550ae">=</span> cy<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#cf222e">int</span> cnt <span style="color:#0550ae">=</span> <span style="color:#0550ae">1024</span><span style="color:#1f2328">;</span>
@@ -465,8 +499,9 @@ Yn+1 = 2 * Xn * Yn + b
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	x <span style="color:#0550ae">=</span> nx<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>	y <span style="color:#0550ae">=</span> ny<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><p>1024번으로 구간을 정했으므로
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p>1024번으로 구간을 정했으므로
 1024단계의 색상을 입혀서 칠하면 된다.</p>
 <h3 id="opengl로-구현하기">OPENGL로 구현하기</h3>
 <p>OPENGL 등을 통해 그리면 쉽게 구현할 수 있다.
@@ -485,7 +520,10 @@ Fragment Shader를 통해 픽셀마다 반복계산을
 자동으로 해준다.</p>
 <p>그래도 각 픽셀은 다른 픽셀에 영향을 주지 않고
 자신만 계산하면 되므로 병렬계산을 쉽게 활용할 수 있는 주제이다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>+--------------------------------+
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>+--------------------------------+
 </span></span><span style="display:flex;"><span>|(0,0)                           |
 </span></span><span style="display:flex;"><span>|                                |
 </span></span><span style="display:flex;"><span>|                                |
@@ -501,10 +539,14 @@ Fragment Shader를 통해 픽셀마다 반복계산을
 </span></span><span style="display:flex;"><span>|                          (1,-1)|
 </span></span><span style="display:flex;"><span>+--------------------------------+
 </span></span><span style="display:flex;"><span>한 픽셀씩 진행하면서 만델브로 발산 경계값을 구하고
-</span></span><span style="display:flex;"><span>해당 경계값을 가지고 색상을 정함
-</span></span></code></pre></div><p>이를 <a href="https://doongchoong.github.io/toys/mandel.html">WEBGL로 구현</a>
+</span></span><span style="display:flex;"><span>해당 경계값을 가지고 색상을 정함</span></span></code></pre></div>
+  </div>
+</div><p>이를 <a href="https://doongchoong.github.io/toys/mandel.html">WEBGL로 구현</a>
 하여 토이프로젝트로 올렸다.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#57606a">// {x:-2.0, y:-1.0, w:3.0, h:2.0}
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#57606a">// {x:-2.0, y:-1.0, w:3.0, h:2.0}
 </span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">var</span> <span style="color:#1f2328">plot_vertices</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#0550ae">-</span><span style="color:#0550ae">2.0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">-</span><span style="color:#0550ae">1.0</span><span style="color:#1f2328">,</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#0550ae">-</span><span style="color:#0550ae">2.0</span><span style="color:#1f2328">,</span>  <span style="color:#0550ae">1.0</span><span style="color:#1f2328">,</span>
@@ -519,8 +561,9 @@ Fragment Shader를 통해 픽셀마다 반복계산을
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">bufferData</span><span style="color:#1f2328">(</span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">ARRAY_BUFFER</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">new</span> <span style="color:#1f2328">Float32Array</span><span style="color:#1f2328">(</span><span style="color:#1f2328">plot_vertices</span><span style="color:#1f2328">),</span> <span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">STATIC_DRAW</span><span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">vertexAttribPointer</span><span style="color:#1f2328">(</span><span style="color:#1f2328">plotPos</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">FLOAT</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">drawArrays</span><span style="color:#1f2328">(</span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">TRIANGLE_STRIP</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">);</span>
-</span></span></code></pre></div><p>위 Javascript 소스는 만델브로토 집합 좌표계의 버텍스들을 넘겨주어
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">drawArrays</span><span style="color:#1f2328">(</span><span style="color:#1f2328">gl</span><span style="color:#1f2328">.</span><span style="color:#1f2328">TRIANGLE_STRIP</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">);</span></span></span></code></pre></div>
+  </div>
+</div><p>위 Javascript 소스는 만델브로토 집합 좌표계의 버텍스들을 넘겨주어
 그리라고 지시한 것이다.
 canvas의 좌표계를 신경쓸 필요가 없다. GL이 알아서 해준다.
 하지만 GL을 사용하지 않는다면 canvas 좌표를 변환하는
@@ -530,7 +573,10 @@ canvas의 좌표계를 신경쓸 필요가 없다. GL이 알아서 해준다.
 <p>프랙탈의 색상을 부드럽게 만드는 방법이다.
 <a href="https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set">Continuous Smooth Coloring</a>
 부분을 참조</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">void</span> <span style="color:#6639ba">main</span><span style="color:#1f2328">(</span><span style="color:#cf222e">void</span><span style="color:#1f2328">){</span>
+<div class="code-block-wrapper">
+  <div class="code-title">C</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">void</span> <span style="color:#6639ba">main</span><span style="color:#1f2328">(</span><span style="color:#cf222e">void</span><span style="color:#1f2328">){</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> x <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> y <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#cf222e">float</span> nx <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">;</span>
@@ -576,7 +622,9 @@ canvas의 좌표계를 신경쓸 필요가 없다. GL이 알아서 해준다.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	gl_FragColor <span style="color:#0550ae">=</span> <span style="color:#6639ba">vec4</span><span style="color:#1f2328">(</span>color1<span style="color:#1f2328">,</span> <span style="color:#0550ae">1.0</span><span style="color:#1f2328">);</span>      
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>	
-</span></span></code></pre></div><h2 id="생각해볼만한-주제">생각해볼만한 주제</h2>
+</span></span></code></pre></div>
+  </div>
+</div><h2 id="생각해볼만한-주제">생각해볼만한 주제</h2>
 <p>WEBGL의 한계로 인해 float 은 32비트 부동소수점 숫자로
 계산된다.
 하지만 이는 Zoom을 몇번만 해도 금방 정밀도가 소진되어

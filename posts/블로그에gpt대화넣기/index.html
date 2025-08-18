@@ -136,10 +136,10 @@
        
       pre {
         background-color: #f5f5f5;
-        padding: 16px;
+        padding: 4px;
         border-radius: 4px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 0px 0;
       }
       
       code {
@@ -270,12 +270,12 @@
  
 .chatlog pre {
   background-color: #f5f5f7;
-  padding: 1rem;
+  padding: 4px;
   overflow-x: auto;
   border-radius: 6px;
   font-size: 0.92rem;
   line-height: 1.6;
-  margin: 1.5rem 0;
+  margin: 4px;
 }
 
 .chatlog code {
@@ -311,6 +311,37 @@
 
 .gpt-line {
   margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
 }
     </style>
   </head>
@@ -445,13 +476,20 @@
 좋아, Hugo 블로그에 너와 나의 대화를 남기려면 몇 가지 방식이 있어. 예쁘게 포맷팅된 대화 형태로 남기고 싶다면 <strong>마크다운(Markdown)</strong> 과 함께 <strong>CSS</strong> 또는 <strong>Hugo의 shortcode</strong>를 활용하는 게 좋아.</p>
 <hr>
 <h3 id="-1-대화-내용-마크다운-예시">✅ 1. 대화 내용 마크다운 예시</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>## 🤖 ChatGPT와의 대화 기록
+<div class="code-block-wrapper">
+  <div class="code-title">MARKDOWN</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>## 🤖 ChatGPT와의 대화 기록
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">**</span>🙋 사용자:** Hugo 블로그를 쓰고 있는데 너와의 대화를 블로그에 남기고 싶어  
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">**</span>🤖 ChatGPT:** 좋아, Hugo 블로그에 너와 나의 대화를 남기려면 몇 가지 방식이 있어. 예쁘게 포맷팅된 대화 형태로 남기고 싶다면 **마크다운(Markdown)** 과 함께 **CSS** 또는 **Hugo의 shortcode**를 활용하는 게 좋아.
-</span></span></code></pre></div><hr>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">**</span>🤖 ChatGPT:** 좋아, Hugo 블로그에 너와 나의 대화를 남기려면 몇 가지 방식이 있어. 예쁘게 포맷팅된 대화 형태로 남기고 싶다면 **마크다운(Markdown)** 과 함께 **CSS** 또는 **Hugo의 shortcode**를 활용하는 게 좋아.</span></span></code></pre></div>
+  </div>
+</div><hr>
 <h3 id="-2-말풍선-형태로-꾸미기">✅ 2. 말풍선 형태로 꾸미기</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">style</span><span style="color:#1f2328">&gt;</span>
+<div class="code-block-wrapper">
+  <div class="code-title">HTML</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">style</span><span style="color:#1f2328">&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span><span style="color:#1f2328">chat</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#cf222e">display</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">flex</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#cf222e">flex-direction</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">column</span><span style="color:#1f2328">;</span>
@@ -475,14 +513,19 @@
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;chat&#34;</span><span style="color:#1f2328">&gt;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;user-msg&#34;</span><span style="color:#1f2328">&gt;</span>Hugo 블로그를 쓰고 있는데 너와의 대화를 블로그에 남기고 싶어<span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;bot-msg&#34;</span><span style="color:#1f2328">&gt;</span>좋아, Hugo 블로그에 너와 나의 대화를 남기려면...<span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span>
-</span></span></code></pre></div><blockquote>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span></span></span></code></pre></div>
+  </div>
+</div><blockquote>
 <p>💡 Goldmark에서 HTML을 허용하려면 <code>config.toml</code>에 다음을 추가해야 해:</p></blockquote>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">markup</span><span style="color:#1f2328">]</span>
+<div class="code-block-wrapper">
+  <div class="code-title">TOML</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#1f2328">[</span><span style="color:#1f2328">markup</span><span style="color:#1f2328">]</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">[</span><span style="color:#1f2328">markup</span><span style="color:#1f2328">.</span><span style="color:#1f2328">goldmark</span><span style="color:#1f2328">]</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#1f2328">markup</span><span style="color:#1f2328">.</span><span style="color:#1f2328">goldmark</span><span style="color:#1f2328">.</span><span style="color:#1f2328">renderer</span><span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">unsafe</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span>
-</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">unsafe</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span></span></span></code></pre></div>
+  </div>
+</div>
 </div>
 <p>대략 보기좋게 잘 꾸미고자 한다면 마크다운 형태로 저장하고
 이를 css를 통해 꾸미는데 이를 hugo의 숏코드를 사용하자는 얘기인 듯 하다.</p>
@@ -502,30 +545,46 @@
 <hr>
 <h2 id="-1-shortcode-파일-만들기">✅ 1. Shortcode 파일 만들기</h2>
 <p>Hugo 프로젝트에서 다음 위치에 파일을 만들어:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>layouts/shortcodes/user.html
-</span></span><span style="display:flex;"><span>layouts/shortcodes/gpt.html
-</span></span></code></pre></div><h3 id="userhtml"><code>user.html</code></h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;chat user&#34;</span><span style="color:#1f2328">&gt;</span>
+<div class="code-block-wrapper">
+  <div class="code-title"></div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>layouts/shortcodes/user.html
+</span></span><span style="display:flex;"><span>layouts/shortcodes/gpt.html</span></span></code></pre></div>
+  </div>
+</div><h3 id="userhtml"><code>user.html</code></h3>
+<div class="code-block-wrapper">
+  <div class="code-title">HTML</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;chat user&#34;</span><span style="color:#1f2328">&gt;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">strong</span><span style="color:#1f2328">&gt;</span>🙋 사용자:<span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">strong</span><span style="color:#1f2328">&gt;</span> {{ .Inner | markdownify }}
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span>
-</span></span></code></pre></div><h3 id="gpthtml"><code>gpt.html</code></h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;chat gpt&#34;</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="gpthtml"><code>gpt.html</code></h3>
+<div class="code-block-wrapper">
+  <div class="code-title">HTML</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;chat gpt&#34;</span><span style="color:#1f2328">&gt;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">strong</span><span style="color:#1f2328">&gt;</span>🤖 ChatGPT:<span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">strong</span><span style="color:#1f2328">&gt;</span> {{ .Inner | markdownify }}
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span>
-</span></span></code></pre></div><hr>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span></span></span></code></pre></div>
+  </div>
+</div><hr>
 <h2 id="-2-css-스타일-추가-말풍선-스타일">✅ 2. CSS 스타일 추가 (말풍선 스타일)</h2>
 <p>(생략)</p>
 <hr>
 <h2 id="-3-포스트에서-사용하기">✅ 3. 포스트에서 사용하기</h2>
 <p>이제 블로그 마크다운에서 대화를 이렇게 입력하면 돼:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>{ {<span style="color:#1f2328">&lt;</span> <span style="color:#0550ae">user</span> <span style="color:#1f2328">&gt;</span>} }
+<div class="code-block-wrapper">
+  <div class="code-title">MARKDOWN</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>{ {<span style="color:#1f2328">&lt;</span> <span style="color:#0550ae">user</span> <span style="color:#1f2328">&gt;</span>} }
 </span></span><span style="display:flex;"><span>내가 hugo 블로그를 쓰고 있는데 너와의 대화를 블로그에 남기고 싶어
 </span></span><span style="display:flex;"><span>{ {<span style="color:#1f2328">&lt;</span> <span style="color:#1f2328">/</span><span style="color:#0550ae">user</span> <span style="color:#1f2328">&gt;</span>} }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>{ {<span style="color:#1f2328">&lt;</span> <span style="color:#0550ae">gpt</span> <span style="color:#1f2328">&gt;</span>} }
 </span></span><span style="display:flex;"><span>좋아, Hugo 블로그에 너와 나의 대화를 남기려면 몇 가지 방식이 있어...
-</span></span><span style="display:flex;"><span>{ {<span style="color:#1f2328">&lt;</span> <span style="color:#1f2328">/</span><span style="color:#0550ae">gpt</span> <span style="color:#1f2328">&gt;</span>} }
-</span></span></code></pre></div><hr>
+</span></span><span style="display:flex;"><span>{ {<span style="color:#1f2328">&lt;</span> <span style="color:#1f2328">/</span><span style="color:#0550ae">gpt</span> <span style="color:#1f2328">&gt;</span>} }</span></span></code></pre></div>
+  </div>
+</div><hr>
 <h2 id="-보너스-blockquote처럼-보이게-하고-싶다면">💡 보너스: blockquote처럼 보이게 하고 싶다면?</h2>
 <p>Shortcode 내부를 <code>&lt;blockquote&gt;</code>로 감싸거나, tailwind 등을 활용한 디자인도 가능해.</p>
 <hr>
@@ -588,7 +647,10 @@ GPT 선생은 맘에 들지 않는 눈치</p>
 <h2 id="2-적용">2. 적용</h2>
 <p>이 부분은 내가 작성한게 아니고 100% GPT가 만든것이다.</p>
 <h3 id="21-숏코드">2.1. 숏코드</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{ $content := .Inner | markdownify }}
+<div class="code-block-wrapper">
+  <div class="code-title">HTML</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{ $content := .Inner | markdownify }}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>{{/* 이제 HTML 안에서 <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">strong</span><span style="color:#1f2328">&gt;</span>User<span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">strong</span><span style="color:#1f2328">&gt;</span> 찾기 */}}
 </span></span><span style="display:flex;"><span>{{ $pattern := `<span style="color:#1f2328">&lt;</span><span style="color:#0550ae">strong</span><span style="color:#1f2328">&gt;</span>User<span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">strong</span><span style="color:#1f2328">&gt;</span>\.?\s*([^<span style="color:#f6f8fa;background-color:#82071e">&lt;</span>]*)` }}
@@ -598,9 +660,13 @@ GPT 선생은 맘에 들지 않는 눈치</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;chatlog&#34;</span><span style="color:#1f2328">&gt;</span>
 </span></span><span style="display:flex;"><span>  {{ $final | safeHTML }}
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span>
-</span></span></code></pre></div><h3 id="22-css">2.2. CSS</h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#57606a">/* 1. 글꼴 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="22-css">2.2. CSS</h3>
+<div class="code-block-wrapper">
+  <div class="code-title">CSS</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#57606a">/* 1. 글꼴 */</span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span><span style="color:#1f2328">chatlog</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#cf222e">font-family</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#39;Inter&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;Roboto&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;Noto Sans KR&#39;</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">sans-serif</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#cf222e">font-size</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.98</span><span style="color:#cf222e">rem</span><span style="color:#1f2328">;</span>
@@ -681,8 +747,9 @@ GPT 선생은 맘에 들지 않는 눈치</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span><span style="color:#1f2328">gpt-line</span> <span style="color:#1f2328">{</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#cf222e">margin</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.5</span><span style="color:#cf222e">em</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span></code></pre></div><h2 id="3-후기">3. 후기</h2>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h2 id="3-후기">3. 후기</h2>
 <p>GPT는 내가 필요한 간단한 수준의 css는 뚝딱 만들어준다.
 대략적으로만 알고 있었는데 이젠 나한테 굳이 필요없으면
 아예 연구할 생각없이 이용만 해도 될것 같다.

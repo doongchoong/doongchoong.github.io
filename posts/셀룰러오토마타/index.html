@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>셀룰러오토마타 | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+  }
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+  background-color: #cdcdcd;
+  border-radius: 16px 16px 0 16px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #cdcdcd;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <h1 class="post-title">셀룰러오토마타</h1>
+    <div class="post-date">August 16, 2025</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-1차원">1. 1차원</a>
+      <ul>
+        <li><a href="#11--rule">1.1.  Rule</a></li>
+        <li><a href="#12-gpt에게-물어보기">1.2. GPT에게 물어보기</a></li>
+        <li><a href="#13-분석">1.3. 분석</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-2차원">2. 2차원</a>
+      <ul>
+        <li><a href="#21-rule">2.1. Rule</a></li>
+        <li><a href="#22-animation">2.2. Animation</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-hexagonal">3. Hexagonal</a>
+      <ul>
+        <li><a href="#31-animation">3.1. Animation</a></li>
+        <li><a href="#32-rule">3.2. Rule</a></li>
+        <li><a href="#33-좌표계">3.3. 좌표계</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-후기">4. 후기</a></li>
+    <li><a href="#5-생각-해볼만한-것">5. 생각 해볼만한 것</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>셀룰러 오토마타는 세포를 기반으로 구성되는 체계를 말한다.
+세포는 그리드(grid) 안의 하나의 셀을 말하고
+세포는 각각  &lsquo;살음&rsquo;, &lsquo;죽음&rsquo; 과 같은 상태를 지닌다.
+세포는 이웃을 가지고 이웃의 상태에 따라 자신의 상태가 결정하는 식으로 동작하는 체계.
+셀룰러 오토마타라고 하고 줄여서 CA라고 한다.</p>
+<h2 id="1-1차원">1. 1차원</h2>
+<p>1차원 가장 기본적인 오토마타는 이 체계가 어떤것인지 이해하기 위한 가장 간단한 형태이다.</p>
+<h3 id="11--rule">1.1.  Rule</h3>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>000 =&gt; 0
+</span></span><span style="display:flex;"><span>001 =&gt; 1
+</span></span><span style="display:flex;"><span>010 =&gt; 0
+</span></span><span style="display:flex;"><span>011 =&gt; 1
+</span></span><span style="display:flex;"><span>100 =&gt; 1
+</span></span><span style="display:flex;"><span>101 =&gt; 0
+</span></span><span style="display:flex;"><span>110 =&gt; 1
+</span></span><span style="display:flex;"><span>111 =&gt; 0</span></span></code></pre></div>
+  </div>
+</div><p>마치 이진수처럼 양 옆을 이웃 가운데를 본인 셀이라고 하면 위 8가지 패턴이 나오게 되는데
+각 패턴별로 본인이 취해야할 다음 상태를 나타내는 것이다. 위 01011010을 다시 이진수로 인식하면 십진수로 90이 되며
+이를 &lsquo;Rule90&rsquo;이라고 한다.</p>
+<h3 id="12-gpt에게-물어보기">1.2. GPT에게 물어보기</h3>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. 셀룰러 오토마타를 canvas에 그리고 싶은데</div></p>
+<p><strong>🤖 ChatGPT</strong>
+좋아요! 😄
+셀룰러 오토마타를 HTML <!-- raw HTML omitted -->에 그리는 방법을 단계별로 설명해 드릴게요.</p>
+<hr>
+<h3 id="1-기본-구조">1️⃣ 기본 구조</h3>
+<ul>
+<li>2D 배열을 만들어 각 셀의 상태(예: 0=죽음, 1=살음)를 저장</li>
+<li>**룰(rule)**을 적용해서 다음 세대를 계산</li>
+<li>캔버스에 셀을 칠하기</li>
+</ul>
+<hr>
+<h3 id="2-예시-코드-간단한-2d-conways-game-of-life">2️⃣ 예시 코드 (간단한 2D Conway’s Game of Life)</h3>
+<div class="code-block-wrapper">
+  <div class="code-title">HTML</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">canvas</span> <span style="color:#1f2328">id</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;ca&#34;</span> <span style="color:#1f2328">width</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;400&#34;</span> <span style="color:#1f2328">height</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;400&#34;</span><span style="color:#1f2328">&gt;&lt;/</span><span style="color:#0550ae">canvas</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">script</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">canvas</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">document</span><span style="color:#1f2328">.</span><span style="color:#1f2328">getElementById</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;ca&#34;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">ctx</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">canvas</span><span style="color:#1f2328">.</span><span style="color:#1f2328">getContext</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;2d&#34;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">cols</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">101</span><span style="color:#1f2328">;</span>        <span style="color:#57606a">// 셀 개수
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">const</span> <span style="color:#1f2328">cellSize</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">;</span>      <span style="color:#57606a">// 셀 크기
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">const</span> <span style="color:#1f2328">rows</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">floor</span><span style="color:#1f2328">(</span><span style="color:#1f2328">canvas</span><span style="color:#1f2328">.</span><span style="color:#1f2328">height</span> <span style="color:#0550ae">/</span> <span style="color:#1f2328">cellSize</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">let</span> <span style="color:#1f2328">current</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Array</span><span style="color:#1f2328">(</span><span style="color:#1f2328">cols</span><span style="color:#1f2328">).</span><span style="color:#1f2328">fill</span><span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">current</span><span style="color:#1f2328">[</span><span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">floor</span><span style="color:#1f2328">(</span><span style="color:#1f2328">cols</span> <span style="color:#0550ae">/</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span> <span style="color:#57606a">// 중앙에서 시작
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// Rule 30: 111, 110, 101, 100, 011, 010, 001, 000 → 결과
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">const</span> <span style="color:#1f2328">rule30</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">function</span> <span style="color:#1f2328">draw</span><span style="color:#1f2328">()</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">let</span> <span style="color:#1f2328">y</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">y</span> <span style="color:#0550ae">&lt;</span> <span style="color:#1f2328">rows</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">y</span><span style="color:#0550ae">++</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#57606a">// 현재 세대 그리기
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>        <span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">let</span> <span style="color:#1f2328">x</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">x</span> <span style="color:#0550ae">&lt;</span> <span style="color:#1f2328">cols</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">x</span><span style="color:#0550ae">++</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">current</span><span style="color:#1f2328">[</span><span style="color:#1f2328">x</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">===</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">ctx</span><span style="color:#1f2328">.</span><span style="color:#1f2328">fillStyle</span> <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#34;black&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">ctx</span><span style="color:#1f2328">.</span><span style="color:#1f2328">fillRect</span><span style="color:#1f2328">(</span><span style="color:#1f2328">x</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">cellSize</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">y</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">cellSize</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">cellSize</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">cellSize</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#57606a">// 다음 세대 만들기
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>        <span style="color:#cf222e">let</span> <span style="color:#1f2328">next</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Array</span><span style="color:#1f2328">(</span><span style="color:#1f2328">cols</span><span style="color:#1f2328">).</span><span style="color:#1f2328">fill</span><span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">let</span> <span style="color:#1f2328">x</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">x</span> <span style="color:#0550ae">&lt;</span> <span style="color:#1f2328">cols</span> <span style="color:#0550ae">-</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">x</span><span style="color:#0550ae">++</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">let</span> <span style="color:#1f2328">left</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">current</span><span style="color:#1f2328">[</span><span style="color:#1f2328">x</span> <span style="color:#0550ae">-</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">let</span> <span style="color:#1f2328">mid</span>  <span style="color:#0550ae">=</span> <span style="color:#1f2328">current</span><span style="color:#1f2328">[</span><span style="color:#1f2328">x</span><span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">let</span> <span style="color:#1f2328">right</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">current</span><span style="color:#1f2328">[</span><span style="color:#1f2328">x</span> <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">let</span> <span style="color:#1f2328">idx</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">left</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">|</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">mid</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">|</span> <span style="color:#1f2328">right</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">next</span><span style="color:#1f2328">[</span><span style="color:#1f2328">x</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">rule30</span><span style="color:#1f2328">[</span><span style="color:#0550ae">7</span> <span style="color:#0550ae">-</span> <span style="color:#1f2328">idx</span><span style="color:#1f2328">];</span> <span style="color:#57606a">// 7-idx는 비트 패턴 순서 맞추기
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>        <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">current</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">next</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">draw</span><span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">script</span><span style="color:#1f2328">&gt;</span></span></span></code></pre></div>
+  </div>
+</div>
+</div>
+<p>이쪽 셀룰러 오토마타 CA쪽은 엄청나게 연구가 되어있고 소스도 많아서
+학습량이 많았는지 그냥 통짜로 코드를 던져준다~ 👍</p>
+<p>GPT의 코드를 좀 수정해서 여러개의 Rule을 적용하도록 수정한다.</p>
+<h3 id="13-분석">1.3. 분석</h3>
+<p>아래 이미지들은 사진파일이 아니라 자바스크립트로 canvas에 그려진 이미지이다.</p>
+
+<canvas id="ca" width="400" height="200"></canvas>
+<script>
+const canvas0 = document.getElementById("ca");
+const ctx = canvas0.getContext("2d");
+
+// Rule 30
+const rule30 = [0, 0, 0, 1, 1, 1, 1, 0];
+const rule90 = [0,1,0,1,1,0,1,0];
+const rule110 = [0,1,1,0,1,1,1,0];
+
+function draw(canvas, ctx, iscenter, drawRule, drawStartRow) {
+    const cellSize = 4;
+    let rows = Math.floor(canvas.height / cellSize);
+
+    // 셀 개수를 rows보다 훨씬 크게
+    const cols = rows * 4; // 충분히 여유
+
+    rows *= 4;
+
+    let current = Array(cols).fill(0);
+    current[Math.floor(cols / 2)] = 1; // 정확히 중앙에서 시작
+
+    // 중앙에서 보여줄 범위
+    let centernum = 2;
+    if(iscenter){
+
+    }else{
+        centernum = 1;
+    }
+    const viewStart = Math.floor(cols / 2) - Math.floor((canvas.width / cellSize) ) / centernum;
+    const viewEnd = viewStart + Math.floor(canvas.width / cellSize);
+
+    for (let y = 0; y < rows; y++) {
+        // 지정된 세대 이후부터 그리기 시작
+        if ( y >= drawStartRow){
+            for (let x = viewStart; x < viewEnd; x++) {
+                if (current[x] === 1) {
+                    ctx.fillStyle = "black";
+                    ctx.fillRect((x - viewStart) * cellSize, (y-drawStartRow) * cellSize, cellSize, cellSize);
+                }
+            }
+        }
+        // 다음 세대 계산
+        let next = Array(cols).fill(0);
+        for (let x = 1; x < cols - 1; x++) {
+            let left = current[x - 1];
+            let mid  = current[x];
+            let right = current[x + 1];
+            let idx = (left << 2) | (mid << 1) | right;
+            next[x] = drawRule[7 - idx];
+        }
+        current = next;
+    }
+}
+
+draw(canvas0, ctx, true, rule30, 0);
+</script>
+
+
+<p>Rule30을 적용하면 위와 같은 그림이 나온다.
+즉 이런식이다.</p>
+<ol>
+<li>가운데 셀 하나만 상태를 1 (살음)으로 한다. (초기)</li>
+<li>현재 1차원 그리드를 그린다.</li>
+<li>Rule을 적용하여 다음 상태들을 전부 구한다.</li>
+<li>그 다음 Row에 1차원 그리드를 그린다.</li>
+<li>계속 반복</li>
+</ol>
+<p>1차원 그리드를 2차원으로 표현하였으므로 아래로 내려갈수록 세대가 늘어나는
+진행도라고 볼수 있다.</p>
+<p><strong>중간부분</strong></p>
+<p>중간부분을 확인해보려면  일종의 &lsquo;확대&rsquo; 개념을 생각해봐야한다.
+실제로는 계산한 grid의 크기는 더 크지만 canvas는 더 좁은 범위에서 출력한다.
+그래서 세대 진행은 세대진행대로 하되 시작점만 조정하며 View의 위치를 옮긴다.</p>
+<p>canvas에는 N세대 이후 그리면 N만큼 아래로 이동한 것처럼 될 것이다.</p>
+
+<canvas id="ca1" width="400" height="400"></canvas>
+<script>
+const canvas1 = document.getElementById("ca1");
+const ctx1 = canvas1.getContext("2d");
+draw(canvas1, ctx1, false, rule30, 100);
+</script>
+
+<p>(Rule30)</p>
+
+<canvas id="ca2" width="400" height="400"></canvas>
+<script>
+const canvas2 = document.getElementById("ca2");
+const ctx2 = canvas2.getContext("2d");
+draw(canvas2, ctx2, false, rule110, 100);
+</script>
+
+<p>(Rule110)</p>
+<p>해파리 수백마리가 헤엄쳐 다니는 것 같다는 생각이 들었다.
+간단한 규칙이 전파되면서 복잡계를 만든다.</p>
+<h2 id="2-2차원">2. 2차원</h2>
+<p>2차원의 경우 Rule 정의하기가 힘들어지는데 이는 본인 포함 주변 9개 셀의 나열하는 경우의 수는
+9비트로 512가지나 되어 그걸 일일히 나열하기엔 너무 비효율적이기 때문이다.</p>
+<p>따라서 Rule은 주변 이웃의 상태의 개수를 세서 결정하게 된다.</p>
+<h3 id="21-rule">2.1. Rule</h3>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">let</span> <span style="color:#1f2328">neighbors</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">countNeighbors</span><span style="color:#1f2328">(</span><span style="color:#1f2328">grid</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">x</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">y</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">grid</span><span style="color:#1f2328">[</span><span style="color:#1f2328">y</span><span style="color:#1f2328">][</span><span style="color:#1f2328">x</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">===</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">neighbors</span> <span style="color:#0550ae">&lt;</span> <span style="color:#0550ae">2</span> <span style="color:#0550ae">||</span> <span style="color:#1f2328">neighbors</span> <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">))</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">newGrid</span><span style="color:#1f2328">[</span><span style="color:#1f2328">y</span><span style="color:#1f2328">][</span><span style="color:#1f2328">x</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span> <span style="color:#cf222e">else</span> <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">grid</span><span style="color:#1f2328">[</span><span style="color:#1f2328">y</span><span style="color:#1f2328">][</span><span style="color:#1f2328">x</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">===</span> <span style="color:#0550ae">0</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#1f2328">neighbors</span> <span style="color:#0550ae">===</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">newGrid</span><span style="color:#1f2328">[</span><span style="color:#1f2328">y</span><span style="color:#1f2328">][</span><span style="color:#1f2328">x</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><ul>
+<li>세포가 살아있고 주변 살아있는 세포가 2개 미만이면 외로워서 죽음</li>
+<li>세포가 살아있고 주변 살아있는 세포가 3개 초과라면 혼란스러워서 죽음</li>
+<li>세포가 죽어있고 주변에 살아있는 세포가 3개 있다면 살아나게 함</li>
+</ul>
+<h3 id="22-animation">2.2. Animation</h3>
+
+<canvas id="caCanvas" width="400" height="400" style="border:1px solid black;"></canvas>
+<div id="buttonContainer" style="margin-top: 10px; display: flex; justify-content: left; gap: 10px;">
+    <button id="randomBtn">랜덤 뿌리기</button>
+    <button id="gliderBtn">글라이더</button>
+    <button id="spaceshipBtn">우주선</button>
+    <button id="clearBtn">Clear</button>
+</div>
+<script>
+class CellularAutomata {
+    constructor(canvas, cellSize=10) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.cellSize = cellSize;
+        this.cols = Math.floor(canvas.width / cellSize);
+        this.rows = Math.floor(canvas.height / cellSize);
+        this.grid = this.createGrid();
+        this.animationId = null;
+    }
+
+    createGrid(fill=0) {
+        return Array.from({length: this.rows}, () => Array(this.cols).fill(fill));
+    }
+
+    draw() {
+        const ctx = this.ctx;
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        for (let y=0; y<this.rows; y++) {
+            for (let x=0; x<this.cols; x++) {
+                if (this.grid[y][x]) {
+                    ctx.fillStyle = 'black';
+                    ctx.fillRect(x*this.cellSize, y*this.cellSize, this.cellSize, this.cellSize);
+                }
+            }
+        }
+    }
+
+    step() {
+        const next = this.createGrid();
+        for (let y=0; y<this.rows; y++) {
+            for (let x=0; x<this.cols; x++) {
+                const alive = this.grid[y][x];
+                const neighbors = this.countNeighbors(x, y);
+                if (alive && (neighbors === 2 || neighbors === 3)) next[y][x] = 1;
+                else if (!alive && neighbors === 3) next[y][x] = 1;
+            }
+        }
+        this.grid = next;
+        this.draw();
+    }
+
+    countNeighbors(x, y) {
+        let count = 0;
+        for (let dy=-1; dy<=1; dy++) {
+            for (let dx=-1; dx<=1; dx++) {
+                if (dx === 0 && dy === 0) continue;
+                const nx = x + dx;
+                const ny = y + dy;
+                if (nx >= 0 && nx < this.cols && ny >= 0 && ny < this.rows) {
+                    count += this.grid[ny][nx];
+                }
+            }
+        }
+        return count;
+    }
+
+    randomize() {
+        this.grid = this.createGrid();
+        for (let y=0; y<this.rows; y++) {
+            for (let x=0; x<this.cols; x++) {
+                this.grid[y][x] = Math.random() < 0.3 ? 1 : 0;
+            }
+        }
+        this.draw();
+    }
+
+    clear() {
+        this.grid = this.createGrid();
+        this.draw();
+    }
+
+    addPattern(pattern, offsetX=0, offsetY=0) {
+        for (let y=0; y<pattern.length; y++) {
+            for (let x=0; x<pattern[0].length; x++) {
+                const gx = offsetX + x;
+                const gy = offsetY + y;
+                if (gx < this.cols && gy < this.rows) {
+                    this.grid[gy][gx] = pattern[y][x];
+                }
+            }
+        }
+        this.draw();
+    }
+
+    start(interval=200) {
+        if (this.animationId) cancelAnimationFrame(this.animationId);
+        const loop = () => {
+            this.step();
+            this.animationId = requestAnimationFrame(loop);
+        };
+        loop();
+    }
+
+    stop() {
+        if (this.animationId) cancelAnimationFrame(this.animationId);
+        this.animationId = null;
+    }
+}
+
+// 글라이더 
+const glider = [
+    [0,1,0],
+    [0,0,1],
+    [1,1,1]
+];
+// 우주선패턴
+const spaceship = [
+    [1,0,0,1,0],
+    [0,0,0,0,1],
+    [1,0,0,0,1],
+    [0,1,1,1,1]
+];
+
+// 초기화
+const canvas = document.getElementById('caCanvas');
+const ca = new CellularAutomata(canvas);
+
+// 버튼 이벤트
+document.getElementById('randomBtn').addEventListener('click', () => ca.randomize());
+document.getElementById('gliderBtn').addEventListener('click', () => ca.addPattern(glider, 1, 1));
+document.getElementById('spaceshipBtn').addEventListener('click', () => ca.addPattern(spaceship, 1, 1));
+document.getElementById('clearBtn').addEventListener('click', () => ca.clear());
+
+// 자동 진행
+//ca.randomize();
+ca.start(200);
+</script>
+
+<hr>
+<ul>
+<li>&lsquo;랜덤뿌리기&rsquo; 버튼을 누르면 그리드에서 랜덤으로 생존 상태가 뿌려짐</li>
+<li>&lsquo;글라이더&rsquo;는 2차원 셀룰러 오토마타에서 알려진 대각선 이동패턴 중 하나</li>
+<li>&lsquo;우주선&rsquo;은 수평이동 패턴중 하나</li>
+<li>&lsquo;Clear&rsquo;는 생존상태를 없애고 깨끗한 상태로 세팅</li>
+</ul>
+<p>랜덤으로 뿌려보면 마구 퍼지거나 없어지거나하는데 마치 전염병이 번지는 느낌이다.
+유달리 오래 진행되는 케이스가 있는데 랜덤으로 뿌릴때 세대가 굉장히 오래 진행되는
+어떤 패턴이 발현되어 그런것 같다.</p>
+<h2 id="3-hexagonal">3. Hexagonal</h2>
+<p>육각형 벌집모양의 그리드를 정의하고 여기서 적용되는 CA도 만들수 있다.
+리서치하다가 찾았는데 육각형에 관련된 거의 모든 코딩 내용은
+<a href="https://www.redblobgames.com/grids/hexagons/">이 링크</a>
+가 압권이다.</p>
+<p>hexagonal부터 조금씩 복잡해지니 GPT가 조금씩 틀린다. 그래서 코드를 조금씩 손 봐주어야 하는데
+활용을 위해 클래스로 만들었다. 즉 GPT소스 4가지 버젼에서 몇가지를 조합하고 수정해서 정리했다.
+앞으로의 개발은 이런식으로 흘러가게 되는 것일까? 🤔</p>
+<h3 id="31-animation">3.1. Animation</h3>
+
+<canvas id="hexca" width="600" height="400" style="background:#000;"></canvas>
+<div style="margin-top: 10px; display: flex; justify-content: left; gap: 10px;">
+  <button id="randomize_hex">🎲 Randomize</button>
+  <button id="pause_hex">▶️ Play</button>
+  <button id="clear_hex">🧹 Clear</button>
+</div>
+
+<script>
+const canvashex=document.getElementById('hexca');
+
+class HexCellularAutomata {
+    static NEI_EVEN = [[+1,0],[0,+1],[-1,+1],[-1,0],[-1,-1],[0,-1]];
+    static NEI_ODD = [[+1,0],[+1,+1],[0,+1],[-1,0],[0,-1],[+1,-1]];
+    static DENSITY = 0.21;
+    static SQRT3 = Math.sqrt(3);
+    
+    constructor(canvas, hex_size){
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.cols = Math.floor(canvas.width/(Math.sqrt(3)*hex_size))+3;
+        this.rows = Math.floor(canvas.height/(1.5*hex_size))+3;
+        this.hex_size = hex_size;
+        this.grid = this.createGrid(this.cols, this.rows);
+        this.nextGrid = this.createGrid(this.cols, this.rows);
+        this.speed = 1000.0 / 12;
+        this.paused = false;
+        this.paused_label = '⏸️ Pause';
+        this.elem = null;
+        this.cnt = 0;
+        
+        this.randomizeGrid(); 
+        this.rule = this.parseRule('2456/23456/4');
+    }
+    
+    createGrid(c,r){ return Array.from({length:r},()=>new Uint8Array(c).fill(0)); }
+    
+    randomizeGrid(){
+        for(let y=0; y < this.grid.length; y++){
+            for(let x=0; x < this.grid[0].length; x++){
+                this.grid[y][x] = Math.random() < HexCellularAutomata.DENSITY ? 1 : 0;
+            }
+        }
+    }
+    
+    clearGrid(){
+        for(let y=0; y < this.grid.length; y++){
+            this.grid[y].fill(0);
+        }
+        this.cnt = 0;
+        this.updateInfoElem();
+    }
+    
+    togglePaused(){
+        if(this.paused){
+            this.paused = false;
+            this.paused_label = '⏸️ Pause';
+        }else{
+            this.paused = true;
+            this.paused_label = '▶️ Play';
+        }
+    }
+    
+    countNeighbors(x, y){
+        const nei = (y&1)? HexCellularAutomata.NEI_ODD: HexCellularAutomata.NEI_EVEN ;
+        let cnt =0;
+        for(let i=0; i < 6; i++){
+            let dx = nei[i][0];
+            let dy = nei[i][1];
+            
+            let nx = (x + dx + this.cols) % this.cols;
+            let ny = (y + dy + this.rows) % this.rows;
+            
+            if(this.grid[ny][nx] == 1)
+                cnt++;
+        }
+        return cnt;
+    }
+    
+    parseRule(text){
+      // 공백 제거
+      const t = text.trim();
+      const parts = t.split('/');
+      if (parts.length !== 3) throw new Error('형식은 S/B/G 입니다. 예: 2345/23456/4');
+      const [sPart, bPart, gPart] = parts;
+      const s = new Set([...sPart].map(ch => parseInt(ch, 10)).filter(n => !isNaN(n)));
+      const b = new Set([...bPart].map(ch => parseInt(ch, 10)).filter(n => !isNaN(n)));
+      const g = parseInt(gPart, 10);
+      if (!Number.isInteger(g) || g < 2 || g > 50) throw new Error('G(상태 수)는 2~50 사이의 정수여야 합니다.');
+      return { survive: s, birth:b, state:g };
+    }
+    
+    step(){
+        for(let y=0; y < this.rows; y++){
+            for(let x=0; x < this.cols; x++){
+                const v = this.grid[y][x];
+                const n = this.countNeighbors(x, y);
+                
+                if(v == 1){
+                    this.nextGrid[y][x] = this.rule.survive.has(n)? 1 : 2;
+                }else if(v > 1){
+                    this.nextGrid[y][x] = (v + 1 >= this.rule.state) ? 0 : v + 1;
+                }else{
+                    this.nextGrid[y][x] = this.rule.birth.has(n)? 1: 0;
+                }
+            }
+        }// end for
+        [this.grid, this.nextGrid] = [this.nextGrid, this.grid];
+    }
+    
+    // Rendering
+    hexXY(x, y){  //  grid 좌표계를 실질 hex의 위치 좌표로 변경
+        return [
+            // hex좌표계 x
+            x * HexCellularAutomata.SQRT3 * this.hex_size 
+            + (y&1? HexCellularAutomata.SQRT3 * this.hex_size / 2: 0)
+            + this.hex_size,
+            
+            // hex좌표계 y
+            y * 1.5 * this.hex_size + this.hex_size
+        ];
+    }
+    
+    drawHex(cx, cy, r){
+        this.ctx.beginPath();
+        for(let i=0; i < 6; i++){
+            const a = Math.PI / 180 * (60 * i - 30);
+            const px = cx + r * Math.cos(a);
+            const py = cy + r * Math.sin(a);
+            
+            if(i == 0){
+                this.ctx.moveTo(px, py);
+            }else{
+                this.ctx.lineTo(px, py);
+            }
+        }
+        this.ctx.closePath();
+    }
+    
+    stateColor(s){
+        if(s == 0) return null;
+        const t = (s-1)/ (this.rule.state - 1);
+        return `hsl(30, 100%, ${Math.round(80-50*t)}%)`;
+    }
+    
+    render(){
+        this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+        for(let y=0; y < this.rows; y++){
+            for(let x=0; x < this.cols; x++){
+                const s = this.grid[y][x];
+                if(s == 0) 
+                    continue;
+                const fill = this.stateColor(s);
+                const [cx, cy] = this.hexXY(x, y);
+                this.drawHex(cx, cy, this.hex_size);
+                this.ctx.fillStyle = fill;
+                this.ctx.fill();
+            }
+        }
+    }
+    
+    setInfoElem(elem){
+        this.elem = elem;
+    }
+    updateInfoElem(){
+        if(this.elem != null){
+            this.elem.textContent = `크기: ${this.cols}x${this.rows}, 세대: ${this.cnt}`;
+        }
+    }
+    
+    start(){
+        setInterval(() => {
+            if(this.paused){
+                // pass   
+            }else{
+                this.step();
+                this.render();
+                this.updateInfoElem();
+                this.cnt++;
+            }
+        }, this.speed);
+    }
+}
+
+let hexca = new HexCellularAutomata(canvashex, 4);
+hexca.render();
+hexca.togglePaused();
+
+document.getElementById('pause_hex').onclick=()=>{
+    hexca.togglePaused();
+    document.getElementById('pause_hex').textContent = hexca.paused_label;
+};
+
+document.getElementById('randomize_hex').onclick=()=>{ 
+    hexca.randomizeGrid(); hexca.render(); 
+};
+document.getElementById('clear_hex').onclick=()=>{ 
+    hexca.clearGrid(); 
+    hexca.render(); 
+};
+
+hexca.start();
+
+</script>
+
+
+<hr>
+<p>위 시뮬레이션은 Hexagonal CA 중  Gliders 1 패턴으로 <code>2456/23456/4</code> 룰에 의해 발현된다.</p>
+<ul>
+<li>아이스크림 모양의 글라이더가 6방향중 한 방향으로 이동한다.</li>
+<li>점차 세력을 키우면서 마치 태양이 이글거리는 듯한 느낌을 준다.</li>
+<li>최종적으로는 모든 화면을 채운다.</li>
+</ul>
+<p><strong>Rule 표기법</strong>
+<code>2456/23456/4</code> 라면 survive 생존조건이 2,4,5,6 즉 주변 이웃이 저 숫자중 하나면 생존하는 것이다.
+두번째는 Birth 탄생조건으로 주변 생존이 2,3,4,5,6 개면 새로 태어난다.
+마지막은 state 즉 죽어가는 단계인데 생존을 만족하지 않으면 죽어가는 단계로 빠지고 4단계에 걸쳐 죽어간다.</p>
+<p>이때 GPT가 상당히 이해를 못했는데 코드를 보면 이웃을 셀때 죽어가는 놈까지 같이 세는 식으로 사소한 곳에서
+무언가 조금씩 어긋남이 있다.</p>
+<h3 id="32-rule">3.2. Rule</h3>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#1f2328">step</span><span style="color:#1f2328">(){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">let</span> <span style="color:#1f2328">y</span><span style="color:#0550ae">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">y</span> <span style="color:#0550ae">&lt;</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">rows</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">y</span><span style="color:#0550ae">++</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">let</span> <span style="color:#1f2328">x</span><span style="color:#0550ae">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">x</span> <span style="color:#0550ae">&lt;</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">cols</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">x</span><span style="color:#0550ae">++</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">const</span> <span style="color:#1f2328">v</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">grid</span><span style="color:#1f2328">[</span><span style="color:#1f2328">y</span><span style="color:#1f2328">][</span><span style="color:#1f2328">x</span><span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">const</span> <span style="color:#1f2328">n</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">countNeighbors</span><span style="color:#1f2328">(</span><span style="color:#1f2328">x</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">y</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span><span style="color:#1f2328">v</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">nextGrid</span><span style="color:#1f2328">[</span><span style="color:#1f2328">y</span><span style="color:#1f2328">][</span><span style="color:#1f2328">x</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">rule</span><span style="color:#1f2328">.</span><span style="color:#1f2328">survive</span><span style="color:#1f2328">.</span><span style="color:#1f2328">has</span><span style="color:#1f2328">(</span><span style="color:#1f2328">n</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">:</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">}</span><span style="color:#cf222e">else</span> <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span><span style="color:#1f2328">v</span> <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">nextGrid</span><span style="color:#1f2328">[</span><span style="color:#1f2328">y</span><span style="color:#1f2328">][</span><span style="color:#1f2328">x</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">v</span> <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&gt;=</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">rule</span><span style="color:#1f2328">.</span><span style="color:#1f2328">state</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">?</span> <span style="color:#0550ae">0</span> <span style="color:#0550ae">:</span> <span style="color:#1f2328">v</span> <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">}</span><span style="color:#cf222e">else</span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">nextGrid</span><span style="color:#1f2328">[</span><span style="color:#1f2328">y</span><span style="color:#1f2328">][</span><span style="color:#1f2328">x</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">rule</span><span style="color:#1f2328">.</span><span style="color:#1f2328">birth</span><span style="color:#1f2328">.</span><span style="color:#1f2328">has</span><span style="color:#1f2328">(</span><span style="color:#1f2328">n</span><span style="color:#1f2328">)</span><span style="color:#0550ae">?</span> <span style="color:#0550ae">1</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span><span style="color:#57606a">// end for
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#1f2328">[</span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">grid</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">nextGrid</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span><span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">nextGrid</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">grid</span><span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><ul>
+<li>생존이면 survive조건에 속하는지 판단 충족시 그대로 상태 1(생존), 미충족시 상태 2로 빠짐(죽어가는 단계)</li>
+<li>죽어가는 단계이면 상태를 하나씩 늘리고 Rule에 지정한 state를 넘어서면 상태 0(죽음)</li>
+<li>죽어있는 셀이면 Birth 탄생조건에 속하는지 판단</li>
+</ul>
+<p>내가 학창시절 겪었던 javascript와 굉장히 많이 달라졌는데 swap 을 저런식으로 직관적으로 할수 있게 되었다.
+GPT에게 물어보니 <code>구조 분해 할당(destructuring assignment)</code> 이라고 한다.</p>
+<h3 id="33-좌표계">3.3. 좌표계</h3>
+<p>위에 소개한 링크에서 <a href="https://www.redblobgames.com/grids/hexagons/#coordinates"><code>Coordinate System</code> 찾아보면</a></p>
+<p>육각형 좌표계에 대한 내용이 나온다.
+위 시뮬레이션은 Pointy-Top방식으로 Offset Coordinate로 짝홀 행에 따라서 시작위치가 반칸을 밀려나느냐 아니냐가 결정되는 식이다.</p>
+<p>만일 GPT에게 &ldquo;그냥 만들어줘&rdquo; 하면 좌표계를 이렇게도 저렇게도 바꿔가면서 만들것이다. 그래서 사실 이론을 알아야 한다. Offset vs Axial 둘중 하나다. 마구 만들어낸 코드를 보면서 이게 어떤 좌표계를 기준으로 만든건지 이해가 필요하다.</p>
+<h2 id="4-후기">4. 후기</h2>
+<p>이 내용은 우연히 집에 책을 정리하다가 <a href="https://natureofcode.com/">Nature Of Code</a> 오래된 버젼을 찾았다.
+쭉 훑어보다가 CA챕터에서 흥미를 가지게 되었다.</p>
+<p>코딩으로 창발적 현상을 만들어보는 것은 어렵지만 상당한 재미를 준다. 간단한 규칙으로 복잡함을 이끌어낸다면 더욱 그렇다.
+이 셀룰러 오토마타가 얼마나 자연계에 있는지는 잘 모르겠지만 몇가지 사례를 소개하고 있다. 신기한 느낌이 든다.</p>
+<p>리서치를 하면서 확인해보니 CA는 이쪽만 파고드는 사람들이 엄청 많았다. 별개 위키페이지도 있으며 굉장히 많은 패턴이 연구
+되었다고 한다. Golly라고 검색하면 십여년 전부터도 이미 전용 프로그램이 있었다.</p>
+<h2 id="5-생각-해볼만한-것">5. 생각 해볼만한 것</h2>
+<p>평면을 타일링 해서 빈틈없이 덮는 것을 테셀레이션(tessellation)이라고 하는데 이때  몇가지 도형의 Set으로 이루어진
+테셀레이션을 만들수 있다. 예를 들면 3.4.6.4 테셀레이션.  이를 가지고 CA를 만들어 볼수도 있을 것이다.</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>
