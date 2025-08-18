@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sat, 26 Jul 2025 00:36:49 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 16 Aug 2025 12:32:15 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>셀룰러오토마타</title>
+      <link>https://doongchoong.github.io/posts/%EC%85%80%EB%A3%B0%EB%9F%AC%EC%98%A4%ED%86%A0%EB%A7%88%ED%83%80/</link>
+      <pubDate>Sat, 16 Aug 2025 12:32:15 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/%EC%85%80%EB%A3%B0%EB%9F%AC%EC%98%A4%ED%86%A0%EB%A7%88%ED%83%80/</guid>
+      <description>&lt;p&gt;셀룰러 오토마타는 세포를 기반으로 구성되는 체계를 말한다.&#xA;세포는 그리드(grid) 안의 하나의 셀을 말하고&#xA;세포는 각각  &amp;lsquo;살음&amp;rsquo;, &amp;lsquo;죽음&amp;rsquo; 과 같은 상태를 지닌다.&#xA;세포는 이웃을 가지고 이웃의 상태에 따라 자신의 상태가 결정하는 식으로 동작하는 체계.&#xA;셀룰러 오토마타라고 하고 줄여서 CA라고 한다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-1차원&#34;&gt;1. 1차원&lt;/h2&gt;&#xA;&lt;p&gt;1차원 가장 기본적인 오토마타는 이 체계가 어떤것인지 이해하기 위한 가장 간단한 형태이다.&lt;/p&gt;&#xA;&lt;h3 id=&#34;11--rule&#34;&gt;1.1.  Rule&lt;/h3&gt;&#xA;&lt;div class=&#34;code-block-wrapper&#34;&gt;&#xA;  &lt;div class=&#34;code-title&#34;&gt;TXT&lt;/div&gt;&#xA;  &lt;div class=&#34;highlight_wrap&#34;&gt;&#xA;    &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;000 =&amp;gt; 0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;001 =&amp;gt; 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;010 =&amp;gt; 0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;011 =&amp;gt; 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;100 =&amp;gt; 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;101 =&amp;gt; 0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;110 =&amp;gt; 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;111 =&amp;gt; 0&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&#xA;  &lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;마치 이진수처럼 양 옆을 이웃 가운데를 본인 셀이라고 하면 위 8가지 패턴이 나오게 되는데&#xA;각 패턴별로 본인이 취해야할 다음 상태를 나타내는 것이다. 위 01011010을 다시 이진수로 인식하면 십진수로 90이 되며&#xA;이를 &amp;lsquo;Rule90&amp;rsquo;이라고 한다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>블로그에GPT대화넣기</title>
       <link>https://doongchoong.github.io/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EC%97%90gpt%EB%8C%80%ED%99%94%EB%84%A3%EA%B8%B0/</link>
