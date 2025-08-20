@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drop_paint | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+  }
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+  background-color: #cdcdcd;
+  border-radius: 16px 16px 0 16px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #cdcdcd;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <h1 class="post-title">Drop_paint</h1>
+    <div class="post-date">August 20, 2025</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-공식">1. 공식</a></li>
+    <li><a href="#2-시뮬레이션">2. 시뮬레이션</a></li>
+    <li><a href="#3-그-외">3. 그 외</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>페인트와 같이 점성이 높은 액체 방울을 떨어뜨렸을때
+형성되는 무늬모양을 시뮬레이션 하는 내용이 있다.
+<a href="https://people.csail.mit.edu/jaffer/Marbling/Dropping-Paint">https://people.csail.mit.edu/jaffer/Marbling/Dropping-Paint</a></p>
+<p>먼저 떨어트린 방울이 원을 형성하다가 그 다음 방울에 의해 조금 밀려나며
+모양이 조금씩 변해가며 생성되는 무늬를 수학적으로 풀어낸 것이다.</p>
+<p><a href="https://doongchoong.github.io/toys/drop_paint.html">만들어본 시뮬레이션 웹 페이지</a></p>
+<h2 id="1-공식">1. 공식</h2>
+<p>$$
+C + (P - C) \cdot sqrt \left( 1 + \frac{r^2}{ || P - C ||^2 } \right)
+$$</p>
+<p>원래 있던 방울 P 가 새로운 C 방울이 떨어졌을때 대한 내용이다.
+이 방울은 중심을 가지고 있고 방울을 표현하는 벡터들의 집합이다.
+코딩으로는 외곽선을 형성하는 벡터들의 집합이고 이들 각각에 대해서 계산하는 것이다.
+원의 정밀도에 따라 100step으로 쪼개서 외곽선을 형성한다면 방울 하나에 100개의 벡터가 존재한다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>  <span style="color:#57606a">// 무늬 만들기
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>  <span style="color:#1f2328">marble</span><span style="color:#1f2328">(</span><span style="color:#1f2328">newone</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// 공식: C + (P - C) * sqrt(1 + r^2 / ||(P - C)||^2 )
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">let</span> <span style="color:#1f2328">v</span> <span style="color:#cf222e">of</span> <span style="color:#cf222e">this</span><span style="color:#1f2328">.</span><span style="color:#1f2328">vertices</span><span style="color:#1f2328">){</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cf222e">let</span> <span style="color:#1f2328">c</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">newone</span><span style="color:#1f2328">.</span><span style="color:#1f2328">center</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cf222e">let</span> <span style="color:#1f2328">r</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">newone</span><span style="color:#1f2328">.</span><span style="color:#1f2328">r</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cf222e">let</span> <span style="color:#1f2328">p</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span> <span style="color:#57606a">// 벡터 빼기
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>        <span style="color:#1f2328">x</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">v</span><span style="color:#1f2328">.</span><span style="color:#1f2328">x</span> <span style="color:#0550ae">-</span> <span style="color:#1f2328">c</span><span style="color:#1f2328">.</span><span style="color:#1f2328">x</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">y</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">v</span><span style="color:#1f2328">.</span><span style="color:#1f2328">y</span> <span style="color:#0550ae">-</span> <span style="color:#1f2328">c</span><span style="color:#1f2328">.</span><span style="color:#1f2328">y</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cf222e">let</span> <span style="color:#1f2328">mag_square</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">x</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">x</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">y</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">y</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cf222e">let</span> <span style="color:#1f2328">sqrt</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">sqrt</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">r</span><span style="color:#0550ae">*</span><span style="color:#1f2328">r</span> <span style="color:#0550ae">/</span> <span style="color:#1f2328">mag_square</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">x</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">x</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">sqrt</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">c</span><span style="color:#1f2328">.</span><span style="color:#1f2328">x</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">y</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">y</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">sqrt</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">c</span><span style="color:#1f2328">.</span><span style="color:#1f2328">y</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#57606a">// assign p in v
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>      <span style="color:#1f2328">v</span><span style="color:#1f2328">.</span><span style="color:#1f2328">x</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">x</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">v</span><span style="color:#1f2328">.</span><span style="color:#1f2328">y</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">y</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><ul>
+<li><code>||P - C||</code>는 Magnitude로 P와 C간 거리를 나타낸다. $\sqrt{(p_x-c_x)^2 + (p_y-c_y)^2}$</li>
+<li>위를 어차피 제곱을 하게 되므로 굳이 sqrt한뒤 다시 제곱할 필요가 없다.</li>
+<li>새로운 방울을 입력받아서 현재 방울의 벡터들에 대해 공식을 통해 위치를 재조정하는 것</li>
+</ul>
+<h2 id="2-시뮬레이션">2. 시뮬레이션</h2>
+
+
+
+<canvas id="ca" width="400" height="300"></canvas>
+<div id="info">
+  <div id="buttons">
+    <button id="resetBtn">🔄 Reset</button>
+    <button id="stopBtn">⏸️ Stop</button>
+  </div>
+  <div id="status">
+    Drop 색상: <span id="colorText"></span>
+    <span id="colorBox">|_|</span> |
+    개수: <span id="count">0</span>
+  </div>
+</div>
+
+<script>
+const canvas=document.getElementById('ca');
+const ctx=canvas.getContext('2d');
+
+// 컨트롤들
+const colorText = document.getElementById("colorText");
+const colorBox = document.getElementById("colorBox");
+const countSpan = document.getElementById("count");
+const resetBtn = document.getElementById("resetBtn");
+const stopBtn = document.getElementById("stopBtn");
+
+const palette = [
+      "#FF6B6B", // 레드톤
+      "#FFD93D", // 옐로우톤
+      "#6BCB77", // 그린톤
+      "#4D96FF", // 블루톤
+      "#9D4EDD"  // 퍼플톤
+];
+
+function random_int(max){
+  return Math.floor(Math.random() * max);
+}
+
+function randomColor() {
+  return palette[random_int(palette.length)];
+}
+
+const circleSegments = 100;
+
+class Paint {
+  constructor(x, y, r, color){
+    this.center = {x: x, y: y};
+    this.r = r; 
+
+    // 원을 구성하는 점들을 생성함.
+    this.vertices = [];
+    for(let i =0; i < circleSegments; i++){
+      let angle = i * (Math.PI * 2 / circleSegments );
+      let v = {
+        x: Math.cos(angle) * this.r + this.center.x,
+        y: Math.sin(angle) * this.r + this.center.y,
+      };
+      this.vertices.push(v);
+    }
+    this.color = color;
+  }
+
+  // 무늬 만들기
+  marble(newone){
+    // 공식: C + (P - C) * sqrt(1 + r^2 / ||(P - C)||^2 )
+    for(let v of this.vertices){
+      let c = newone.center;
+      let r = newone.r;
+      let p = { // 벡터 빼기
+        x: v.x - c.x,
+        y: v.y - c.y,
+      };
+      let mag_square = p.x * p.x + p.y * p.y;
+      let sqrt = Math.sqrt(1 + r*r / mag_square);
+      p.x = p.x * sqrt + c.x;
+      p.y = p.y * sqrt + c.y;
+
+      // assign p in v
+      v.x = p.x;
+      v.y = p.y;
+    }
+  }
+
+  // context에 draw 
+  draw(ctx){
+    ctx.beginPath();
+    for(let [i, p] of this.vertices.entries()){
+      if(i == 0){
+        ctx.moveTo(p.x, p.y);
+      }else{
+        ctx.lineTo(p.x, p.y);
+      }
+    }
+    ctx.closePath();
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+}
+
+class Drop {
+  constructor(canvas, max = 200){
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.drops = [];
+    this.max = max;
+  }
+
+  drop_paint(color){
+    // 초과하면 아무것도 하지 않음
+    if( this.drops.length >= this.max ){
+      return ;
+    }
+
+    let x = random_int(this.canvas.width);
+    let y = random_int(this.canvas.height);
+    let r = random_int(30) + 7;
+
+    let newone = new Paint(x, y, r, color);
+
+    for(let oldone of this.drops){
+      oldone.marble(newone);
+    }
+    this.drops.push(newone);
+  }
+
+  draw(){
+    // 초과하면 아무것도 하지 않음
+    if( this.drops.length >= this.max ){
+      return ;
+    }
+    // 모든 drop을 그림
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    for(let drop of this.drops){
+      drop.draw(this.ctx);
+    }    
+  }
+
+  clear(){
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.drops = [];
+  }
+
+  is_max(){
+    return (this.max <= this.drops.length);
+  }
+}
+
+
+let drop = new Drop(canvas);
+
+let count = 0;
+let lastTime = 0;
+let pause = false;
+
+function loop(timestamp) {
+  if (timestamp - lastTime >= 200) { // 1000ms = 1초
+    if(pause){
+      //pass
+    }else{
+      let color = randomColor();
+      drop.drop_paint(color);
+      drop.draw();
+      count = drop.drops.length;
+
+      // update UI
+      if( drop.is_max() == false) {
+        countSpan.textContent = count;
+        colorText.textContent = color;
+        colorBox.style.backgroundColor = color;  
+      }else{
+        pause = true;
+        stopBtn.textContent = '▶️ Play';
+      }
+    }
+    // update time
+    lastTime = timestamp;
+  }
+
+  requestAnimationFrame(loop);
+}
+
+function resetCanvas() {
+  drop.clear();
+}
+
+function stopDrawing() {
+  if(pause){
+    pause = false;
+    stopBtn.textContent = '⏸️ Stop';
+  }else{
+    pause = true;
+    stopBtn.textContent = '▶️ Play';
+  }
+
+}
+
+resetBtn.addEventListener("click", resetCanvas);
+stopBtn.addEventListener("click", stopDrawing);
+
+// start
+requestAnimationFrame(loop);
+
+</script>
+
+
+
+<hr>
+<p>어느 정도 방울들이 화면을 채웠을때  떨어지는 방울에 의해 변화하는 양상이
+상당히 진짜 같은 느낌을 준다.</p>
+<h2 id="3-그-외">3. 그 외</h2>
+<ul>
+<li>Tine이란 것이 있다. 저 페인트방울 위로 stroke를 했을때 생성되는 모양을 얘기한다.</li>
+<li>Vortex 도 있다. 전체적으로 자체 회전이 걸릴때 소용돌이 모양처럼 형성되는 내용이다.</li>
+</ul>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>
