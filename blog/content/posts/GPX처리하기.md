@@ -13,7 +13,7 @@ tocBorder : true
 ## 인증용 Stats 정보 만들기
 
 인증용 stat은 투명한 이미지 위에 거리, 획득고도 등 기록을 표시하는 것이다. 
-Strava의 투명 인증샷을 거의 똑같다고 보면 된다. 
+Strava의 투명 인증샷과 거의 똑같다고 보면 된다. 
 하지만 직접 GPX파일을 다루기 때문에 고도 그래프까지 추가하여 표시되도록 하였다.
 이는 인스타에 스티커로 붙여넣어 사용하게 된다.
 
@@ -31,10 +31,10 @@ Strava의 투명 인증샷을 거의 똑같다고 보면 된다.
 <div class="form-container">
   <input id="gpxInput" type="file" accept=".gpx" />
   <input id="bottomtext" type="text" value="@doongchoong">
-  <div class="form-group"><label>Distance</label><input id="totalDistance" type="text"></div>
-  <div class="form-group"><label>Elev Gain</label><input id="elevGain" type="text"></div>
-  <div class="form-group"><label>Time</label><input id="elapseTime" type="text"></div>
-  <div class="form-group"><label>Elev Correction</label><input id="elevCrrt" type="numeric" value="0"></div>
+  <div class="form-group"><label>총 거리</label><input id="totalDistance" type="text"></div>
+  <div class="form-group"><label>획득고도</label><input id="elevGain" type="text"></div>
+  <div class="form-group"><label>소요시간</label><input id="elapseTime" type="text"></div>
+  <div class="form-group"><label>고도 보정</label><input id="elevCrrt" type="numeric" value="0"></div>
   <button id="updateBtn">Image Update</button>
   <button id="saveBtn">Save Image</button>
 </div>
@@ -47,7 +47,6 @@ Strava의 투명 인증샷을 거의 똑같다고 보면 된다.
   max-width: 600px;
   aspect-ratio: 3/4; /* 원하는 비율 유지 */
   overflow: hidden;
-  border : solid 1px;
 }
 
 .bg {
@@ -443,7 +442,51 @@ fetch("../../img/bukhansan.gpx")
 * 총 시간 계산
 * 경로를 그래프로 표시
 * 고도를 그래프로 표시
+* 각 측정값들을 수정하고 이미지 갱신을 할수 있도록 처리
+* 최종 반영 이미지를 저장
 
 
 
+### 1.1. 시행착오
+
+**[획득고도오차]**
+첫 번째에선  획득고도가 25미터 밖에 안나왔다. 최소 700미터는 넘어야 하는 상황에서 말이다. 
+이는 GPS가 오차가 많기 때문에 이런 오차를 보정하기 위해 threshold 값을 지정하는데
+GPS측정 주기가 짧으면 상승고도 변화분이  항상 threshold값보다 작아 문제가 생긴다. 
+
+* 이동평균 사용하기
+* 직전값 기록후 사용하기
+
+둘중 하나를 골라서 사용하려고 했는데  결국 이동평균이 좀더 깔끔한것 같았다. (추후 그래프를 그릴때)
+
+**[경로 뾰죡하게 튀는 현상]**
+GPS 오차가 있다보니  경로를 그리게 되면 가끔씩 튀는 현상이 발생했다. 
+이때 GPT가  만들어준 SVG 지도 매핑에서는 경로가 튀는게 없는데  내가 캔버스로 만든 버젼은 튀게되었다. 
+
+```javascript
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+```
+
+이유는 선을 그릴때 아주 좁은지역에서 급속 이동을 한것처럼 처리가 되면
+선의 폭만큼 그대로 그리기 때문에 날카롭게 뾰죡한 부분이 생기는 것이다. 
+이는 위 `round` 를 주어서 해결하였다. 
+
+
+**[최고 고도 오차]**
+GPS 내장 시계는 위치는 꽤 정확히 추정해 주는데 이게 고도는 별도로 측정한다고 한다. 
+고도계는 사실 기압계를 가지고 잰다.  이게 오차가 상당하다.  10-30미터 까지도 차이가 난다. 
+
+이를 핸드폰 앱은 어떻게 보정하는지 리서치해보니
+
+1. GPS로 경로 추적
+2. 3D 지형정보 DEM을 가지고 고도 재 매핑
+
+결국 DEM이라는 별도의 정확한 정보를 가지고 다시 재는 것이였다! 
+이를 정확히 반영하는 것은 상당히 어려운 일이다. 
+
+기압기반 고도계는 오차가 있지만 오차가 있는채로 상대적 고도차이는 그래도 정확한 편이다. 
+영점 조절이 안된 느낌으로 생각하면 되므로 
+
+최고높이 봉우리 미터를 알고있으니 수동으로 수정하면 되도록 하였다.
 
