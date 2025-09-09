@@ -13,7 +13,6 @@ tocBorder : true
 먼저 떨어트린 방울이 원을 형성하다가 그 다음 방울에 의해 조금 밀려나며
 모양이 조금씩 변해가며 생성되는 무늬를 수학적으로 풀어낸 것이다.
 
-[만들어본 시뮬레이션 웹 페이지](https://doongchoong.github.io/toys/drop_paint.html)
 
 ## 1. 공식
 
@@ -265,10 +264,15 @@ requestAnimationFrame(loop);
 
 {{< /raw >}}
 
+
+
 -------
 
 어느 정도 방울들이 화면을 채웠을때  떨어지는 방울에 의해 변화하는 양상이 
 상당히 진짜 같은 느낌을 준다.
+
+
+[만들어본 시뮬레이션 웹 페이지](https://doongchoong.github.io/toys/drop_paint.html)
 
 ## 3. 그 외
 

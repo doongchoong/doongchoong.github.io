@@ -1,0 +1,449 @@
+---
+title: "GPX처리하기"
+date: 2025-09-09T19:26:01+09:00
+draft: false
+toc : true
+tocBorder : true
+---
+
+최근에 등산을 다니며 스포츠워치를 구매를 하였다. 그래서 GPS정보를 이용하여 내가 이동한 경로를 저장하고
+관리할 수 있게 되었는데 등산앱, 스포츠앱들이 조금씩 기능이 마음에 들지 않아서
+직접 받은 gpx파일 정보를 가지고 여러가지 기능을 구현해보게 되었다. 
+
+## 인증용 Stats 정보 만들기
+
+인증용 stat은 투명한 이미지 위에 거리, 획득고도 등 기록을 표시하는 것이다. 
+Strava의 투명 인증샷을 거의 똑같다고 보면 된다. 
+하지만 직접 GPX파일을 다루기 때문에 고도 그래프까지 추가하여 표시되도록 하였다.
+이는 인스타에 스티커로 붙여넣어 사용하게 된다.
+
+--------
+
+**[미리보기]**
+
+{{< raw >}}
+
+<div class="bg-slideshow">
+  <div class="bg bg1"></div>
+  <div class="bg bg2"></div>
+  <canvas id="summaryCanvas"></canvas>
+</div>
+<div class="form-container">
+  <input id="gpxInput" type="file" accept=".gpx" />
+  <input id="bottomtext" type="text" value="@doongchoong">
+  <div class="form-group"><label>Distance</label><input id="totalDistance" type="text"></div>
+  <div class="form-group"><label>Elev Gain</label><input id="elevGain" type="text"></div>
+  <div class="form-group"><label>Time</label><input id="elapseTime" type="text"></div>
+  <div class="form-group"><label>Elev Correction</label><input id="elevCrrt" type="numeric" value="0"></div>
+  <button id="updateBtn">Image Update</button>
+  <button id="saveBtn">Save Image</button>
+</div>
+
+<style>
+.bg-slideshow {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  aspect-ratio: 3/4; /* 원하는 비율 유지 */
+  overflow: hidden;
+  border : solid 1px;
+}
+
+.bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  animation: fade 10s infinite;
+}
+
+.bg1 {
+  background-image: url("../../img/250909_01.jpeg");
+  animation-delay: 0s;
+}
+
+.bg2 {
+  background-image: url("../../img/250909_02.jpeg");
+  animation-delay: 5s;
+}
+
+@keyframes fade {
+  0%, 45% { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+
+/* 캔버스는 투명 오버레이 */
+#summaryCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 기본 2열 */
+  gap: 10px; /* 요소 사이 간격 */
+  max-width: 500px; /* 컨테이너 최대 크기 */
+}
+/* label + input 묶음은 Flex (가로 정렬) */
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 화면이 좁아질 때 (예: 600px 이하) 1열로 */
+@media (max-width: 600px) {
+  .form-container {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<script>
+  const canvas = document.getElementById("summaryCanvas");
+  const ctx = canvas.getContext("2d");
+
+  // 내부 해상도는 항상 600px 기준
+  canvas.width = 600;
+  canvas.height = 800;
+
+//////////
+   const toFixed = (n, d = 2) => Number.isFinite(n) ? n.toFixed(d) : '-';
+    const fmtDistance = (m) => m >= 1000 ? `${toFixed(m / 1000, 2)} km` : `${Math.round(m)} m`;
+    const fmtElev = (m) => Number.isFinite(m) ? `${Math.round(m)} m` : '-';
+    const fmtTime = (sec) => {
+      if (!Number.isFinite(sec)) return '-';
+      const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = Math.floor(sec % 60);
+      //return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':');
+      return h + 'h ' + m + 'm';
+    };
+    function haversine(lat1, lon1, lat2, lon2) {
+      const R = 6371000, toRad = d => d * Math.PI / 180, dLat = toRad(lat2 - lat1), dLon = toRad(lon2 - lon1);
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+    function parseGPX(text) {
+      const doc = new DOMParser().parseFromString(text, 'application/xml');
+
+      // 1️⃣ 원본 points 추출
+      const points = Array.from(doc.getElementsByTagName('trkpt'))
+        .map(pt => {
+          const lat = parseFloat(pt.getAttribute('lat'));
+          const lon = parseFloat(pt.getAttribute('lon'));
+          const eleEl = pt.getElementsByTagName('ele')[0];
+          const timeEl = pt.getElementsByTagName('time')[0];
+          const ele = eleEl ? parseFloat(eleEl.textContent) : NaN;
+          const time = timeEl ? new Date(timeEl.textContent) : null;
+          return { lat, lon, ele, time };
+        })
+        .filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon));
+
+      // 2️⃣ 5포인트 이동평균 적용
+      const windowSize = 5;
+      const smoothed = points.map((p, idx, arr) => {
+        let sumLat = 0, sumLon = 0, sumEle = 0;
+        let countLat = 0, countLon = 0, countEle = 0;
+
+        for (let i = idx - Math.floor(windowSize / 2); i <= idx + Math.floor(windowSize / 2); i++) {
+          if (i >= 0 && i < arr.length) {
+            if (Number.isFinite(arr[i].lat)) { sumLat += arr[i].lat; countLat++; }
+            if (Number.isFinite(arr[i].lon)) { sumLon += arr[i].lon; countLon++; }
+            if (Number.isFinite(arr[i].ele)) { sumEle += arr[i].ele; countEle++; }
+          }
+        }
+
+        return {
+          lat: countLat > 0 ? sumLat / countLat : p.lat,
+          lon: countLon > 0 ? sumLon / countLon : p.lon,
+          ele: countEle > 0 ? sumEle / countEle : p.ele,
+          time: p.time
+        };
+      });
+
+      // 3️⃣ smoothed 반환
+      return smoothed;
+    }
+    function computeMetrics(points) {
+      const elevThreshold = 0.2, stopSpeed = 1, stopGrace = 5;
+      let totalDist = 0, gain = 0, movingTime = 0, last = null, belowSince = null;
+      for (const p of points) {
+        if (!last) { last = p; continue; }
+        const d = haversine(last.lat, last.lon, p.lat, p.lon);
+        const dt = (p.time && last.time) ? (p.time - last.time) / 1000 : NaN;
+        if (Number.isFinite(d)) totalDist += d;
+        if (Number.isFinite(p.ele) && Number.isFinite(last.ele)) { const up = p.ele - last.ele; if (up > elevThreshold) gain += up; }
+        if (Number.isFinite(dt) && dt > 0 && Number.isFinite(d)) {
+          const speed = d / dt;
+          if (speed >= stopSpeed) { movingTime += dt; belowSince = null; }
+          else {
+            if (belowSince === null) belowSince = last.time ? last.time.getTime() : null;
+            const belowDur = belowSince && p.time ? (p.time.getTime() - belowSince) / 1000 : 0;
+            if (belowDur < stopGrace) movingTime += dt;
+          }
+        }
+        last = p;
+      }
+      const start = points[0]?.time ?? null, end = points.at(-1)?.time ?? null, elapsed = (start && end) ? (end - start) / 1000 : NaN;
+      return { totalDist, gain, elapsed, movingTime, start, end };
+    }
+
+    function exportSummary(pts, dd, aa, tt) {
+      const canvas = document.getElementById("summaryCanvas");
+
+      let font = " 'Montserrat', sans-serif";
+
+      // 레티나 대응 (안티앨리어싱 강화)
+      const scale = 2; // 2배 크기로 그렸다가 축소
+      canvas.width = 600 * scale;
+      canvas.height = 800 * scale;
+      //canvas.style.width = "600px";
+      //canvas.style.height = "800px";
+
+      const ctx = canvas.getContext("2d");
+      ctx.scale(scale, scale);
+
+      // 캔버스 초기화 (투명 배경)
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+
+      // ====== 예시 데이터 (실제 계산 값으로 교체) ======
+      const totalDistance = dd;
+      const totalAscent = aa;
+      const totalTime = tt;
+
+      // ====== 텍스트 출력 (세로 배치) ======
+      const centerX = 300; // 600/2
+      let y = 60;
+
+      // Distance
+      ctx.font = "20px" + font;
+      ctx.fillText("Distance", centerX, y);
+      y += 28;
+      ctx.font = "bold 42px" + font;
+      ctx.fillText(totalDistance, centerX, y);
+      y += 80;
+
+      // Elev Gain
+      ctx.font = "20px" + font;
+      ctx.fillText("Elev Gain", centerX, y);
+      y += 28;
+      ctx.font = "bold 42px" + font;
+      ctx.fillText(totalAscent, centerX, y);
+      y += 80;
+
+      // Time
+      ctx.font = "20px" + font;
+      ctx.fillText("Time", centerX, y);
+      y += 28;
+      ctx.font = "bold 42px" + font;
+      ctx.fillText(totalTime, centerX, y);
+      y += 80;
+
+      // ====== GPX 좌표 경로 그리기 ======
+      const coords = pts; // {lat, lon} 배열
+      if (coords.length > 1) {
+        const lats = coords.map(p => p.lat);
+        const lons = coords.map(p => p.lon);
+        const elevations = coords.map(p => p.ele);
+        const minLat = Math.min(...lats);
+        const maxLat = Math.max(...lats);
+        const minLon = Math.min(...lons);
+        const maxLon = Math.max(...lons);
+        const minEle = Math.min(...elevations);
+        const maxEle = Math.max(...elevations);
+
+        // 원래 비율 유지
+        const routeWidth = maxLon - minLon;
+        const routeHeight = maxLat - minLat;
+        const aspect = routeWidth / routeHeight;
+
+        // 박스 크기 (작게)
+        const maxBoxWidth = canvas.width / scale * 0.3;
+        const maxBoxHeight = 180;
+
+        let boxWidth, boxHeight;
+        if (aspect > 1) {
+          boxWidth = maxBoxWidth;
+          boxHeight = maxBoxWidth / aspect;
+        } else {
+          boxHeight = maxBoxHeight;
+          boxWidth = maxBoxHeight * aspect;
+        }
+
+        const gapAfterText = 0; // 텍스트 끝과 경로 사이 간격
+        const offsetX = (canvas.width / scale - boxWidth) / 2;
+        const offsetY = y + gapAfterText; // y 위치
+
+        ctx.beginPath();
+        coords.forEach((p, i) => {
+          const x = offsetX + ((p.lon - minLon) / routeWidth) * boxWidth;
+          const y = offsetY + ((maxLat - p.lat) / routeHeight) * boxHeight;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.strokeStyle = "#FF4500"; // 주황색
+        ctx.lineWidth = 4;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        // 그래프
+        const graphWidth = boxWidth;  // 경로와 같은 너비
+        const graphHeight = 100;      // 그래프 높이
+        const graphOffsetX = offsetX;
+        const graphOffsetY = offsetY + boxHeight + 40; // 경로 아래 20px
+
+        ctx.beginPath();
+        elevations.forEach((ele, i) => {
+          if (i % 5 !== 0) { return; }
+          const x = graphOffsetX + (i / (elevations.length - 1)) * graphWidth;
+          const y = graphOffsetY + graphHeight * (1 - (ele - minEle) / (maxEle - minEle));
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.strokeStyle = "#FF4500"; // 주황색
+        ctx.lineWidth = 3;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        const maxEleY = graphOffsetY + graphHeight * (1 - (maxEle - minEle) / (maxEle - minEle));
+        const minEleY = graphOffsetY + graphHeight * (1 - (minEle - minEle) / (maxEle - minEle));
+
+        ctx.beginPath();
+        ctx.moveTo(graphOffsetX, maxEleY);
+        ctx.lineTo(graphOffsetX + graphWidth, maxEleY);
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(graphOffsetX, minEleY);
+        ctx.lineTo(graphOffsetX + graphWidth, minEleY);
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.fillStyle = "white";
+        ctx.font = "14px " + font;
+        ctx.textAlign = "right";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(`${parseInt(maxEle) + parseInt(elevCrrt.value)} m`, graphOffsetX + graphWidth, maxEleY - 2); // 선 위쪽에 조금 띄워서 표시
+
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillText(`${parseInt(minEle)+ parseInt(elevCrrt.value)} m`, graphOffsetX + 0, minEleY - 2); // 선 위쪽에 조금 띄워서 표시
+
+
+        // ====== ID 표시 ======
+        const gapAfterRoute = 30; // 경로 끝과 ID 사이 간격
+        const idY = graphOffsetY + graphHeight + gapAfterRoute;
+
+        ctx.fillStyle = "white";
+        ctx.font = "20px" + font;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+
+        const txtel = document.getElementById('bottomtext');
+        ctx.fillText(txtel.value, centerX, idY);
+      }
+
+    }
+
+
+/////////////
+
+const gpxInput = document.getElementById('gpxInput');
+const totalDistance = document.getElementById('totalDistance');
+const elevGain = document.getElementById('elevGain');
+const elapseTime = document.getElementById('elapseTime');
+const elevCrrt = document.getElementById('elevCrrt');
+
+const updateBtn = document.getElementById('updateBtn');
+const saveBtn = document.getElementById('saveBtn');
+
+let gpts = null;
+
+
+gpxInput.addEventListener('change', async e => {
+      const file = e.target.files?.[0]; if (!file) return;
+      const pts = parseGPX(await file.text());
+      if (!pts.length) { alert('GPX 트랙포인트를 찾지 못했습니다.'); return; }
+      const metrics = computeMetrics(pts);
+      totalDistance.value = fmtDistance(metrics.totalDist);
+      elevGain.value = fmtElev(metrics.gain);
+      elapseTime.value = fmtTime(metrics.elapsed);
+
+      gpts = pts;
+
+      exportSummary(gpts,
+        totalDistance.value,
+        elevGain.value,
+        elapseTime.value
+      );
+});
+
+updateBtn.addEventListener('click', function () {
+      exportSummary(gpts,
+        totalDistance.value,
+        elevGain.value,
+        elapseTime.value
+      );
+});
+
+saveBtn.addEventListener('click', function () {
+      const link = document.createElement("a");
+      link.download = "stat.png"; // 저장될 파일명
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+});
+
+fetch("../../img/bukhansan.gpx")
+  .then(response => {
+    if (!response.ok) throw new Error("Network error");
+    return response.text();   // 파일 내용을 text로 읽음
+  })
+  .then(text => {
+    const pts = parseGPX(text);
+    if (!pts.length) { alert('GPX 트랙포인트를 찾지 못했습니다.'); return; }
+    const metrics = computeMetrics(pts);
+    totalDistance.value = fmtDistance(metrics.totalDist);
+    elevGain.value = fmtElev(metrics.gain);
+    elapseTime.value = fmtTime(metrics.elapsed);
+
+      gpts = pts;
+    exportSummary(gpts,
+        totalDistance.value,
+        elevGain.value,
+        elapseTime.value
+      );
+  })
+  .catch(err => {
+    console.error(err);
+  });
+
+
+</script>
+
+{{< /raw >}}
+
+
+
+--------
+
+* GPX파일을 로드하면 경도,위도 정보를 읽고 거리 표시
+* 고도정보를 읽고 누적고도를 계산
+* 총 시간 계산
+* 경로를 그래프로 표시
+* 고도를 그래프로 표시
+
+
+
+

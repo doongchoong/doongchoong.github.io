@@ -6,14 +6,21 @@
     <description>Recent content on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Wed, 20 Aug 2025 22:56:20 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 09 Sep 2025 19:26:01 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GPX처리하기</title>
+      <link>https://doongchoong.github.io/posts/gpx%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0/</link>
+      <pubDate>Tue, 09 Sep 2025 19:26:01 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/gpx%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0/</guid>
+      <description>&lt;p&gt;최근에 등산을 다니며 스포츠워치를 구매를 하였다. 그래서 GPS정보를 이용하여 내가 이동한 경로를 저장하고&#xA;관리할 수 있게 되었는데 등산앱, 스포츠앱들이 조금씩 기능이 마음에 들지 않아서&#xA;직접 받은 gpx파일 정보를 가지고 여러가지 기능을 구현해보게 되었다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;인증용-stats-정보-만들기&#34;&gt;인증용 Stats 정보 만들기&lt;/h2&gt;&#xA;&lt;p&gt;인증용 stat은 투명한 이미지 위에 거리, 획득고도 등 기록을 표시하는 것이다.&#xA;Strava의 투명 인증샷을 거의 똑같다고 보면 된다.&#xA;하지만 직접 GPX파일을 다루기 때문에 고도 그래프까지 추가하여 표시되도록 하였다.&#xA;이는 인스타에 스티커로 붙여넣어 사용하게 된다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Drop_paint</title>
       <link>https://doongchoong.github.io/posts/drop_paint/</link>
       <pubDate>Wed, 20 Aug 2025 22:56:20 +0900</pubDate>
       <guid>https://doongchoong.github.io/posts/drop_paint/</guid>
-      <description>&lt;p&gt;페인트와 같이 점성이 높은 액체 방울을 떨어뜨렸을때&#xA;형성되는 무늬모양을 시뮬레이션 하는 내용이 있다.&#xA;&lt;a href=&#34;https://people.csail.mit.edu/jaffer/Marbling/Dropping-Paint&#34;&gt;https://people.csail.mit.edu/jaffer/Marbling/Dropping-Paint&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;먼저 떨어트린 방울이 원을 형성하다가 그 다음 방울에 의해 조금 밀려나며&#xA;모양이 조금씩 변해가며 생성되는 무늬를 수학적으로 풀어낸 것이다.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://doongchoong.github.io/toys/drop_paint.html&#34;&gt;만들어본 시뮬레이션 웹 페이지&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-공식&#34;&gt;1. 공식&lt;/h2&gt;&#xA;&lt;p&gt;$$&#xA;C + (P - C) \cdot sqrt \left( 1 + \frac{r^2}{ || P - C ||^2 } \right)&#xA;$$&lt;/p&gt;&#xA;&lt;p&gt;원래 있던 방울 P 가 새로운 C 방울이 떨어졌을때 대한 내용이다.&#xA;이 방울은 중심을 가지고 있고 방울을 표현하는 벡터들의 집합이다.&#xA;코딩으로는 외곽선을 형성하는 벡터들의 집합이고 이들 각각에 대해서 계산하는 것이다.&#xA;원의 정밀도에 따라 100step으로 쪼개서 외곽선을 형성한다면 방울 하나에 100개의 벡터가 존재한다.&lt;/p&gt;</description>
+      <description>&lt;p&gt;페인트와 같이 점성이 높은 액체 방울을 떨어뜨렸을때&#xA;형성되는 무늬모양을 시뮬레이션 하는 내용이 있다.&#xA;&lt;a href=&#34;https://people.csail.mit.edu/jaffer/Marbling/Dropping-Paint&#34;&gt;https://people.csail.mit.edu/jaffer/Marbling/Dropping-Paint&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;먼저 떨어트린 방울이 원을 형성하다가 그 다음 방울에 의해 조금 밀려나며&#xA;모양이 조금씩 변해가며 생성되는 무늬를 수학적으로 풀어낸 것이다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-공식&#34;&gt;1. 공식&lt;/h2&gt;&#xA;&lt;p&gt;$$&#xA;C + (P - C) \cdot sqrt \left( 1 + \frac{r^2}{ || P - C ||^2 } \right)&#xA;$$&lt;/p&gt;&#xA;&lt;p&gt;원래 있던 방울 P 가 새로운 C 방울이 떨어졌을때 대한 내용이다.&#xA;이 방울은 중심을 가지고 있고 방울을 표현하는 벡터들의 집합이다.&#xA;코딩으로는 외곽선을 형성하는 벡터들의 집합이고 이들 각각에 대해서 계산하는 것이다.&#xA;원의 정밀도에 따라 100step으로 쪼개서 외곽선을 형성한다면 방울 하나에 100개의 벡터가 존재한다.&lt;/p&gt;</description>
     </item>
     <item>
       <title>셀룰러오토마타</title>
