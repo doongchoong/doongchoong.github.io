@@ -871,7 +871,6 @@ fetch("../../img/bukhansan.gpx")
         elevGain.value,
         elapseTime.value
       );
-    loadTrack();
   })
   .catch(err => {
     console.error(err);
@@ -936,37 +935,57 @@ GPS내장 시계라서  위도,경도는 생각보다 정확하게 추정이 된
 <link rel="stylesheet" href="https://unpkg.com/leaflet-minimap/dist/Control.MiniMap.min.css">
 <script src="https://unpkg.com/leaflet-minimap/dist/Control.MiniMap.min.js"></script>
 
-<div id="map"></div>
 
+<div class="map-wrapper">
+    <div id="map"></div>
+</div>
 
 <style>
-  #map {
+.map-wrapper {
+    margin: 0px; /* 블로그 p 태그 margin 영향 제거 */
+    padding: 0px;
+}
+
+#map {
+    margin: 0 !important;
+    padding: 0 !important;
     height: 420px;   /* 원하는 높이 */
     width: 100%;     /* 가로는 화면 꽉 채우기 */
     box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-  }
+    overflow: hidden;
+}
 </style>
 
 <script>
-    function loadTrack() {
+    function loadTrack(pts) {
         const map = L.map('map');
-        
         // Set initial center and zoom first
         map.setView([36.5,127.8],7);
         const base = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap 기여자',crossOrigin:true}).addTo(map);
-        const miniBase = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{crossOrigin:true});
-    new L.Control.MiniMap(miniBase,{toggleDisplay:true,minimized:false,aimingRectOptions:{weight:2}}).addTo(map);
 
         let  trackLayer = null;
-        const latlngs=gpts.map(p=>[p.lat,p.lon]);
+        const latlngs=pts.map(p=>[p.lat,p.lon]);
         if(trackLayer)trackLayer.remove();
         trackLayer=L.polyline(latlngs,{color:'#f43f5e',weight:4,opacity:0.9}).addTo(map);
-        map.fitBounds(trackLayer.getBounds(),{padding:[20,20]});
-        
+        map.fitBounds(trackLayer.getBounds(),{
+            padding: [20, 20] 
+        });
     }
 
+
+fetch("../../img/bukhansan.gpx")
+  .then(response => {
+    if (!response.ok) throw new Error("Network error");
+    return response.text();   // 파일 내용을 text로 읽음
+  })
+  .then(text => {
+    const pts = parseGPX(text);
+    if (!pts.length) { alert('GPX 트랙포인트를 찾지 못했습니다.'); return; }
+    loadTrack(pts);
+  })
+  .catch(err => {
+    console.error(err);
+  });
 
 </script>
 
