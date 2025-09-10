@@ -966,7 +966,13 @@ GPS내장 시계라서  위도,경도는 생각보다 정확하게 추정이 된
         let  trackLayer = null;
         const latlngs=pts.map(p=>[p.lat,p.lon]);
         if(trackLayer)trackLayer.remove();
-        trackLayer=L.polyline(latlngs,{color:'#f43f5e',weight:4,opacity:0.9}).addTo(map);
+
+        map.createPane('svgOffsetPane');
+        map.getPane('svgOffsetPane').style.transform = 'translateY(34px)';
+
+        // 폴리라인을 새 pane에 추가
+        trackLayer = L.polyline(latlngs, { pane: 'svgOffsetPane', color:'#f43f5e',weight:4,opacity:0.9}).addTo(map);
+
         map.fitBounds(trackLayer.getBounds(),{
             padding: [20, 20] 
         });
@@ -989,6 +995,61 @@ fetch("../../img/bukhansan.gpx")
 
 </script>
 
+<div class="code-block-wrapper">
+  <div class="code-title">HTML</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;map-wrapper&#34;</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">id</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;map&#34;</span><span style="color:#1f2328">&gt;&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">style</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">.</span><span style="color:#1f2328">map-wrapper</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">margin</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0</span><span style="color:#cf222e">px</span><span style="color:#1f2328">;</span> <span style="color:#57606a">/* 블로그 p 태그 margin 영향 제거 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">padding</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0</span><span style="color:#cf222e">px</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">#</span><span style="color:#24292e">map</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">margin</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0</span> <span style="color:#57606a">!important</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">padding</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0</span> <span style="color:#57606a">!important</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">height</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">420</span><span style="color:#cf222e">px</span><span style="color:#1f2328">;</span>   <span style="color:#57606a">/* 원하는 높이 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">width</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">100</span><span style="color:#cf222e">%</span><span style="color:#1f2328">;</span>     <span style="color:#57606a">/* 가로는 화면 꽉 채우기 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">box-sizing</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">border-box</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">overflow</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">hidden</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">style</span><span style="color:#1f2328">&gt;</span></span></span></code></pre></div>
+  </div>
+</div><p>위와 같이 div 로  <code>id=&quot;map&quot;</code> 엘리먼트를 만들고</p>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">map</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">L</span><span style="color:#1f2328">.</span><span style="color:#1f2328">map</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;map&#39;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// Set initial center and zoom first
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#1f2328">map</span><span style="color:#1f2328">.</span><span style="color:#1f2328">setView</span><span style="color:#1f2328">([</span><span style="color:#0550ae">36.5</span><span style="color:#1f2328">,</span><span style="color:#0550ae">127.8</span><span style="color:#1f2328">],</span><span style="color:#0550ae">7</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">base</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">L</span><span style="color:#1f2328">.</span><span style="color:#1f2328">tileLayer</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&#39;</span><span style="color:#1f2328">,{</span><span style="color:#1f2328">attribution</span><span style="color:#0550ae">:</span><span style="color:#0a3069">&#39;&amp;copy; OpenStreetMap 기여자&#39;</span><span style="color:#1f2328">,</span><span style="color:#1f2328">crossOrigin</span><span style="color:#0550ae">:</span><span style="color:#cf222e">true</span><span style="color:#1f2328">}).</span><span style="color:#1f2328">addTo</span><span style="color:#1f2328">(</span><span style="color:#1f2328">map</span><span style="color:#1f2328">);</span></span></span></code></pre></div>
+  </div>
+</div><p>기본지도를 띄울수 있다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">let</span>  <span style="color:#1f2328">trackLayer</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">null</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">latlngs</span><span style="color:#0550ae">=</span><span style="color:#1f2328">pts</span><span style="color:#1f2328">.</span><span style="color:#1f2328">map</span><span style="color:#1f2328">(</span><span style="color:#1f2328">p</span><span style="color:#1f2328">=&gt;[</span><span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">lat</span><span style="color:#1f2328">,</span><span style="color:#1f2328">p</span><span style="color:#1f2328">.</span><span style="color:#1f2328">lon</span><span style="color:#1f2328">]);</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span><span style="color:#1f2328">trackLayer</span><span style="color:#1f2328">)</span><span style="color:#1f2328">trackLayer</span><span style="color:#1f2328">.</span><span style="color:#1f2328">remove</span><span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">map</span><span style="color:#1f2328">.</span><span style="color:#1f2328">createPane</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;svgOffsetPane&#39;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">map</span><span style="color:#1f2328">.</span><span style="color:#1f2328">getPane</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;svgOffsetPane&#39;</span><span style="color:#1f2328">).</span><span style="color:#1f2328">style</span><span style="color:#1f2328">.</span><span style="color:#1f2328">transform</span> <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;translateY(34px)&#39;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// 폴리라인을 새 pane에 추가
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#1f2328">trackLayer</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">L</span><span style="color:#1f2328">.</span><span style="color:#1f2328">polyline</span><span style="color:#1f2328">(</span><span style="color:#1f2328">latlngs</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">{</span> <span style="color:#1f2328">pane</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#39;svgOffsetPane&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">color</span><span style="color:#0550ae">:</span><span style="color:#0a3069">&#39;#f43f5e&#39;</span><span style="color:#1f2328">,</span><span style="color:#1f2328">weight</span><span style="color:#0550ae">:</span><span style="color:#0550ae">4</span><span style="color:#1f2328">,</span><span style="color:#1f2328">opacity</span><span style="color:#0550ae">:</span><span style="color:#0550ae">0.9</span><span style="color:#1f2328">}).</span><span style="color:#1f2328">addTo</span><span style="color:#1f2328">(</span><span style="color:#1f2328">map</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">map</span><span style="color:#1f2328">.</span><span style="color:#1f2328">fitBounds</span><span style="color:#1f2328">(</span><span style="color:#1f2328">trackLayer</span><span style="color:#1f2328">.</span><span style="color:#1f2328">getBounds</span><span style="color:#1f2328">(),{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">padding</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">20</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">20</span><span style="color:#1f2328">]</span> 
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">});</span></span></span></code></pre></div>
+  </div>
+</div><ul>
+<li>polyline을 새로 만들어 map에 포함시키면 경로가 표시된다.</li>
+<li>[주의!] 경로 자체가 svg로 렌더링 되는데 이 좌표계산시에 웹페이지 css등으로 margin이 들어가면 오차가 발생한다.
+이때 pane를 만들어서 Y transform을 미리 해서 조정 가능. 일반 웹페이지에선 조정 필요없지만 필요한 경우 위처럼 하면 됨.</li>
+</ul>
 
   </div>
   

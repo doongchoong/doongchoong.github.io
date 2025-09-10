@@ -542,7 +542,13 @@ GPS내장 시계라서  위도,경도는 생각보다 정확하게 추정이 된
         let  trackLayer = null;
         const latlngs=pts.map(p=>[p.lat,p.lon]);
         if(trackLayer)trackLayer.remove();
-        trackLayer=L.polyline(latlngs,{color:'#f43f5e',weight:4,opacity:0.9}).addTo(map);
+
+        map.createPane('svgOffsetPane');
+        map.getPane('svgOffsetPane').style.transform = 'translateY(34px)';
+
+        // 폴리라인을 새 pane에 추가
+        trackLayer = L.polyline(latlngs, { pane: 'svgOffsetPane', color:'#f43f5e',weight:4,opacity:0.9}).addTo(map);
+
         map.fitBounds(trackLayer.getBounds(),{
             padding: [20, 20] 
         });
@@ -565,3 +571,58 @@ fetch("../../img/bukhansan.gpx")
 
 </script>
 {{< /raw >}}
+
+
+```html
+<div class="map-wrapper">
+    <div id="map"></div>
+</div>
+
+<style>
+.map-wrapper {
+    margin: 0px; /* 블로그 p 태그 margin 영향 제거 */
+    padding: 0px;
+}
+
+#map {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 420px;   /* 원하는 높이 */
+    width: 100%;     /* 가로는 화면 꽉 채우기 */
+    box-sizing: border-box;
+    overflow: hidden;
+}
+</style>
+```
+
+위와 같이 div 로  `id="map"` 엘리먼트를 만들고 
+
+
+```javascript
+const map = L.map('map');
+// Set initial center and zoom first
+map.setView([36.5,127.8],7);
+const base = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap 기여자',crossOrigin:true}).addTo(map);
+```
+
+기본지도를 띄울수 있다. 
+
+```javascript
+let  trackLayer = null;
+const latlngs=pts.map(p=>[p.lat,p.lon]);
+if(trackLayer)trackLayer.remove();
+
+map.createPane('svgOffsetPane');
+map.getPane('svgOffsetPane').style.transform = 'translateY(34px)';
+
+// 폴리라인을 새 pane에 추가
+trackLayer = L.polyline(latlngs, { pane: 'svgOffsetPane', color:'#f43f5e',weight:4,opacity:0.9}).addTo(map);
+
+map.fitBounds(trackLayer.getBounds(),{
+    padding: [20, 20] 
+});
+```
+
+* polyline을 새로 만들어 map에 포함시키면 경로가 표시된다.
+* [주의!] 경로 자체가 svg로 렌더링 되는데 이 좌표계산시에 웹페이지 css등으로 margin이 들어가면 오차가 발생한다.
+이때 pane를 만들어서 Y transform을 미리 해서 조정 가능. 일반 웹페이지에선 조정 필요없지만 필요한 경우 위처럼 하면 됨.
