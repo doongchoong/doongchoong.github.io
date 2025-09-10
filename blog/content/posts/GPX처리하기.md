@@ -7,15 +7,15 @@ tocBorder : true
 ---
 
 최근에 등산을 다니며 스포츠워치를 구매를 하였다. 그래서 GPS정보를 이용하여 내가 이동한 경로를 저장하고
-관리할 수 있게 되었는데 등산앱, 스포츠앱들이 조금씩 기능이 마음에 들지 않아서
+관리할 수 있게 되었다. 하지만 등산앱, 스포츠앱들이 조금씩 기능이 마음에 들지 않아서
 직접 받은 gpx파일 정보를 가지고 여러가지 기능을 구현해보게 되었다. 
 
-## 인증용 Stats 정보 만들기
+## 1. 인증용 Stats 정보 만들기
 
 인증용 stat은 투명한 이미지 위에 거리, 획득고도 등 기록을 표시하는 것이다. 
 Strava의 투명 인증샷과 거의 똑같다고 보면 된다. 
 하지만 직접 GPX파일을 다루기 때문에 고도 그래프까지 추가하여 표시되도록 하였다.
-이는 인스타에 스티커로 붙여넣어 사용하게 된다.
+이 이미지를 저장 후에 이미지복사 -> 인스타에 스티커로 붙여넣어 사용하게 된다.
 
 --------
 
@@ -85,7 +85,7 @@ Strava의 투명 인증샷과 거의 똑같다고 보면 된다.
   display: grid;
   grid-template-columns: 1fr 1fr; /* 기본 2열 */
   gap: 10px; /* 요소 사이 간격 */
-  max-width: 500px; /* 컨테이너 최대 크기 */
+  max-width: 600px; /* 컨테이너 최대 크기 */
 }
 /* label + input 묶음은 Flex (가로 정렬) */
 .form-group {
@@ -99,6 +99,14 @@ Strava의 투명 인증샷과 거의 똑같다고 보면 된다.
   .form-container {
     grid-template-columns: 1fr;
   }
+}
+
+.form-container input {
+    font-size: 16px;
+    width: 50%;
+}
+.form-container button {
+    padding: 8px 0px;
 }
 </style>
 
@@ -423,6 +431,7 @@ fetch("../../img/bukhansan.gpx")
         elevGain.value,
         elapseTime.value
       );
+    loadTrack();
   })
   .catch(err => {
     console.error(err);
@@ -443,24 +452,25 @@ fetch("../../img/bukhansan.gpx")
 * 경로를 그래프로 표시
 * 고도를 그래프로 표시
 * 각 측정값들을 수정하고 이미지 갱신을 할수 있도록 처리
-* 최종 반영 이미지를 저장
+* 최종 반영 투명 이미지를 저장
 
+배경은 예시이고 stat 정보만 기록된 이미지가 저장된다.
 
 
 ### 1.1. 시행착오
 
 **[획득고도오차]**
 첫 번째에선  획득고도가 25미터 밖에 안나왔다. 최소 700미터는 넘어야 하는 상황에서 말이다. 
-이는 GPS가 오차가 많기 때문에 이런 오차를 보정하기 위해 threshold 값을 지정하는데
-GPS측정 주기가 짧으면 상승고도 변화분이  항상 threshold값보다 작아 문제가 생긴다. 
+이는 GPS가 오차가 많기 때문에 보정하기 위해 threshold 값을 지정한다.
+이때 GPS측정 주기가 짧으면 상승고도 변화분이  항상 threshold값보다 작아 누적이 안되서 생기는 문제이다. 
 
 * 이동평균 사용하기
 * 직전값 기록후 사용하기
 
-둘중 하나를 골라서 사용하려고 했는데  결국 이동평균이 좀더 깔끔한것 같았다. (추후 그래프를 그릴때)
+둘중 하나를 골라서 사용할 수 있고 이동평균이 좀더 깔끔한 것 같다.  (추후 경로,고도 그래프를 그릴때도 사용가능)
 
 **[경로 뾰죡하게 튀는 현상]**
-GPS 오차가 있다보니  경로를 그리게 되면 가끔씩 튀는 현상이 발생했다. 
+경로를 그리게 되면 가끔씩 튀는 현상이 발생했다. 
 이때 GPT가  만들어준 SVG 지도 매핑에서는 경로가 튀는게 없는데  내가 캔버스로 만든 버젼은 튀게되었다. 
 
 ```javascript
@@ -468,14 +478,14 @@ ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ```
 
-이유는 선을 그릴때 아주 좁은지역에서 급속 이동을 한것처럼 처리가 되면
+이유는 선을 그릴때 아주 좁은지역에서  방향을 크게 바꾸는 경우 (경사로가 험할때 지그재그로 길이 나있는 경우) 
 선의 폭만큼 그대로 그리기 때문에 날카롭게 뾰죡한 부분이 생기는 것이다. 
-이는 위 `round` 를 주어서 해결하였다. 
+이는 선 자체를 둥글게 그리는 방법 즉 위 `round` 를 주어서 해결하였다. 
 
 
 **[최고 고도 오차]**
-GPS 내장 시계는 위치는 꽤 정확히 추정해 주는데 이게 고도는 별도로 측정한다고 한다. 
-고도계는 사실 기압계를 가지고 잰다.  이게 오차가 상당하다.  10-30미터 까지도 차이가 난다. 
+GPS내장 시계라서  위도,경도는 생각보다 정확하게 추정이 된다. 고도는 GPS와는 다르게 사실 기압계를 가지고 잰다. 
+그리고 이게 오차가 상당하다.  10-30미터 까지도 차이가 난다. 
 
 이를 핸드폰 앱은 어떻게 보정하는지 리서치해보니
 
@@ -485,8 +495,54 @@ GPS 내장 시계는 위치는 꽤 정확히 추정해 주는데 이게 고도�
 결국 DEM이라는 별도의 정확한 정보를 가지고 다시 재는 것이였다! 
 이를 정확히 반영하는 것은 상당히 어려운 일이다. 
 
-기압기반 고도계는 오차가 있지만 오차가 있는채로 상대적 고도차이는 그래도 정확한 편이다. 
-영점 조절이 안된 느낌으로 생각하면 되므로 
+기압기반 고도계는 오차가 있어 영점 조절이 안된 느낌으로 생각하면 되므로 
+직접 등반하여 최고높이 봉우리 미터를 알고있으니 차이만큼 수동으로 보정하도록 하였다.
 
-최고높이 봉우리 미터를 알고있으니 수동으로 수정하면 되도록 하였다.
 
+
+## 2. OpenStreetMap 
+
+[openstreetmap](https://www.openstreetmap.org)은 개방 라이선스로 자유롭게 사용가능한 세계지도이다. 
+이를 이용하여 지도를 그리고 그 위에 경로를 표시할수 있다. 
+[leafletjs](https://leafletjs.com) 이걸 사용하여 편하게 지도를 표시할수 있다.
+
+{{< raw >}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-minimap/dist/Control.MiniMap.min.css">
+<script src="https://unpkg.com/leaflet-minimap/dist/Control.MiniMap.min.js"></script>
+
+<div id="map"></div>
+
+
+<style>
+  #map {
+    height: 420px;   /* 원하는 높이 */
+    width: 100%;     /* 가로는 화면 꽉 채우기 */
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+  }
+</style>
+
+<script>
+    function loadTrack() {
+        const map = L.map('map');
+        
+        // Set initial center and zoom first
+        map.setView([36.5,127.8],7);
+        const base = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap 기여자',crossOrigin:true}).addTo(map);
+        const miniBase = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{crossOrigin:true});
+    new L.Control.MiniMap(miniBase,{toggleDisplay:true,minimized:false,aimingRectOptions:{weight:2}}).addTo(map);
+
+        let  trackLayer = null;
+        const latlngs=gpts.map(p=>[p.lat,p.lon]);
+        if(trackLayer)trackLayer.remove();
+        trackLayer=L.polyline(latlngs,{color:'#f43f5e',weight:4,opacity:0.9}).addTo(map);
+        map.fitBounds(trackLayer.getBounds(),{padding:[20,20]});
+        
+    }
+
+
+</script>
+{{< /raw >}}

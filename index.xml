@@ -13,7 +13,7 @@
       <link>https://doongchoong.github.io/posts/gpx%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0/</link>
       <pubDate>Tue, 09 Sep 2025 19:26:01 +0900</pubDate>
       <guid>https://doongchoong.github.io/posts/gpx%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0/</guid>
-      <description>&lt;p&gt;최근에 등산을 다니며 스포츠워치를 구매를 하였다. 그래서 GPS정보를 이용하여 내가 이동한 경로를 저장하고&#xA;관리할 수 있게 되었는데 등산앱, 스포츠앱들이 조금씩 기능이 마음에 들지 않아서&#xA;직접 받은 gpx파일 정보를 가지고 여러가지 기능을 구현해보게 되었다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;인증용-stats-정보-만들기&#34;&gt;인증용 Stats 정보 만들기&lt;/h2&gt;&#xA;&lt;p&gt;인증용 stat은 투명한 이미지 위에 거리, 획득고도 등 기록을 표시하는 것이다.&#xA;Strava의 투명 인증샷과 거의 똑같다고 보면 된다.&#xA;하지만 직접 GPX파일을 다루기 때문에 고도 그래프까지 추가하여 표시되도록 하였다.&#xA;이는 인스타에 스티커로 붙여넣어 사용하게 된다.&lt;/p&gt;</description>
+      <description>&lt;p&gt;최근에 등산을 다니며 스포츠워치를 구매를 하였다. 그래서 GPS정보를 이용하여 내가 이동한 경로를 저장하고&#xA;관리할 수 있게 되었다. 하지만 등산앱, 스포츠앱들이 조금씩 기능이 마음에 들지 않아서&#xA;직접 받은 gpx파일 정보를 가지고 여러가지 기능을 구현해보게 되었다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-인증용-stats-정보-만들기&#34;&gt;1. 인증용 Stats 정보 만들기&lt;/h2&gt;&#xA;&lt;p&gt;인증용 stat은 투명한 이미지 위에 거리, 획득고도 등 기록을 표시하는 것이다.&#xA;Strava의 투명 인증샷과 거의 똑같다고 보면 된다.&#xA;하지만 직접 GPX파일을 다루기 때문에 고도 그래프까지 추가하여 표시되도록 하였다.&#xA;이 이미지를 저장 후에 이미지복사 -&amp;gt; 인스타에 스티커로 붙여넣어 사용하게 된다.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Drop_paint</title>
