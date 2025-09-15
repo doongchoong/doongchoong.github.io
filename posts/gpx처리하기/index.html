@@ -617,12 +617,21 @@ Strava의 투명 인증샷과 거의 똑같다고 보면 된다.
     function computeMetrics(points) {
       const elevThreshold = 0.2, stopSpeed = 1, stopGrace = 5;
       let totalDist = 0, gain = 0, movingTime = 0, last = null, belowSince = null;
+      let prevElev = 0;
       for (const p of points) {
-        if (!last) { last = p; continue; }
+        if (!last) { last = p; prevElev = last.ele; continue; }
         const d = haversine(last.lat, last.lon, p.lat, p.lon);
         const dt = (p.time && last.time) ? (p.time - last.time) / 1000 : NaN;
         if (Number.isFinite(d)) totalDist += d;
-        if (Number.isFinite(p.ele) && Number.isFinite(last.ele)) { const up = p.ele - last.ele; if (up > elevThreshold) gain += up; }
+        if (Number.isFinite(p.ele) && Number.isFinite(last.ele)) { 
+            const up = p.ele - prevElev; 
+            if (up > elevThreshold) {
+                gain += up; 
+                prevElev = p.ele;
+            }else{
+                prevElev = last.ele;
+            }
+        }
         if (Number.isFinite(dt) && dt > 0 && Number.isFinite(d)) {
           const speed = d / dt;
           if (speed >= stopSpeed) { movingTime += dt; belowSince = null; }
@@ -742,9 +751,9 @@ Strava의 투명 인증샷과 거의 똑같다고 보면 된다.
         ctx.stroke();
 
         // 그래프
-        const graphWidth = boxWidth;  // 경로와 같은 너비
+        const graphWidth = maxBoxWidth;  // 경로와 같은 너비
         const graphHeight = 100;      // 그래프 높이
-        const graphOffsetX = offsetX;
+        const graphOffsetX = (canvas.width / scale - graphWidth) / 2;
         const graphOffsetY = offsetY + boxHeight + 40; // 경로 아래 20px
 
         ctx.beginPath();
