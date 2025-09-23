@@ -635,3 +635,127 @@ map.fitBounds(trackLayer.getBounds(),{
 * polyline을 새로 만들어 map에 포함시키면 경로가 표시된다.
 * [주의!] 경로 자체가 svg로 렌더링 되는데 이 좌표계산시에 웹페이지 css등으로 margin이 들어가면 오차가 발생한다.
 이때 pane를 만들어서 Y transform을 미리 해서 조정 가능. 일반 웹페이지에선 조정 필요없지만 필요한 경우 위처럼 하면 됨.
+
+
+
+## 3. 3D 표현하기
+
+등산을 하다보니 내가 이동한 경로가 지형 기준으로 어떻게 움직인건지
+3차원에서의 경로가 궁금해졌다. 
+
+가끔씩 유투브 같은 것 보면 등산코드를 3차원으로 이동하는 것을 보여주는 것을 보았는데 
+그런 느낌으로 경로를 보았으면 했다. 
+
+[구현한 3D 북한산 gpx 경로](https://doongchoong.github.io/toys/gpx3d.html)
+
+
+{{< raw >}}
+<img src="../../img/250909_03.jpeg"></img>
+<img src="../../img/250909_04.jpeg"></img>
+{{< /raw >}}
+> (북한산 지형위에 표시된 경로들) [^1]
+
+
+[^1]: 북한산 주 능선,  사패산-도봉산 연계
+
+### 3.1. 지형정보
+
+지형데이터의 소스 국토지리연구원이나 해외 오픈데이터 사이트에서 구할수 있다. 
+국내 정밀지형은 해상도가 1m 까지도 나온다고 한다. 하지만 인증 및 여러절차가 있으므로 
+해상도가 30m인 아래 사이트에서 구하였다. 
+[https://opentopography.org](https://opentopography.org)
+
+* Data -> Find Data Map
+* "Select a region"
+* 데이터 소스 선택 (어떤것이 좋은지 몰라서 일단 SRTM GL1로 선택)
+* Geo데이터를 tif 포맷으로 선택
+
+### 3.2. GeoTIFF.js
+
+[https://github.com/geotiffjs/geotiff.js/](https://github.com/geotiffjs/geotiff.js/)
+
+이 라이브러리는 tif 파일을 읽고 지형정보를 읽어들일수 있다. 
+
+* 읽어들인 지형정보를 가지고 THREE.js  3D 라이브러리의 평면에 매핑하고 높이 맵을 만든다. 
+* GPX정보를 읽어들이고 THREE.js 의 Line을 만든다. 
+* Line을 따라 움직이는 물체를 만든다 (구)
+
+**[주의!]GPX의 경로를 만들때 x,y좌표는 GPX 데이터 기반으로 계산하고, 높이는 tif의 높이로 한다.**
+
+```js
+  const geometry = new THREE.PlaneGeometry(terrainWidth, terrainHeight, demWidth-1, demHeight-1);
+  const vertices = geometry.attributes.position.array;
+  for(let i=0,j=2;i<rasterData.length;i++,j+=3){
+    vertices[j] = rasterData[i]/10; // DEM 스케일
+  }
+  geometry.computeVertexNormals();
+
+  const material = new THREE.MeshStandardMaterial({
+    color:0x88cc88,
+    wireframe:false,
+    side:THREE.DoubleSide,
+    flatShading:true
+  });
+
+  terrainMesh = new THREE.Mesh(geometry, material);
+  terrainMesh.rotation.x = -Math.PI/2;
+  scene.add(terrainMesh);
+```
+
+* TIF파일의 raster 데이터를 그대로 plane에 대입한다.
+* 재질을 만들고 지오메트리와 재질을 합쳐만든 메쉬를 scene에 추가
+
+
+```js
+// 좌표 변환
+function latLonToXZ(lat, lon){
+  const [minX, minY, maxX, maxY] = geoBounds;
+  const x = ((lon - minX)/(maxX - minX) - 0.5) * terrainWidth;
+  const z = (1 - (lat - minY)/(maxY - minY) - 0.5) * terrainHeight;
+  return {x, z};
+}
+```
+
+* gpx의 정보를 3d 좌표계로 변환
+
+
+```js
+    const [minX, minY, maxX, maxY] = geoBounds;
+    let ix = Math.floor((p.lon - minX)/(maxX - minX) * (demWidth - 1));
+    let iz = Math.floor((maxY - p.lat)/(maxY - minY) * (demHeight - 1));
+
+    // 범위 clamp
+    ix = Math.max(0, Math.min(ix, demWidth-1));
+    iz = Math.max(0, Math.min(iz, demHeight-1));
+    const idx = iz * demWidth + ix;
+
+    let y = rasterData[idx]/10 + 1;
+    if(isNaN(y)) y = 0;
+
+    vertices.push(pos.x, y, pos.z);
+```
+
+* 높이값을 얻기 위해 GPX좌표를 TIF좌표계로 변환한뒤 tif의 높이값을 구함.
+
+
+
+## 4. 생각해 볼만한 것
+
+* 3D 지형에 위성사진 매핑 하기
+* GPS api를 이용해서 3d지도에서 현재 위치 표시하기
+
+
+GPT의 도움을 받았는데 좌표계에서 계속 2선택지 중 하나로 (둘다 잘못됨)
+변경되는 현상이 있었다. 
+그래서 코드를 하나하나 이해해보니 뭔가 큰 그림에서는 맞지만
+세세한 부분부분에서의 차이가 결과를 크게 바꾸었다. 
+
+예를 들면 GeoTIFF를 THREE 의 plane에 그대로 매핑 하면 좌표계가 x, y 좌표와 그 값을 매핑할텐데
+THREE.js는 z가 깊이이므로 좌표계가 다르다. 
+
+그리고 tif는 먼쪽부터 채우는데 GPX는 가까운쪽 기준으로 삼으면 경로의 시작위치가 완전 변경된다. 
+이런 것들을 조금씩 조정해주어야 한다. 
+이때 코드를 이해하지 못한다면 GPT는 계속 "완벽히 보정된 예제를 만들어드릴수 있어요" 얘기를 하지만
+이미 잘못되었던 내용을 계속 반복하게 되는 것이다.
+
+따라서 인공지능의 도움은 많이 받아도 그걸 이해하지 못하면 시행착오를 상당히 겪을수밖에 없다.
