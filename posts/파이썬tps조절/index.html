@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파이썬Tps조절 | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+  }
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+  background-color: #cdcdcd;
+  border-radius: 16px 16px 0 16px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #cdcdcd;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <h1 class="post-title">파이썬Tps조절</h1>
+    <div class="post-date">January 9, 2026</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-가장-기본-tps-조절">1. 가장 기본 tps 조절</a></li>
+    <li><a href="#2-drift제거-버젼">2. Drift제거 버젼</a></li>
+    <li><a href="#3-정밀도를-더-높인-버젼">3. 정밀도를 더 높인 버젼</a></li>
+    <li><a href="#4-adaptive-tps">4. Adaptive TPS</a></li>
+    <li><a href="#5-생각">5. 생각</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>회사에서 파이썬을 여러가지 용도로 활용하고 있는데
+대규모 부하테스트 전 실험적으로 돌려보는 용도로도 사용한다.
+좀더 고도화해서 사용하고자 하는 과정을 기록한다.</p>
+<h2 id="1-가장-기본-tps-조절">1. 가장 기본 tps 조절</h2>
+<div class="code-block-wrapper">
+  <div class="code-title">PY</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">tps_test</span><span style="color:#1f2328">(</span>tps<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    interval <span style="color:#0550ae">=</span> <span style="color:#0550ae">1.0</span> <span style="color:#0550ae">/</span> tps
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> i <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span><span style="color:#0550ae">5000</span><span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>        _call_my_job<span style="color:#1f2328">(</span>i<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        time<span style="color:#0550ae">.</span>sleep<span style="color:#1f2328">(</span>interval<span style="color:#1f2328">)</span></span></span></code></pre></div>
+  </div>
+</div><p>1초 기준으로 역산하여 sleep할 시간을 구한다.
+하지만 이렇게 만들면 drifting
+즉 함수호출이나 시스템 콜등이 누적되며 조금씩의 오차가 누적된다.</p>
+<h2 id="2-drift제거-버젼">2. Drift제거 버젼</h2>
+<p>제네레이터로 바꾼다. 기본개념은 기본 인터벌이 적용된 다음 &lsquo;기대&rsquo;시간과 현재 시간의 차이만큼
+sleep하는 것.</p>
+<p>대신 양수일때 sleep하고 음수라면 (이미 &lsquo;기대&rsquo;시간이 지난 상황) 즉각 호출한다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">PY</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">time</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">itertools</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">tps_throttle</span><span style="color:#1f2328">(</span>iterable<span style="color:#1f2328">,</span> tps<span style="color:#1f2328">,</span> total<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    interval <span style="color:#0550ae">=</span> <span style="color:#0550ae">1.0</span> <span style="color:#0550ae">/</span> tps
+</span></span><span style="display:flex;"><span>    it <span style="color:#0550ae">=</span> itertools<span style="color:#0550ae">.</span>cycle<span style="color:#1f2328">(</span>iterable<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    next_tick <span style="color:#0550ae">=</span> time<span style="color:#0550ae">.</span>perf_counter<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> _ <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span>total<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>        now <span style="color:#0550ae">=</span> time<span style="color:#0550ae">.</span>perf_counter<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>        sleep_time <span style="color:#0550ae">=</span> next_tick <span style="color:#0550ae">-</span> now
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span> sleep_time <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            time<span style="color:#0550ae">.</span>sleep<span style="color:#1f2328">(</span>sleep_time<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">yield</span> <span style="color:#6639ba">next</span><span style="color:#1f2328">(</span>it<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        next_tick <span style="color:#0550ae">+=</span> interval
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 제네레이터 사용</span>
+</span></span><span style="display:flex;"><span>dat <span style="color:#0550ae">=</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1000</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span> itm <span style="color:#0550ae">in</span> <span style="color:#1f2328">(</span>dat<span style="color:#1f2328">,</span> tps<span style="color:#0550ae">=</span><span style="color:#0550ae">200</span><span style="color:#1f2328">,</span> total<span style="color:#0550ae">=</span><span style="color:#0550ae">100000</span><span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    _call_my_job<span style="color:#1f2328">(</span>itm<span style="color:#1f2328">)</span></span></span></code></pre></div>
+  </div>
+</div><p>제네레이터를 사용한 for문은 tps가 조정되서 정확하게 호출된다.
+여기까지는 내가 작성하여 사용했던 버젼인데
+이제 더 정확한 tps를 만들수 있나? 라는 궁금증이 생겼다.</p>
+<h2 id="3-정밀도를-더-높인-버젼">3. 정밀도를 더 높인 버젼</h2>
+<p>일단 GPT에게 한번 물어보았다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. 굉장히 미세한 구간에서 약간 일찍 sleep을 끝내고 busy-waiting해도 되나?</div></p>
+<p><strong>🤖 ChatGPT:</strong><br>
+짧은 답부터 말하면 **“된다, 그리고 그게 정석이다”**야.
+다만 <strong>어디까지 허용하느냐</strong>가 중요해.</p>
+<hr>
+<h2 id="결론-한-줄">결론 한 줄</h2>
+<blockquote>
+<p><strong>아주 미세한 구간(수백 μs 이하)에서만 sleep을 일찍 깨고 busy-wait 하는 건
+정확도를 올리는 올바른 방법이다.</strong></p></blockquote>
+<p>이건 “편법”이 아니라 <strong>타이머 정확도 보정 기법</strong>이야.</p>
+<hr>
+<h2 id="왜-이런-게-필요하냐면">왜 이런 게 필요하냐면</h2>
+<h3 id="timesleep의-현실"><code>time.sleep()</code>의 현실</h3>
+<ul>
+<li>
+<p><code>sleep(0.002)</code> → <strong>정확히 2ms 보장 ❌</strong></p>
+</li>
+<li>
+<p>실제로는:</p>
+<ul>
+<li>2.1ms</li>
+<li>2.8ms</li>
+<li>가끔 4ms</li>
+</ul>
+</li>
+</ul>
+<p>즉, <strong>sleep은 항상 늦게 깬다</strong>
+→ TPS에서는 이 “늦음”이 문제</p>
+<hr>
+<h2 id="그래서-쓰는-패턴이-이거야">그래서 쓰는 패턴이 이거야</h2>
+<h3 id="개념">개념</h3>
+<ol>
+<li><strong>멀리 있을 때</strong> → sleep</li>
+<li><strong>아주 가까워지면</strong> → busy-wait</li>
+</ol>
+<hr>
+<h2 id="정석-구조-500-tps에-딱-맞음">정석 구조 (500 TPS에 딱 맞음)</h2>
+<div class="code-block-wrapper">
+  <div class="code-title">PYTHON</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">time</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">itertools</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">tps_throttle</span><span style="color:#1f2328">(</span>iterable<span style="color:#1f2328">,</span> tps<span style="color:#1f2328">,</span> total<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    interval <span style="color:#0550ae">=</span> <span style="color:#0550ae">1.0</span> <span style="color:#0550ae">/</span> tps
+</span></span><span style="display:flex;"><span>    it <span style="color:#0550ae">=</span> itertools<span style="color:#0550ae">.</span>cycle<span style="color:#1f2328">(</span>iterable<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    SPIN_THRESHOLD <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0005</span>  <span style="color:#57606a"># 0.5ms</span>
+</span></span><span style="display:flex;"><span>    next_tick <span style="color:#0550ae">=</span> time<span style="color:#0550ae">.</span>perf_counter<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> _ <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span>total<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">while</span> <span style="color:#cf222e">True</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            now <span style="color:#0550ae">=</span> time<span style="color:#0550ae">.</span>perf_counter<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>            remaining <span style="color:#0550ae">=</span> next_tick <span style="color:#0550ae">-</span> now
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> remaining <span style="color:#0550ae">&lt;=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#cf222e">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> remaining <span style="color:#0550ae">&gt;</span> SPIN_THRESHOLD<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                time<span style="color:#0550ae">.</span>sleep<span style="color:#1f2328">(</span>remaining <span style="color:#0550ae">-</span> SPIN_THRESHOLD<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#57606a"># 마지막 수백 μs만 spin</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#cf222e">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">yield</span> <span style="color:#6639ba">next</span><span style="color:#1f2328">(</span>it<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        next_tick <span style="color:#0550ae">+=</span> interval</span></span></code></pre></div>
+  </div>
+</div><h2 id="어느-정도가-안전한-spin-구간인가">어느 정도가 “안전한” spin 구간인가?</h2>
+<p>실무 기준 표로 줄게.</p>
+<table>
+  <thead>
+      <tr>
+          <th>환경</th>
+          <th>SPIN_THRESHOLD</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>macOS / Linux</td>
+          <td>0.3 ~ 0.7 ms</td>
+      </tr>
+      <tr>
+          <td>Windows</td>
+          <td>0.8 ~ 1.5 ms</td>
+      </tr>
+      <tr>
+          <td>서버 (전용 코어)</td>
+          <td>0.1 ~ 0.3 ms</td>
+      </tr>
+  </tbody>
+</table>
+<p>👉 처음엔 <strong>0.5ms</strong>로 두고 측정하는 게 베스트</p>
+
+</div>
+<p>그래 너무 좋다. threshold가 워낙 작은 값이라 spin은 굉장히 짧게 돌게 된다.
+굉장히 정확한 타이밍으로 tps가 쪼개져 호출될 것이다.</p>
+<h2 id="4-adaptive-tps">4. Adaptive TPS</h2>
+<p>문득 이런생각이 들었다. sync 방식 콜링하는 서비스를 측정하면 기대하는 tps를 높게 적어도
+실질 tps가 굉장히 느릴텐데. 이런 경우 동적으로 tps가 줄어들어 적절한 tps로 변화하는 방법은 없을까 생각했다.
+물론 async 콜링같이 굉장히 빠른 케이스는 그대로 기대tps를 사용하도록 한다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. 대부분 tps_throttle을 쓰는 대상은 async로 시스템콜만 하는 거라서 빠른데, 간혹 내가 아닌 다른사람이 blocking 서비스를 호출할수도 있어 그러면 기대하는 tps보다 훨씬 낮은 실제 tps가 나올텐데 이런 경우를 대비해서 adaptive하게 조절 하는 방법이 있을까?</div></p>
+<p><strong>🤖 ChatGPT:</strong><br>
+이건 <strong>“TPS 발생기 + 느린 소비자”가 섞일 때 반드시 생기는 문제</strong>고,
+해결책은 <strong>타이밍 기법이 아니라 “제어(컨트롤)” 문제</strong>야.</p>
+<p>결론부터 말하면:</p>
+<blockquote>
+<p><strong>가능하다.</strong>
+다만 <strong>“TPS를 보장”하는 게 아니라
+“시스템이 감당 가능한 TPS로 자동 수렴”</strong> 하게 만드는 방식이다.</p></blockquote>
+<hr>
+<h3 id="-현실적인-목표">✅ 현실적인 목표</h3>
+<blockquote>
+<p>“시스템이 막히면 TPS를 낮추되,
+회복되면 다시 올리자”</p></blockquote>
+<p>이게 바로 <strong>Adaptive Throttling</strong></p>
+<h3 id="aimd-additive-increase--multiplicative-decrease">AIMD (Additive Increase / Multiplicative Decrease)</h3>
+<p>TCP 혼잡제어랑 같은 방식이야.</p>
+<ul>
+<li>잘 돌아가면 → TPS <strong>천천히 증가</strong></li>
+<li>막히면 → TPS <strong>확 줄임</strong></li>
+</ul>
+<hr>
+<h2 id="최소한의-adaptive-tps_throttle-구현">최소한의 Adaptive tps_throttle 구현</h2>
+<h3 id="핵심-아이디어">핵심 아이디어</h3>
+<ul>
+<li>목표 TPS는 <code>target_tps</code></li>
+<li>실제 TPS는 <code>current_tps</code></li>
+<li>consumer가 느려지면 <code>current_tps ↓</code></li>
+</ul>
+<div class="code-block-wrapper">
+  <div class="code-title">PY</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#0550ae">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a"># --- latency 관측 ---</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> last_yield <span style="color:#0550ae">is</span> <span style="color:#0550ae">not</span> <span style="color:#cf222e">None</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>        actual_interval <span style="color:#0550ae">=</span> t <span style="color:#0550ae">-</span> last_yield
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#57606a"># 기대보다 느리면 과부하 판단</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span> actual_interval <span style="color:#0550ae">&gt;</span> interval <span style="color:#0550ae">*</span> <span style="color:#0550ae">1.5</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            current_tps <span style="color:#0550ae">*=</span> <span style="color:#0550ae">0.7</span>   <span style="color:#57606a"># multiplicative decrease</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            current_tps <span style="color:#0550ae">+=</span> <span style="color:#0550ae">1</span>     <span style="color:#57606a"># additive increase</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        current_tps <span style="color:#0550ae">=</span> <span style="color:#6639ba">max</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#6639ba">min</span><span style="color:#1f2328">(</span>current_tps<span style="color:#1f2328">,</span> target_tps<span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span>        interval <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">/</span> current_tps
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    last_yield <span style="color:#0550ae">=</span> t
+</span></span><span style="display:flex;"><span>    next_tick <span style="color:#0550ae">+=</span> interval</span></span></code></pre></div>
+  </div>
+</div><p><div class="user-bubble"><strong>User</strong>. 회복을 계속 하나? tps를 조금씩 올리다가 1.5배 넘으면 갑자기 70% 감쇠되잖아 수렴하게 해야지</div></p>
+<p><strong>🤖 ChatGPT:</strong><br>
+맞아. <strong>지금 구조 그대로면 “왔다 갔다(oscillation)” 할 수 있어.</strong>
+네가 정확히 짚은 포인트는 <strong>제어 이론 문제</strong>고, 해결 키워드는 딱 두 개야:</p>
+<blockquote>
+<p><strong>① 노이즈 제거(평활화)</strong>
+<strong>② 수렴 조건 명시</strong></p></blockquote>
+<p>아래를 순서대로 보면 “왜 흔들리고 → 어떻게 수렴시키는지”가 한 번에 보일 거야.</p>
+<hr>
+<h2 id="1-왜-지금-로직은-흔들리나-문제의-본질">1️⃣ 왜 지금 로직은 흔들리나 (문제의 본질)</h2>
+<p>현재 로직 요약하면:</p>
+<ul>
+<li>정상 → TPS +1</li>
+<li>느림 감지 → TPS × 0.7</li>
+</ul>
+<p>이건 전형적인 <strong>거친 AIMD</strong>야.</p>
+<p>문제는:</p>
+<ul>
+<li>latency는 <strong>항상 노이즈가 있음</strong></li>
+<li>단발성 blocking에도 즉시 ×0.7</li>
+<li>회복은 선형, 감쇠는 급격</li>
+</ul>
+<p>결과:</p>
+<div class="code-block-wrapper">
+  <div class="code-title"></div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>올라감 → 한번 튐 → 급락 → 다시 올라감 → 또 튐 …</span></span></code></pre></div>
+  </div>
+</div><p>👉 <strong>수렴점 근처에서 계속 진동</strong></p>
+<hr>
+<h2 id="2-수렴을-만들려면-반드시-필요한-2가지">2️⃣ 수렴을 만들려면 반드시 필요한 2가지</h2>
+<h3 id="-a-관측값을-평활화해야-한다-ewma">✅ (A) 관측값을 평활화해야 한다 (EWMA)</h3>
+<p>단일 샘플로 판단 ❌
+<strong>이동 평균</strong>으로 판단 ✅</p>
+<div class="code-block-wrapper">
+  <div class="code-title">PYTHON</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ewma <span style="color:#0550ae">=</span> α <span style="color:#0550ae">*</span> sample <span style="color:#0550ae">+</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#0550ae">-</span>α<span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> ewma</span></span></code></pre></div>
+  </div>
+</div><ul>
+<li>α = 0.1 ~ 0.3 (보통)</li>
+<li>blocking “패턴”만 반응</li>
+<li>스파이크 무시</li>
+</ul>
+<hr>
+<h2 id="3-수렴형-adaptive-제어의-정석-구조">3️⃣ 수렴형 Adaptive 제어의 정석 구조</h2>
+<p>개념적으로 이렇게 된다:</p>
+<div class="code-block-wrapper">
+  <div class="code-title"></div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>measured_interval (EWMA)
+</span></span><span style="display:flex;"><span>        ↓
+</span></span><span style="display:flex;"><span>error = measured - target
+</span></span><span style="display:flex;"><span>        ↓
+</span></span><span style="display:flex;"><span>작은 오차 → 유지
+</span></span><span style="display:flex;"><span>큰 오차 지속 → 감소
+</span></span><span style="display:flex;"><span>오차 거의 없음 지속 → 증가</span></span></code></pre></div>
+  </div>
+</div><p>이건 사실상 <strong>1차 PI 컨트롤러의 단순형</strong>이야.</p>
+<hr>
+<h2 id="4-네-throttle에-맞는-수렴형-로직-실전용">4️⃣ 네 throttle에 맞는 “수렴형” 로직 (실전용)</h2>
+<h3 id="핵심-정책">핵심 정책</h3>
+<ul>
+<li>기준: <code>measured_interval / ideal_interval</code></li>
+<li>EWMA로 판단</li>
+<li>dead-zone(무반응 구간) 존재</li>
+<li>변화량 제한</li>
+</ul>
+<hr>
+<h3 id="-수렴형-adaptive--spin-최종-예제">⭐ 수렴형 adaptive + spin 최종 예제</h3>
+<div class="code-block-wrapper">
+  <div class="code-title">PYTHON</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">time</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">itertools</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">adaptive_tps_throttle</span><span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>    iterable<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    target_tps<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    total<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    spin_threshold<span style="color:#0550ae">=</span><span style="color:#0550ae">0.0005</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    it <span style="color:#0550ae">=</span> itertools<span style="color:#0550ae">.</span>cycle<span style="color:#1f2328">(</span>iterable<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    current_tps <span style="color:#0550ae">=</span> target_tps
+</span></span><span style="display:flex;"><span>    interval <span style="color:#0550ae">=</span> <span style="color:#0550ae">1.0</span> <span style="color:#0550ae">/</span> current_tps
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    next_tick <span style="color:#0550ae">=</span> time<span style="color:#0550ae">.</span>perf_counter<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>    last_yield <span style="color:#0550ae">=</span> <span style="color:#cf222e">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a"># --- control parameters ---</span>
+</span></span><span style="display:flex;"><span>    ewma_interval <span style="color:#0550ae">=</span> <span style="color:#cf222e">None</span>
+</span></span><span style="display:flex;"><span>    ALPHA <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.2</span>          <span style="color:#57606a"># smoothing</span>
+</span></span><span style="display:flex;"><span>    DEADZONE <span style="color:#0550ae">=</span> <span style="color:#0550ae">1.1</span>       <span style="color:#57606a"># ±10%는 무시</span>
+</span></span><span style="display:flex;"><span>    DEC_RATE <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.9</span>       <span style="color:#57606a"># 감소 시 10%</span>
+</span></span><span style="display:flex;"><span>    INC_STEP <span style="color:#0550ae">=</span> <span style="color:#0550ae">1.0</span>       <span style="color:#57606a"># 증가 시 +1 tps</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> _ <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span>total<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#57606a"># --- precise wait ---</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">while</span> <span style="color:#cf222e">True</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            now <span style="color:#0550ae">=</span> time<span style="color:#0550ae">.</span>perf_counter<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>            remaining <span style="color:#0550ae">=</span> next_tick <span style="color:#0550ae">-</span> now
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> remaining <span style="color:#0550ae">&lt;=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#cf222e">break</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> remaining <span style="color:#0550ae">&gt;</span> spin_threshold<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                time<span style="color:#0550ae">.</span>sleep<span style="color:#1f2328">(</span>remaining <span style="color:#0550ae">-</span> spin_threshold<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">yield</span> <span style="color:#6639ba">next</span><span style="color:#1f2328">(</span>it<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        now <span style="color:#0550ae">=</span> time<span style="color:#0550ae">.</span>perf_counter<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#57606a"># --- measure ---</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span> last_yield <span style="color:#0550ae">is</span> <span style="color:#0550ae">not</span> <span style="color:#cf222e">None</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            measured <span style="color:#0550ae">=</span> now <span style="color:#0550ae">-</span> last_yield
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> ewma_interval <span style="color:#0550ae">is</span> <span style="color:#cf222e">None</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                ewma_interval <span style="color:#0550ae">=</span> measured
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                ewma_interval <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>                    ALPHA <span style="color:#0550ae">*</span> measured <span style="color:#0550ae">+</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">1</span> <span style="color:#0550ae">-</span> ALPHA<span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> ewma_interval
+</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            ratio <span style="color:#0550ae">=</span> ewma_interval <span style="color:#0550ae">/</span> interval
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#57606a"># --- adaptive control (수렴 핵심) ---</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> ratio <span style="color:#0550ae">&gt;</span> DEADZONE<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                current_tps <span style="color:#0550ae">*=</span> DEC_RATE
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">elif</span> ratio <span style="color:#0550ae">&lt;</span> <span style="color:#0550ae">0.95</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                current_tps <span style="color:#0550ae">+=</span> INC_STEP
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            current_tps <span style="color:#0550ae">=</span> <span style="color:#6639ba">max</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#6639ba">min</span><span style="color:#1f2328">(</span>current_tps<span style="color:#1f2328">,</span> target_tps<span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span>            interval <span style="color:#0550ae">=</span> <span style="color:#0550ae">1.0</span> <span style="color:#0550ae">/</span> current_tps
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        last_yield <span style="color:#0550ae">=</span> now
+</span></span><span style="display:flex;"><span>        next_tick <span style="color:#0550ae">+=</span> interval</span></span></code></pre></div>
+  </div>
+</div>
+</div>
+<p>이렇게 하면 기존에 async 콜링하는 경우 500tps에 육박해도 문제없이 정확한 타이밍에 call되고
+간혹 느리고 편차가 큰 서비스를 콜링하여 실질tps가 가늠이 안잡힐때는 adaptive가 작동하며
+수렴될 것이다.</p>
+<h2 id="5-생각">5. 생각</h2>
+<p>최근 ai들의 성능이 25년 하반기에 급격하게 좋아지며 대부분의 개발자 코딩능력을 넘어선 것 같다.
+이제는 여러 ai들을 조합해서 멀티 에이전트로 돌린다고 한다.
+26년도 목표는 훨씬 친해지는 것이 목표</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>
