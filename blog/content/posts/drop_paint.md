@@ -58,8 +58,9 @@ $$
 
 {{< raw >}}
 
-
-<canvas id="ca" width="400" height="300"></canvas>
+<div class="WrapCanvas">
+  <canvas id="ca"> </canvas>
+</div>
 <div id="info">
   <div id="buttons">
     <button id="resetBtn">🔄 Reset</button>
@@ -72,9 +73,27 @@ $$
   </div>
 </div>
 
+<style>
+.WrapCanvas {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  aspect-ratio: 4/3; /* 원하는 비율 유지 */
+  overflow: hidden; 
+} 
+#ca {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+</style>
 <script>
 const canvas=document.getElementById('ca');
 const ctx=canvas.getContext('2d');
+
+canvas.width = 400;
+canvas.height=300;
 
 // 컨트롤들
 const colorText = document.getElementById("colorText");
