@@ -3,16 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://doongchoong.github.io/posts/</loc>
-    <lastmod>2026-02-01T12:02:43+09:00</lastmod>
+    <lastmod>2026-02-03T23:37:35+09:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://doongchoong.github.io/posts/%EB%84%A4%EC%98%A8%EC%B0%A8%ED%8A%B8/</loc>
-    <lastmod>2026-02-01T12:02:43+09:00</lastmod>
+    <loc>https://doongchoong.github.io/posts/strangler_fig/</loc>
+    <lastmod>2026-02-03T23:37:35+09:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://doongchoong.github.io/</loc>
+    <lastmod>2026-02-03T23:37:35+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://doongchoong.github.io/posts/%EB%84%A4%EC%98%A8%EC%B0%A8%ED%8A%B8/</loc>
     <lastmod>2026-02-01T12:02:43+09:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>

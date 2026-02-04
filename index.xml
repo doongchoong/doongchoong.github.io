@@ -6,8 +6,15 @@
     <description>Recent content on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sun, 01 Feb 2026 12:02:43 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 03 Feb 2026 23:37:35 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Strangler_fig</title>
+      <link>https://doongchoong.github.io/posts/strangler_fig/</link>
+      <pubDate>Tue, 03 Feb 2026 23:37:35 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/strangler_fig/</guid>
+      <description>&lt;div class=&#34;chatlog&#34;&gt;&#xA;  &lt;p&gt;&lt;div class=&#34;user-bubble&#34;&gt;&lt;strong&gt;User&lt;/strong&gt;. 스트랭글러 피그 패턴이 뭐야?&lt;/div&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;🤖 Gemini:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;스트랭글러 피그(Strangler Fig) 패턴&lt;/strong&gt;은 이름에서 알 수 있듯이, 거대한 나무를 감싸며 자라 결국은 나무를 완전히 대체해버리는 &amp;lsquo;교살자 무화과나무&amp;rsquo;의 생태에서 착안한 아키텍처 이주 전략입니다.&lt;/p&gt;&#xA;&lt;p&gt;한마디로 요약하면 **&amp;ldquo;한 번에 다 갈아엎지(Big Bang) 말고, 야금야금 갉아먹듯 바꿔라&amp;rdquo;**는 뜻입니다.&lt;/p&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&lt;h2 id=&#34;1-서비스화&#34;&gt;1. 서비스화&lt;/h2&gt;&#xA;&lt;p&gt;금융권은 레거시 코드가 많아서 전통적인 방식으로 구현된 곳이 많다.&#xA;다만 이러한 방법론을 바탕으로 오랜시간동안 안정화를 해왔지만 기본 구조 자체가&#xA;문제가 되어 고질적으로 문제를 일으키는 시스템이기도 하다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>네온차트</title>
       <link>https://doongchoong.github.io/posts/%EB%84%A4%EC%98%A8%EC%B0%A8%ED%8A%B8/</link>
