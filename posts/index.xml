@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 03 Feb 2026 23:37:35 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 22:14:46 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>에이전트코딩</title>
+      <link>https://doongchoong.github.io/posts/%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8%EC%BD%94%EB%94%A9/</link>
+      <pubDate>Mon, 10 Aug 2026 22:14:46 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8%EC%BD%94%EB%94%A9/</guid>
+      <description>&lt;h2 id=&#34;어떻게-알게-되었나&#34;&gt;어떻게 알게 되었나&lt;/h2&gt;&#xA;&lt;p&gt;얼마전 Gemini 에서 다시 GPT로 변경했다. 그렇게 하드하게 쓰는게 아니기 때문에&#xA;Plus요금제를 쓰고 있는데 Codex란 것을 알게되었고. 그리고 에이전트코딩에 대해&#xA;듣고 한번 시도를 해보았다.&#xA;토이프로젝트 수준에 과한것 같긴 하지만 굉장히 만족스러웠기 때문에 기록으로&#xA;남기고자 한다.&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#34;chatlog&#34;&gt;&#xA;  &lt;p&gt;&lt;div class=&#34;user-bubble&#34;&gt;&lt;strong&gt;User&lt;/strong&gt;. 에이전트 코딩에 대해 간략하게 요약해줘&lt;/div&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;🤖 ChatGPT:&lt;/strong&gt;&lt;br&gt;&#xA;에이전트 코딩(Agentic Coding)은 AI가 단순히 코드를 제안하는 것을 넘어, 개발 목표를 이해하고 작업을 자율적으로 수행하는 방식입니다.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;코드베이스와 요구사항을 분석합니다.&lt;/li&gt;&#xA;&lt;li&gt;구현 계획을 세우고 여러 파일을 수정합니다.&lt;/li&gt;&#xA;&lt;li&gt;테스트·빌드·오류 분석을 반복하며 결과를 검증합니다.&lt;/li&gt;&#xA;&lt;li&gt;필요하면 문서나 외부 자료를 조사합니다.&lt;/li&gt;&#xA;&lt;li&gt;중요한 선택이나 권한이 필요한 작업은 사용자와 협의합니다.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;즉, 일반적인 코드 자동완성이 “다음 코드를 써주는 도구”라면, 에이전트 코딩은 &lt;strong&gt;문제 해결 과정 전체를 함께 수행하는 개발 파트너&lt;/strong&gt;에 가깝습니다. 다만 잘못된 가정이나 과도한 변경 가능성이 있으므로, 명확한 목표·작업 범위·검증 기준과 사람의 최종 검토가 중요합니다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Strangler_fig</title>
       <link>https://doongchoong.github.io/posts/strangler_fig/</link>

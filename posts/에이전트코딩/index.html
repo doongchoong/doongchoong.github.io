@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>에이전트코딩 | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+  }
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+        padding: 20px 20px;
+}
+
+ 
+.chatlog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.chatlog th,
+.chatlog td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.chatlog thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+.chatlog tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+.user-bubble {
+   
+  background-color: #e9e9eb;
+  
+  border-radius: 20px 20px 20px 20px;  
+  padding: 0.8em 1.2em;
+  margin: 0.5em 0 0.5em auto;  
+  max-width: 80%;
+  display: inline-block;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-right-color: #e9e9eb;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <a href="/" class="back-link">← Back to home</a>
+    <h1 class="post-title">에이전트코딩</h1>
+    <div class="post-date">August 10, 2026</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#어떻게-알게-되었나">어떻게 알게 되었나</a></li>
+    <li><a href="#마켓메이킹-봇">마켓메이킹 봇</a>
+      <ul>
+        <li><a href="#1-코덱스에서-에이전트-구성해줘">1. 코덱스에서 &ldquo;에이전트 구성해줘&rdquo;</a></li>
+        <li><a href="#2-스펙문서를-자세히-만들고-그걸-읽고-구현해줘">2. 스펙문서를 자세히 만들고 그걸 읽고 구현해줘</a></li>
+        <li><a href="#3-테스터-혹은-리뷰어는-필수">3. 테스터 혹은 리뷰어는 필수</a></li>
+        <li><a href="#4-아쉬웠던-점과-재시도-방안">4. 아쉬웠던 점과 재시도 방안</a></li>
+      </ul>
+    </li>
+    <li><a href="#기관-정의서-웹페이지-렌더러">기관 정의서 웹페이지 렌더러</a>
+      <ul>
+        <li><a href="#1-일단-스킬부터-만들자">1. 일단 스킬부터 만들자</a></li>
+        <li><a href="#2-그-외-필요한-스킬들">2. 그 외 필요한 스킬들</a></li>
+        <li><a href="#3-에이전트-정하기">3. 에이전트 정하기</a></li>
+        <li><a href="#4-작업절차">4. 작업절차</a></li>
+      </ul>
+    </li>
+    <li><a href="#후기-및-목표">후기 및 목표</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <h2 id="어떻게-알게-되었나">어떻게 알게 되었나</h2>
+<p>얼마전 Gemini 에서 다시 GPT로 변경했다. 그렇게 하드하게 쓰는게 아니기 때문에
+Plus요금제를 쓰고 있는데 Codex란 것을 알게되었고. 그리고 에이전트코딩에 대해
+듣고 한번 시도를 해보았다.
+토이프로젝트 수준에 과한것 같긴 하지만 굉장히 만족스러웠기 때문에 기록으로
+남기고자 한다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. 에이전트 코딩에 대해 간략하게 요약해줘</div></p>
+<p><strong>🤖 ChatGPT:</strong><br>
+에이전트 코딩(Agentic Coding)은 AI가 단순히 코드를 제안하는 것을 넘어, 개발 목표를 이해하고 작업을 자율적으로 수행하는 방식입니다.</p>
+<ul>
+<li>코드베이스와 요구사항을 분석합니다.</li>
+<li>구현 계획을 세우고 여러 파일을 수정합니다.</li>
+<li>테스트·빌드·오류 분석을 반복하며 결과를 검증합니다.</li>
+<li>필요하면 문서나 외부 자료를 조사합니다.</li>
+<li>중요한 선택이나 권한이 필요한 작업은 사용자와 협의합니다.</li>
+</ul>
+<p>즉, 일반적인 코드 자동완성이 “다음 코드를 써주는 도구”라면, 에이전트 코딩은 <strong>문제 해결 과정 전체를 함께 수행하는 개발 파트너</strong>에 가깝습니다. 다만 잘못된 가정이나 과도한 변경 가능성이 있으므로, 명확한 목표·작업 범위·검증 기준과 사람의 최종 검토가 중요합니다.</p>
+
+</div>
+<h2 id="마켓메이킹-봇">마켓메이킹 봇</h2>
+<p>회사에서 거래소 테스트 시스템에 접속하여 테스트 장시간에 맞추어
+주식시장을 본다&hellip;  하지만 아무 거래가 없기때문에 이를 대비 스크립트들을 준비해놓았다.
+돈을 벌기위한 수단은 아니고 테스트를 위해 주문을 자동으로 깔아주는 형태의 스크립트는 이미 많이 작성하였고 잘 써먹는 와중이다&hellip;</p>
+<p>이것보다 더 고도화된 형태의 메이킹을 만들고 싶었는데 &lsquo;코인선물시장&rsquo;에서 눈에 많이 띄던 Spoofing Bot이다. (불법이다)
+체결을 많이.. 거의 발생시키지 않으면서 주가를 조작하는 느낌으로 생각하면 된다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>매도 호가는 지속적으로 후퇴(위로) 1호가는 점점 잔량이 줄어든다. 
+</span></span><span style="display:flex;"><span>=&gt; 체결이 강하게 발생하여 줄어드는 것처럼 보일뿐 실제로는 취소되는 중
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>매수 호가는 지속적으로 전진(위로) 1호가는 점점 잔량이 늘어난다. 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>매도잔량이 두껍고 매수잔량이 얇은 것처럼 잔량을 쌓아둔다.
+</span></span><span style="display:flex;"><span>실제로는 1-2주만 체결되면서 마치 빠르고 강하게 체결되어 올라가는 것처럼 조작</span></span></code></pre></div>
+  </div>
+</div><ul>
+<li>매도잔량이 두껍고 매수잔량이 얇은 모양은 강한매수체결로 인한 상승모양으로 널리 알려져 있다.</li>
+</ul>
+<h3 id="1-코덱스에서-에이전트-구성해줘">1. 코덱스에서 &ldquo;에이전트 구성해줘&rdquo;</h3>
+<p>처음엔 잘 모르니 무조건 &ldquo;해줘&rdquo; 를 시도한다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. 에이전트 코딩 하려고 하는데 구성해줘</div></p>
+<p><strong>🤖 ChatGPT:</strong><br>
+좋아요. 먼저 에이전트가 맡을 일을 정의해볼게요.
+어떤 목표를 달성해야 하는지, 어디까지 자율적으로 행동해도 되는지, 사람의 확인이 필요한 순간은 언제인지, 무엇을 완료로 볼지 알려주세요. 이를 바탕으로 역할과 작업 절차, 사용할 도구, 검증 방법, 예외 상황에서의 행동 원칙까지 구성하겠습니다.</p>
+
+</div>
+<p>GPT가 AGENTS.md파일을 구성하는데 대략 이런식이다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">MARKDOWN</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># MKBot 개발 지침
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## 목표
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>이 저장소에는 봇 검증을 위한 두 프로그램을 만든다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">1.</span> <span style="color:#0a3069">`http://localhost:5001`</span>에서 실행되는 단순한 호가창 시뮬레이터
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">2.</span> 시뮬레이터의 <span style="color:#0a3069">`/order`</span> API로 주문을 보내는 market maker 봇
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>두 프로그램은 별도 프로세스로 실행하고 HTTP로 통신한다. 실제 거래소나 외부 주문 API에는 연결하지 않는다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## 소스 구조
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 모든 실행 Python 코드는 <span style="color:#0a3069">`src/`</span> 아래에 둔다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 호가창 시뮬레이터 코드는 <span style="color:#0a3069">`src/simulator/`</span>에 둔다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> Market maker 봇 코드는 <span style="color:#0a3069">`src/bot/`</span>에 둔다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 시뮬레이터와 봇 사이의 코드를 섞거나 서로의 내부 객체를 import하지 않는다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> <span style="color:#0a3069">`sample/`</span>은 참조 코드 전용이며 새 실행 코드를 추가하지 않는다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 테스트는 대상 패키지 구조를 알아볼 수 있도록 별도의 <span style="color:#0a3069">`tests/`</span> 아래에 구성한다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## 요구사항 기준
+</span></span><span style="display:flex;"><span>...</span></span></code></pre></div>
+  </div>
+</div><ul>
+<li>Skill도 지가 만든다.</li>
+</ul>
+<p>지금 보니 접근법이 굉장히 어설펐는데 일단 &ldquo;무엇을 만들어줘&rdquo; 라고 물어봤기 때문인것 같다. 그래서 AGENTS.md를 만들었지만 사실 그냥 내 요구사항을 GPT가 해석해서 정리한 요구사항일 뿐이다.</p>
+<p><strong>지금 만든다면 AGENTS들이 행동할 파이프라인.. 즉 작업절차를 구성할 것 같다.</strong></p>
+<h3 id="2-스펙문서를-자세히-만들고-그걸-읽고-구현해줘">2. 스펙문서를 자세히 만들고 그걸 읽고 구현해줘</h3>
+<p>대략적으로 고수준의 가장 지능이 좋은 GPT로는 에이전트를 구성하고 규약을 만든다.
+그리고 저지능 AI로는 에이전트들이 작성한 명세서를 보고 단순 코딩을 한다.
+이런식으로 접근하는 것이다.</p>
+<p>그래서 어떤 어떤 기능이 필요한지 주저리 주저리 떠든뒤에 상세 스펙을 적어달라고 했다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">MARKDOWN</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># Price 클래스 정의서
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## 1. 목적
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0a3069">`Price`</span>는 마켓메이커 봇이 관리하는 하나의 가격대와 해당 가격대의 주문 대기열을 관리한다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 가격의 구체적인 자료형이나 표현 방식은 <span style="color:#0a3069">`Price`</span>의 관심사가 아니다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 주문 체결, 포지션, 손익, 거래소 API 호출은 담당하지 않는다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## 2. 상태
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### `price`
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>관리할 가격대다. 예를 들어 10,000원 가격대라면 <span style="color:#0a3069">`10000`</span>을 가진다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### `quantity`
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>현재 가격대에 등록된 모든 주문 수량의 합이다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 매수 가격대는 양수다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 매도 가격대는 음수다.
+</span></span><span style="display:flex;"><span>....</span></span></code></pre></div>
+  </div>
+</div><ul>
+<li>내가 적은것이 아니라 에이전트가 정리해놓은 것이다.</li>
+<li>어느 순간 coder가 나타나더니 코딩을 수행했다.</li>
+</ul>
+<div class="code-block-wrapper">
+  <div class="code-title">PY</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#cf222e">class</span> <span style="color:#1f2328">Price</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">def</span> __init__<span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#1f2328">,</span> price<span style="color:#1f2328">:</span> <span style="color:#6639ba">float</span><span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>price <span style="color:#0550ae">=</span> price
+</span></span><span style="display:flex;"><span>        <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>orders <span style="color:#0550ae">=</span> collections<span style="color:#0550ae">.</span>deque<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>quantity <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>goal_quantity <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">def</span> <span style="color:#6639ba">execute_next_step</span><span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span> <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>is_complete<span style="color:#1f2328">():</span> <span style="color:#cf222e">return</span> <span style="color:#1f2328">[]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_current_step <span style="color:#0550ae">+=</span> <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span> <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_current_step <span style="color:#0550ae">==</span> <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_total_steps<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            step_amount <span style="color:#0550ae">=</span> <span style="color:#6639ba">abs</span><span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_remaining_diff<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            remaining_steps <span style="color:#0550ae">=</span> <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_total_steps <span style="color:#0550ae">-</span> <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_current_step <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>            target <span style="color:#0550ae">=</span> <span style="color:#6639ba">abs</span><span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_remaining_diff<span style="color:#1f2328">)</span> <span style="color:#0550ae">/</span> remaining_steps <span style="color:#0550ae">*</span> random<span style="color:#0550ae">.</span>uniform<span style="color:#1f2328">(</span><span style="color:#0550ae">0.0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2.0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>            step_amount <span style="color:#0550ae">=</span> <span style="color:#6639ba">int</span><span style="color:#1f2328">(</span>target<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> random<span style="color:#0550ae">.</span>random<span style="color:#1f2328">()</span> <span style="color:#0550ae">&lt;</span> target <span style="color:#0550ae">-</span> step_amount<span style="color:#1f2328">:</span> step_amount <span style="color:#0550ae">+=</span> <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>            step_amount <span style="color:#0550ae">=</span> <span style="color:#6639ba">min</span><span style="color:#1f2328">(</span>step_amount<span style="color:#1f2328">,</span> <span style="color:#6639ba">abs</span><span style="color:#1f2328">(</span><span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_remaining_diff<span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span> step_amount <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">return</span> <span style="color:#1f2328">[]</span>
+</span></span><span style="display:flex;"><span>        step_diff <span style="color:#0550ae">=</span> step_amount <span style="color:#cf222e">if</span> <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_remaining_diff <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">0</span> <span style="color:#cf222e">else</span> <span style="color:#0550ae">-</span>step_amount
+</span></span><span style="display:flex;"><span>        requests <span style="color:#0550ae">=</span> <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_apply_diff<span style="color:#1f2328">(</span>step_diff<span style="color:#1f2328">);</span> <span style="color:#6a737d">self</span><span style="color:#0550ae">.</span>_remaining_diff <span style="color:#0550ae">-=</span> step_diff
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">return</span> requests</span></span></code></pre></div>
+  </div>
+</div><ul>
+<li>Price 클래스에서 자신의 가격대에서 그다음 진행할 스텝 주문이 뭔지 진행하는 함수</li>
+<li>FIFO로 주문을 추가해야하면 append, 주문을 차감해야하면 수량을 보고 부분차감 혹은 2-3개 더 pop하고 차감하고 후속 주문리스트를 작성하는 복잡한 작업</li>
+<li>오류로직이 하나도 없이 제대로 만들어낸다. 심지어 약한 모델 (Deep Seek V4 flash)조차도.. 요즘 AI가 얼마나 발전했는지 대단한 세상이다.</li>
+<li>주석이 하나도 안들어있고 압축적으로 작성한다. 이는 따로 지시하면 보기좋게 해줄것 같다.</li>
+</ul>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>src/
+</span></span><span style="display:flex;"><span>├── simulator/
+</span></span><span style="display:flex;"><span>│   └── ... 
+</span></span><span style="display:flex;"><span>└── bot/
+</span></span><span style="display:flex;"><span>    ├── __init__.py
+</span></span><span style="display:flex;"><span>    ├── broker.py
+</span></span><span style="display:flex;"><span>    ├── main.py
+</span></span><span style="display:flex;"><span>    ├── orderbook.py
+</span></span><span style="display:flex;"><span>    ├── profile.py
+</span></span><span style="display:flex;"><span>    ├── runner.py
+</span></span><span style="display:flex;"><span>    └── scenario.py</span></span></code></pre></div>
+  </div>
+</div><p>세상에&hellip; 시간이 꽤 지나면 그냥 다 짜준다&hellip;</p>
+<h3 id="3-테스터-혹은-리뷰어는-필수">3. 테스터 혹은 리뷰어는 필수</h3>
+<p>에이전트 코딩에서 가장 멋진 부분인것 같다.
+토이플젝은 당연히 그렇고 대부분 개발자들이 주요기능 테스트는 꽤 하지만
+전방위적으로 세세한 부분까지는 힘들어 하는데
+테스터 에이전트는 그걸 힘들이지 않고 더 고퀄리티로 테스트 해준다.
+이는 그냥 GPT 높은 버젼에다가 &ldquo;테스트 에이전트 구성해줘&rdquo; 하면 된다.</p>
+<p>여태까지 그냥 &ldquo;해줘, 해줘, 해줘&hellip;&rdquo; 반복이다.
+이래도 되나? 싶은 느낌이다.</p>
+<h3 id="4-아쉬웠던-점과-재시도-방안">4. 아쉬웠던 점과 재시도 방안</h3>
+<p>메이킹 봇은 결국 다 만들어 현재 프로젝트에 테스트 봇으로 쓰고 있다.
+양 거래소간 잔량을 바꿔가면서 SOR이 서로 반대로 배정되게 함으로서
+엔진 패치 테스트를 하고 있다.</p>
+<p><strong>아쉬웠던 점:</strong></p>
+<ul>
+<li>에이전트 관리를 너무 어설프게 했다.</li>
+<li>나랑 소통하는 primary 에이전트가 지가 명세 정리하고 코딩하고 고치고 다한다.</li>
+</ul>
+<p>한마디로 절차가 없었고, 권한관리가 없었다.</p>
+<p><strong>재시도 방안:</strong></p>
+<ul>
+<li>토큰을 너무 많이 먹으니 저렴한 코딩 모델을 사용하는 요금제를 사용한다.
+<a href="https://opencode.ai/ko/go">https://opencode.ai/ko/go</a></li>
+<li>초반에 플랜을 세울때 &lsquo;무엇을&rsquo; 만들기 위해 &lsquo;절차&rsquo;를 만든다.</li>
+<li>스킬부터 구상한다.</li>
+</ul>
+<h2 id="기관-정의서-웹페이지-렌더러">기관 정의서 웹페이지 렌더러</h2>
+<p>외부기관의 전문정의서가 있는데 이를 파일로 관리한다. 그러면 어떤 파일이
+최신이였는지, 지금 폴더에 있는게 진짜 최신인지. 서로 다른 파일을 보는지 알수가 없다.
+따라서 정적웹페이지로 보기편하게 만드는 작업을 <code>손코딩</code>-&gt;<code>바이브코딩</code> 으로 진화했는데
+요번에 에이전트코딩으로 시도를 해보기로 마음을 먹었다.</p>
+<h3 id="1-일단-스킬부터-만들자">1. 일단 스킬부터 만들자</h3>
+<p>스킬은 에이전트가 <code>어떤 방식</code>으로 일할 것인지를 나타내는 것으로 이해했다.
+가장 먼저  <code>클래스 스펙 작성스킬</code>을 만들었다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>src/
+</span></span><span style="display:flex;"><span>├── class-spec-writer/
+</span></span><span style="display:flex;"><span>│   └── SKILL.md</span></span></code></pre></div>
+  </div>
+</div><p>이런 형태로 한다. 이 스킬은 <code>GPT 5.6 sol high</code>가 만들었는데
+내용은 전부 영어로 작성되어 있다.</p>
+<p>대략&hellip;</p>
+<ul>
+<li>yaml: &hellip;즉시 구현가능한 구조화된 명세서 작성&hellip;</li>
+<li>목적:</li>
+<li>언어정책 : 한글로 작성한다. 식별자는 &hellip;리스트와 같으며 번역하지 않음&hellip;</li>
+<li>핵심규칙 :</li>
+<li>작업단계 WorkFlow:
+<ol>
+<li>클래스와 책임을 명확히 한다.</li>
+<li>메서드를 추출</li>
+<li>요구 상태 결정: 추론이냐 유저가 명시했느냐</li>
+<li>불변조건과 제약사항:</li>
+<li>명확히한다. 협력객체</li>
+<li>정보핸들링: 가정/미해결사항/설계제안</li>
+</ol>
+</li>
+<li>추론정책:</li>
+<li>출력포맷: (매우중요)</li>
+</ul>
+<p>이런형태로 되어있다. GPT에다가는 세부 클래스 명세서를 작성하는 스킬을
+만들어 달라고 하였다.
+만들어진 결과는  그 다음 에이전트가 그냥 읽고 단순 구현만 해도 될 정도로
+자세하게 정의되기를 원했다.</p>
+<h3 id="2-그-외-필요한-스킬들">2. 그 외 필요한 스킬들</h3>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>src/
+</span></span><span style="display:flex;"><span>├── class-spec-writer/
+</span></span><span style="display:flex;"><span>│   └── SKILL.md
+</span></span><span style="display:flex;"><span>├── web-design-director/
+</span></span><span style="display:flex;"><span>│   └── SKILL.md
+</span></span><span style="display:flex;"><span>├── code-implementer/
+</span></span><span style="display:flex;"><span>│   └── SKILL.md
+</span></span><span style="display:flex;"><span>├── frontend-implementer/
+</span></span><span style="display:flex;"><span>│   └── SKILL.md
+</span></span><span style="display:flex;"><span>├── requirement-organizer/
+</span></span><span style="display:flex;"><span>│   └── SKILL.md</span></span></code></pre></div>
+  </div>
+</div><ul>
+<li>클래스 명세 작성 스킬</li>
+<li>웹디자인 구성 스킬</li>
+<li>코드 구현 스킬</li>
+<li>프론트엔드 구현 스킬</li>
+<li>요구사항 구성 스킬 (중요)</li>
+</ul>
+<p>가장 중요한 것은 내가 직접 대화하는 대상 에이전트이다. 내가 두서없이 마구마구 요구사항을 내놓아도 최대한  몇가지 방식에 따라 정리를 하는 형태인 것이다. 이 에이전트는 요구사항  간단히 정리 후에 상세 구현 작성 에이전트들에게 넘기고 시키고 제어하는 에이전트라서
+<code>requirement-organizer</code> 스킬은 매우 중요하다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>이 문서는 `requirement-organizer`라는 **소프트웨어 요구사항 정리용 지침(스킬)**입니다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>핵심 목적은 사용자가 대화식으로 흩어놓은 요구사항을 곧바로 설계하거나 구현하지 않고, 
+</span></span><span style="display:flex;"><span>다음 단계에서 검토하기 쉬운 **상위 수준의 책임 개요**로 정리하는 것입니다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>주요 내용은 다음과 같습니다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- 중복되거나 장황한 표현을 제거하되 사용자의 의도는 보존합니다.
+</span></span><span style="display:flex;"><span>- 시스템이 담당해야 할 핵심 책임을 분류합니다.
+</span></span><span style="display:flex;"><span>- 각 책임을 맡을 수 있는 클래스나 컴포넌트의 **후보 이름**을 제안합니다.
+</span></span><span style="display:flex;"><span>- 화면이 있는 프로그램이라면 다음을 명확히 분리합니다.
+</span></span><span style="display:flex;"><span>  - 핵심 시스템 책임
+</span></span><span style="display:flex;"><span>  - UI 책임
+</span></span><span style="display:flex;"><span>  - UI와 시스템 사이에 오가는 개념적 정보
+</span></span><span style="display:flex;"><span>  - 앱 시작점이나 전체 연결 등 후속 통합 작업
+</span></span><span style="display:flex;"><span>- 아직 결정되지 않은 중요한 사항은 `미정 사항`에 기록합니다.
+</span></span><span style="display:flex;"><span>- 결과는 한국어로 작성하되, `OrderManager` 같은 기술 식별자는 영어를 사용할 수 있습니다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>예를 들어 다음 요구사항이 있다면:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; 잘못된 입력으로는 주문할 수 없게 하고 오류를 보여주세요.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>다음처럼 나눕니다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- 핵심 시스템
+</span></span><span style="display:flex;"><span>  - 주문 가능한 입력인지 판단한다.
+</span></span><span style="display:flex;"><span>  - 주문할 수 없는 이유를 구분한다.
+</span></span><span style="display:flex;"><span>- UI
+</span></span><span style="display:flex;"><span>  - 사용자의 입력을 받는다.
+</span></span><span style="display:flex;"><span>  - 주문할 수 없는 이유를 화면에 표시한다.
+</span></span><span style="display:flex;"><span>- 시스템 경계
+</span></span><span style="display:flex;"><span>  - UI가 주문 의도와 입력값을 전달한다.
+</span></span><span style="display:flex;"><span>  - 시스템이 처리 결과나 오류 종류를 반환한다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>이 지침에서 의도적으로 정하지 않는 것도 많습니다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- 메서드명, 매개변수, 반환값
+</span></span><span style="display:flex;"><span>- 멤버 변수와 자료구조
+</span></span><span style="display:flex;"><span>- 알고리즘과 디자인 패턴
+</span></span><span style="display:flex;"><span>- 데이터베이스 스키마와 API 규격
+</span></span><span style="display:flex;"><span>- 프레임워크와 라이브러리
+</span></span><span style="display:flex;"><span>- 구체적인 화면 구조와 디자인
+</span></span><span style="display:flex;"><span>- 파일 구성과 담당 개발자
+</span></span><span style="display:flex;"><span>- 최종 구현 아키텍처
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>즉, 이 문서의 요지는 다음 한 문장으로 정리할 수 있습니다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; **비정형 요구사항을 구현 설계로 넘어가기 전 단계의 ‘책임 지도’로 정리하라.**
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>결과물은 대략 `핵심 시스템 책임 → UI 책임 → 시스템 경계 → 후속 통합 항목 → 미정 사항` 순서의 한국어 Markdown 문서가 됩니다. UI가 없는 기능이라면 UI 및 시스템 경계 부분은 생략합니다.</span></span></code></pre></div>
+  </div>
+</div><h3 id="3-에이전트-정하기">3. 에이전트 정하기</h3>
+<p>에이전트는 대략 내가 하려는 작업에 따라
+거의 스킬을 하나씩 장착한 대로 만들면 되겠지만
+UI 구현과 로직 구현을 분리할시 같은 파일에 대한 수정이 이루어져 좋진 않았다</p>
+<p>그래서</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>1. organizer =&gt; (skill)requirement-organizer
+</span></span><span style="display:flex;"><span>2.1. spec-writer=&gt; (skill)class-spec-writer
+</span></span><span style="display:flex;"><span>2.2. designer=&gt;(skill) web-design-director
+</span></span><span style="display:flex;"><span>3. coder =&gt; (skill) code-implementer + frontend-implementer
+</span></span><span style="display:flex;"><span>4. tester </span></span></code></pre></div>
+  </div>
+</div><p>이런 형태로 구성했다. 코더는 스킬을 2개를 가지고 구현을 전담한다.
+대신 상세스펙들을 읽고 충실히 구현만 한다.</p>
+<h3 id="4-작업절차">4. 작업절차</h3>
+<p>가장 중요한 부분이고 가장 어려운거 같다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">MARKDOWN</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>## 에이전트 파이프라인
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&#39;&#39;&#39;
+</span></span><span style="display:flex;"><span>organizer ─→ spec-writer ───┐
+</span></span><span style="display:flex;"><span>         └─→ design-director ┴─→ coder ─→ tester
+</span></span><span style="display:flex;"><span>&#39;&#39;&#39;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>| 에이전트 | 역할 | 산출물 |
+</span></span><span style="display:flex;"><span>|----------|------|--------|
+</span></span><span style="display:flex;"><span>| <span style="color:#0a3069">`organizer`</span> | 사용자와 대화하며 요구사항 정리 (requirement-organizer 스킬, primary) | <span style="color:#0a3069">`docs/requirements.md`</span> |
+</span></span><span style="display:flex;"><span>| <span style="color:#0a3069">`spec-writer`</span> | 파서/모델/렌더러 클래스 명세 (class-spec-writer 스킬) | <span style="color:#0a3069">`docs/specs/`</span> |
+</span></span><span style="display:flex;"><span>| <span style="color:#0a3069">`design-director`</span> | 렌더링 페이지 디자인 명세 (web-design-director 스킬) | <span style="color:#0a3069">`docs/design/`</span> |
+</span></span><span style="display:flex;"><span>| <span style="color:#0a3069">`coder`</span> | 명세 기반 기능 + HTML/CSS 템플릿 구현, 구현 후 빌드 검증 | <span style="color:#0a3069">`src/`</span> |
+</span></span><span style="display:flex;"><span>| <span style="color:#0a3069">`tester`</span> | 문제 재현·원인 진단과 파서 정확성·재생성 무결성·링크 유효성 검증 | <span style="color:#0a3069">`src/tests/`</span> |
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>명세 산출물이 다음 단계 에이전트의 입력 계약이다. organizer의 요구사항 개요를 받아 스펙/디자인은 병렬 진행 가능하고, 구현은 영향받는 명세가 모두 준비된 후 시작한다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### 파이프라인 운영 원칙
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 모든 신규 기능, 변경 요청, 문제 보고는 <span style="color:#0a3069">`organizer`</span>를 통해 접수한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> <span style="color:#0a3069">`AGENTS.md`</span>는 단계 순서와 전환 조건의 단일 진실 공급원이다. 개별 에이전트 정의는 자신의 역할, 입력, 출력, 수정 범위와 금지 사항만 구체화한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 각 에이전트는 자신의 산출물 범위 밖의 파일을 수정하지 않는다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 하위 에이전트는 입력 계약에 없는 내용을 임의로 결정하거나 상위 산출물을 직접 수정하지 않고 <span style="color:#0a3069">`organizer`</span>에게 반환한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 사용자의 직접 요청이 현재 산출물 계약과 충돌하면 작업을 진행하지 않고 충돌 내용을 <span style="color:#0a3069">`organizer`</span>에게 보고한다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### 신규 기능·변경 요청 절차
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">1.</span> <span style="color:#0a3069">`organizer`</span>가 사용자의 의도, 기대 결과, 제약, 미정 사항을 정리한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">2.</span> 사용자가 확인한 요구사항만 <span style="color:#0a3069">`docs/requirements.md`</span>에 반영한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">3.</span> 핵심 시스템 책임이 바뀌면 <span style="color:#0a3069">`spec-writer`</span>, UI 책임이 바뀌면 <span style="color:#0a3069">`design-director`</span>가 각각의 명세를 갱신한다. 두 영역이 모두 영향받으면 두 에이전트가 모두 작업한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">4.</span> <span style="color:#0a3069">`coder`</span>는 갱신된 <span style="color:#0a3069">`docs/specs/`</span>와 <span style="color:#0a3069">`docs/design/`</span>을 구현 계약으로 삼아 영향 범위만 구현한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">5.</span> <span style="color:#0a3069">`tester`</span>가 변경 요청, 기존 기능, 빌드 재생성을 검증한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">6.</span> <span style="color:#0a3069">`organizer`</span>가 검증 결과와 남은 문제를 사용자에게 보고한다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### 문제 보고·결함 수정 절차
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">1.</span> <span style="color:#0a3069">`organizer`</span>가 보고된 현상, 기대 결과, 실제 결과, 재현 조건과 관련 증거를 정리한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">2.</span> 구현을 수정하기 전에 <span style="color:#0a3069">`tester`</span>에게 재현과 원인 분석을 요청한다. 진단 요청에서는 프로덕션 코드와 명세를 수정하지 않는다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">3.</span> <span style="color:#0a3069">`organizer`</span>가 진단 결과를 기존 요구사항 대비 구현 결함, 명세·디자인 누락, 새로운 요구사항 중 하나로 분류한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">4.</span> 구현 결함이면 요구사항을 변경하지 않고 <span style="color:#0a3069">`coder`</span>에게 기존 계약과 진단 결과를 전달한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">5.</span> 명세·디자인 누락이면 요구사항과 진단 결과를 담당 에이전트에게 전달해 명세를 먼저 보완한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">6.</span> 새로운 요구사항이면 사용자 확인 후 <span style="color:#0a3069">`docs/requirements.md`</span>부터 갱신하고 신규 기능·변경 요청 절차를 따른다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">7.</span> 수정 후 <span style="color:#0a3069">`tester`</span>가 재현 조건과 관련 회귀 범위를 검증한다.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### 단계 실패 반환 규칙
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> 하위 에이전트가 모호함, 계약 충돌, 입력 누락을 발견하면 작업을 임의로 완성하지 않고 근거와 필요한 결정을 <span style="color:#0a3069">`organizer`</span>에게 보고한다.
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> <span style="color:#0a3069">`tester`</span>가 실패를 보고하면 <span style="color:#0a3069">`organizer`</span>가 실패 원인을 분류한 후 요구사항, 명세, 디자인, 구현 중 해당 단계로 되돌린다.
+</span></span><span style="display:flex;"><span>- 실패가 발생했다는 이유로 <span style="color:#0a3069">`organizer`</span>가 코드, 클래스 명세, 디자인 명세를 직접 수정하지 않는다.</span></span></code></pre></div>
+  </div>
+</div><p>즉 프로젝트가 어떤 절차로 흘러가야 하는지를 정하는 것이다.
+물론 내가 만든것이 아니고 GPT가 만들었다&hellip;</p>
+<h2 id="후기-및-목표">후기 및 목표</h2>
+<p>결과는 아주 만족스러웠다. 내가 에이전트 코딩을 제대로 한것도 있고
+이상하게 한것도 있겠지만 그 결과는 내가 들이는 정신에너지에 비해 너무도 가볍다.
+내가 직접 만든것보다 종합적인 퀄리티는 더 좋으며 특히 테스터가 산출해 내는 테스트는
+전율할 정도로 너무 좋은 기능이였다.</p>
+<p>대략적으로 에이전트를 굴려보면서  에이전트 설정들을 찾아보기 시작했는데
+재밌는 리파지토리가 보였다.</p>
+<p><a href="https://github.com/msitarzewski/agency-agents">https://github.com/msitarzewski/agency-agents</a></p>
+<p>에이전트들의 에이전시 ㅎㅎ 인데  엄청나게 많은 에이전트 설정을 담고 있다.
+여기서 골라서 담고 내 플젝에 맞게 고쳐쓰면 될것 같다.</p>
+<p>이후 목표는 훨씬 더 싼 모델로도 좋은 퀄을 뽑아내는
+절차를 만드는 것이다. 여러모로 테스트를 해보봐야겠다.</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>
