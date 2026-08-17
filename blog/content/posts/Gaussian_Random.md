@@ -7,6 +7,17 @@ tocBorder : true
 ---
 
 {{< raw >}}
+<style>
+  /* Mobile adaptation guided by Dex (OpenAI Codex), 2026 */
+  #normal_dist_canvas {
+    display: block;
+    width: 100%;
+    max-width: 660px;
+    height: auto;
+    margin: 0 auto;
+  }
+</style>
+
 <canvas id="normal_dist_canvas" width="660" height="480"></canvas>
 	<script type="text/javascript">
 		var normal_dist_canvas = document.getElementById('normal_dist_canvas');

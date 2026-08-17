@@ -346,6 +346,16 @@
   margin: 0;           
   padding: 4px 8px;    
 }
+
+   
+  .mermaid svg[aria-roledescription="gitGraph"] {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
     </style>
   </head>
   <body>
@@ -457,6 +467,18 @@
 <li>선택된 점이 없다면 3번으로 돌아간다.</li>
 </ol>
 <p>즉 외접원이 핵심인데 어떠한 점도 외접원안에 포함되지 않는다면 그것이 바로 내각이 최소화 되는 모양일 것이다. DE(완료Edge집합) 가 완성된 들로네 삼각화 그래프이다. 아래는 완성된 모습이다. HTML5 의 canvas tag를 이용하여 만들었다. 보이지 않는다면 크롬 브라우져로 보면 된다. 모든소스는 직접 작성하였으며 풀소스가 궁금하면 소스보기로 보면된다. 라이센스는 따로 표시되어 있지 않으나 MIT License</p>
+
+<style>
+  /* Mobile adaptation guided by Dex (OpenAI Codex), 2026 */
+  #delaunay,
+  #delaunay1 {
+    display: block;
+    width: 100%;
+    max-width: 660px;
+    height: auto;
+    margin: 0 auto;
+  }
+</style>
 
 <canvas id="delaunay" width="600" height="480"></canvas>
 <script>
