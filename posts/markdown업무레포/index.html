@@ -291,25 +291,34 @@
   border-radius: 4px;
   font-size: 0.95em;
 }
+
 .user-bubble {
-   
   background-color: #e9e9eb;
-  
-  border-radius: 20px 20px 20px 20px;  
+  border-radius: 20px;
   padding: 0.8em 1.2em;
-  margin: 0.5em 0 0.5em auto;  
+
+   
+  display: block;
+  width: fit-content;
   max-width: 80%;
-  display: inline-block;
+  margin: 0.5em 0 0.5em auto;
+
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
   position: relative;
 }
 
 .user-bubble::before {
   content: "";
   position: absolute;
-  left: -10px;
+
+   
+  left: auto;
+  right: -10px;
   top: 10px;
+
   border: 6px solid transparent;
-  border-right-color: #e9e9eb;
+  border-left-color: #e9e9eb;
 }
 
 .gpt-line {
