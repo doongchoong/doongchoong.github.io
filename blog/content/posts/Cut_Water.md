@@ -11,6 +11,17 @@ tocBorder : true
 
 
 {{< raw >}}
+<style>
+  #cut_water_canvas {
+    display: block;
+    width: 100%;
+    max-width: 660px;
+    height: auto;
+    margin: 0 auto;
+    touch-action: none;
+  }
+</style>
+
 <canvas id="cut_water_canvas" width="660" height="480"></canvas>
 <script>
 cut_water = {
@@ -85,13 +96,60 @@ cut_water = {
 			}
 		}
 
-		this.canvas.addEventListener('mousemove', this.mouse_move, false);
+		//this.canvas.addEventListener('mousemove', this.mouse_move, false);
+// Mobile adaptation guided by Dex (OpenAI Codex, GPT5.6-sol), 2026
+this.pointerActive = false;
+
+this.canvas.addEventListener(
+  'pointermove',
+  this.pointer_move.bind(this),
+  false
+);
+
+this.canvas.addEventListener(
+  'pointerdown',
+  this.pointer_move.bind(this),
+  false
+);
+
+this.canvas.addEventListener('pointerleave', function () {
+  cut_water.pointerActive = false;
+});
+
+this.canvas.addEventListener('pointerup', function () {
+  cut_water.pointerActive = false;
+});
+
+this.canvas.addEventListener('pointercancel', function () {
+  cut_water.pointerActive = false;
+});
+
 	},
+
+/*	2026. GPT5.6-sol Guides
 	mouse_move: function(e){
 		cut_water.mouseX = e.offsetX || e.pageX - cut_water.canvas.parentNode.offsetLeft;
 		cut_water.mouseY = e.offsetY || e.pageY - cut_water.canvas.parentNode.offsetTop;
 
 	},
+*/
+// Mobile adaptation guided by Dex (OpenAI Codex, GPT5.6-sol), 2026
+pointer_move: function (e) {
+  var rect = this.canvas.getBoundingClientRect();
+
+  /*
+   * 화면에서는 Canvas가 축소되어 있으므로
+   * 화면 좌표를 원래 660 × 480 좌표로 환산한다.
+   */
+  this.mouseX =
+    (e.clientX - rect.left) * (this.w / rect.width);
+
+  this.mouseY =
+    (e.clientY - rect.top) * (this.h / rect.height);
+
+  this.pointerActive = true;
+},
+/* 
 	update_points: function(){
 		for(var i=0; i < this.points.length; i++){
 			var pnt = this.points[i];
@@ -109,6 +167,32 @@ cut_water = {
 		}
 
 	},
+*/
+// Mobile adaptation guided by Dex (OpenAI Codex, GPT5.6-sol), 2026
+update_points: function () {
+  for (var i = 0; i < this.points.length; i++) {
+    var pnt = this.points[i];
+    var pushX = 0;
+    var pushY = 0;
+
+    if (this.pointerActive) {
+      var dx = pnt.x - this.mouseX;
+      var dy = pnt.y - this.mouseY;
+      var length = Math.max(Math.sqrt(dx * dx + dy * dy), 0.001);
+
+      var force = Math.min(
+        this.sensitivity * 100 / length,
+        130
+      );
+
+      pushX = dx / length * force;
+      pushY = dy / length * force;
+    }
+
+    pnt.x += pushX + (pnt.ox - pnt.x) * 0.05;
+    pnt.y += pushY + (pnt.oy - pnt.y) * 0.05;
+  }
+},
 	draw_points: function(){
 		for(var i=0; i < this.points.length; i++){
 			var pnt = this.points[i];
@@ -123,17 +207,41 @@ cut_water = {
 		this.ctx.closePath();
 		this.ctx.fill();		
 	},
+	/*
 	draw: function(){
 		this.canvas.width = this.canvas.width;
 		this.draw_points();
 		this.update_points();
 	}
-
+*/
+// Mobile adaptation guided by Dex (OpenAI Codex, GPT5.6-sol), 2026
+draw: function () {
+  this.ctx.clearRect(0, 0, this.w, this.h);
+  this.update_points();
+  this.draw_points();
+}
 };
 var cut_water_canvas= document.getElementById('cut_water_canvas');
 cut_water.init(cut_water_canvas);
+
+/* 
 setInterval(function(){
 	cut_water.draw();
 }, 1000/60);
+*/
+// Mobile adaptation guided by Dex (OpenAI Codex, GPT5.6-sol), 2026
+var frameInterval = 1000 / 60;
+var lastFrame = 0;
+
+function animate(now) {
+  if (now - lastFrame >= frameInterval) {
+    cut_water.draw();
+    lastFrame = now - ((now - lastFrame) % frameInterval);
+  }
+
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
 </script>
 {{< /raw >}}
