@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>재시도-시뮬레이션 | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+    border-radius: 6px 6px 6px 6px;
+    margin: 1em 0;
+  }
+
+   
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;  
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+   
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+ 
+tr:last-child td {
+  border-bottom: none;
+}
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid ;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 1em auto;
+  padding: 20px 20px;
+}
+
+
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.user-bubble {
+  background-color: #e9e9eb;
+  border-radius: 20px;
+  padding: 0.8em 1.2em;
+
+   
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0.5em 0 0.5em auto;
+
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+
+   
+  left: auto;
+  right: -10px;
+  top: 10px;
+
+  border: 6px solid transparent;
+  border-left-color: #e9e9eb;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+
+   
+  .mermaid svg[aria-roledescription="gitGraph"] {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <a href="/" class="back-link">← Back to home</a>
+    <h1 class="post-title">재시도-시뮬레이션</h1>
+    <div class="post-date">August 29, 2026</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-재시도-방식">1. 재시도 방식</a>
+      <ul>
+        <li><a href="#11-고정-간격">1.1. 고정 간격</a></li>
+        <li><a href="#12-exponential-backoff">1.2. Exponential Backoff</a></li>
+        <li><a href="#13-jitter">1.3. Jitter</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-시뮬레이션-설계">2. 시뮬레이션 설계</a></li>
+    <li><a href="#3-그래프">3. 그래프</a></li>
+    <li><a href="#4-결과">4. 결과</a></li>
+    <li><a href="#5-생각해볼점">5. 생각해볼점</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>잠깐의 오류로 요청이 실패했을 때 재시도를 넣는 것은 그렇게 어렵지 않다.
+하지만 Client가 하나가 아니라면 어떨까?
+모두 같은 시각에 실패하고 같은 규칙으로 재시도하면, 재시도 자체가 다음 부하를 만들 것 같았다.</p>
+<p>고정 간격, Exponential Backoff, Jitter를 Python으로 간단하게 시뮬레이션해서 요청이 시간에 따라 어떻게 퍼지는지 확인해보았다.</p>
+<h2 id="1-재시도-방식">1. 재시도 방식</h2>
+<h3 id="11-고정-간격">1.1. 고정 간격</h3>
+<p>가장 단순한 방식은 항상 같은 시간을 기다리는 것이다.
+예를 들어 1초를 사용하면 모든 Client가 1초, 2초, 3초에 다시 요청한다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">PY</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">fixed_delay</span><span style="color:#1f2328">(</span>attempt<span style="color:#1f2328">,</span> rng<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#0550ae">1.0</span></span></span></code></pre></div>
+  </div>
+</div><p>하나의 Client만 보면 예측하기 쉽다.
+하지만 여러 Client가 동시에 시작했다면 처음에 생긴 정렬이 계속 유지된다.</p>
+<h3 id="12-exponential-backoff">1.2. Exponential Backoff</h3>
+<p>Exponential Backoff는 실패할 때마다 대기 시간을 두 배씩 늘린다.
+장애가 길어질수록 요청 횟수를 줄일 수 있고, 대기 시간이 끝없이 늘지 않도록 상한을 둔다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">PY</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">exponential_delay</span><span style="color:#1f2328">(</span>attempt<span style="color:#1f2328">,</span> rng<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#6639ba">min</span><span style="color:#1f2328">(</span><span style="color:#0550ae">0.5</span> <span style="color:#0550ae">*</span> <span style="color:#0550ae">2</span> <span style="color:#0550ae">**</span> <span style="color:#1f2328">(</span>attempt <span style="color:#0550ae">-</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">),</span> <span style="color:#0550ae">8.0</span><span style="color:#1f2328">)</span></span></span></code></pre></div>
+  </div>
+</div><p>이번 설정에서 대기 시간은 <code>0.5, 1, 2, 4, 8...</code>초가 된다.
+재시도 횟수는 확실히 줄지만 모든 Client가 같은 규칙을 사용하면 여전히 같은 시각에 몰린다. 간격만 멀어진 것이다.</p>
+<h3 id="13-jitter">1.3. Jitter</h3>
+<p>Jitter는 대기 시간에 무작위성을 추가한다.
+이번에는 Exponential Backoff로 구한 상한과 0 사이에서 무작위로 기다리는 Full Jitter를 사용했다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">PY</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">jitter_delay</span><span style="color:#1f2328">(</span>attempt<span style="color:#1f2328">,</span> rng<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    ceiling <span style="color:#0550ae">=</span> <span style="color:#6639ba">min</span><span style="color:#1f2328">(</span><span style="color:#0550ae">0.5</span> <span style="color:#0550ae">*</span> <span style="color:#0550ae">2</span> <span style="color:#0550ae">**</span> <span style="color:#1f2328">(</span>attempt <span style="color:#0550ae">-</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">),</span> <span style="color:#0550ae">8.0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> rng<span style="color:#0550ae">.</span>uniform<span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> ceiling<span style="color:#1f2328">)</span></span></span></code></pre></div>
+  </div>
+</div><p>같은 횟수의 재시도라도 Client마다 기다리는 시간이 달라진다.
+정렬을 깨는 핵심은 Backoff의 크기보다 이 무작위성에 있다.</p>
+<h2 id="2-시뮬레이션-설계">2. 시뮬레이션 설계</h2>
+<p>Client 200개가 0초에 모두 실패했다고 가정했다.
+서버는 4초에 회복하며, Client는 회복 이후의 첫 요청에서 성공하고 더 이상 재시도하지 않는다.
+난수 seed는 <code>20260829</code>로 고정했고, 요청은 100ms 구간으로 묶어서 세었다.</p>
+<p>최초 0초의 실패 요청은 어떤 방식이든 200개로 같다.
+그래서 이 요청은 빼고 <strong>재시도가 만든 분포</strong>만 비교했다.</p>
+<p>핵심 시뮬레이션은 다음과 같다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">PY</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">simulate</span><span style="color:#1f2328">(</span>client_count<span style="color:#1f2328">,</span> delay_fn<span style="color:#1f2328">,</span> recovered_at<span style="color:#1f2328">,</span> rng<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    events <span style="color:#0550ae">=</span> <span style="color:#1f2328">[]</span>
+</span></span><span style="display:flex;"><span>    success_times <span style="color:#0550ae">=</span> <span style="color:#1f2328">[]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> _ <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span>client_count<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>        now <span style="color:#0550ae">=</span> <span style="color:#0550ae">0.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">for</span> attempt <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">21</span><span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>            now <span style="color:#0550ae">+=</span> delay_fn<span style="color:#1f2328">(</span>attempt<span style="color:#1f2328">,</span> rng<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>            events<span style="color:#0550ae">.</span>append<span style="color:#1f2328">(</span>now<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> now <span style="color:#0550ae">&gt;=</span> recovered_at<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                success_times<span style="color:#0550ae">.</span>append<span style="color:#1f2328">(</span>now<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#cf222e">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> events<span style="color:#1f2328">,</span> success_times</span></span></code></pre></div>
+  </div>
+</div><p>실제 서버의 처리량이나 응답 지연은 모델링하지 않았다.
+이 실험에서 궁금한 것은 재시도 규칙 자체가 Client들을 얼마나 퍼뜨리는지이다.</p>
+<h2 id="3-그래프">3. 그래프</h2>
+<p>아래 그래프는 각 100ms 구간에 들어온 요청 수를 나타낸다.
+세로축을 모두 200으로 맞춰서 몰림의 크기를 같은 기준으로 비교했다.</p>
+
+<div id="retry-simulation-chart" style="width:100%;max-width:920px;margin:18px auto"></div>
+<script>
+(() => {
+  const series = [
+    {
+      name: "고정 간격",
+      color: "#d95f59",
+      values: [0,0,0,0,0,0,0,0,0,0,200,0,0,0,0,0,0,0,0,0,200,0,0,0,0,0,0,0,0,0,200,0,0,0,0,0,0,0,0,0,200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    },
+    {
+      name: "Exponential Backoff",
+      color: "#3b82b8",
+      values: [0,0,0,0,0,200,0,0,0,0,0,0,0,0,0,200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    },
+    {
+      name: "Full Jitter",
+      color: "#45956b",
+      values: [37,48,56,60,53,25,20,29,26,25,28,24,21,10,7,9,13,10,17,13,13,15,22,10,14,17,11,15,9,8,11,8,5,6,4,5,3,7,7,4,6,8,7,5,6,4,5,6,7,6,6,6,5,6,4,5,5,2,6,7,5,2,3,5,3,0,2,5,1,3,2,1,0,2,2,1,1,0,0,1,3,1,3,0,2,2,2,2,2,2,4,3,1,0,1,1,1,2,2,1,0,0,1,1,3,0,1,0,5,0,0,0,0,0,1,1,0,0,0,1]
+    }
+  ];
+
+  // 모든 패널의 가로축을 0~12초로 맞춘다.
+  series.forEach(item => {
+    while (item.values.length < 120) item.values.push(0);
+  });
+
+  const width = 900;
+  const panelHeight = 170;
+  const left = 44;
+  const right = 12;
+  const plotWidth = width - left - right;
+  const plotHeight = 112;
+  const height = panelHeight * series.length;
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", "고정 간격, Exponential Backoff, Full Jitter의 100ms 구간별 재시도 요청 수 비교");
+  svg.style.width = "100%";
+  svg.style.height = "auto";
+
+  const add = (tag, attrs, text) => {
+    const el = document.createElementNS(ns, tag);
+    Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
+    if (text !== undefined) el.textContent = text;
+    svg.appendChild(el);
+    return el;
+  };
+
+  series.forEach((item, panel) => {
+    const top = panel * panelHeight + 28;
+    const baseline = top + plotHeight;
+    const barWidth = plotWidth / item.values.length;
+
+    add("text", {x:left, y:panel * panelHeight + 18, fill:"currentColor", "font-size":"14", "font-weight":"600"}, item.name);
+    add("line", {x1:left, y1:top, x2:left, y2:baseline, stroke:"#999", "stroke-width":"1"});
+    add("line", {x1:left, y1:baseline, x2:width-right, y2:baseline, stroke:"#999", "stroke-width":"1"});
+
+    [0, 100, 200].forEach(value => {
+      const y = baseline - value / 200 * plotHeight;
+      add("line", {x1:left, y1:y, x2:width-right, y2:y, stroke:"#aaa", "stroke-opacity":"0.18"});
+      add("text", {x:left-6, y:y+4, fill:"#777", "font-size":"10", "text-anchor":"end"}, value);
+    });
+
+    [0, 4, 8, 12].forEach(second => {
+      const x = left + second / 12 * plotWidth;
+      add("text", {x, y:baseline+16, fill:"#777", "font-size":"10", "text-anchor":second === 0 ? "start" : second === 12 ? "end" : "middle"}, `${second}초`);
+    });
+
+    const recoveryX = left + 4 / 12 * plotWidth;
+    add("line", {x1:recoveryX, y1:top, x2:recoveryX, y2:baseline, stroke:"#d18b25", "stroke-width":"1.5", "stroke-dasharray":"5 4"});
+    add("text", {x:recoveryX+5, y:top+11, fill:"#b16e12", "font-size":"10"}, "서버 회복");
+
+    item.values.forEach((value, index) => {
+      if (value === 0) return;
+      const h = value / 200 * plotHeight;
+      add("rect", {
+        x:left + index * barWidth,
+        y:baseline - h,
+        width:Math.max(1, barWidth * 0.92),
+        height:h,
+        fill:item.color
+      });
+    });
+  });
+
+  document.getElementById("retry-simulation-chart").appendChild(svg);
+})();
+</script>
+
+<p>고정 간격은 1초마다 200개의 요청이 정확히 동시에 생긴다.
+서버가 4초에 회복했으니 모든 Client가 바로 성공하지만, 회복한 순간에 다시 200개를 받아야 한다.</p>
+<p>Exponential Backoff의 요청은 0.5초, 1.5초, 3.5초, 7.5초에 생긴다.
+요청 간격은 점점 늘었지만 세로 막대의 높이는 그대로다. 게다가 서버는 4초에 이미 회복했는데 다음 재시도는 7.5초에 있어서 3.5초를 더 기다렸다.</p>
+<p>Full Jitter는 모양이 완전히 다르다.
+초반에는 요청이 많지만 재시도가 진행될수록 여러 구간으로 퍼진다. 100ms 구간에 가장 많이 들어온 요청도 60개였고, 서버 회복 이후에는 최대 8개였다.</p>
+<h2 id="4-결과">4. 결과</h2>
+<table>
+  <thead>
+      <tr>
+          <th>방식</th>
+          <th style="text-align: right">전체 재시도</th>
+          <th style="text-align: right">100ms 최대 요청</th>
+          <th style="text-align: right">성공 시각 중앙값</th>
+          <th style="text-align: right">성공 시각 95%</th>
+          <th style="text-align: right">평균 재시도 횟수</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>고정 간격</td>
+          <td style="text-align: right">800</td>
+          <td style="text-align: right">200</td>
+          <td style="text-align: right">4.000초</td>
+          <td style="text-align: right">4.000초</td>
+          <td style="text-align: right">4.00</td>
+      </tr>
+      <tr>
+          <td>Exponential Backoff</td>
+          <td style="text-align: right">800</td>
+          <td style="text-align: right">200</td>
+          <td style="text-align: right">7.500초</td>
+          <td style="text-align: right">7.500초</td>
+          <td style="text-align: right">4.00</td>
+      </tr>
+      <tr>
+          <td>Full Jitter</td>
+          <td style="text-align: right">925</td>
+          <td style="text-align: right">60</td>
+          <td style="text-align: right">5.843초</td>
+          <td style="text-align: right">10.442초</td>
+          <td style="text-align: right">4.62</td>
+      </tr>
+  </tbody>
+</table>
+<p>예상했던 것처럼 Exponential Backoff만으로는 Client의 동시성이 사라지지 않았다.
+오히려 장애 중 요청 횟수를 줄이는 역할에 가깝다.</p>
+<p>Jitter는 몰림을 확실히 줄였다.
+하지만 무작위 범위가 0부터 시작하기 때문에 아주 짧은 대기 시간이 연속으로 나올 수 있다.
+그 Client들은 서버가 회복하기 전에 요청을 더 많이 소비했고, 반대로 긴 대기 시간을 연속으로 뽑은 Client는 성공까지 더 오래 걸렸다.</p>
+<p>그래서 이번 실행에서 Full Jitter의 전체 재시도는 925개로 늘었고, 95%의 Client가 성공하는 시점도 10.442초로 느려졌다.
+이 수치만 보면 Jitter가 손해처럼 보일 수 있다. 하지만 실제 서버에서는 200개가 한번에 재진입하는 것과 여러 시각에 나누어 들어오는 것이 같지 않다. 이번 모델에는 그 차이를 성공률이나 응답 시간으로 반영하지 않았다.</p>
+<h2 id="5-생각해볼점">5. 생각해볼점</h2>
+<p>이번 시뮬레이션으로 보면 Exponential Backoff와 Jitter는 서로 대체하는 방식이 아니다.
+Backoff는 장애가 계속될 때 요청 빈도를 낮추고, Jitter는 여러 Client의 시계를 엇갈리게 한다. 둘을 같이 사용해야 각자의 역할이 드러난다.</p>
+<p>다만 Jitter를 넣었다고 끝은 아니다.
+서버가 알려준 재시도 시각이 있다면 그 값을 우선해야 하고, 요청을 다시 보내도 안전한지도 따로 확인해야 한다. 재시도 횟수와 최대 대기 시간도 필요하다.</p>
+<p>다음에는 서버에 100ms당 처리량을 넣고 싶다.
+그렇게 하면 이번에는 그래프의 모양으로만 보았던 “몰림”이 실제 성공률과 회복 시간에 어떤 차이를 만드는지도 볼 수 있을 것 같다.</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>

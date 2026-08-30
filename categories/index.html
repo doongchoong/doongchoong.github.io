@@ -226,7 +226,48 @@
         .toc {
     border: thin solid ;
     padding: 1rem;
+    border-radius: 6px 6px 6px 6px;
+    margin: 1em 0;
   }
+
+   
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;  
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+   
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+ 
+tr:last-child td {
+  border-bottom: none;
+}
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
 
     </style>
 
@@ -240,33 +281,11 @@
   border: 1px solid ;
   border-radius: 10px;
   max-width: 580px;
-  margin: 0 auto;
-        padding: 20px 20px;
+  margin: 1em auto;
+  padding: 20px 20px;
 }
 
- 
-.chatlog table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 0.95rem;
-}
 
-.chatlog th,
-.chatlog td {
-  border: 1px solid #ddd;
-  padding: 0.75rem;
-  text-align: left;
-}
-
-.chatlog thead {
-  background-color: #f0f0f5;
-  font-weight: 600;
-}
-
-.chatlog tbody tr:nth-child(even) {
-  background-color: #fafafa;
-}
 
  
 .chatlog pre {
