@@ -6,7 +6,7 @@ toc : true
 tocBorder : true
 ---
 
-```[AI-Written (GPT-6-Astra)```
+```[AI-Written (GPT-6-Astra)]```
 
 Canvas로 움직이는 모습을 보여주면서 기술적으로도 살펴볼 만한 주제를 찾다가 Poisson Disk Sampling을 추천받았다.
 처음 듣는 이름인데 랜덤으로 점을 뿌리면서도 점 사이의 간격은 유지하는 방식이라고 한다.
