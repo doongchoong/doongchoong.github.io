@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 10 Aug 2026 22:14:46 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 21:08:40 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Poisson Disk Sampling</title>
+      <link>https://doongchoong.github.io/posts/poisson-disk-sampling/</link>
+      <pubDate>Sat, 05 Sep 2026 21:08:40 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/poisson-disk-sampling/</guid>
+      <description>&lt;p&gt;[AI-written (GPT-6-Astra)]&#xA;Canvas로 움직이는 모습을 보여주면서 기술적으로도 살펴볼 만한 주제를 찾다가 Poisson Disk Sampling을 추천받았다.&#xA;처음 듣는 이름인데 랜덤으로 점을 뿌리면서도 점 사이의 간격은 유지하는 방식이라고 한다.&lt;/p&gt;&#xA;&lt;p&gt;그냥 랜덤으로 뿌리는 것과 어떻게 다른지부터 보고, 이 점들을 이용해서 그림도 표현해본다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-랜덤-배치&#34;&gt;1. 랜덤 배치&lt;/h2&gt;&#xA;&lt;p&gt;화면에 점을 랜덤으로 뿌리는 것은 간단하다. 가로와 세로 좌표를 각각 난수로 정하면 된다.&lt;/p&gt;&#xA;&lt;div class=&#34;code-block-wrapper&#34;&gt;&#xA;  &lt;div class=&#34;code-title&#34;&gt;JAVASCRIPT&lt;/div&gt;&#xA;  &lt;div class=&#34;highlight_wrap&#34;&gt;&#xA;    &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;Math&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;random&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;width&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;y&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;Math&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;random&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&#xA;  &lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;이때 어디에나 같은 확률로 놓인다는 것과, 서로 비슷한 간격으로 놓인다는 것은 다른 얘기다.&#xA;옆에 이미 점이 있어도 새 점이 놓일 확률은 똑같다. 그래서 몇 개씩 뭉친 곳도 있고 휑한 곳도 생긴다.&#xA;&lt;a href=&#34;https://bost.ocks.org/mike/algorithms/#sampling&#34;&gt;Mike Bostock의 시각화 글&lt;/a&gt;에서도 이런 배치의 차이를 그림으로 비교하고 있다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>에이전트코딩</title>
       <link>https://doongchoong.github.io/posts/%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8%EC%BD%94%EB%94%A9/</link>
