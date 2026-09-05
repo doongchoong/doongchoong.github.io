@@ -1,13 +1,36 @@
 ---
-title: "Poisson Disk Sampling"
+title: "[AI] Poisson Disk Sampling"
 date: 2026-09-05T21:08:40+09:00
 draft: false
 toc : true
 tocBorder : true
 ---
-[AI-written (GPT-6-Astra)]
+
+```[AI-Written (GPT-6-Astra)```
+
 Canvas로 움직이는 모습을 보여주면서 기술적으로도 살펴볼 만한 주제를 찾다가 Poisson Disk Sampling을 추천받았다.
 처음 듣는 이름인데 랜덤으로 점을 뿌리면서도 점 사이의 간격은 유지하는 방식이라고 한다.
+
+{{< chatlog >}}
+**User**
+괜찮은 주제 있어?  html canvas 에 에니메이션으로도 보여줄수 있으면서 적당히 기술적이고 응용을 한번 더 해볼수 있는 것
+
+**🤖 GPT-Astra:**
+
+(앞부분 생략)
+
+**3. Poisson Disk Sampling — 랜덤인데 왜 골고루 놓인 것처럼 보일까**
+
+점 사이의 최소 거리를 유지하면서 무작위로 배치하는 방법입니다. Bridson 알고리즘은 격자를 이용해 주변 점을 효율적으로 검사합니다. [짧은 원 논문](https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf)
+
+- **Canvas:** 후보 점이 생기고, 너무 가까우면 탈락하고, 조건을 만족하면 남는 과정을 보여준다. 일반 난수 배치와 나란히 비교한다.
+- **기술적인 부분:** 최소 거리, 주변 탐색, 후보 생성 방식, 격자 크기를 정하는 이유.
+- **한 번 더 응용:** 이미지 밝기에 따라 점의 간격을 바꾸어 점묘화 만들기. 가변 간격에서는 거리 판정과 탐색 범위를 어떻게 바꿀지도 추가 주제가 된다.
+
+이쪽은 계속 움직이는 시뮬레이션보다 **만들어지는 과정을 보는 애니메이션**에 가깝지만, 결과를 이미지로 남기는 재미가 있습니다.
+
+(뒷부분 생략)
+{{< /chatlog >}}
 
 그냥 랜덤으로 뿌리는 것과 어떻게 다른지부터 보고, 이 점들을 이용해서 그림도 표현해본다.
 
