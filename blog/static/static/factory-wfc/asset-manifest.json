@@ -1,0 +1,407 @@
+{
+  "version": 1,
+  "units": "meters",
+  "upAxis": "Y",
+  "frontAxis": "+Z",
+  "materials": "Embedded base color PNG and scalar metalness/roughness; no normal or bump maps.",
+  "assets": [
+    {
+      "id": "robot-cell",
+      "name": "로봇 셀",
+      "kind": "robot",
+      "layer": 1,
+      "cellSize": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "ports": [],
+      "animated": true,
+      "bounds": {
+        "min": [
+          -1.402500033378601,
+          -1.4305114426349519e-8,
+          -1.402500033378601
+        ],
+        "max": [
+          1.402500033378601,
+          3.070585322023467,
+          1.402500033378601
+        ]
+      },
+      "geometry": {
+        "vertices": 11676,
+        "triangles": 3892
+      },
+      "file": "models/robot-cell.glb"
+    },
+    {
+      "id": "cnc-machine",
+      "name": "CNC 가공 머신",
+      "kind": "machine",
+      "layer": 1,
+      "cellSize": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "ports": [],
+      "animated": false,
+      "bounds": {
+        "min": [
+          -1.3875000476837158,
+          -7.1525572131747595e-9,
+          -1.402500033378601
+        ],
+        "max": [
+          1.3875000476837158,
+          2.5850000381469727,
+          1.402500033378601
+        ]
+      },
+      "geometry": {
+        "vertices": 11940,
+        "triangles": 3980
+      },
+      "file": "models/cnc-machine.glb"
+    },
+    {
+      "id": "conveyor-straight",
+      "name": "직선 컨베이어",
+      "kind": "conveyor",
+      "layer": 1,
+      "cellSize": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "ports": [
+        {
+          "face": "-X",
+          "position": [
+            -1.5,
+            0.83,
+            0
+          ],
+          "width": 0.7,
+          "type": "belt"
+        },
+        {
+          "face": "+X",
+          "position": [
+            1.5,
+            0.83,
+            0
+          ],
+          "width": 0.7,
+          "type": "belt"
+        }
+      ],
+      "animated": false,
+      "bounds": {
+        "min": [
+          -1.5,
+          0.004999999888241291,
+          -0.45100000500679016
+        ],
+        "max": [
+          1.5,
+          1.245,
+          0.8500000238418579
+        ]
+      },
+      "geometry": {
+        "vertices": 7572,
+        "triangles": 2524
+      },
+      "file": "models/conveyor-straight.glb"
+    },
+    {
+      "id": "storage-rack",
+      "name": "적재 랙",
+      "kind": "rack",
+      "layer": 0,
+      "cellSize": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "ports": [],
+      "animated": false,
+      "bounds": {
+        "min": [
+          -1.1200000047683716,
+          0,
+          -0.7799999713897705
+        ],
+        "max": [
+          1.1636605262756348,
+          2.5999999046325684,
+          0.8220000267028809
+        ]
+      },
+      "geometry": {
+        "vertices": 8484,
+        "triangles": 2828
+      },
+      "file": "models/storage-rack.glb"
+    },
+    {
+      "id": "pipe-skid",
+      "name": "배관 스키드",
+      "kind": "pipe",
+      "layer": 2,
+      "cellSize": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "ports": [
+        {
+          "face": "-X",
+          "position": [
+            -1.5,
+            0.85,
+            -0.48
+          ],
+          "radius": 0.14,
+          "type": "pipe-main"
+        },
+        {
+          "face": "+X",
+          "position": [
+            1.5,
+            0.85,
+            -0.48
+          ],
+          "radius": 0.14,
+          "type": "pipe-main"
+        },
+        {
+          "face": "-X",
+          "position": [
+            -1.5,
+            0.85,
+            0.48
+          ],
+          "radius": 0.09,
+          "type": "pipe-secondary"
+        },
+        {
+          "face": "+X",
+          "position": [
+            1.5,
+            0.85,
+            0.48
+          ],
+          "radius": 0.09,
+          "type": "pipe-secondary"
+        }
+      ],
+      "animated": false,
+      "bounds": {
+        "min": [
+          -1.5,
+          0,
+          -0.875
+        ],
+        "max": [
+          1.5,
+          1.5352420806884766,
+          0.875
+        ]
+      },
+      "geometry": {
+        "vertices": 11748,
+        "triangles": 3916
+      },
+      "file": "models/pipe-skid.glb"
+    },
+    {
+      "id": "conveyor-corner",
+      "name": "코너 컨베이어",
+      "kind": "conveyor",
+      "mask": 5,
+      "layer": 0,
+      "cellSize": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "ports": [
+        {
+          "face": "+X",
+          "position": [
+            1.5,
+            0.83,
+            0
+          ],
+          "width": 0.7,
+          "type": "belt"
+        },
+        {
+          "face": "+Z",
+          "position": [
+            0,
+            0.83,
+            1.5
+          ],
+          "width": 0.7,
+          "type": "belt"
+        }
+      ],
+      "animated": false,
+      "bounds": {
+        "min": [
+          -0.45100000500679016,
+          0.004999999888241291,
+          -0.8500000238418579
+        ],
+        "max": [
+          1.5,
+          0.9909999966621399,
+          1.5
+        ]
+      },
+      "geometry": {
+        "vertices": 13872,
+        "triangles": 4624
+      },
+      "file": "models/conveyor-corner.glb"
+    },
+    {
+      "id": "conveyor-tee",
+      "name": "T자 컨베이어",
+      "kind": "conveyor",
+      "mask": 7,
+      "layer": 0,
+      "cellSize": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "ports": [
+        {
+          "face": "+X",
+          "position": [
+            1.5,
+            0.83,
+            0
+          ],
+          "width": 0.7,
+          "type": "belt"
+        },
+        {
+          "face": "-X",
+          "position": [
+            -1.5,
+            0.83,
+            0
+          ],
+          "width": 0.7,
+          "type": "belt"
+        },
+        {
+          "face": "+Z",
+          "position": [
+            0,
+            0.83,
+            1.5
+          ],
+          "width": 0.7,
+          "type": "belt"
+        }
+      ],
+      "animated": false,
+      "bounds": {
+        "min": [
+          -1.5,
+          0.004999999888241291,
+          -0.8500000238418579
+        ],
+        "max": [
+          1.5,
+          0.9909999966621399,
+          1.5
+        ]
+      },
+      "geometry": {
+        "vertices": 16320,
+        "triangles": 5440
+      },
+      "file": "models/conveyor-tee.glb"
+    },
+    {
+      "id": "conveyor-cross",
+      "name": "십자 컨베이어",
+      "kind": "conveyor",
+      "mask": 15,
+      "layer": 0,
+      "cellSize": 3,
+      "footprint": [
+        1,
+        1
+      ],
+      "ports": [
+        {
+          "face": "+X",
+          "position": [
+            1.5,
+            0.83,
+            0
+          ],
+          "width": 0.7,
+          "type": "belt"
+        },
+        {
+          "face": "-X",
+          "position": [
+            -1.5,
+            0.83,
+            0
+          ],
+          "width": 0.7,
+          "type": "belt"
+        },
+        {
+          "face": "+Z",
+          "position": [
+            0,
+            0.83,
+            1.5
+          ],
+          "width": 0.7,
+          "type": "belt"
+        },
+        {
+          "face": "-Z",
+          "position": [
+            0,
+            0.83,
+            -1.5
+          ],
+          "width": 0.7,
+          "type": "belt"
+        }
+      ],
+      "animated": false,
+      "bounds": {
+        "min": [
+          -1.5,
+          0.004999999888241291,
+          -1.5
+        ],
+        "max": [
+          1.5,
+          0.9909999966621399,
+          1.5
+        ]
+      },
+      "geometry": {
+        "vertices": 18768,
+        "triangles": 6256
+      },
+      "file": "models/conveyor-cross.glb"
+    }
+  ]
+}

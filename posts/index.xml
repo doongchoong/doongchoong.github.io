@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sat, 05 Sep 2026 21:08:40 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 20:55:00 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파동함수붕괴(WFC)</title>
+      <link>https://doongchoong.github.io/posts/%ED%8C%8C%EB%8F%99%ED%95%A8%EC%88%98%EB%B6%95%EA%B4%B4/</link>
+      <pubDate>Thu, 10 Sep 2026 20:55:00 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/%ED%8C%8C%EB%8F%99%ED%95%A8%EC%88%98%EB%B6%95%EA%B4%B4/</guid>
+      <description>&lt;p&gt;파동함수붕괴 WFC(Wave Function Collapse)는 유명한 맵,지형 등을 절차적으로 생성하는 알고리즘이다.&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#34;chatlog&#34;&gt;&#xA;  &lt;p&gt;&lt;div class=&#34;user-bubble&#34;&gt;&lt;strong&gt;User&lt;/strong&gt;. wfc 알고리즘에 대해 설명해줘&lt;/div&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;🤖 Chat GPT:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;WFC(Wave Function Collapse)는 **“각 칸이 가질 수 있는 후보를 점점 줄여가며, 주변 규칙을 만족하는 전체 배치를 만들어내는 절차적 생성 알고리즘”**이라고 보면 됩니다.&lt;/p&gt;&#xA;&lt;p&gt;이름은 양자역학에서 따왔지만, 실제로 게임 맵이나 건물 배치에 쓸 때는 양자역학을 알 필요는 없습니다. 핵심은 &lt;strong&gt;아직 결정되지 않은 칸에는 여러 후보가 동시에 가능하고, 하나를 결정하면 그 영향으로 주변 후보들이 줄어든다&lt;/strong&gt;는 개념입니다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>[AI] Poisson Disk Sampling</title>
       <link>https://doongchoong.github.io/posts/poisson-disk-sampling/</link>

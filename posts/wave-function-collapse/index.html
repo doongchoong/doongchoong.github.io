@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wave Function Collapse | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+    border-radius: 6px 6px 6px 6px;
+    margin: 1em 0;
+  }
+
+   
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;  
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+   
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+ 
+tr:last-child td {
+  border-bottom: none;
+}
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 1em auto;
+  padding: 20px 20px;
+}
+
+
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.user-bubble {
+  background-color: #e9e9eb;
+  border-radius: 20px;
+  padding: 0.8em 1.2em;
+
+   
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0.5em 0 0.5em auto;
+
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+
+   
+  left: auto;
+  right: -10px;
+  top: 10px;
+
+  border: 6px solid transparent;
+  border-left-color: #e9e9eb;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+
+   
+  .mermaid svg[aria-roledescription="gitGraph"] {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <a href="/" class="back-link">← Back to home</a>
+    <h1 class="post-title">Wave Function Collapse</h1>
+    <div class="post-date">September 5, 2026</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-타일과-규칙">1. 타일과 규칙</a></li>
+    <li><a href="#2-격자-채우기">2. 격자 채우기</a></li>
+    <li><a href="#3-분석">3. 분석</a>
+      <ul>
+        <li><a href="#31-후보-집합">3.1. 후보 집합</a></li>
+        <li><a href="#32-전파">3.2. 전파</a></li>
+        <li><a href="#33-모순">3.3. 모순</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-wfc로-배치되는-3d-공장">4. WFC로 배치되는 3D 공장</a></li>
+    <li><a href="#5-생각">5. 생각</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>WFC(Wave Function Collapse)는 유명한 맵,지형 등을 절차적으로 생성하는 알고리즘이다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. wfc 알고리즘에 대해 설명해줘</div></p>
+<p><strong>🤖 Chat GPT:</strong></p>
+<p>WFC(Wave Function Collapse)는 **“각 칸이 가질 수 있는 후보를 점점 줄여가며, 주변 규칙을 만족하는 전체 배치를 만들어내는 절차적 생성 알고리즘”**이라고 보면 됩니다.</p>
+<p>이름은 양자역학에서 따왔지만, 실제로 게임 맵이나 건물 배치에 쓸 때는 양자역학을 알 필요는 없습니다. 핵심은 <strong>아직 결정되지 않은 칸에는 여러 후보가 동시에 가능하고, 하나를 결정하면 그 영향으로 주변 후보들이 줄어든다</strong>는 개념입니다.</p>
+<p>(&hellip; 생략 &hellip;)</p>
+<h3 id="wfc의-기본-동작">WFC의 기본 동작</h3>
+<p>전체 흐름은 크게 4단계입니다.</p>
+<ol>
+<li>
+<p><strong>가능한 상태 초기화</strong><br>
+모든 셀이 여러 타일 후보를 가지고 시작합니다.</p>
+</li>
+<li>
+<p><strong>Entropy가 가장 낮은 셀 선택</strong><br>
+가능한 후보가 가장 적은 칸을 고릅니다. 예를 들어 <code>{잔디, 길}</code>처럼 2개밖에 안 남은 칸을 <code>{잔디, 길, 물, 건물}</code> 4개가 남은 칸보다 먼저 결정합니다.</p>
+</li>
+<li>
+<p><strong>Collapse</strong><br>
+후보 중 하나를 선택합니다.</p>
+</li>
+<li>
+<p><strong>Propagation</strong><br>
+선택한 타일 때문에 불가능해진 주변 후보를 제거합니다. 주변 후보가 줄면서 또 다른 주변 칸까지 연쇄적으로 영향을 받습니다.</p>
+</li>
+</ol>
+
+</div>
+<p>WFC를 설명할때 가장 기본적인 것은 길잇기, 파이프, 회로도 연결하기 등
+격자의 동서남북 방향에서 인접한 셀이 이어질수 있는 후보들을 계속 연결하여
+하는 예제가 가장 대표적이다.</p>
+<p>아래는 GPT6-Astra가 예제를 만들어주었다.</p>
+<h2 id="1-타일과-규칙">1. 타일과 규칙</h2>
+<p>정사각형 타일 12개를 사용한다. 각 타일은 북·동·남·서 네 변에 선이 있는지 없는지로 정의한다. [북, 동, 남, 서] 순서.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>빈 칸        [0,0,0,0]
+</span></span><span style="display:flex;"><span>직선 ×2      [0,1,0,1]  [1,0,1,0]
+</span></span><span style="display:flex;"><span>모서리 ×4    [1,1,0,0]  [0,1,1,0]  [0,0,1,1]  [1,0,0,1]
+</span></span><span style="display:flex;"><span>십자         [1,1,1,1]
+</span></span><span style="display:flex;"><span>T자 ×4       [0,1,1,1]  [1,1,1,0]  [1,1,0,1]  [1,0,1,1]</span></span></code></pre></div>
+  </div>
+</div><p>이웃한 두 칸은 맞닿은 변은 이어져야 한다. 즉, 어떤 칸의 동쪽에 선이 있으면, 그 오른쪽 칸의 서쪽에도 선이 있어 &lsquo;연결&rsquo;되어야 한다.</p>
+
+<div id="wfc-palette" class="wfc-demo">
+  <canvas data-role="palette" width="960" height="248" role="img" aria-label="이 글에서 사용하는 타일 12개">타일 12개</canvas>
+  <p class="wfc-note">주황 점: 그 변에 선이 있다는 표시</p>
+</div>
+<style>
+.wfc-demo{margin:1.5rem 0;padding:16px;border:1px solid #b8c5c7;border-radius:10px;background:#f5f8f7;color:#20373d;font:14px/1.6 system-ui,sans-serif;color-scheme:light}
+.wfc-demo .wfc-controls{display:flex;gap:10px 14px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.wfc-demo label{display:inline-flex;gap:7px;align-items:center;flex-wrap:wrap}
+.wfc-demo input[type=range]{width:110px;accent-color:#147d80}
+.wfc-demo button{font:inherit;border:1px solid #738d92;border-radius:5px;padding:5px 12px;background:#fff;color:#20373d;cursor:pointer}
+.wfc-demo button:disabled{opacity:.5;cursor:default}
+.wfc-demo :focus-visible{outline:3px solid #db7b29;outline-offset:3px}
+.wfc-demo canvas{display:block;width:100%;height:auto;background:#fff;border:1px solid #d1dcdd;box-sizing:border-box}
+.wfc-demo .wfc-note{font-size:12px;color:#496169;margin:10px 0 4px}
+.wfc-demo .wfc-status{font-variant-numeric:tabular-nums;margin:5px 0 0;min-height:1.6em}
+@media(max-width:600px){.wfc-demo{padding:10px}}
+</style>
+<script>
+(() => {
+  function randomSeed(seed) {
+    return () => {
+      let t = seed += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  const DIRS = [{x: 0, y: -1}, {x: 1, y: 0}, {x: 0, y: 1}, {x: -1, y: 0}];
+  function makeTileset(defs) {
+    const tiles = defs.map((edges, id) => ({id, edges}));
+    const allowed = DIRS.map((_, d) => tiles.map(a =>
+      new Set(tiles.filter(b => a.edges[d] === b.edges[(d + 2) % 4]).map(b => b.id))
+    ));
+    return {tiles, allowed};
+  }
+  const KNOT = makeTileset([
+    [0,0,0,0],
+    [0,1,0,1], [1,0,1,0],
+    [1,1,0,0], [0,1,1,0], [0,0,1,1], [1,0,0,1],
+    [1,1,1,1],
+    [0,1,1,1], [1,1,1,0], [1,1,0,1], [1,0,1,1]
+  ]);
+  function drawKnotTile(ctx, tile, x, y, size) {
+    const open = [];
+    tile.edges.forEach((v, d) => { if (v) open.push(d); });
+    if (!open.length) return;
+    const cx = x + size / 2, cy = y + size / 2;
+    const mid = [[cx, y], [x + size, cy], [cx, y + size], [x, cy]];
+    ctx.strokeStyle = '#1a7389';
+    ctx.lineWidth = Math.max(1.5, size * .12);
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    if (open.length === 2) {
+      ctx.moveTo(mid[open[0]][0], mid[open[0]][1]);
+      ctx.quadraticCurveTo(cx, cy, mid[open[1]][0], mid[open[1]][1]);
+    } else {
+      for (const d of open) { ctx.moveTo(cx, cy); ctx.lineTo(mid[d][0], mid[d][1]); }
+    }
+    ctx.stroke();
+  }
+  class WFC {
+    constructor(cols, rows, tileset, rng, weights) {
+      this.cols = cols;
+      this.rows = rows;
+      this.tileset = tileset;
+      this.rng = rng;
+      this.weights = weights || tileset.tiles.map(() => 1);
+      this.n = cols * rows;
+      this.wave = [];
+      for (let i = 0; i < this.n; i++) this.wave.push(new Set(tileset.tiles.map(t => t.id)));
+      this.collapsed = new Array(this.n).fill(-1);
+      this.done = false;
+      this.failed = false;
+      this.lastCell = -1;
+      this.lastChange = [];
+    }
+    index(x, y) { return x + y * this.cols; }
+    neighbor(cell, d) {
+      const x = cell % this.cols + DIRS[d].x;
+      const y = Math.floor(cell / this.cols) + DIRS[d].y;
+      if (x < 0 || y < 0 || x >= this.cols || y >= this.rows) return -1;
+      return x + y * this.cols;
+    }
+    restrict(cell, keep) {
+      const wave = this.wave[cell];
+      for (const t of [...wave]) if (!keep.has(t)) wave.delete(t);
+      return this.propagate([cell]);
+    }
+    propagate(stack) {
+      const allowed = this.tileset.allowed;
+      this.lastChange = [];
+      while (stack.length) {
+        const cell = stack.pop();
+        const wave = this.wave[cell];
+        for (let d = 0; d < 4; d++) {
+          const nb = this.neighbor(cell, d);
+          if (nb === -1) continue;
+          const nbWave = this.wave[nb];
+          const before = nbWave.size;
+          for (const t of [...nbWave]) {
+            let ok = false;
+            for (const s of wave) if (allowed[d][s].has(t)) { ok = true; break; }
+            if (!ok) nbWave.delete(t);
+          }
+          if (nbWave.size === 0) { this.failed = true; return false; }
+          if (nbWave.size < before) {
+            stack.push(nb);
+            if (this.collapsed[nb] === -1) this.lastChange.push(nb);
+          }
+        }
+      }
+      return true;
+    }
+    pickCell() {
+      let best = -1, bestEntropy = Infinity;
+      for (let i = 0; i < this.n; i++) {
+        if (this.collapsed[i] !== -1) continue;
+        const entropy = this.wave[i].size + this.rng() * 0.1;
+        if (entropy < bestEntropy) { best = i; bestEntropy = entropy; }
+      }
+      return best;
+    }
+    step() {
+      if (this.done || this.failed) return 'halt';
+      const cell = this.pickCell();
+      if (cell === -1) { this.done = true; return 'done'; }
+      const wave = this.wave[cell];
+      let total = 0;
+      for (const t of wave) total += this.weights[t];
+      let pick = this.rng() * total;
+      let tile = [...wave][wave.size - 1];
+      for (const t of wave) {
+        pick -= this.weights[t];
+        if (pick <= 0) { tile = t; break; }
+      }
+      this.lastCell = cell;
+      this.collapsed[cell] = tile;
+      this.wave[cell] = new Set([tile]);
+      if (!this.propagate([cell])) return 'failed';
+      return 'collapsed';
+    }
+  }
+  window.WFCArticle20260905 = {randomSeed, makeTileset, KNOT, drawKnotTile, WFC};
+
+  const root = document.getElementById('wfc-palette');
+  const ctx = root.querySelector('[data-role="palette"]').getContext('2d');
+  ctx.setTransform(2, 0, 0, 2, 0, 0);
+  const size = 40, gap = 16, perRow = 6;
+  const ox = (480 - (perRow * size + (perRow - 1) * gap)) / 2;
+  KNOT.tiles.forEach((tile, i) => {
+    const x = ox + (i % perRow) * (size + gap);
+    const y = 14 + Math.floor(i / perRow) * (size + gap);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(x, y, size, size);
+    drawKnotTile(ctx, tile, x, y, size);
+    ctx.strokeStyle = '#d1dcdd';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x + .5, y + .5, size - 1, size - 1);
+    ctx.fillStyle = '#db7b29';
+    tile.edges.forEach((v, d) => {
+      if (!v) return;
+      const mx = [x + size / 2, x + size, x + size / 2, x][d];
+      const my = [y, y + size / 2, y + size, y + size / 2][d];
+      ctx.beginPath();
+      ctx.arc(mx, my, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  });
+})();
+</script>
+
+<p>(12개의 타일)</p>
+<h2 id="2-격자-채우기">2. 격자 채우기</h2>
+<p>처음에는 모든 칸의 후보가 12개다. GPT가 만들어준 <code>한단계</code>를 눌러보면 랜덤하게
+어떤 한 타일이 만들어지는데 이때 타일의 모양에 따라 주변 연결될수 있는 후보들이
+줄어들어서 숫자가 바뀌는 것을 알수 있다.</p>
+
+<div id="wfc-knot" class="wfc-demo">
+  <div class="wfc-controls">
+    <label>속도 <input data-role="speed" type="range" min="1" max="24" value="3"> <output data-role="speed-value">3</output></label>
+    <button type="button" data-role="play">시작</button>
+    <button type="button" data-role="step">한 단계</button>
+    <button type="button" data-role="reset">다시</button>
+    <label><input type="checkbox" data-role="count" checked> 가능성 수</label>
+  </div>
+  <div class="wfc-panels">
+    <canvas data-role="board" width="960" height="640" role="img" aria-label="Wave Function Collapse가 격자를 채우는 과정">격자 채우기</canvas>
+  </div>
+  <p class="wfc-note">주황 테두리: 직전 단계에서 후보가 줄어든 칸 · 진한 테두리: 이번에 확정된 칸 · 빨강: 모순</p>
+  <p class="wfc-status" data-role="status" role="status" aria-live="polite"></p>
+</div>
+<script>
+(() => {
+  const {randomSeed, KNOT, drawKnotTile, WFC} = window.WFCArticle20260905;
+  const root = document.getElementById('wfc-knot');
+  const get = name => root.querySelector(`[data-role="${name}"]`);
+  const ctx = get('board').getContext('2d');
+  const CELL = 24, COLS = 19, ROWS = 13;
+  const OX = (480 - COLS * CELL) / 2, OY = (320 - ROWS * CELL) / 2;
+  let wfc = null, seed = 20260904, running = false, frame = 0;
+  let restarts = 0, failedBefore = false;
+  function stop() {
+    running = false;
+    cancelAnimationFrame(frame);
+    get('play').textContent = '시작';
+  }
+  function reset() {
+    stop();
+    if (failedBefore) { restarts++; failedBefore = false; }
+    wfc = new WFC(COLS, ROWS, KNOT, randomSeed(++seed));
+    draw();
+  }
+  function cellXY(cell) {
+    return [OX + (cell % COLS) * CELL, OY + Math.floor(cell / COLS) * CELL];
+  }
+  function draw() {
+    ctx.setTransform(2, 0, 0, 2, 0, 0);
+    ctx.fillStyle = '#f5f8f7';
+    ctx.fillRect(0, 0, 480, 320);
+    const showCount = get('count').checked;
+    for (let cell = 0; cell < wfc.n; cell++) {
+      const [x, y] = cellXY(cell);
+      if (wfc.collapsed[cell] !== -1) {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(x, y, CELL, CELL);
+        drawKnotTile(ctx, KNOT.tiles[wfc.collapsed[cell]], x, y, CELL);
+      } else {
+        ctx.fillStyle = '#e9efee';
+        ctx.fillRect(x, y, CELL, CELL);
+        if (showCount) {
+          ctx.fillStyle = '#5b757c';
+          ctx.font = '10px system-ui, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(wfc.wave[cell].size, x + CELL / 2, y + CELL / 2 + .5);
+        }
+      }
+    }
+    ctx.strokeStyle = '#d1dcdd';
+    ctx.lineWidth = .5;
+    for (let cell = 0; cell < wfc.n; cell++) {
+      const [x, y] = cellXY(cell);
+      ctx.strokeRect(x, y, CELL, CELL);
+    }
+    ctx.strokeStyle = '#db7b29';
+    ctx.lineWidth = 1.5;
+    for (const cell of wfc.lastChange) {
+      const [x, y] = cellXY(cell);
+      ctx.strokeRect(x + 1, y + 1, CELL - 2, CELL - 2);
+    }
+    if (wfc.lastCell !== -1 && wfc.collapsed[wfc.lastCell] !== -1) {
+      const [x, y] = cellXY(wfc.lastCell);
+      ctx.strokeStyle = '#ae5916';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(x + 1, y + 1, CELL - 2, CELL - 2);
+    }
+    if (wfc.failed) {
+      ctx.fillStyle = '#bd5252';
+      for (let cell = 0; cell < wfc.n; cell++) {
+        if (wfc.collapsed[cell] === -1 && wfc.wave[cell].size === 0) {
+          const [x, y] = cellXY(cell);
+          ctx.fillRect(x + 2, y + 2, CELL - 4, CELL - 4);
+        }
+      }
+    }
+    const done = wfc.collapsed.filter(v => v !== -1).length;
+    let text = `확정 ${done}/${wfc.n} · 재시작 ${restarts}회`;
+    if (wfc.failed) text += ' · 모순 발생 — 시작 또는 다시를 누르면 새 시드로 만든다';
+    else if (wfc.done) text += ' · 완료';
+    else text += running ? ' · 채우는 중' : ' · 대기';
+    get('status').textContent = text;
+  }
+  function tick() {
+    if (!running) return;
+    const steps = +get('speed').value;
+    for (let i = 0; i < steps; i++) {
+      const r = wfc.step();
+      if (r !== 'collapsed') {
+        if (r === 'failed') failedBefore = true;
+        stop();
+        break;
+      }
+    }
+    draw();
+    if (running) frame = requestAnimationFrame(tick);
+  }
+  get('play').onclick = () => {
+    if (running) { stop(); draw(); return; }
+    if (wfc.failed || wfc.done) reset();
+    running = true;
+    get('play').textContent = '일시정지';
+    frame = requestAnimationFrame(tick);
+  };
+  get('step').onclick = () => {
+    if (running) stop();
+    if (wfc.failed || wfc.done) return;
+    wfc.step();
+    draw();
+  };
+  get('reset').onclick = reset;
+  get('speed').oninput = () => { get('speed-value').value = get('speed').value; };
+  get('count').onchange = draw;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && running) { stop(); draw(); }
+  });
+  reset();
+})();
+</script>
+
+<h2 id="3-분석">3. 분석</h2>
+<h3 id="31-후보-집합">3.1. 후보 집합</h3>
+<p>각 칸의 후보는 타일 번호의 Set(집합)으로 둔다. 처음에는 전부 12로 세팅된다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">wave</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">[];</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">let</span> <span style="color:#1f2328">i</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">i</span> <span style="color:#0550ae">&lt;</span> <span style="color:#1f2328">cols</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">rows</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">i</span><span style="color:#0550ae">++</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">wave</span><span style="color:#1f2328">.</span><span style="color:#1f2328">push</span><span style="color:#1f2328">(</span><span style="color:#cf222e">new</span> <span style="color:#1f2328">Set</span><span style="color:#1f2328">(</span><span style="color:#1f2328">tiles</span><span style="color:#1f2328">.</span><span style="color:#1f2328">map</span><span style="color:#1f2328">(</span><span style="color:#1f2328">t</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">t</span><span style="color:#1f2328">.</span><span style="color:#1f2328">id</span><span style="color:#1f2328">)));</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p>후보 중 엔트로피가 가장 작은 것을 고른다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">let</span> <span style="color:#1f2328">best</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">bestEntropy</span> <span style="color:#0550ae">=</span> <span style="color:#cf222e">Infinity</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">let</span> <span style="color:#1f2328">i</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">i</span> <span style="color:#0550ae">&lt;</span> <span style="color:#1f2328">wave</span><span style="color:#1f2328">.</span><span style="color:#1f2328">length</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">i</span><span style="color:#0550ae">++</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">collapsed</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">!==</span> <span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span> <span style="color:#cf222e">continue</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">const</span> <span style="color:#1f2328">entropy</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">wave</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">].</span><span style="color:#1f2328">size</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">rng</span><span style="color:#1f2328">()</span> <span style="color:#0550ae">*</span> <span style="color:#0550ae">0.1</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">entropy</span> <span style="color:#0550ae">&lt;</span> <span style="color:#1f2328">bestEntropy</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">best</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">i</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">bestEntropy</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">entropy</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="32-전파">3.2. 전파</h3>
+<p>이웃 후보중에 확정 타일과 이어지지 않았으면 제외하는데 또 이웃의 후보를 대상으로도
+삭제되며 후보숫자가 연쇄적으로 줄어들게 된다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">stack</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span><span style="color:#1f2328">cell</span><span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">while</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">stack</span><span style="color:#1f2328">.</span><span style="color:#1f2328">length</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">const</span> <span style="color:#1f2328">current</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">stack</span><span style="color:#1f2328">.</span><span style="color:#1f2328">pop</span><span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">let</span> <span style="color:#1f2328">d</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">d</span> <span style="color:#0550ae">&lt;</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">d</span><span style="color:#0550ae">++</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">const</span> <span style="color:#1f2328">nb</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">neighbor</span><span style="color:#1f2328">(</span><span style="color:#1f2328">current</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">d</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">nb</span> <span style="color:#0550ae">===</span> <span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)</span> <span style="color:#cf222e">continue</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">const</span> <span style="color:#1f2328">before</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">wave</span><span style="color:#1f2328">[</span><span style="color:#1f2328">nb</span><span style="color:#1f2328">].</span><span style="color:#1f2328">size</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">const</span> <span style="color:#1f2328">t</span> <span style="color:#cf222e">of</span> <span style="color:#1f2328">wave</span><span style="color:#1f2328">[</span><span style="color:#1f2328">nb</span><span style="color:#1f2328">])</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cf222e">const</span> <span style="color:#1f2328">ok</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">[...</span><span style="color:#1f2328">wave</span><span style="color:#1f2328">[</span><span style="color:#1f2328">current</span><span style="color:#1f2328">]].</span><span style="color:#1f2328">some</span><span style="color:#1f2328">(</span><span style="color:#1f2328">s</span> <span style="color:#1f2328">=&gt;</span> <span style="color:#1f2328">allowed</span><span style="color:#1f2328">[</span><span style="color:#1f2328">d</span><span style="color:#1f2328">][</span><span style="color:#1f2328">s</span><span style="color:#1f2328">].</span><span style="color:#1f2328">has</span><span style="color:#1f2328">(</span><span style="color:#1f2328">t</span><span style="color:#1f2328">));</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">!</span><span style="color:#1f2328">ok</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">wave</span><span style="color:#1f2328">[</span><span style="color:#1f2328">nb</span><span style="color:#1f2328">].</span><span style="color:#cf222e">delete</span><span style="color:#1f2328">(</span><span style="color:#1f2328">t</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">wave</span><span style="color:#1f2328">[</span><span style="color:#1f2328">nb</span><span style="color:#1f2328">].</span><span style="color:#1f2328">size</span> <span style="color:#0550ae">===</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span> <span style="color:#cf222e">return</span> <span style="color:#cf222e">false</span><span style="color:#1f2328">;</span> <span style="color:#57606a">// 모순
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">wave</span><span style="color:#1f2328">[</span><span style="color:#1f2328">nb</span><span style="color:#1f2328">].</span><span style="color:#1f2328">size</span> <span style="color:#0550ae">&lt;</span> <span style="color:#1f2328">before</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">stack</span><span style="color:#1f2328">.</span><span style="color:#1f2328">push</span><span style="color:#1f2328">(</span><span style="color:#1f2328">nb</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p>d 는 Direction 4방향이고 allowed는 d방향으로 인접한 상태 t와 연결될수 있는지 확인</p>
+<h3 id="33-모순">3.3. 모순</h3>
+<p>모순은 후보가 더이상 없는 상태로 주변의 상황에 의거하여 결국
+놓을수 있는 방법이 없어지는 것이다.
+GPT가 만들어준 이 예제는 재시도를 하여 처리하며
+사실 거의 발생하지 않는 것으로 보인다.</p>
+<h2 id="4-wfc로-배치되는-3d-공장">4. WFC로 배치되는 3D 공장</h2>
+<p>절차적 방식으로 만들수 있는것이 또 무엇이 있을까 고민하다가.
+공장을 만들어 보기로 결정하고 최근에 나온  GPT6-Astra 성능도 점검할 겸.
+초기화권도 써볼겸 해서 3D로 만들어 보고자 하였다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. 다음 이미지는 wfc 알고리즘을 이용한 3d 공장 생성 프로토타입이야 , 이걸 three.js를 사용해서 html에서 볼수 있도록 만들어줘.</div></p>
+<p><strong>🤖 Codex:</strong>
+완성했습니다. HTML 파일을 브라우저에서 열면 인터넷 없이 실행됩니다.</p>
+<ul>
+<li>단일 HTML 파일</li>
+<li>전체 소스 ZIP</li>
+</ul>
+<p>시드 기반 WFC 생성, 회전·확대, 층별·분해 보기, 로봇 애니메이션, PNG 저장을 지원합니다. 90가지 설정에서 연결 규칙과 재현성을 검증했습니다.</p>
+<p><div class="user-bubble"><strong>User</strong>. 너무 맘에 들긴하는데 이거 그래픽이 맘에 안들어 에셋으로 만들려면 어떻게 해야해?</div></p>
+<p><strong>🤖 Codex:</strong>
+로봇 셀·CNC 머신·컨베이어·적재 랙·배관 스키드이며, 재질 이미지와 WFC 배치 정보를 포함했습니다. 로봇에는 관절 애니메이션도 있습니다.</p>
+<ul>
+<li>3D 에셋 미리보기 — 개별 회전·확대 가능</li>
+<li>에셋·수정 소스 ZIP</li>
+</ul>
+<p>Blender에서 기본 <strong>파일 → 가져오기 → glTF 2.0</strong>으로 열어 수정할 수 있습니다. 별도 플러그인이 필요하지 않습니다.</p>
+<p>이번 결과는 <strong>현재 상세 모델을 독립 에셋으로 정리한 1차 키트</strong>입니다. 첨부 이미지 수준으로 올리려면 이 모델의 비례·곡면·표면 디테일을 더 다듬는 작업이 필요합니다.</p>
+
+</div>
+<p>내컴에는 Blender가 없다. 그런데 어떻게 만들었는지는 모르겠지만
+GPT6-Astra는 3D모델을 만들어냈고 뷰어도 중간에 만들어서 와이어프레임으로도 볼수 있었다.
+공장의 요소는 컨베이어벨트, 로봇팔, CNC기계, 선반 등으로 이루어진다.</p>
+
+<factory-wfc
+  seed="WORKSHOP-01"
+  camera="24,13,29"
+  target="0,1,0"
+  focus="0,1,0"
+  dof="75"
+></factory-wfc>
+<script type="module" src="/static/factory-wfc/viewer.js"></script>
+
+<p><code>다른시드</code> 버튼을 누르면 공장배치가 WFC알고리즘에 의해 다르게 배치된다.</p>
+<h2 id="5-생각">5. 생각</h2>
+<p>여기서는 타일과 규칙을 직접 정의했다. 반대로 이미지 조각을 타일로 쓰고 그림에서 규칙을 추출하면, 그림 한 장에서 비슷한 새 이미지를 만들어내는 데도 쓸 수 있다. WFC가 처음 나온 용도도 그쪽이다. 다음에는 이 방향을 시도해볼 만하다.</p>
+<p>모순을 되돌리는 백트래킹은 넣지 않았다. 재시작으로 해결되는 지금은 필요하지 않다. 다만 격자가 커지면 다시 만드는 비용도 커진다. 그때는 어디로 되돌아갈지를 고민하게 될 것 같다.</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  </body>
+</html>
