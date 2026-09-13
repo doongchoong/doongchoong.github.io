@@ -6,8 +6,15 @@
     <description>Recent content on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Thu, 10 Sep 2026 20:55:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2026 00:10:41 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>블로그 문체 흉내내기</title>
+      <link>https://doongchoong.github.io/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%AC%B8%EC%B2%B4%ED%9D%89%EB%82%B4%EB%82%B4%EA%B8%B0/</link>
+      <pubDate>Sun, 13 Sep 2026 00:10:41 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%AC%B8%EC%B2%B4%ED%9D%89%EB%82%B4%EB%82%B4%EA%B8%B0/</guid>
+      <description>&lt;p&gt;GPT랑 대화하다보니 문득 든 생각이 있어 물어보았다.&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#34;chatlog&#34;&gt;&#xA;  &lt;p&gt;&lt;div class=&#34;user-bubble&#34;&gt;&lt;strong&gt;User&lt;/strong&gt;. 말투를 흉내내게 하려면?  예를 들면 내 블로그 글을 주고 내 문체? 등을 흉내내는거지&lt;/div&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;🤖 ChatGPT:&lt;/strong&gt;&lt;br&gt;&#xA;가능해. 오히려 &lt;strong&gt;본인이 쓴 블로그 글 여러 편을 예시로 주는 방식&lt;/strong&gt;이 가장 잘 먹혀. 핵심은 단순히 “내 말투로 써줘”가 아니라, 모델이 &lt;strong&gt;문체의 특징을 먼저 추출하고 그 특징을 재사용&lt;/strong&gt;하게 만드는 거야.&lt;/p&gt;&#xA;&lt;h3 id=&#34;가장-간단한-방식&#34;&gt;가장 간단한 방식&lt;/h3&gt;&#xA;&lt;p&gt;블로그 글 3~10개 정도를 주고 먼저 이렇게 시켜.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;다음 글들은 내가 직접 쓴 블로그 글이다.&lt;br&gt;&#xA;내용 자체가 아니라 &lt;strong&gt;문체와 서술 습관&lt;/strong&gt;을 분석해라.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>파동함수붕괴(WFC)</title>
       <link>https://doongchoong.github.io/posts/%ED%8C%8C%EB%8F%99%ED%95%A8%EC%88%98%EB%B6%95%EA%B4%B4/</link>
