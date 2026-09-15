@@ -1,0 +1,3893 @@
+---
+title: "KRX거래시간연장"
+date: 2026-09-15T20:10:41+09:00
+draft: true
+toc : true
+tocBorder : true
+---
+
+26.09.14 KRX 거래시간 연장 + NXT제도변경  오픈하였다. 
+이때 우리회사의 관련 대응 프로젝트 PM은 내가 맡았는데 프로젝트 규모가 상당히 크기때문에
+내 역할도 좀 컷다. 그리고 매우 힘들었다. 😂
+정말 제대로 각을 잡고 PM역할을 하였다. 이점이 좀 인상적인 프로젝트여서 
+후기를 남긴다. 
+
+## 1. PM의 역할
+
+증권사IT 인하우스 개발에서 PM은 사실 프로젝트를 지배(마이크로 매니징) 한다기 보다는 PL들중 뽑혀서 대표로 느슨하게 관리하는 느낌에 더 가깝다. 선배들의 자조적인 말로는 모든 책임을 지게되는 
+대표 같은 느낌이지만 말이다. 
+개발은 개발대로 하면서 PM역할도 같이 해야하니 프로젝트 규모가 커지면 굉장히 버거워지는게 
+사실이다.
+
+내 파트는 진행사항을 잘 알수 있지만 타 파트는 잘 진행되고 있나? 불신이 생긴다. 요번에는 꽤 
+구체적인 기준을 세워 수치화를 위해 노력했다.
+
+## 2. 현업요건대응비율
+
+현업이 일을 잘한다고 느껴질때 보면 요건서의 퀄리티가 뛰어난 경우인데, 본인들이 확인할 수 있는 
+정보 (화면, 규정, 업무정의서)에 누락이 없고 서로 충돌이 없으며 요구하는 사항을 정확히 표기하면 
+개발자들은 정말로 편하다. 👍  요번에는 이런 꽤 이상적인 요건서로 진행되었다.
+프로젝트 규모가 크기 때문에 요건서의 덩치도 커서 450페이지 가량의 요건 정의서가 도착했다.
+
+{{< mermaid >}}
+graph LR
+
+요건서 -->  WBS --> 수정사항목록
+
+subgraph 현업그룹
+요건서
+end
+subgraph PL그룹
+WBS
+수정사항목록
+end
+{{< /mermaid >}}
+
+**WBS작업**
+* 1:N 분할 => 요건 1개에 대해 , 다건의 수정사항 (일반적인 경우)
+* N:1 병합 => 다건의 요건에 대해서 1건의 수정사항으로 묶음 (공통)
+
+요건서는 간단하게 PPT, PDF등의 형태로 도착하므로 이를 일반화해서 목록화하기 어렵기 때문에
+정말 그대로 페이지에 대한 수정사항이 대응되도록 매핑을 한것으로 정의했다. 
+
+* 34페이지 요건은 수정사항 34,78번으로 대응
+* 41,42,43 페이지 요건은 수정사항 101번으로 대응
+
+이런식으로 확대하면 450페이지중 개요, split페이지, 별첨 등을 제외하고 순수 요건페이지를
+다 찾아내어 대응이 얼마나되었나 현황을 파악한다. 이렇게 하면 이제 **"현업요건총량에 대한 개발부서의 대응비율"** 을 구할수가 있다. 이 작업은 프로젝트 초기에 빠르게 이루어져야 하며, 기초공사이기 때문에 프로젝트의 성공/실패를 가르는 아주 중요한 작업이다.
+
+**"수정사항"** 은 아주 중요한데, 각 파트가 개발진척 및 단위테스트까지 그리고 현업테스트시 
+해당 개발자가 대응해야하는 프로젝트 시작부터 끝까지 관통하는 "기준" 이 되기 때문이다. 이 "수정사항"은 절대적인것은 아니고 프로젝트를 진행하면서 끊임없이 변화한다. 
+
+(개발을 하다보니 KRX가 프리마켓을 포기하기도 하며, 미처 파악하지 못하는 영향도가 발견되기도 한다.)
+
+※ 수정사항은 하나의 단위로 여러개의 소스파일 및 설정등이 포함될 수 있는 추상적인 개념.
+
+### 2.1. 엑셀작업
+
+{{< chatlog >}}
+**User**
+엑셀에서  12,27, 38 이런식으로 적혀있는 셀에서 숫자를 발라내어  해당 페이지가 커버되었다. 를 알아내기 위해  1부터 400페이지까지의 행을 만들고 O , X등으로 표기하는 방법
+
+**🤖 ChatGPT:**  
+가능해. 가장 간단하게는 1~400 페이지 목록을 만들고, 기존 셀들에 해당 숫자가 있으면 O / 없으면 X로 표시하면 돼.
+
+(...생략...)
+
+2. 해당 페이지가 한 번이라도 등장했는지 확인
+
+B2에:
+```excel
+=IF(ISNUMBER(SEARCH(","&A2&",",","&SUBSTITUTE(TEXTJOIN(",",TRUE,$D$2:$D$100)," ","")&",")),"O","X")
+```
+{{< /chatlog >}}
+
+
+### 2.2. 수정사항의 숫자
+
+현업 요건 총량에 대해서 정리된 수정사항의 수는 
+효율적이건, 비효율적이건 우리회사의 시스템 아키텍쳐 자체가 그정도의 변화에 대응하여
+수정되는 크기로 이해할수 있다. 요번에는 생각보다는 축소되었는데
+단축을 선호하는 PL성향도 있겠지만 큰 변화에 대응하여 시스템이 적당히 잘 대응되는 편으로 보였다. 이는 프로젝트를 여러개 모아보았을때 통계가 나올것이다. 
+
+## 3. 개발진척
+
+PM으로 프로젝트를 진행하려면 이를 윗선에 보고하는 형태를 잘 잡아주는것도 중요하다. 
+이 프로젝트는  주요개발파트 3그룹, 그외 그룹 2그룹 총 5개로 나누었다. 
+파트도 많은데 이를 일일히 다 나열하는것도 너무 복잡하고  그렇다고 너무 묶어놓으면
+이유가 딱히 없기 때문이다.
+
+{{< raw >}}
+<div id="progress-chart" style="width:100%; max-width:1100px; margin:0 auto;">
+  <svg viewBox="0 0 1100 560"
+       width="100%"
+       role="img"
+       aria-label="5개 파트 개발 진척률 차트"
+       style="font-family: Pretendard, 'Noto Sans KR', sans-serif;">
+
+    <style>
+      .axis-text {
+        fill: #777;
+        font-size: 14px;
+      }
+
+      .grid {
+        stroke: #e8e8e8;
+        stroke-width: 1;
+      }
+
+      .actual {
+        fill: none;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .plan {
+        fill: none;
+        stroke: #e5484d;
+        stroke-width: 3;
+        stroke-dasharray: 9 7;
+      }
+
+      .point {
+        stroke: white;
+        stroke-width: 2;
+      }
+
+      .legend {
+        font-size: 14px;
+        fill: #444;
+      }
+
+      .title {
+        font-size: 24px;
+        font-weight: 700;
+        fill: #222;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        fill: #888;
+      }
+    </style>
+
+    <text x="80" y="42" class="title">파트별 개발 진척률</text>
+    <text x="80" y="68" class="subtitle">
+      5월 ~ 8월 누적 진척률
+    </text>
+
+    <!-- 차트는 아래 script에서 생성 -->
+    <g id="chart-area"></g>
+  </svg>
+
+  <script>
+    (() => {
+      const svg = document.querySelector("#progress-chart svg");
+      const chart = svg.querySelector("#chart-area");
+
+      const labels = [
+        "5월 1주",
+        "5월 3주",
+        "6월 1주",
+        "6월 3주",
+        "7월 2주",
+        "7월 4주",
+        "8월 2주",
+        "8월 4주"
+      ];
+
+      const series = [        
+        {
+          name: "파트 A",
+          values: [8, 30, 55, 78, 97, 100, 100, 100],
+          color: "#2563eb"
+        },
+        {
+          name: "파트 B",
+          values: [4, 23, 47, 72, 95, 99, 100, 100],
+          color: "#0ea5e9"
+        },
+        {
+          name: "파트 C",
+          values: [10, 33, 52, 80, 96, 100, 100, 100],
+          color: "#6366f1"
+        },
+        {
+          name: "파트 D",
+          values: [3, 19, 42, 68, 94, 98, 100, 100],
+          color: "#14b8a6"
+        },
+        {
+          name: "파트 E",
+          values: [2, 10, 23, 38, 55, 68, 86, 100],
+          color: "#334155",
+          delayed: true
+        },
+        {
+          name: "계획 진척률",
+          values: [0, 25, 50, 75, 100, null, null, null],
+          color: "#e5484d",
+          plan: true
+        }
+      ];
+
+      const NS = "http://www.w3.org/2000/svg";
+
+      const left = 80;
+      const top = 120;
+      const width = 940;
+      const height = 350;
+      const bottom = top + height;
+
+      const x = i =>
+        left + (i / (labels.length - 1)) * width;
+
+      const y = value =>
+        bottom - (value / 100) * height;
+
+      function element(type, attrs = {}) {
+        const el = document.createElementNS(NS, type);
+
+        Object.entries(attrs).forEach(([key, value]) => {
+          el.setAttribute(key, value);
+        });
+
+        return el;
+      }
+
+      // Y축 Grid
+      [0, 25, 50, 75, 100].forEach(value => {
+        const py = y(value);
+
+        chart.appendChild(element("line", {
+          x1: left,
+          x2: left + width,
+          y1: py,
+          y2: py,
+          class: "grid"
+        }));
+
+        const text = element("text", {
+          x: left - 15,
+          y: py + 5,
+          "text-anchor": "end",
+          class: "axis-text"
+        });
+
+        text.textContent = value + "%";
+        chart.appendChild(text);
+      });
+
+      // X축
+      labels.forEach((label, i) => {
+        const text = element("text", {
+          x: x(i),
+          y: bottom + 36,
+          "text-anchor": "middle",
+          class: "axis-text"
+        });
+
+        text.textContent = label;
+        chart.appendChild(text);
+      });
+
+      // 7월 2주 기준선
+      const julyX = x(4);
+
+      chart.appendChild(element("line", {
+        x1: julyX,
+        x2: julyX,
+        y1: top,
+        y2: bottom,
+        stroke: "#d5d5d5",
+        "stroke-width": "1",
+        "stroke-dasharray": "4 5"
+      }));
+
+      const julyLabel = element("text", {
+        x: julyX,
+        y: top - 15,
+        "text-anchor": "middle",
+        fill: "#888",
+        "font-size": "13"
+      });
+
+      julyLabel.textContent = "7월 2주차";
+      chart.appendChild(julyLabel);
+
+      // 실제/계획선
+      series.forEach(s => {
+        const points = [];
+
+        s.values.forEach((value, i) => {
+          if (value !== null) {
+            points.push(`${x(i)},${y(value)}`);
+          }
+        });
+
+        const polyline = element("polyline", {
+          points: points.join(" "),
+          stroke: s.color,
+          class: s.plan ? "plan" : "actual"
+        });
+
+        if (s.delayed) {
+          polyline.setAttribute("stroke-width", "4");
+        }
+
+        chart.appendChild(polyline);
+
+        // 각 지점 원
+        if (!s.plan) {
+          s.values.forEach((value, i) => {
+            if (value === null) return;
+
+            chart.appendChild(element("circle", {
+              cx: x(i),
+              cy: y(value),
+              r: s.delayed ? 5 : 4,
+              fill: s.color,
+              class: "point"
+            }));
+          });
+        }
+      });
+
+      // 95% Annotation
+      const annotation = element("text", {
+        x: julyX + 12,
+        y: y(95) - 14,
+        fill: "#555",
+        "font-size": "14",
+        "font-weight": "600"
+      });
+
+      annotation.textContent = "4개 파트 ≈ 95%";
+      chart.appendChild(annotation);
+
+      // 늦은 파트 Annotation
+      const delayedAnnotation = element("text", {
+        x: x(6) - 10,
+        y: y(86) + 35,
+        fill: "#334155",
+        "font-size": "14",
+        "font-weight": "600"
+      });
+
+      delayedAnnotation.textContent = "파트 E 지연";
+      chart.appendChild(delayedAnnotation);
+
+      // Legend
+      let legendX = 430;
+      const legendY = 55;
+
+      series.forEach(s => {
+        chart.appendChild(element("line", {
+          x1: legendX,
+          x2: legendX + 28,
+          y1: legendY,
+          y2: legendY,
+          stroke: s.color,
+          "stroke-width": s.delayed ? "4" : "3",
+          "stroke-dasharray": s.plan ? "8 6" : ""
+        }));
+
+        const text = element("text", {
+          x: legendX + 36,
+          y: legendY + 5,
+          class: "legend"
+        });
+
+        text.textContent = s.name;
+        chart.appendChild(text);
+
+        legendX += s.plan ? 130 : 105;
+      });
+    })();
+  </script>
+</div>
+<small>(이런 느낌으로 진행이 된다.)</small>
+<br>
+<br>
+{{< /raw >}}
+
+
+윗선에서는 "계획대비" 라는 말을 참 좋아한다. 이게 각 개발파트에서 처한 상황에 따라
+'6월에는 A프로젝트를 하고 7월에 B프로젝트를 진행해야지~' 라는 "계획"을 세웠다면 
+내가 PM을 맡은 이 프로젝트에서의 "계획"과는 다른 진짜 계획인 것이다. 하지만 이 프로젝트에서의
+"계획대비"로는 마이너스가 나오기 때문에 달성을 못하고 있는 개발 파트가 된다. 
+왜냐하면 프로젝트의 계획진척은 단순 목표일까지의 N으로 나뉜 단순 값이기 때문이다.
+
+하지만 PM으로서는 해당파트에 압박을 줄 수밖에 없다. 이게 개발자 역할로만 참여하던 시절과는 다른 굉장히 다이나믹한 회사생활이다. ㅎ 🤔
+
+### 3.1. 주관적인 진척률
+
+* A개발자: 목록을 다 뽑아놓은뒤 완료하는대로 진척률을 표기 (객관적)
+* B개발자: 경험에 의거 어렵고 큰 소스를 고치면 진척률을 크게, 간단한것을 수정하면 작게 증가시킴(주관적)
+
+이는 정답이 없다. 오히려 주관적인 방식이 난이도 가중치까지 고려되어 더 정확할 수 있다. 결국 각 PL들에게 진척률을 맡겼다.  이게 바로 앞서말한 '느슨한' 관리라고 할 수 있다.
+
+
+### 3.2. 동등하지 않은 수정사항
+
+단순개발파트에서 작성한 수정사항 1개, 핵심파트에서 작성한 수정사항 1개는 그 사이즈가 다르다.
+이는 추상적으로 현업요건에 대응된 건이고, 정확히 수정해야하는 소스코드는  후자가 훨씬 많을 것이다. 하지만 진척률은 똑같이 증가하기 때문에 핵심파트가 과소평가되는 경향이 생기게 된다.
+이 숫자의 보정작업은 너무도 어려운 작업이다. 
+
+
+
+## 4. 통합테스트
+
+{{< raw >}}
+<div style="width:100%; max-width:1200px; margin:0 auto;">
+<svg viewBox="0 0 1200 620"
+     width="100%"
+     role="img"
+     aria-label="프로젝트 단계별 누적 진척률"
+     style="font-family:Pretendard,'Noto Sans KR',sans-serif;">
+
+  <defs>
+
+    <!-- 요건정의 -->
+    <linearGradient id="reqGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- WBS -->
+    <linearGradient id="wbsGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 개발 -->
+    <linearGradient id="devGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f766e" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0f766e" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 통합테스트 -->
+    <linearGradient id="testGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </linearGradient>
+
+  </defs>
+
+  <style>
+    .title {
+      font-size: 25px;
+      font-weight: 700;
+      fill: #222;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      fill: #888;
+    }
+
+    .grid {
+      stroke: #e9e9e9;
+      stroke-width: 1;
+    }
+
+    .axis {
+      font-size: 13px;
+      fill: #777;
+    }
+
+    .line {
+      fill: none;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .legend {
+      font-size: 14px;
+      fill: #444;
+    }
+
+    .milestone {
+      font-size: 13px;
+      font-weight: 700;
+    }
+  </style>
+
+
+  <!-- ============================== -->
+  <!-- 제목 -->
+  <!-- ============================== -->
+
+  <text x="80" y="45" class="title">
+    프로젝트 단계별 누적 진척률
+  </text>
+
+  <text x="80" y="70" class="subtitle">
+    요건정의 → WBS → 개발진척 → 통합테스트
+  </text>
+
+
+  <!--
+    Plot
+
+    x
+    1월초    100
+    2월초    227
+    3월초    355
+    4월초    482
+    5월초    610
+    6월초    737
+    7월초    865
+    8월초    992
+    9월초   1120
+
+    y
+    100% = 120
+     75% = 220
+     50% = 320
+     25% = 420
+      0% = 520
+  -->
+
+
+  <!-- ============================== -->
+  <!-- 가로 Grid -->
+  <!-- ============================== -->
+
+  <line x1="100" x2="1120" y1="520" y2="520" class="grid"/>
+  <line x1="100" x2="1120" y1="420" y2="420" class="grid"/>
+  <line x1="100" x2="1120" y1="320" y2="320" class="grid"/>
+  <line x1="100" x2="1120" y1="220" y2="220" class="grid"/>
+  <line x1="100" x2="1120" y1="120" y2="120" class="grid"/>
+
+  <text x="80" y="525" text-anchor="end" class="axis">0%</text>
+  <text x="80" y="425" text-anchor="end" class="axis">25%</text>
+  <text x="80" y="325" text-anchor="end" class="axis">50%</text>
+  <text x="80" y="225" text-anchor="end" class="axis">75%</text>
+  <text x="80" y="125" text-anchor="end" class="axis">100%</text>
+
+
+  <!-- ============================== -->
+  <!-- 월 Grid -->
+  <!-- ============================== -->
+
+  <line x1="100" y1="110" x2="100" y2="520" class="grid"/>
+  <line x1="227" y1="110" x2="227" y2="520" class="grid"/>
+  <line x1="355" y1="110" x2="355" y2="520" class="grid"/>
+  <line x1="482" y1="110" x2="482" y2="520" class="grid"/>
+  <line x1="610" y1="110" x2="610" y2="520" class="grid"/>
+  <line x1="737" y1="110" x2="737" y2="520" class="grid"/>
+  <line x1="865" y1="110" x2="865" y2="520" class="grid"/>
+  <line x1="992" y1="110" x2="992" y2="520" class="grid"/>
+  <line x1="1120" y1="110" x2="1120" y2="520" class="grid"/>
+
+  <text x="163" y="555" class="axis" text-anchor="middle">1월</text>
+  <text x="291" y="555" class="axis" text-anchor="middle">2월</text>
+  <text x="418" y="555" class="axis" text-anchor="middle">3월</text>
+  <text x="546" y="555" class="axis" text-anchor="middle">4월</text>
+  <text x="673" y="555" class="axis" text-anchor="middle">5월</text>
+  <text x="801" y="555" class="axis" text-anchor="middle">6월</text>
+  <text x="928" y="555" class="axis" text-anchor="middle">7월</text>
+  <text x="1056" y="555" class="axis" text-anchor="middle">8월</text>
+
+
+  <!-- ================================================= -->
+  <!-- ① 요건정의                                     -->
+  <!-- 1월 → 3월말 100%                                -->
+  <!-- 여기서 종료                                      -->
+  <!-- ================================================= -->
+
+  <path
+    d="
+      M 100 520
+
+      C 140 440, 185 330, 235 245
+
+      C 285 175, 340 138, 405 124
+
+      C 435 120, 462 120, 482 120
+
+      L 482 520
+      L 100 520
+      Z
+    "
+    fill="url(#reqGradient)"
+  />
+
+  <path
+    d="
+      M 100 520
+
+      C 140 440, 185 330, 235 245
+
+      C 285 175, 340 138, 405 124
+
+      C 435 120, 462 120, 482 120
+    "
+    class="line"
+    stroke="#2563eb"
+  />
+
+  <circle cx="482" cy="120" r="5" fill="#2563eb"/>
+
+  <text x="465"
+        y="145"
+        text-anchor="end"
+        class="milestone"
+        fill="#2563eb">
+    100%
+  </text>
+
+
+  <!-- ================================================= -->
+  <!-- ② WBS                                          -->
+  <!-- 4월 중순 시작                                   -->
+  <!-- 약 2주 → 95%                                    -->
+  <!-- 천천히 100%                                     -->
+  <!-- 이후 프로젝트 종료까지 100% 유지                -->
+  <!-- ================================================= -->
+
+  <path
+    d="
+      M 545 520
+
+      C 552 470, 560 320, 575 220
+
+      C 584 165, 595 135, 610 140
+
+      C 650 130, 690 122, 737 120
+
+      L 1120 120
+
+      L 1120 520
+      L 545 520
+      Z
+    "
+    fill="url(#wbsGradient)"
+  />
+
+  <path
+    d="
+      M 545 520
+
+      C 552 470, 560 320, 575 220
+
+      C 584 165, 595 135, 610 140
+
+      C 650 130, 690 122, 737 120
+
+      L 1120 120
+    "
+    class="line"
+    stroke="#7c3aed"
+  />
+
+  <!-- 약 95% -->
+  <circle cx="610" cy="140" r="5" fill="#7c3aed"/>
+
+  <text x="624"
+        y="163"
+        class="milestone"
+        fill="#7c3aed">
+    약 2주 · 95%
+  </text>
+
+
+  <!-- ================================================= -->
+  <!-- ③ 개발진척                                     -->
+  <!-- 5월 시작                                        -->
+  <!-- S Curve                                         -->
+  <!-- 7월 2주 90%                                     -->
+  <!-- 이후 천천히 100%                                -->
+  <!-- ================================================= -->
+
+  <path
+    d="
+      M 610 520
+
+      C 645 518, 675 507, 700 480
+
+      C 735 440, 755 365, 795 290
+
+      C 825 235, 855 195, 900 170
+
+      C 915 162, 925 160, 930 160
+
+      C 970 148, 1010 135, 1050 125
+
+      C 1070 121, 1090 120, 1100 120
+
+      L 1120 120
+
+      L 1120 520
+      L 610 520
+      Z
+    "
+    fill="url(#devGradient)"
+  />
+
+  <path
+    d="
+      M 610 520
+
+      C 645 518, 675 507, 700 480
+
+      C 735 440, 755 365, 795 290
+
+      C 825 235, 855 195, 900 170
+
+      C 915 162, 925 160, 930 160
+
+      C 970 148, 1010 135, 1050 125
+
+      C 1070 121, 1090 120, 1100 120
+
+      L 1120 120
+    "
+    class="line"
+    stroke="#0f766e"
+  />
+
+  <!-- 7월 2주 약 90% -->
+  <circle cx="930" cy="160" r="5" fill="#0f766e"/>
+
+  <text x="914"
+        y="185"
+        text-anchor="end"
+        class="milestone"
+        fill="#0f766e">
+    90%
+  </text>
+
+
+  <!-- ================================================= -->
+  <!-- ④ 통합테스트                                   -->
+  <!-- 개발 90% 시점부터 병행                          -->
+  <!-- 7월 2주 시작                                    -->
+  <!-- 8월 중 100%                                     -->
+  <!-- 이후 종료까지 유지                              -->
+  <!-- ================================================= -->
+
+  <path
+    d="
+      M 930 520
+
+      C 955 515, 975 485, 995 440
+
+      C 1020 380, 1040 300, 1060 225
+
+      C 1075 175, 1090 137, 1100 120
+
+      L 1120 120
+
+      L 1120 520
+      L 930 520
+      Z
+    "
+    fill="url(#testGradient)"
+  />
+
+  <path
+    d="
+      M 930 520
+
+      C 955 515, 975 485, 995 440
+
+      C 1020 380, 1040 300, 1060 225
+
+      C 1075 175, 1090 137, 1100 120
+
+      L 1120 120
+    "
+    class="line"
+    stroke="#f97316"
+  />
+
+
+  <!-- ================================================= -->
+  <!-- 7월 2주 기준선                                  -->
+  <!-- ================================================= -->
+
+  <line x1="930"
+        y1="105"
+        x2="930"
+        y2="525"
+        stroke="#555"
+        stroke-width="1.4"
+        stroke-dasharray="5 5"/>
+
+  <rect x="882"
+        y="92"
+        width="96"
+        height="26"
+        rx="13"
+        fill="#444"/>
+
+  <text x="930"
+        y="110"
+        text-anchor="middle"
+        fill="#fff"
+        font-size="12"
+        font-weight="700">
+    7월 2주
+  </text>
+
+
+  <!-- ================================================= -->
+  <!-- 개발 / 통합테스트 중첩 설명                     -->
+  <!-- ================================================= -->
+
+  <text x="946"
+        y="500"
+        font-size="13"
+        fill="#777"
+        font-weight="600">
+    개발 완료 전 통합테스트 병행
+  </text>
+
+
+  <!-- ================================================= -->
+  <!-- Legend                                           -->
+  <!-- ================================================= -->
+
+  <g transform="translate(420,82)">
+
+    <line x1="0" y1="0" x2="28" y2="0"
+          stroke="#2563eb"
+          stroke-width="4"
+          stroke-linecap="round"/>
+
+    <text x="38" y="5" class="legend">
+      ① 요건정의
+    </text>
+
+
+    <line x1="145" y1="0" x2="173" y2="0"
+          stroke="#7c3aed"
+          stroke-width="4"
+          stroke-linecap="round"/>
+
+    <text x="183" y="5" class="legend">
+      ② WBS
+    </text>
+
+
+    <line x1="280" y1="0" x2="308" y2="0"
+          stroke="#0f766e"
+          stroke-width="4"
+          stroke-linecap="round"/>
+
+    <text x="318" y="5" class="legend">
+      ③ 개발진척
+    </text>
+
+
+    <line x1="440" y1="0" x2="468" y2="0"
+          stroke="#f97316"
+          stroke-width="4"
+          stroke-linecap="round"/>
+
+    <text x="478" y="5" class="legend">
+      ④ 통합테스트
+    </text>
+
+  </g>
+
+</svg>
+</div>
+
+<small style="
+  display:block;
+  margin-top:5px;
+  color:#888;
+  font-size:0.82em;
+">
+※ 통합테스트는 개발 완료 이후가 아닌, 개발 진척 약 90% 시점부터 병행 수행
+</small>
+<br><br>
+{{< /raw >}}
+
+개발진척이 다 끝나지 않더라도 통합테스트는 중간부터 진행될 수 있다. 
+이는 경험이 많지 않은 PM은 꼭 단절시켜서 스텝별로 진행해야한다는 강박을 겪을 수 있는 문제인데. 
+프로젝트 규모가 커질수록 완전 끊고 넘어가는 것 자체가 불가능하다. 
+
+개발진척이 빨리 끝난 파트부터 시작해서 테스트단계로 진입을 시켜 병행가동 하는 것이다.
+
+
+### 4.1. 오류의 주인 찾기
+
+{{< mermaid >}}
+graph LR
+
+오류사항접수 --> 개발자배정 --> 수정완료 --> 현업재확인 --> 완료
+{{< /mermaid >}}
+
+현업테스트케이스 총 건수는 7700건에 육박했다. 세상에 미친거 아니야? 생각부터 들었다. ㅎㅎ
+
+케이스가 많으면 자연스럽게 오류건수도 그만큼 많이 나오게 되므로 숫자가 커지면 관리가 들어가야 한다. 
+여기서 PM의 고달픔이 시작이 된다. 이러한 절차를 해주는 시스템이 없으면 스스로가 그 역할을 해야
+하는 것. 오류접수 후 개발자를 찾고, 수정공지를 하고 수정사항 받으면 다시 현업공지 하고 현업재확인하고... 이 루틴이 잘돌아가도록 해주어야 한다. 문제는 "개발도 같이 병행하면서", 나도 수정사항을 같이 고치면서 동시에 이런 루틴도 돌려야 하는 것이다. 
+
+`이 부분은 필히 시스템이 마련되어야 한다.`
+
+현업도 총괄이 있기 때문에 정말 다행히도 현업사이드에서 취합작업을 해주었다. PM은 개발자 사이드에서의 루틴을 돌려서 부담이 조금 덜했다.
+
+### 4.2. 오류현황 엑셀
+
+{{< chatlog >}}
+**User**
+엑셀에서 리스트를 가지고  unique 한 일자를 다 추출한뒤 정렬해서 표출하는 방법
+
+**🤖 ChatGPT:**  
+엑셀 365/2021 이상이면 가장 간단하게 **`UNIQUE` + `SORT`** 조합 쓰면 돼.
+
+빈 셀이 섞여 있으면 이게 더 깔끔해:
+
+```excel
+=SORT(UNIQUE(FILTER(A2:A1000,A2:A1000<>"")))
+```
+{{< /chatlog >}}
+
+일자별 현황, 즉 과거에 오류사항이 있었는데 안고치고 리스트가 많아서 개발자들이 전부 놓쳤다.
+그러면 현황을 통해 잡아낼수 있도록 하는 것이다. 그래서 unique한 일자 추출해내고 
+그 일자에 처리 되는 건들의 숫자를 해서 아직 처리안된 건을 찾아내거나 할수 있다. 
+
+이는 개발자별, 현업별로도 가능하다. 
+
+특히 내가 개발자를 unique하게 하여 집계를 했는데... 
+이때 PM으로 좀 사악하게 '평균 조치일자'를 넣어보았다. 즉 접수되고 나서 
+얼마나 오랫동안 대응안하다가 대응을 하는지에 대한 내용인데. 
+이건 딱히 어디 보고도 되지 않기도 하고 , 윗선에 밝힐 생각도 없었지만
+은근히 신경쓰였던 개발자분들이 있었나보다. 
+
+"더 빨리 조치했었어요" 
+
+이런 말을 많이 들었는데 처음에는 왜 굳이? 그런 요청을 하지 생각이 들었다가. 
+나중에 '평균조치일자' 때문에 느리게 대처한 사람처럼 보일까봐 걱정을 하고 있었던 것을 
+알게되었다. 개발자들에게 좀 미안한 느낌이 들었고 해당 집계는 바로 삭제하였다. 😅
+
+
+## 5. 회귀테스트
+
+{{< raw >}}
+<div id="market-test-board">
+
+  <style>
+    #market-test-board {
+      --krx: #2563eb;
+      --nxt: #ef4444;
+      --closed: #c7ccd4;
+
+      max-width: 900px;
+      margin: 24px auto;
+
+      font-family:
+        Pretendard,
+        "Noto Sans KR",
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+
+      color: #30343b;
+    }
+
+    #market-test-board * {
+      box-sizing: border-box;
+    }
+
+
+    /* =========================
+       TITLE
+       ========================= */
+
+    .mt-title {
+      font-size: 22px;
+      font-weight: 750;
+      margin-bottom: 5px;
+    }
+
+    .mt-subtitle {
+      font-size: 12px;
+      color: #8b9199;
+      margin-bottom: 20px;
+    }
+
+
+    /* =========================
+       TABLE
+       ========================= */
+
+    .mt-header,
+    .mt-row {
+      display: grid;
+
+      grid-template-columns:
+        190px
+        80px
+        80px
+        1fr;
+    }
+
+    .mt-header {
+      height: 38px;
+
+      align-items: center;
+
+      background: #fafbfc;
+
+      border-top: 1px solid #e5e7eb;
+      border-bottom: 1px solid #dfe2e6;
+
+      font-size: 11px;
+      font-weight: 700;
+      color: #777f89;
+    }
+
+    .mt-header > div {
+      padding: 0 15px;
+    }
+
+    .market-header {
+      text-align: center;
+      padding: 0 !important;
+    }
+
+
+    /* =========================
+       ROW
+       ========================= */
+
+    .mt-row {
+      min-height: 92px;
+
+      border-bottom: 1px solid #edf0f2;
+
+      transition: background .15s ease;
+    }
+
+    .mt-row:hover {
+      background: #fafbfc;
+    }
+
+
+    /* =========================
+       TIME
+       ========================= */
+
+    .time-cell {
+      display: flex;
+      align-items: center;
+
+      gap: 13px;
+
+      padding: 0 15px;
+    }
+
+    .time {
+      width: 48px;
+
+      font-size: 14px;
+      font-weight: 800;
+
+      color: #20242a;
+    }
+
+    .session {
+      font-size: 13px;
+      color: #757c85;
+    }
+
+
+    /* =========================
+       MARKET LINE
+       ========================= */
+
+    .market-cell {
+      position: relative;
+      min-height: 92px;
+    }
+
+    .market-line {
+      position: absolute;
+
+      left: 50%;
+      top: 0;
+      bottom: 0;
+
+      transform: translateX(-50%);
+    }
+
+
+    /* KRX OPEN */
+
+    .krx-open {
+      width: 3px;
+      background: var(--krx);
+    }
+
+
+    /* NXT OPEN */
+
+    .nxt-open {
+      width: 3px;
+      background: var(--nxt);
+    }
+
+
+    /* CLOSED */
+
+    .closed {
+      width: 0;
+
+      border-left:
+        2px dashed var(--closed);
+    }
+
+
+    /* =========================
+       TEST CASE
+       ========================= */
+
+    .cases-cell {
+      display: flex;
+      align-items: center;
+
+      padding:
+        12px
+        18px
+        12px
+        28px;
+    }
+
+    .case-grid {
+      display: grid;
+
+      /* 최대 4 x 4 */
+      grid-template-columns:
+        repeat(4, 13px);
+
+      grid-auto-rows: 13px;
+
+      gap: 6px;
+
+      align-content: center;
+    }
+
+
+    .test-case {
+      width: 13px;
+      height: 13px;
+
+      border-radius: 2px;
+
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.045);
+
+      transition:
+        transform .1s ease,
+        filter .1s ease;
+    }
+
+    .test-case:hover {
+      transform: scale(1.35);
+      filter: brightness(.94);
+    }
+
+
+    /* =========================
+       GREEN LEVEL
+       ========================= */
+
+    .lv1 {
+      background: #dcfce7;
+    }
+
+    .lv2 {
+      background: #bbf7d0;
+    }
+
+    .lv3 {
+      background: #86efac;
+    }
+
+    .lv4 {
+      background: #4ade80;
+    }
+
+    .lv5 {
+      background: #22c55e;
+    }
+
+    .lv6 {
+      background: #15803d;
+    }
+
+
+    /* WARNING */
+
+    .warn {
+      background: #f59e0b;
+    }
+
+
+    /* =========================
+       LEGEND
+       ========================= */
+
+    .legend {
+      display: flex;
+
+      align-items: center;
+      flex-wrap: wrap;
+
+      gap: 22px;
+
+      margin-top: 18px;
+      padding-left: 190px;
+
+      font-size: 11px;
+      color: #777f89;
+    }
+
+    .legend-item {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+    }
+
+    .legend-line {
+      display: block;
+      height: 22px;
+    }
+
+    .legend-line.krx {
+      border-left:
+        3px solid var(--krx);
+    }
+
+    .legend-line.nxt {
+      border-left:
+        3px solid var(--nxt);
+    }
+
+    .legend-line.closed {
+      border-left:
+        2px dashed var(--closed);
+    }
+
+    .legend-square {
+      width: 13px;
+      height: 13px;
+
+      border-radius: 2px;
+
+      background: #22c55e;
+    }
+
+    .legend-square.warn {
+      background: #f59e0b;
+    }
+
+
+    /* =========================
+       FOOTNOTE
+       ========================= */
+
+    .footnote {
+      margin-top: 14px;
+      padding-left: 190px;
+
+      font-size: 10px;
+
+      color: #999fa7;
+    }
+
+  </style>
+
+
+  <!-- =========================
+       TITLE
+       ========================= -->
+
+  <div class="mt-title">
+    수행 현황
+  </div>
+
+
+  <!-- =========================
+       HEADER
+       ========================= -->
+
+  <div class="mt-header">
+
+    <div>
+      시간
+    </div>
+
+    <div class="market-header">
+      KRX
+    </div>
+
+    <div class="market-header">
+      NXT
+    </div>
+
+    <div>
+      테스트케이스
+    </div>
+
+  </div>
+
+
+  <!-- ROW 생성 -->
+
+  <div id="market-test-rows"></div>
+
+
+  
+
+  <div class="footnote">
+    ※ 작은 사각형 하나는 자동 수행 테스트케이스 1건을 의미하며,
+    시간대별 최대 16건(4×4)으로 표현
+  </div>
+
+
+  <script>
+    (() => {
+
+      /*
+       * krx / nxt
+       *
+       * true  = 장 Open
+       * false = 장 Closed
+       *
+       * count
+       * 테스트케이스 개수
+       *
+       * 최대 16
+       */
+
+      const schedule = [
+
+        {
+          time: "08:00",
+          session: "프리마켓",
+
+          krx: false,
+          nxt: true,
+
+          count: 8,
+          warn: [5]
+        },
+
+        {
+          time: "08:30",
+          session: "시가단일가",
+
+          krx: true,
+          nxt: true,
+
+          count: 12,
+          warn: [8]
+        },
+
+        {
+          time: "08:50",
+          session: "오전휴장",
+
+          krx: true,
+          nxt: false,
+
+          count: 6,
+          warn: []
+        },
+
+        {
+          time: "09:00",
+          session: "정규장",
+
+          krx: true,
+          nxt: true,
+
+          count: 16,
+          warn: [6, 14]
+        },
+
+        {
+          time: "15:20",
+          session: "오후휴장",
+
+          krx: true,
+          nxt: false,
+
+          count: 6,
+          warn: []
+        },
+
+        {
+          time: "15:30",
+          session: "N애프터",
+
+          krx: false,
+          nxt: true,
+
+          count: 10,
+          warn: [4]
+        },
+
+        {
+          time: "16:00",
+          session: "애프터",
+
+          krx: true,
+          nxt: true,
+
+          count: 14,
+          warn: [11]
+        },
+
+        {
+          time: "20:00",
+          session: "종료",
+
+          krx: false,
+          nxt: false,
+
+          count: 5,
+          warn: []
+        }
+
+      ];
+
+
+      const rows =
+        document.getElementById(
+          "market-test-rows"
+        );
+
+
+      /*
+       * 잔디색 패턴
+       *
+       * 랜덤이 아니라
+       * 항상 같은 형태로 표시
+       */
+
+      const greenPattern = [
+        3, 4, 5, 4,
+        6, 3, 4, 5,
+        2, 4, 6, 3,
+        5, 4, 3, 5
+      ];
+
+
+      schedule.forEach(
+        (item, rowIndex) => {
+
+          const row =
+            document.createElement("div");
+
+          row.className =
+            "mt-row";
+
+
+          /* =========================
+             TIME
+             ========================= */
+
+          const timeCell =
+            document.createElement("div");
+
+          timeCell.className =
+            "time-cell";
+
+          timeCell.innerHTML = `
+            <span class="time">
+              ${item.time}
+            </span>
+
+            <span class="session">
+              ${item.session}
+            </span>
+          `;
+
+          row.appendChild(
+            timeCell
+          );
+
+
+          /* =========================
+             KRX
+             ========================= */
+
+          const krxCell =
+            document.createElement("div");
+
+          krxCell.className =
+            "market-cell";
+
+
+          const krxLine =
+            document.createElement("span");
+
+          krxLine.className =
+            "market-line " +
+            (
+              item.krx
+                ? "krx-open"
+                : "closed"
+            );
+
+
+          krxCell.appendChild(
+            krxLine
+          );
+
+          row.appendChild(
+            krxCell
+          );
+
+
+          /* =========================
+             NXT
+             ========================= */
+
+          const nxtCell =
+            document.createElement("div");
+
+          nxtCell.className =
+            "market-cell";
+
+
+          const nxtLine =
+            document.createElement("span");
+
+          nxtLine.className =
+            "market-line " +
+            (
+              item.nxt
+                ? "nxt-open"
+                : "closed"
+            );
+
+
+          nxtCell.appendChild(
+            nxtLine
+          );
+
+          row.appendChild(
+            nxtCell
+          );
+
+
+          /* =========================
+             TEST CASE
+             ========================= */
+
+          const casesCell =
+            document.createElement("div");
+
+          casesCell.className =
+            "cases-cell";
+
+
+          const grid =
+            document.createElement("div");
+
+          grid.className =
+            "case-grid";
+
+
+          /*
+           * 혹시 16 초과가 들어와도
+           * 화면에는 최대 16개만 표시
+           */
+
+          const count =
+            Math.min(
+              item.count,
+              16
+            );
+
+
+          for (
+            let i = 1;
+            i <= count;
+            i++
+          ) {
+
+            const tc =
+              document.createElement(
+                "span"
+              );
+
+
+            const level =
+              greenPattern[
+                (
+                  i +
+                  rowIndex * 3
+                )
+                %
+                greenPattern.length
+              ];
+
+
+            tc.className =
+              `test-case lv${level}`;
+
+
+            /*
+             * 주황색
+             */
+
+            if (
+              item.warn.includes(i)
+            ) {
+
+              tc.className =
+                "test-case warn";
+
+            }
+
+
+            /*
+             * Hover Tooltip
+             */
+
+            tc.title =
+              `${item.time} ` +
+              `${item.session} · ` +
+              `TC-${String(i).padStart(2, "0")}`;
+
+
+            grid.appendChild(
+              tc
+            );
+
+          }
+
+
+          casesCell.appendChild(
+            grid
+          );
+
+          row.appendChild(
+            casesCell
+          );
+
+
+          rows.appendChild(
+            row
+          );
+
+        }
+      );
+
+    })();
+  </script>
+
+</div>
+{{< /raw >}}
+
+
+굉장히 간략화해서 그리면 위와 같은 모양인데 
+저것보다는 더 자세한 형태의 회귀테스트 웹페이지를 구성했다. 
+내부적으로는 주문서비스를 시간대별로 유형주문, 조건주문 및 정정/취소 주문등을 
+엣지케이스등등등
+시나리오, 시간에 맞추어 **자동으로 전송이 되는 것**이다.
+
+`나중에 수정한것 때문에 먼저 확인한 것이 도루묵이 되었다`
+
+자동으로 돌려서 계속 반복해서 테스트를 하는 이유는 재오류를 검출하기 위해서이다. 
+특히 주문쪽에서 재검출확률은 매우 낮지만 운영에서 발생한다면 
+엄청나게 큰 장애가 터지는 케이스... 그걸 찾기 위해서다. 이는 수백번 돌려서
+1건이 추출되어도 성공했다고 할수 있을정도로 중대한 일이다. 
+
+(기본적인 것이 안되는 것은 매우 심각한 일)
+
+
+## 6. 부하테스트
+
+부하테스트는 '비기능테스트' 중 가장 대표적인 것인데, 일반적으로 IT적인 지식이 없더라도
+부하테스트가 무엇을 뜻하는지는 감각적으로는 다 알고 있다. 
+요번 프로젝트에서는 종목별로 작업이 나누어지는 특수 업무와 NXT에서 
+새로 도입한 GTP조건을 대상으로 부하테스트를 진행했다.
+
+
+### 6.1. 주문의 편중분포
+
+{{< raw >}}
+<div id="order-distribution-chart">
+
+<style>
+#order-distribution-chart {
+  max-width: 1050px;
+  margin: 24px auto;
+
+  font-family:
+    Pretendard,
+    "Noto Sans KR",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+
+  color: #30343b;
+}
+
+#order-distribution-chart * {
+  box-sizing: border-box;
+}
+
+.od-title {
+  font-size: 22px;
+  font-weight: 750;
+  margin-bottom: 5px;
+}
+
+.od-subtitle {
+  font-size: 12px;
+  color: #8b9199;
+  margin-bottom: 18px;
+}
+
+.od-chart-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.od-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.od-footnote {
+  margin-top: 8px;
+
+  font-size: 11px;
+  color: #9298a0;
+}
+
+
+/* SVG */
+
+.grid-line {
+  stroke: #e9ecf0;
+  stroke-width: 1;
+}
+
+.axis-line {
+  stroke: #bfc5cc;
+  stroke-width: 1;
+}
+
+.axis-label {
+  fill: #7d848d;
+  font-size: 12px;
+}
+
+.x-label {
+  fill: #7d848d;
+  font-size: 11px;
+}
+
+.bar-top {
+  fill: #2563eb;
+}
+
+.bar-tail {
+  fill: #d8dde4;
+}
+
+.bar {
+  rx: 2;
+  transition:
+    opacity .12s ease,
+    transform .12s ease;
+}
+
+.bar:hover {
+  opacity: .75;
+}
+
+.top-area {
+  fill: rgba(37,99,235,.035);
+}
+
+.cut-line {
+  stroke: #2563eb;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+.cut-label {
+  fill: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.share-big {
+  fill: #2563eb;
+  font-size: 29px;
+  font-weight: 800;
+}
+
+.share-small {
+  fill: #59616b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.annotation-bg {
+  fill: white;
+  stroke: #dde2e8;
+  stroke-width: 1;
+}
+
+</style>
+
+
+
+
+
+<div class="od-chart-wrap">
+
+<svg
+  id="order-svg"
+  class="od-chart"
+  viewBox="0 0 1050 540"
+  role="img"
+  aria-label="종목별 주문건수 편중분포">
+
+  <!-- 실제 그래프는 JS로 생성 -->
+
+</svg>
+
+</div>
+
+
+<div class="od-footnote">
+  ※ 예시 분포이며, 전체 종목 중 상위 25%가 전체 주문의 약 75%를 차지하도록 구성
+</div>
+
+
+<script>
+(() => {
+
+  /*
+   * 40개 종목
+   *
+   * 앞 10개 = 상위 25%
+   *
+   * 상위 10개 주문 합계 : 2,575
+   * 전체 주문 합계      : 3,433
+   *
+   * 비중 ≒ 75%
+   */
+
+  const values = [
+
+    /* 상위 25% */
+
+    500,
+    420,
+    350,
+    290,
+    240,
+    205,
+    175,
+    150,
+    130,
+    115,
+
+    /* 나머지 75% */
+
+    93,
+    78,
+    68,
+    60,
+    54,
+    49,
+    45,
+    41,
+    37,
+    34,
+    31,
+    28,
+    26,
+    24,
+    22,
+    20,
+    18,
+    16,
+    15,
+    14,
+    13,
+    12,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4
+
+  ];
+
+
+  const svg =
+    document.getElementById("order-svg");
+
+  const NS =
+    "http://www.w3.org/2000/svg";
+
+
+  function elem(type, attrs = {}) {
+
+    const e =
+      document.createElementNS(NS, type);
+
+    Object.entries(attrs)
+      .forEach(([key, value]) => {
+        e.setAttribute(key, value);
+      });
+
+    return e;
+
+  }
+
+
+  /*
+   * Chart 영역
+   */
+
+  const left   = 75;
+  const top    = 95;
+  const width  = 900;
+  const height = 355;
+
+  const bottom =
+    top + height;
+
+
+  const maxY = 500;
+
+  const topCount =
+    Math.ceil(values.length * 0.25);
+
+
+  /*
+   * 실제 75% 계산
+   */
+
+  const total =
+    values.reduce(
+      (a, b) => a + b,
+      0
+    );
+
+  const topTotal =
+    values
+      .slice(0, topCount)
+      .reduce(
+        (a, b) => a + b,
+        0
+      );
+
+  const share =
+    (
+      topTotal /
+      total *
+      100
+    ).toFixed(0);
+
+
+
+  /* =========================
+     좌표 계산
+     ========================= */
+
+  const slot =
+    width / values.length;
+
+  const barWidth =
+    slot * 0.66;
+
+
+  const x = index =>
+    left +
+    index * slot +
+    (slot - barWidth) / 2;
+
+
+  const y = value =>
+    bottom -
+    (value / maxY) *
+    height;
+
+
+
+  /* =========================
+     상위 25% 배경
+     ========================= */
+
+  const cutX =
+    left +
+    slot *
+    topCount;
+
+
+  svg.appendChild(
+    elem(
+      "rect",
+      {
+        x: left,
+        y: top,
+        width: cutX - left,
+        height: height,
+        class: "top-area"
+      }
+    )
+  );
+
+
+
+  /* =========================
+     Y Grid
+     ========================= */
+
+  [
+    0,
+    100,
+    200,
+    300,
+    400,
+    500
+
+  ].forEach(value => {
+
+    const py =
+      y(value);
+
+
+    svg.appendChild(
+      elem(
+        "line",
+        {
+          x1: left,
+          x2: left + width,
+          y1: py,
+          y2: py,
+          class: "grid-line"
+        }
+      )
+    );
+
+
+    const label =
+      elem(
+        "text",
+        {
+          x: left - 14,
+          y: py + 4,
+          "text-anchor": "end",
+          class: "axis-label"
+        }
+      );
+
+
+    label.textContent =
+      value;
+
+
+    svg.appendChild(
+      label
+    );
+
+  });
+
+
+
+  /* =========================
+     Y축 제목
+     ========================= */
+
+  const yTitle =
+    elem(
+      "text",
+      {
+        x: 20,
+        y: top + height / 2,
+        transform:
+          `rotate(-90 20 ${top + height / 2})`,
+
+        "text-anchor": "middle",
+
+        class: "axis-label"
+      }
+    );
+
+
+  yTitle.textContent =
+    "주문건수";
+
+
+  svg.appendChild(
+    yTitle
+  );
+
+
+
+  /* =========================
+     막대
+     ========================= */
+
+  values.forEach(
+    (value, index) => {
+
+      const py =
+        y(value);
+
+      const bar =
+        elem(
+          "rect",
+          {
+            x: x(index),
+            y: py,
+
+            width: barWidth,
+            height: bottom - py,
+
+            class:
+              index < topCount
+                ? "bar bar-top"
+                : "bar bar-tail"
+          }
+        );
+
+
+      const title =
+        elem("title");
+
+
+      title.textContent =
+        `종목 ${index + 1} · ${value}건`;
+
+
+      bar.appendChild(
+        title
+      );
+
+
+      svg.appendChild(
+        bar
+      );
+
+    }
+  );
+
+
+
+  /* =========================
+     25% 경계선
+     ========================= */
+
+  svg.appendChild(
+    elem(
+      "line",
+      {
+        x1: cutX,
+        x2: cutX,
+
+        y1: top - 10,
+        y2: bottom + 5,
+
+        class: "cut-line"
+      }
+    )
+  );
+
+
+
+  const cutLabel =
+    elem(
+      "text",
+      {
+        x: cutX - 10,
+        y: bottom + 33,
+
+        "text-anchor": "end",
+
+        class: "cut-label"
+      }
+    );
+
+
+  cutLabel.textContent =
+    "상위 25%";
+
+
+  svg.appendChild(
+    cutLabel
+  );
+
+
+
+  /* =========================
+     X축
+     ========================= */
+
+  svg.appendChild(
+    elem(
+      "line",
+      {
+        x1: left,
+        x2: left + width,
+
+        y1: bottom,
+        y2: bottom,
+
+        class: "axis-line"
+      }
+    )
+  );
+
+
+  [
+    {
+      p: 0,
+      text: "0%"
+    },
+
+    {
+      p: .25,
+      text: "25%"
+    },
+
+    {
+      p: .50,
+      text: "50%"
+    },
+
+    {
+      p: .75,
+      text: "75%"
+    },
+
+    {
+      p: 1,
+      text: "100%"
+    }
+
+  ].forEach(item => {
+
+    const px =
+      left +
+      width *
+      item.p;
+
+
+    const label =
+      elem(
+        "text",
+        {
+          x: px,
+          y: bottom + 55,
+
+          "text-anchor": "middle",
+
+          class: "x-label"
+        }
+      );
+
+
+    label.textContent =
+      item.text;
+
+
+    svg.appendChild(
+      label
+    );
+
+  });
+
+
+
+  /*
+   * X Axis description
+   */
+
+  const xTitle =
+    elem(
+      "text",
+      {
+        x: left + width / 2,
+        y: bottom + 82,
+
+        "text-anchor": "middle",
+
+        class: "axis-label"
+      }
+    );
+
+
+  xTitle.textContent =
+    "종목 비율  ·  주문건수 내림차순";
+
+
+  svg.appendChild(
+    xTitle
+  );
+
+
+
+  /* =========================
+     핵심 메시지
+     ========================= */
+
+  const boxX =
+    660;
+
+  const boxY =
+    25;
+
+
+  svg.appendChild(
+    elem(
+      "rect",
+      {
+        x: boxX,
+        y: boxY,
+
+        width: 315,
+        height: 58,
+
+        rx: 9,
+
+        class: "annotation-bg"
+      }
+    )
+  );
+
+
+  const text1 =
+    elem(
+      "text",
+      {
+        x: boxX + 18,
+        y: boxY + 38,
+
+        class: "share-big"
+      }
+    );
+
+
+  text1.textContent =
+    `${share}%`;
+
+
+  svg.appendChild(
+    text1
+  );
+
+
+  const text2 =
+    elem(
+      "text",
+      {
+        x: boxX + 92,
+        y: boxY + 28,
+
+        class: "share-small"
+      }
+    );
+
+
+  text2.textContent =
+    "전체 주문 중";
+
+
+  svg.appendChild(
+    text2
+  );
+
+
+  const text3 =
+    elem(
+      "text",
+      {
+        x: boxX + 92,
+        y: boxY + 47,
+
+        class: "share-small"
+      }
+    );
+
+
+  text3.textContent =
+    "상위 25% 종목이 차지";
+
+
+  svg.appendChild(
+    text3
+  );
+
+})();
+</script>
+
+</div>
+{{< /raw >}}
+
+위 차트는 개념적인 것이고 실데이터로 하면 더 극단적인 편중분포 그래프가 나타난다.
+(멱분포, 파레토법칙)
+즉 '종목별' 로 뭔가를 하는 작업은 사실 균등하게 병렬처리를 못한다. 
+불가능하다고 할수 있다. 
+
+소수의 인기있는 종목이 거래량의 대부분을 가져간다 (삼성전자, 하이닉스)
+
+
+
+### 6.2. 경험적 배분
+
+'종목별' 의 처리가 필요할때 결국 실험등을 많이 해서  '잘' 나누어지는 어떤 표지를 찾아야한다. 
+이때 뭔가 복잡한 처리 없이 단순해야 한다. 정답은 없고 가장 경제적이면서도 가장 적당한. 
+느낌으로 찾아야 한다. 
+
+이부분은 종목코드의 특정 부분을 가지고 배분하면 그나마 좀 나은 분포를 보이는 점을 
+찾아서 적용하였다.
+
+
+
+### 6.3. 속도보다 용량 
+
+NXT의 제도개편 사항중 GTP호가조건이 있다. 이는 프리마켓에서만 유효한 주문이란 뜻이다. 
+이 새로운 조건은 결국 '거래소가 주도하여 일괄취소(증거금일괄해지)'를 하는 첫 케이스인 셈이다. 
+따라서 NXT측에서도 큰 사이즈의 테스트 요청이 있었다.
+
+{{< raw >}}
+<div style="width:100%; max-width:1100px; margin:20px auto;">
+
+
+  <canvas
+  id="queueCanvas"
+  width="1100"
+  height="570"
+  style="
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+  ">
+</canvas>
+</div>
+
+<script>
+(() => {
+
+  const canvas = document.getElementById("queueCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const W = canvas.width;
+  const H = canvas.height;
+
+  /* ==============================
+     설정
+     ============================== */
+
+  const QUEUE_COUNT = 5;
+
+  /* Queue 최대 용량 */
+  const CAPACITY = 100;
+
+  /*
+   * 소비 속도
+   * 값이 작을수록 천천히 감소
+   */
+  const CONSUME_SPEED = 3.2;
+
+  /*
+   * 생산자가 한번에 던지는 작업 개수
+   */
+  const BURST_SIZE = 58;
+
+  /*
+   * Burst 발생 주기
+   */
+  const BURST_INTERVAL = 5200;
+
+
+  /* ==============================
+     Queue 상태
+     ============================== */
+
+  const queues = [];
+
+  for (let i = 0; i < QUEUE_COUNT; i++) {
+
+    queues.push({
+      value: 8 + Math.random() * 5,
+      incoming: 0
+    });
+
+  }
+
+
+  /* ==============================
+     날아가는 작업
+     ============================== */
+
+  const particles = [];
+
+  const producer = {
+    x: 95,
+    y: H / 2
+  };
+
+
+  /* ==============================
+     Queue 위치
+     ============================== */
+
+  const queueStartX = 520;
+
+  const queueWidth = 400;
+  const queueHeight = 58;
+
+  const queueStartY = 95;
+  const queueGap = 82;
+
+
+  function queueY(index) {
+
+    return queueStartY +
+      index * queueGap;
+
+  }
+
+
+  /* ==============================
+     Utils
+     ============================== */
+
+  function lerp(a, b, t) {
+
+    return a + (b - a) * t;
+
+  }
+
+
+  function roundedRect(
+    x,
+    y,
+    width,
+    height,
+    radius
+  ) {
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+      x,
+      y,
+      width,
+      height,
+      radius
+    );
+
+  }
+
+
+  /* ==============================
+     Burst 생성
+     ============================== */
+
+  function burst() {
+
+    for (let i = 0; i < BURST_SIZE; i++) {
+
+      const queueIndex =
+        i % QUEUE_COUNT;
+
+      /*
+       * 완전히 같은 궤도로 움직이지 않도록
+       * 약간의 랜덤 지연
+       */
+
+      const delay =
+        Math.random() * 650;
+
+
+      particles.push({
+
+        x:
+          producer.x + 55 +
+          Math.random() * 40,
+
+        y:
+          producer.y +
+          (Math.random() - 0.5) * 55,
+
+        startX:
+          producer.x + 55,
+
+        startY:
+          producer.y,
+
+        targetX:
+          queueStartX - 15,
+
+        targetY:
+          queueY(queueIndex) +
+          queueHeight / 2,
+
+        queue:
+          queueIndex,
+
+        progress:
+          -delay / 1000,
+
+        speed:
+          0.65 + Math.random() * 0.25,
+
+        size:
+          4 + Math.random() * 2
+
+      });
+
+    }
+
+  }
+
+
+  /* ==============================
+     Background
+     ============================== */
+
+  function drawBackground() {
+
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.fillStyle = "#ffffff";
+
+    ctx.fillRect(
+      0,
+      0,
+      W,
+      H
+    );
+
+  }
+
+
+  /* ==============================
+     Header
+     ============================== */
+
+  function drawHeader() {
+
+    ctx.fillStyle = "#222";
+
+    ctx.font =
+      "700 23px Pretendard, sans-serif";
+
+    ctx.fillText(
+      "Producer → Queue → Consumer",
+      40,
+      42
+    );
+
+
+    ctx.fillStyle = "#8a9099";
+
+    ctx.font =
+      "13px Pretendard, sans-serif";
+
+    ctx.fillText(
+      "순간적으로 유입되는 다건 작업을 충분한 Queue가 흡수하고, Consumer가 순차적으로 처리",
+      40,
+      68
+    );
+
+  }
+
+
+  /* ==============================
+     Producer
+     ============================== */
+
+  function drawProducer() {
+
+    ctx.save();
+
+    ctx.translate(
+      producer.x,
+      producer.y
+    );
+
+
+    /* Producer box */
+
+    ctx.fillStyle = "#eff6ff";
+
+    ctx.strokeStyle = "#2563eb";
+
+    ctx.lineWidth = 2;
+
+    roundedRect(
+      -55,
+      -45,
+      110,
+      90,
+      10
+    );
+
+    ctx.fill();
+    ctx.stroke();
+
+
+    ctx.fillStyle = "#2563eb";
+
+    ctx.textAlign = "center";
+
+    ctx.font =
+      "700 15px Pretendard, sans-serif";
+
+    ctx.fillText(
+      "PRODUCER",
+      0,
+      -7
+    );
+
+
+    ctx.fillStyle = "#64748b";
+
+    ctx.font =
+      "12px Pretendard, sans-serif";
+
+    ctx.fillText(
+      "Burst",
+      0,
+      15
+    );
+
+
+    ctx.restore();
+
+
+    /*
+     * producer → queue 방향 화살표
+     */
+
+    ctx.strokeStyle = "#d5d9df";
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      producer.x + 70,
+      producer.y
+    );
+
+    ctx.lineTo(
+      queueStartX - 55,
+      producer.y
+    );
+
+    ctx.stroke();
+
+
+    ctx.fillStyle = "#a1a7af";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      queueStartX - 48,
+      producer.y
+    );
+
+    ctx.lineTo(
+      queueStartX - 61,
+      producer.y - 6
+    );
+
+    ctx.lineTo(
+      queueStartX - 61,
+      producer.y + 6
+    );
+
+    ctx.fill();
+
+  }
+
+
+  /* ==============================
+     Queue
+     ============================== */
+
+  function drawQueues() {
+
+    for (
+      let i = 0;
+      i < QUEUE_COUNT;
+      i++
+    ) {
+
+      const q = queues[i];
+
+      const y =
+        queueY(i);
+
+
+      /*
+       * Queue 이름
+       */
+
+      ctx.fillStyle = "#4b5563";
+
+      ctx.font =
+        "700 12px Pretendard, sans-serif";
+
+      ctx.textAlign = "right";
+
+      ctx.fillText(
+        `QUEUE ${i + 1}`,
+        queueStartX - 20,
+        y + 33
+      );
+
+
+      /*
+       * 배경
+       */
+
+      ctx.fillStyle = "#f4f6f8";
+
+      roundedRect(
+        queueStartX,
+        y,
+        queueWidth,
+        queueHeight,
+        8
+      );
+
+      ctx.fill();
+
+
+      /*
+       * Queue 현재 사용량
+       */
+
+      const ratio =
+        Math.min(
+          q.value / CAPACITY,
+          1
+        );
+
+
+      const gaugeWidth =
+        queueWidth * ratio;
+
+
+      const gradient =
+        ctx.createLinearGradient(
+          queueStartX,
+          0,
+          queueStartX +
+          queueWidth,
+          0
+        );
+
+      gradient.addColorStop(
+        0,
+        "#60a5fa"
+      );
+
+      gradient.addColorStop(
+        1,
+        "#2563eb"
+      );
+
+
+      ctx.fillStyle = gradient;
+
+      roundedRect(
+        queueStartX,
+        y,
+        gaugeWidth,
+        queueHeight,
+        8
+      );
+
+      ctx.fill();
+
+
+      /*
+       * Queue border
+       */
+
+      ctx.strokeStyle = "#dce1e7";
+
+      ctx.lineWidth = 1;
+
+      roundedRect(
+        queueStartX,
+        y,
+        queueWidth,
+        queueHeight,
+        8
+      );
+
+      ctx.stroke();
+
+
+      /*
+       * Capacity
+       */
+
+      ctx.textAlign = "right";
+
+      ctx.font =
+        "600 11px Pretendard, sans-serif";
+
+
+      ctx.fillStyle =
+        ratio > 0.35
+          ? "#ffffff"
+          : "#6b7280";
+
+
+      ctx.fillText(
+        `${Math.round(q.value)} / ${CAPACITY}`,
+        queueStartX +
+        queueWidth -
+        12,
+        y + 35
+      );
+
+
+      /*
+       * Consumer
+       */
+
+      const consumerX =
+        queueStartX +
+        queueWidth +
+        70;
+
+
+      ctx.strokeStyle = "#cbd5e1";
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        queueStartX +
+        queueWidth +
+        8,
+        y +
+        queueHeight / 2
+      );
+
+      ctx.lineTo(
+        consumerX - 25,
+        y +
+        queueHeight / 2
+      );
+
+      ctx.stroke();
+
+
+      ctx.fillStyle = "#f8fafc";
+
+      ctx.strokeStyle = "#94a3b8";
+
+      roundedRect(
+        consumerX - 20,
+        y + 12,
+        70,
+        34,
+        7
+      );
+
+      ctx.fill();
+      ctx.stroke();
+
+
+      ctx.textAlign = "center";
+
+      ctx.fillStyle = "#475569";
+
+      ctx.font =
+        "700 10px Pretendard, sans-serif";
+
+      ctx.fillText(
+        "WORKER",
+        consumerX + 15,
+        y + 33
+      );
+
+    }
+
+  }
+
+
+  /* ==============================
+     Particles
+     ============================== */
+
+  function updateParticles(dt) {
+
+    for (
+      let i = particles.length - 1;
+      i >= 0;
+      i--
+    ) {
+
+      const p =
+        particles[i];
+
+
+      p.progress +=
+        dt * p.speed;
+
+
+      if (p.progress < 0) {
+
+        continue;
+
+      }
+
+
+      const t =
+        Math.min(
+          p.progress,
+          1
+        );
+
+
+      /*
+       * 살짝 부드러운 Ease
+       */
+
+      const ease =
+        1 -
+        Math.pow(
+          1 - t,
+          3
+        );
+
+
+      p.x =
+        lerp(
+          p.startX,
+          p.targetX,
+          ease
+        );
+
+
+      /*
+       * 가운데에서 약간 퍼졌다가
+       * queue로 수렴
+       */
+
+      const wave =
+        Math.sin(
+          t * Math.PI
+        ) *
+        ((p.queue - 2) * 13);
+
+
+      p.y =
+        lerp(
+          p.startY,
+          p.targetY,
+          ease
+        ) +
+        wave;
+
+
+      /*
+       * Queue 도착
+       */
+
+      if (t >= 1) {
+
+        queues[p.queue].value =
+          Math.min(
+            CAPACITY,
+            queues[p.queue].value +
+            1
+          );
+
+
+        particles.splice(
+          i,
+          1
+        );
+
+      }
+
+    }
+
+  }
+
+
+  function drawParticles() {
+
+    particles.forEach(p => {
+
+      if (p.progress < 0) {
+        return;
+      }
+
+
+      ctx.fillStyle =
+        "#22c55e";
+
+
+      ctx.beginPath();
+
+      ctx.arc(
+        p.x,
+        p.y,
+        p.size,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fill();
+
+    });
+
+  }
+
+
+  /* ==============================
+     Consumer
+     ============================== */
+
+  function consume(dt) {
+
+    queues.forEach(
+      (queue, index) => {
+
+        /*
+         * Queue가 완전히 0으로 떨어지지 않도록
+         * 약간의 기본 작업 유지
+         */
+
+        const floor =
+          5 + index * 0.5;
+
+
+        if (
+          queue.value >
+          floor
+        ) {
+
+          queue.value -=
+            CONSUME_SPEED *
+            dt;
+
+        }
+
+
+        if (
+          queue.value <
+          floor
+        ) {
+
+          queue.value =
+            floor;
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* ==============================
+     메시지
+     ============================== */
+
+  function drawMessage() {
+
+    const total =
+      queues.reduce(
+        (sum, queue) =>
+          sum + queue.value,
+        0
+      );
+
+
+    const utilization =
+      total /
+      (
+        CAPACITY *
+        QUEUE_COUNT
+      );
+
+
+    ctx.textAlign = "left";
+
+
+    ctx.fillStyle = "#64748b";
+
+    ctx.font =
+      "12px Pretendard, sans-serif";
+
+    ctx.fillText(
+      "Queue Total Capacity",
+      40,
+      H - 55
+    );
+
+
+    ctx.fillStyle = "#222";
+
+    ctx.font =
+      "700 17px Pretendard, sans-serif";
+
+    ctx.fillText(
+      `${Math.round(total)} / ${CAPACITY * QUEUE_COUNT}`,
+      40,
+      H - 30
+    );
+
+
+    ctx.fillStyle = "#64748b";
+
+    ctx.font =
+      "12px Pretendard, sans-serif";
+
+    ctx.fillText(
+      "일시적인 Burst가 발생해도 Queue의 충분한 여유 용량으로 안전하게 흡수",
+      245,
+      H - 38
+    );
+
+
+    /*
+     * 여유율
+     */
+
+    ctx.fillStyle = "#16a34a";
+
+    ctx.font =
+      "700 12px Pretendard, sans-serif";
+
+
+    ctx.fillText(
+      `사용률 ${Math.round(utilization * 100)}%`,
+      245,
+      H - 18
+    );
+
+  }
+
+
+  /* ==============================
+     Animation
+     ============================== */
+
+  let lastTime =
+    performance.now();
+
+
+  let burstTimer = 0;
+
+
+  function animate(now) {
+
+    const dt =
+      Math.min(
+        (now - lastTime) / 1000,
+        0.05
+      );
+
+
+    lastTime = now;
+
+
+    burstTimer +=
+      dt * 1000;
+
+
+    if (
+      burstTimer >
+      BURST_INTERVAL
+    ) {
+
+      burst();
+
+      burstTimer = 0;
+
+    }
+
+
+    consume(dt);
+
+    updateParticles(dt);
+
+
+    drawBackground();
+
+    drawHeader();
+
+    drawProducer();
+
+    drawQueues();
+
+    drawParticles();
+
+    drawMessage();
+
+
+    requestAnimationFrame(
+      animate
+    );
+
+  }
+
+
+  /*
+   * 처음 페이지 열렸을 때
+   * 잠시 후 첫 Burst
+   */
+
+  setTimeout(
+    burst,
+    800
+  );
+
+
+  requestAnimationFrame(
+    animate
+  );
+
+})();
+</script>
+{{< /raw >}}
+
+
+NXT거래소에서는 엄청나게 빠른속도로 증권사에게 물량을 던질것이다. 
+일시적인 충격이 발생하며  이 물량을 한번에 받아내어 공간에 집어넣고 
+수행할때 시스템이 소화를 하느냐의 문제로 변한다. 
+**속도가 중요한 것이 아니다.**
+
+`GTP로 인해 발생하는 순간적인 충격에도 대비가 되어있어요 😄`
+
+
+
+## 7. 결과 보고 및 이행 
+
+회사에서는 큰 프로젝트를 진행하면 위원회를 열고 
+변경을 승인할 것인지 아닌지의 결정을 하게 된다. 
+IT 최고위라인에 결과보고 즉 PT를 하게되는데 
+이는 프로젝트 기간중 PM에게는 가장 긴장되고 극적인 순간이기도 하다. 
+
+
+### 7.1. 오류율 
+
+{{< raw >}}
+<div id="error-rate-chart" style="
+  width:100%;
+  max-width:1050px;
+  margin:24px auto;
+  font-family:Pretendard,'Noto Sans KR',sans-serif;
+  box-sizing:border-box;
+">
+
+  <style>
+    #error-rate-chart * {
+      box-sizing: border-box;
+    }
+
+    .er-title {
+      font-size: 22px;
+      font-weight: 750;
+      color: #24272c;
+      margin-bottom: 5px;
+    }
+
+    .er-subtitle {
+      font-size: 12px;
+      color: #8b9199;
+      margin-bottom: 16px;
+    }
+
+    .er-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .er-grid {
+      stroke: #e9ecf0;
+      stroke-width: 1;
+    }
+
+    .er-axis {
+      stroke: #bdc3ca;
+      stroke-width: 1;
+    }
+
+    .er-axis-text {
+      fill: #7d848d;
+      font-size: 12px;
+    }
+
+    .er-line {
+      fill: none;
+      stroke: #2563eb;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .er-forecast {
+      fill: none;
+      stroke: #f59e0b;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 8 7;
+    }
+
+    .er-point {
+      fill: #ffffff;
+      stroke: #2563eb;
+      stroke-width: 3;
+    }
+
+    .er-forecast-point {
+      fill: #ffffff;
+      stroke: #f59e0b;
+      stroke-width: 2.5;
+    }
+
+    .er-target {
+      stroke: #9ca3af;
+      stroke-width: 1.3;
+      stroke-dasharray: 4 5;
+    }
+
+    .er-target-text {
+      fill: #6b7280;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .er-forecast-text {
+      fill: #d97706;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .er-current-text {
+      fill: #2563eb;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .er-footnote {
+      margin-top: 4px;
+      color: #9298a0;
+      font-size: 11px;
+    }
+  </style>
+
+
+  <svg
+    class="er-svg"
+    viewBox="0 0 1050 520"
+    role="img"
+    aria-label="7월 3주차부터 8월 말까지 주차별 오류율 추이"
+  >
+
+
+    <!-- ========================= -->
+    <!-- GRID -->
+    <!-- ========================= -->
+
+    <line x1="85" x2="990" y1="420" y2="420" class="er-grid"/>
+    <line x1="85" x2="990" y1="342" y2="342" class="er-grid"/>
+    <line x1="85" x2="990" y1="264" y2="264" class="er-grid"/>
+    <line x1="85" x2="990" y1="187" y2="187" class="er-grid"/>
+    <line x1="85" x2="990" y1="109" y2="109" class="er-grid"/>
+
+
+    <!-- Y Labels -->
+
+    <text x="67" y="424"
+          text-anchor="end"
+          class="er-axis-text">
+      0%
+    </text>
+
+    <text x="67" y="346"
+          text-anchor="end"
+          class="er-axis-text">
+      2%
+    </text>
+
+    <text x="67" y="268"
+          text-anchor="end"
+          class="er-axis-text">
+      4%
+    </text>
+
+    <text x="67" y="191"
+          text-anchor="end"
+          class="er-axis-text">
+      6%
+    </text>
+
+    <text x="67" y="113"
+          text-anchor="end"
+          class="er-axis-text">
+      8%
+    </text>
+
+
+    <!-- 축 -->
+
+    <line
+      x1="85"
+      x2="85"
+      y1="70"
+      y2="420"
+      class="er-axis"
+    />
+
+    <line
+      x1="85"
+      x2="990"
+      y1="420"
+      y2="420"
+      class="er-axis"
+    />
+
+
+    <!-- ========================= -->
+    <!-- 4.5% 수렴선 -->
+    <!-- ========================= -->
+
+    <line
+      x1="85"
+      x2="990"
+      y1="245"
+      y2="245"
+      class="er-target"
+    />
+
+    <text
+      x="985"
+      y="236"
+      text-anchor="end"
+      class="er-target-text">
+      4.5% 수렴
+    </text>
+
+
+    <!-- ========================= -->
+    <!-- 실제 오류율 -->
+    <!-- 직선 연결 -->
+    <!-- ========================= -->
+
+    <!--
+      7월 3주 : 8.0
+      7월 4주 : 7.2
+      8월 1주 : 6.2
+      8월 2주 : 5.2
+      8월 3주 : 4.5
+      8월 4주 : 4.5
+      8월 5주 : 4.5
+    -->
+
+    <polyline
+      points="
+        110,109
+        255,140
+        405,179
+        555,218
+        705,245
+        840,245
+        975,245
+      "
+      class="er-line"
+    />
+
+
+    <!-- 실제 Point -->
+
+    <circle cx="110" cy="109" r="5" class="er-point"/>
+    <circle cx="255" cy="140" r="5" class="er-point"/>
+    <circle cx="405" cy="179" r="5" class="er-point"/>
+    <circle cx="555" cy="218" r="5" class="er-point"/>
+    <circle cx="705" cy="245" r="6" class="er-point"/>
+    <circle cx="840" cy="245" r="5" class="er-point"/>
+    <circle cx="975" cy="245" r="5" class="er-point"/>
+
+
+    <!-- ========================= -->
+    <!-- 예상 오류율 -->
+    <!-- 직선 점선 -->
+    <!-- ========================= -->
+
+    <!--
+      8월 3주 : 4.5%
+      8월 4주 : 3.8%
+      8월 5주 : 3.1%
+    -->
+
+    <polyline
+      points="
+        705,245
+        840,272
+        975,299
+      "
+      class="er-forecast"
+    />
+
+
+    <circle
+      cx="840"
+      cy="272"
+      r="4.5"
+      class="er-forecast-point"
+    />
+
+    <circle
+      cx="975"
+      cy="299"
+      r="4.5"
+      class="er-forecast-point"
+    />
+
+
+    <!-- ========================= -->
+    <!-- Annotation -->
+    <!-- ========================= -->
+
+    <text
+      x="720"
+      y="226"
+      class="er-current-text">
+      4.5%
+    </text>
+
+
+    <text
+      x="960"
+      y="320"
+      text-anchor="end"
+      class="er-forecast-text">
+      예상 오류율 3.1%
+    </text>
+
+
+    <text
+      x="720"
+      y="287"
+      fill="#8b9199"
+      font-size="11">
+      개선 지속 시
+    </text>
+
+
+    <!-- ========================= -->
+    <!-- X Labels -->
+    <!-- ========================= -->
+
+    <text
+      x="110"
+      y="452"
+      text-anchor="middle"
+      class="er-axis-text">
+      7월 3주
+    </text>
+
+    <text
+      x="255"
+      y="452"
+      text-anchor="middle"
+      class="er-axis-text">
+      7월 4주
+    </text>
+
+    <text
+      x="405"
+      y="452"
+      text-anchor="middle"
+      class="er-axis-text">
+      8월 1주
+    </text>
+
+    <text
+      x="555"
+      y="452"
+      text-anchor="middle"
+      class="er-axis-text">
+      8월 2주
+    </text>
+
+    <text
+      x="705"
+      y="452"
+      text-anchor="middle"
+      class="er-axis-text">
+      8월 3주
+    </text>
+
+    <text
+      x="840"
+      y="452"
+      text-anchor="middle"
+      class="er-axis-text">
+      8월 4주
+    </text>
+
+    <text
+      x="975"
+      y="452"
+      text-anchor="middle"
+      class="er-axis-text">
+      8월 5주
+    </text>
+
+
+    <!-- ========================= -->
+    <!-- Legend -->
+    <!-- ========================= -->
+
+    <g transform="translate(690,55)">
+
+      <line
+        x1="0"
+        x2="30"
+        y1="0"
+        y2="0"
+        stroke="#2563eb"
+        stroke-width="4"
+        stroke-linecap="round"
+      />
+
+      <text
+        x="40"
+        y="5"
+        fill="#59616b"
+        font-size="12">
+        오류율
+      </text>
+
+
+      <line
+        x1="115"
+        x2="145"
+        y1="0"
+        y2="0"
+        stroke="#f59e0b"
+        stroke-width="3"
+        stroke-dasharray="7 6"
+        stroke-linecap="round"
+      />
+
+      <text
+        x="155"
+        y="5"
+        fill="#59616b"
+        font-size="12">
+        예상 오류율
+      </text>
+
+    </g>
+
+  </svg>
+
+
+  <div class="er-footnote">
+    ※ 예상 오류율은 최근 개선 추세가 지속되는 경우를 가정한 추정치
+  </div>
+
+</div>
+{{< /raw >}}
+
+프로젝트 통합테스트 진척이 되면서 마지막까지 살펴봤던 포인트중 하나이다. 
+통합테스트 7700건에 해당되는 엄청난 스케일의 테스트가 진행되면서 
+초반 높은 오류율에서 점점 줄어들기 시작했으나. 
+마지막 2-3주는 4.5% 로 수렴을 하게되었다. 
+
+즉 이말은 어느정도 큰 스케일 변경이 수반되고, 테스트의 케이스 덩치가 
+운영스케일 수준으로 커지면... 테스트 신규케이스를 늘릴때 그에 비례해서 
+오류도 그만큼 늘어난다는 의미이다. 
+
+현업들이 7700개에서 무리해서 1000개를 늘려서 8700개를 만들었다면??
+1000개중 4.5%인 45개의 장애가 난다. 이는 수렴한다는 점이 얼마나 무서운 일인지를 알려주는 것이다.
+
+**'무조건 장애가 날수밖에 없다'**
+
+는 안타까운 소식을 굳이 내 의견을 슬라이드에 넣어 얘기했다. 
+위원회는 형식적인 절차일수도 있지만 그 자리에 모인 사람들은 
+부서단위로 영향을 끼칠수 있는 사람들이고 이런 자리가 쉽사리 만들어지기
+어렵기 때문에 이런 기회를 살려 경각심을 일깨우기 위해서이다. 
+
+윗선에서 긴장하고 대응준비를 하는것은 확실히 다르다. 
+어떤 장애가 터질지 모르는 상황에서 결정이 필요한 순간이 올때 즉각 결정을 내려주는 사람이
+있어야 하는 것이다.
+
+
+### 7.2. 이행시나리오
+
+PM이 프로젝트 진행하면서 가장 힘든 순간은 
+결과보고보다 이행준비를 하는 것이 더 힘들다고 생각이 든다. 
+
+PT처럼 적당히 말로 때우는게 아니라 많은 사람들을 순서대로 움직이도록 
+플랜을 세우는 일이라서 선후관계 및 누락이 없어야 하고. 
+이 와중에는 고객님들이 서비스를 간간히 이용을 하고 있고 
+게으른 고객님들과 얼리어답터 고객님까지 다 고려하여야 한다.
+이런 과정에서 내가 잘 모르는 파트의 과정도 다 챙겨야 한다. 
+
+'잊지 말아야 할점... 이와중에도 내 파트, 개발/수정할것 하면서 진행하고 있는 것 😭'
+
+요번에는 특히 KRX 거래소가 '본이행점검테스트'를 특별히 요구를 했다. 
+진짜 너무너무 열받았는데 🤬 자기들 별것도 아닌 테스트를 위해서 (회원사 100% 참여했습니다 보고하려고? )
+회원사들 이행을 무리하게 하도록 강제로 요구하는 것이다. 
+
+이 시간은 맞추기 위해 , 시스템 전환 시간을 역으로 계산해보면 , 여유시간이 하나도 없이 
+완벽히 성공으로만 끝나야 '본이행점검테스트'를 참여할 수 있었다. 
+결국 시간을 다 당겨야 하고 당연히 이른아침출근, 초과근무 강요를 하게 되는 셈이다. 
+
+현업들에게 '본이행점검테스트' 안내자료를 만들고 안내한다. 접속방법 등과 시간과 주의점 등
+간단한자료이다. 
+
+
+### 7.3. 이행일 
+
+이행일에는 PM은 미리준비한 프로그램들 시스템에 반영되도록 전부 대기상태로 넘겨놓는다. 
+그리고 타임테이블에 따라 사람들을 리딩 해야 한다. 
+
+중간에 뭔 문제가 있거나 막히는것이 있으면 바로 간섭해서 해소할 준비를 하고 있어야 했다. 
+
+* 서비스 운영배포 후 점검 : 앱 업데이트 안하는 게으른 고객 가정한 점검
+* KRX본이행테스트 : 시스템 전환 및 KRX의 요구에 따른 테스트 참여, 신규업무 테스트
+* 매체 운영배포 후 점검 : 앱 업데이트 후 점검
+* 시스템 점검 : SOR, FEP 등등 주요 솔루션 점검
+
+크게 4개의 축으로 해서 선후관계도 있고 동시수행도 있고 참 복잡하였다. 
+내가 걱정이 들어 각 팀장님들께 질릴정도로 이행테이블을 계속 뿌려대서 그런지 
+사람들은 전부 잘 숙지하고 있었다. 😅
+
+본이행테스트참여는 예상보다 살짝 늦어졌지만 크게 늦지는 않아서
+현업들도 본인들의 시나리오대로 진행할수 있었다고 하였다.
+
+
+## 8. 오픈일 9/14 결전의 날
+
+오전부터 시작 모든 장운영시간에 걸쳐서 점검 및 모니터링을 하였다. 
+다행이 뭐 문구가 조금 잘못되었다던지 이런 가벼운 류가 발견이 되고
+신규서비스에서  특정 부서의 업무에서 특정조건에서 간혹 발생하는 특이한 케이스도 발견이 되었다. 
+
+그 와중에 삼성증권, 미래에셋증권이 NXT-SOR시스템 에서 심각한 오류로
+큰 장애가 난것 같았다. 
+안도의 한숨을 내쉬며 (1빠따가 아니었음에...) 동시에 정말로 
+안타까운 마음도 들었다. 우리같이 몇달을 개고생하고 준비 열심히 했을텐데
+노력과 상관없이 발생한 천재지변 같은 느낌이다.
+
+좀 힘들게 개발 및 준비한 신규업무는 별 큰일도 없이, 그리고 인기도없이 😅
+무탈하게 넘어갔다. 
+
+
+## 9. 내 마음은 지침
+
+이제는 긴장이 풀리며 너무나도 정신적으로 지친 나를 다스리는 시간을 가져야겠다..
+하지만 뒤로 쏟아져 들어오는 개발건들은 무엇이냐 ㅎㅎ 😂
