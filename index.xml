@@ -6,8 +6,15 @@
     <description>Recent content on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sun, 13 Sep 2026 00:10:41 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2026 20:10:41 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>KRX거래시간연장</title>
+      <link>https://doongchoong.github.io/posts/krx%EA%B1%B0%EB%9E%98%EC%8B%9C%EA%B0%84%EC%97%B0%EC%9E%A5/</link>
+      <pubDate>Tue, 15 Sep 2026 20:10:41 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/krx%EA%B1%B0%EB%9E%98%EC%8B%9C%EA%B0%84%EC%97%B0%EC%9E%A5/</guid>
+      <description>&lt;p&gt;26.09.14 KRX 거래시간 연장 + NXT제도변경  오픈하였다.&#xA;이때 우리회사의 관련 대응 프로젝트 PM은 내가 맡았는데 프로젝트 규모가 상당히 크기때문에&#xA;내 역할도 좀 컷다. 그리고 매우 힘들었다. 😂&#xA;정말 제대로 각을 잡고 PM역할을 하였다. 이점이 좀 인상적인 프로젝트여서&#xA;후기를 남긴다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-pm의-역할&#34;&gt;1. PM의 역할&lt;/h2&gt;&#xA;&lt;p&gt;증권사IT 인하우스 개발에서 PM은 사실 프로젝트를 지배(마이크로 매니징) 한다기 보다는 PL들중 뽑혀서 대표로 느슨하게 관리하는 느낌에 더 가깝다. 선배들의 자조적인 말로는 모든 책임을 지게되는&#xA;대표 같은 느낌이지만 말이다.&#xA;개발은 개발대로 하면서 PM역할도 같이 해야하니 프로젝트 규모가 커지면 굉장히 버거워지는게&#xA;사실이다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>블로그 문체 흉내내기</title>
       <link>https://doongchoong.github.io/posts/%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%AC%B8%EC%B2%B4%ED%9D%89%EB%82%B4%EB%82%B4%EA%B8%B0/</link>
