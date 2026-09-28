@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>미니차트 스킬만들기 | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+    border-radius: 6px 6px 6px 6px;
+    margin: 1em 0;
+  }
+
+   
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;  
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+   
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+ 
+tr:last-child td {
+  border-bottom: none;
+}
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 1em auto;
+  padding: 20px 20px;
+}
+
+
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.user-bubble {
+  background-color: #e9e9eb;
+  border-radius: 20px;
+  padding: 0.8em 1.2em;
+
+   
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0.5em 0 0.5em auto;
+
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+
+   
+  left: auto;
+  right: -10px;
+  top: 10px;
+
+  border: 6px solid transparent;
+  border-left-color: #e9e9eb;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+
+   
+  .mermaid svg[aria-roledescription="gitGraph"] {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <a href="/" class="back-link">← Back to home</a>
+    <h1 class="post-title">미니차트 스킬만들기</h1>
+    <div class="post-date">September 28, 2026</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-미니차트-라이브러리">1. 미니차트 라이브러리</a></li>
+    <li><a href="#2-스킬-만들기">2. 스킬 만들기</a>
+      <ul>
+        <li><a href="#21-개발파트-진척률">2.1. 개발파트 진척률</a></li>
+        <li><a href="#22-막대그래프">2.2. 막대그래프</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-gpt에게-요청">3. GPT에게 요청</a></li>
+    <li><a href="#4-후기">4. 후기</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>직전 글 <a href="https://doongchoong.github.io/posts/krx%EA%B1%B0%EB%9E%98%EC%8B%9C%EA%B0%84%EC%97%B0%EC%9E%A5/">KRX거래시간연장</a>을 쓸 때 차트가 필요해서 그냥 GPT6-astra에게 만들어 달라고 했는데 꽤 괜찮았다. &ldquo;~한 차트를 그릴거야 만들어줘&rdquo; 해서 만든 것이다.</p>
+<p>그런데 차트를 추가하다 보니 글 안의 소스가 너무 많아졌다. 차트마다 비슷한 코드가 반복되면서 불필요한 중복도 많아졌다.
+그래서 GPT가 생성한 차트들의 공통점을 모아서 js미니 라이브러리로 만들고
+블로그에 임베딩하게 되었다.</p>
+<h2 id="1-미니차트-라이브러리">1. 미니차트 라이브러리</h2>
+
+<div class="mini-chart">
+<script type="application/json">
+{
+  "type": "line",
+  "title": "오류율 추이",
+  "labels": ["1주", "2주", "3주", "4주", "5주"],
+  "unit": "%",
+  "y": { "min": 0, "max": 10, "step": 2 },
+  "series": [
+    {
+      "name": "실적 (예시)",
+      "values": [8, 6, 4.5, 4.5, 4.5]
+    },
+    {
+      "name": "예상 (예시)",
+      "values": [null, null, 4.5, 3.8, 3.1],
+      "style": "dashed",
+      "fill": "gradient"
+    }
+  ],
+  "annotations": [
+    { "type": "y-line", "y": 4.5, "label": "4.5% 기준" },
+    {
+      "type": "point",
+      "x": "5주",
+      "series": "예상 (예시)",
+      "label": "예상 3.1%",
+      "position": "below"
+    },
+    {
+      "type": "point",
+      "x": "5주",
+      "series": "실적 (예시)",
+      "label": "실제 4.5%",
+      "position": "above"
+    }
+  ],
+  "caption": "예제 차트) 오류율이 4.5%수렴하는 상황 표현"
+}
+</script>
+</div>
+
+<p>주로 꺽은선 직선 그래프외에 다른 차트를 쓸일이 있겠지 싶다.
+가장 효과적이고 또 나도 자주 사용하므로 이 차트 위주로 GPT에게 부탁했다.
+사실 원샷에 나온것은 아니고 요청을 몇번 더 하여 맞춘 것이다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">HTML</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">div</span> <span style="color:#1f2328">class</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;mini-chart&#34;</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">script</span> <span style="color:#1f2328">type</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;application/json&#34;</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;type&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;line&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;title&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;오류율 추이&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;labels&#34;</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;1주&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;2주&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;3주&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;4주&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;5주&#34;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;unit&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;%&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;y&#34;</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">{</span> <span style="color:#0a3069">&#34;min&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;max&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">10</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;step&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">2</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;series&#34;</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;name&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;실적 (예시)&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;values&#34;</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">8</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">6</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">4.5</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">4.5</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">4.5</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;name&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;예상 (예시)&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;values&#34;</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[</span><span style="color:#cf222e">null</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">null</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">4.5</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3.8</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3.1</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;style&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;dashed&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;fill&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;gradient&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;annotations&#34;</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span> <span style="color:#0a3069">&#34;type&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;y-line&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;y&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">4.5</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;label&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;4.5% 기준&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;type&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;point&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;x&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;5주&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;series&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;예상 (예시)&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;label&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;예상 3.1%&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;position&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;below&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;type&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;point&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;x&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;5주&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;series&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;실적 (예시)&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;label&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;실제 4.5%&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0a3069">&#34;position&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;above&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;caption&#34;</span><span style="color:#0550ae">:</span> <span style="color:#0a3069">&#34;예제 차트) 오류율이 4.5%수렴하는 상황 표현&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">script</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;/</span><span style="color:#0550ae">div</span><span style="color:#1f2328">&gt;</span></span></span></code></pre></div>
+  </div>
+</div><p>위 처럼 &lsquo;데이터&rsquo; 만 만들어놓으면 차트라이브러리가 자동으로 읽어들이고
+차트로 렌더링 하게 된다. 중간에 꺽이는 부분은 null을 사용 그리지 않고 있다가 필요한 부분에서 갈라칠때 수치가 있는 부분만 그리게 하여 만들수 있다.</p>
+<p>이것도 차트를 렌더링하는 스크립트가 다 빠진 것이라 엄청 간결해진 것이지만
+또 어떻게 사용해야하는지를 알아뒀다가 나중에 또 써먹어야 하는데
+아직도 json 등으로 복잡하게 구성해야 한다.
+이래서 &lsquo;스킬&rsquo; 을 사용하여 GPT에게 만들어 달라고 요청하도록 하였다.</p>
+<h2 id="2-스킬-만들기">2. 스킬 만들기</h2>
+<p>데이터 포맷을 정했으니 LLM이 이 형식에 맞춰 작성하도록 스킬도 만들어 달라고 했다.</p>
+<div class="mermaid">
+    
+graph LR
+자연어요청 --> |AI-Skill|JSON데이터구조 --> |렌더링|차트
+
+    </div>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>.agents/skills/mini-chart/
+</span></span><span style="display:flex;"><span>├── README.md
+</span></span><span style="display:flex;"><span>├── SKILL.md
+</span></span><span style="display:flex;"><span>└── references/
+</span></span><span style="display:flex;"><span>    ├── format.md
+</span></span><span style="display:flex;"><span>    └── examples.md</span></span></code></pre></div>
+  </div>
+</div><h3 id="21-개발파트-진척률">2.1. 개발파트 진척률</h3>
+<p>여러 개발파트의 진척률을 비교하는 예제</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>mini-chart 스킬로 여러 개발파트 진척률을 그려줘.
+</span></span><span style="display:flex;"><span>아래는 설명용 예시 데이터이고 단위는 %야.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>기간: 5월, 6월, 7월, 8월
+</span></span><span style="display:flex;"><span>프론트엔드: 10, 45, 85, 100
+</span></span><span style="display:flex;"><span>백엔드: 15, 60, 95, 100
+</span></span><span style="display:flex;"><span>데이터: 5, 30, 65, 90
+</span></span><span style="display:flex;"><span>계획: 10, 55, 100, null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>파트별로 서로 다른 색의 실선을 사용하고, 계획은 빨간 점선으로 해줘.
+</span></span><span style="display:flex;"><span>Y축은 0~100으로 하고 눈금 간격은 25로 해줘.
+</span></span><span style="display:flex;"><span>7월에는 &#39;개발 목표일&#39; 세로선을 넣어줘.</span></span></code></pre></div>
+  </div>
+</div>
+<div class="mini-chart">
+<script type="application/json">
+{
+  "type": "line",
+  "title": "개발파트별 진척률",
+  "labels": ["5월", "6월", "7월", "8월"],
+  "unit": "%",
+  "y": { "min": 0, "max": 100, "step": 25 },
+  "series": [
+    { "name": "프론트엔드", "values": [10, 45, 85, 100] },
+    { "name": "백엔드", "values": [15, 60, 95, 100] },
+    { "name": "데이터", "values": [5, 30, 65, 90] },
+    { "name": "계획", "values": [10, 55, 100, null], "style": "dashed", "color": "#E5484D" }
+  ],
+  "annotations": [
+    { "type": "x-line", "x": "7월", "label": "개발 목표일" }
+  ],
+  "caption": "사용법 설명을 위한 가상 데이터"
+}
+</script>
+</div>
+
+<h3 id="22-막대그래프">2.2. 막대그래프</h3>
+<p>직전 글의 예시 종목별 불균등한 주문분포와 유사한 막대그래프</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>mini-chart 스킬로 항목별 주문건수 막대그래프를 그려줘.
+</span></span><span style="display:flex;"><span>아래는 설명용 예시 데이터이고 단위는 건이야.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>A: 500, B: 420, C: 300, D: 220
+</span></span><span style="display:flex;"><span>E: 150, F: 100, G: 60, H: 0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>A부터 H까지 순서를 유지해줘.
+</span></span><span style="display:flex;"><span>항목 수 기준 상위 25%인 A와 B는 파란색, 나머지는 회색으로 해줘.
+</span></span><span style="display:flex;"><span>A~B 구간에는 옅은 파란 배경과 &#39;상위 25%&#39; 설명을 넣고,
+</span></span><span style="display:flex;"><span>B 오른쪽 끝에는 점선 경계선을 표시해줘.</span></span></code></pre></div>
+  </div>
+</div>
+<div class="mini-chart">
+<script type="application/json">
+{
+  "type": "bar",
+  "title": "항목별 주문건수",
+  "labels": ["A", "B", "C", "D", "E", "F", "G", "H"],
+  "unit": "건",
+  "series": [
+    {
+      "name": "주문건수",
+      "color": "#D8DDE4",
+      "values": [
+        { "value": 500, "color": "#2563EB" },
+        { "value": 420, "color": "#2563EB" },
+        300, 220, 150, 100, 60, 0
+      ]
+    }
+  ],
+  "annotations": [
+    { "type": "x-range", "from": "A", "to": "B", "label": "상위 25%", "color": "#2563EB" },
+    { "type": "x-line", "x": "B", "placement": "after", "color": "#2563EB" }
+  ],
+  "caption": "설명용 가상 데이터"
+}
+</script>
+</div>
+
+<h2 id="3-gpt에게-요청">3. GPT에게 요청</h2>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. KRX거래시간연장.md 파일은 새로운 블로그 글이야 , 여기서  라인차트는 GPT6 도움을 받아서 svg 및 스크립트로 html 엘리먼트로 바로 만든거야 , 그래서 내 생각에 이런 라인차트, 막대차트를 만드는 라이브러리를 블로그에 심고 나는 그냥 데이터부분만 만들어서 블로그 글에 넣으면 되지 않을까 하는데</div></p>
+<p><strong>🤖 ChatGPT:</strong><br>
+블로그에 공통 차트 기능을 한 번 넣고, 글에는 데이터만 적는 방향에 동의해요. 지금 글처럼 매번 SVG와 스크립트를 넣으면 글보다 차트 코드가 길어지고, 색이나 글자 크기를 바꿀 때도 차트마다 수정해야 하니까요.</p>
+<p>핵심은 글을 쓰는 방식과 차트를 그리는 방식을 분리하는 것이에요.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>블로그 글에 차트 종류·데이터 작성
+</span></span><span style="display:flex;"><span>                ↓
+</span></span><span style="display:flex;"><span>          공통 Shortcode
+</span></span><span style="display:flex;"><span>                ↓
+</span></span><span style="display:flex;"><span>       공통 스타일로 차트 표시</span></span></code></pre></div>
+  </div>
+</div><p>(&hellip;생략&hellip;)</p>
+<p><div class="user-bubble"><strong>User</strong>. 차트의 스타일은 개발 진척률 같이 하면 좋은데 특별히 점선으로 표현한것 있잖아, &ldquo;계획진척률&rdquo; 이나 &ldquo;예상오류율&rdquo;  보면 빨간색이나 노란색으로 특이하게 눈에 띄는 형태로 강조를 한거야 ,  그래서 라인 차트는 기본은 꺽은선이고 원과 라인 있잖아 , 그리고 선의 색은 3개로 고정하고 돌려가면서 쓰는거지, 하지만 점선을 써야하는 경우는 특이하게 강조색을 넣는거고 , 빨간색과 겨자색? 이렇게 두개로, 일단 기본이 그렇지만 색을 입력하면 입력한 색으로 지정할수 있도록 하는거고</div></p>
+<p><strong>🤖 ChatGPT:</strong><br>
+네. <strong>기본 계열은 3색을 순환하는 실선과 원형 점으로, 강조 계열은 빨강·겨자색을 사용하는 점선으로</strong> 정리하면 되겠어요. 전체 스타일은 개발 진척률 차트를 기준으로 하고요.</p>
+<table>
+  <thead>
+      <tr>
+          <th>구분</th>
+          <th>기본 계열</th>
+          <th>강조 계열</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>선</td>
+          <td>꺾은선, 실선</td>
+          <td>꺾은선, 점선</td>
+      </tr>
+      <tr>
+          <td>데이터 지점</td>
+          <td>원형 점</td>
+          <td>원형 점을 기본으로 유지</td>
+      </tr>
+      <tr>
+          <td>자동 색상</td>
+          <td>기본 3색 순환</td>
+          <td>빨강·겨자색 2색 순환</td>
+      </tr>
+      <tr>
+          <td>직접 색상 지정</td>
+          <td>지정한 색 우선</td>
+          <td>지정한 색 우선</td>
+      </tr>
+  </tbody>
+</table>
+<p>기본 색상과 강조 색상의 순환은 <strong>각각 따로</strong> 세는 게 자연스럽겠습니다. 중간에 계획진척률을 넣어도 다른 파트들의 색상 순서가 밀리지 않도록요. 직접 색을 지정한 계열도 자동 색상 순서를 소비하지 않는 쪽을 추천해요.</p>
+<p>작성 형태는 대략 이렇게 됩니다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">JSON</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0a3069">&#34;series&#34;</span><span style="color:#f6f8fa;background-color:#82071e">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;파트 A&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;values&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">8</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">55</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">97</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">100</span><span style="color:#1f2328">]</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;파트 B&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;values&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">4</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">47</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">95</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">100</span><span style="color:#1f2328">]</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;계획진척률&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;values&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">50</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">100</span><span style="color:#1f2328">,</span> <span style="color:#cf222e">null</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;style&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;dashed&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;예상오류율&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;values&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#cf222e">null</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">4.5</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3.8</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3.1</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;style&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;dashed&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;color&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;#B58A24&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">]</span></span></span></code></pre></div>
+  </div>
+</div><p>즉, <strong>아무 옵션 없이 데이터를 넣으면 기본 스타일</strong>, <code>dashed</code>를 지정하면 점선과 강조색이 함께 적용되고, <code>color</code>를 넣으면 색만 덮어쓰는 방식입니다. 기본 3색의 정확한 색상값은 나중에 개발 진척률 차트와 맞춰 정하면 되겠어요.</p>
+<p><div class="user-bubble"><strong>User</strong>. 그리고 중요한거 하나 있어 , 내가 너한테  &ldquo;~스킬을 사용해서 차트를 그릴거야&rdquo; 라고 말할거야 그러면 차트에 그려질 데이터를 만들어줄수 있도록 스킬도 만들어야 해</div></p>
+<p><strong>🤖 ChatGPT:</strong><br>
+네. 그러면 <strong>차트를 그리는 JS 라이브러리와, 그 라이브러리용 데이터를 작성하는 스킬을 함께 만드는 것</strong>까지 범위에 포함하겠습니다.</p>
+<p>사용 흐름은 이렇게 됩니다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TEXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>“○○ 스킬을 사용해서 개발 진척률 차트를 그릴 거야”
+</span></span><span style="display:flex;"><span> + 원본 데이터 또는 설명
+</span></span><span style="display:flex;"><span>                 ↓
+</span></span><span style="display:flex;"><span>스킬이 차트 종류·데이터·표현 옵션 정리
+</span></span><span style="display:flex;"><span>                 ↓
+</span></span><span style="display:flex;"><span>글에 붙여 넣을 Shortcode 블록 작성
+</span></span><span style="display:flex;"><span>                 ↓
+</span></span><span style="display:flex;"><span>블로그의 JS 라이브러리가 차트 표시</span></span></code></pre></div>
+  </div>
+</div><p>스킬의 역할은 다음과 같아요.</p>
+<ul>
+<li>표·숫자·설명을 라이브러리가 받는 데이터 형식으로 변환</li>
+<li>라인·막대 중 목적에 맞는 차트 선택</li>
+<li>계획·예상 계열의 점선과 강조색 적용</li>
+<li>요청에 맞춰 곡선·그라데이션·어노테이션 설정</li>
+<li>항목과 값의 개수, <code>null</code>, 색상 및 옵션 유효성 확인</li>
+<li><strong>완성된 Shortcode를 제공하거나, 요청한 글에 삽입</strong></li>
+</ul>
+
+</div>
+<p>여러 문답을 통해서 특징을 다 정하고 만들었다.</p>
+<h2 id="4-후기">4. 후기</h2>
+<p><code>AI시대에는 복잡한 js라이브러리 익힐 필요없이 필요하면 그냥 만들어쓴다.</code></p>
+<p>코딩이 AI들이 훨씬 더 잘짜는 상황에서
+더 간단한 데이터 등의 정의등은 AI들에게 시키기 너무 좋은 예제이다.</p>
+<p>내가 유명한 js차트라이브러리 끌고 왔으면? 라이센스, 사용법 등을
+익혀야 한다.  내가 필요로 하는 기능 말고 다른 수없이 많은 기능들을
+가지고 다녀야 한다. 그래서 딱 간단하게 내꺼에 맞는 필요한 기능&hellip;
+이정도는 그냥 만들어쓰자.</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+ <script src="/static/js/mini-chart.js" ></script>
+  </body>
+</html>

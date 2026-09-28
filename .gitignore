@@ -6,3 +6,6 @@ blog/resources
 blog/server
 blog/static/img
 blog/themes
+
+.DS_Store
+.agents
