@@ -1,0 +1,2155 @@
+<!doctype html>
+<html lang="ko" class="embed">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+</head>
+<body>
+<title>SonFUT 15초 스팟</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap"
+/>
+<style>
+  /* 레이아웃: 시네마 플레이어(16:9) 위, 모션 설계 노트 아래. 다크 단일 테마(극장 조명 컨셉) */
+  :root {
+    --bg: #06090b;
+    --panel: #0d1417;
+    --line: #1d2a2e;
+    --fg: #eef3ef;
+    --muted: #8a9e97;
+    --gold: #f2c14e;
+    --emerald: #3fd1ae;
+    --font-display: 'Black Han Sans', 'IBM Plex Sans KR', system-ui, sans-serif;
+    --font-num: 'Barlow Condensed', 'IBM Plex Sans KR', system-ui, sans-serif;
+    --font-body: 'IBM Plex Sans KR', system-ui, -apple-system, sans-serif;
+    color-scheme: dark;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 40px 20px 72px;
+    display: grid;
+    gap: 40px;
+  }
+  .head {
+    display: grid;
+    gap: 10px;
+    max-width: 760px;
+  }
+  .eyebrow {
+    margin: 0;
+    font-family: var(--font-num);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    font-size: 13px;
+    color: var(--gold);
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(34px, 6vw, 60px);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .lede {
+    margin: 0;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+
+  /* ── 플레이어 ── */
+  .player {
+    display: grid;
+    gap: 12px;
+  }
+  .frame {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #000;
+    box-shadow: 0 30px 80px -30px rgba(63, 209, 174, 0.25), 0 0 0 1px var(--line);
+  }
+  .stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    transform-origin: 0 0;
+    overflow: hidden;
+    background: radial-gradient(90% 80% at 50% 40%, #0f2a22 0%, #061210 45%, #020405 100%);
+    font-family: var(--font-display);
+    color: #fff;
+  }
+  .stage * {
+    box-sizing: border-box;
+  }
+  .abs {
+    position: absolute;
+  }
+  .vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 50;
+  }
+  .grain {
+    position: absolute;
+    inset: -50%;
+    pointer-events: none;
+    opacity: 0.07;
+    z-index: 51;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .dust {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242, 193, 78, 0.55), rgba(242, 193, 78, 0) 70%);
+    filter: blur(2px);
+  }
+
+  /* 자막: 줄마다 마스크, 단어가 아래에서 올라옴 */
+  .cap {
+    position: absolute;
+    display: grid;
+    gap: 6px;
+  }
+  .ln {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    line-height: 1.08;
+  }
+  .w {
+    display: inline-block;
+    will-change: transform;
+  }
+  .eye {
+    font-family: var(--font-num);
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+  }
+  .big {
+    font-size: 118px;
+  }
+  .mid {
+    font-size: 84px;
+  }
+  .sub {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 34px;
+    color: rgba(255, 255, 255, 0.72);
+    margin-top: 14px;
+  }
+  .gold {
+    color: var(--gold);
+  }
+  .emer {
+    color: var(--emerald);
+  }
+
+  /* 장면 1 */
+  .streak {
+    width: 1700px;
+    height: 8px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, transparent, rgba(242, 193, 78, 0.2) 30%, #fff6d6 50%, rgba(242, 193, 78, 0.2) 70%, transparent);
+    box-shadow: 0 0 40px 10px rgba(242, 193, 78, 0.35);
+    transform-origin: 50% 50%;
+  }
+  .flash {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    opacity: 0;
+    z-index: 40;
+    pointer-events: none;
+  }
+
+  /* 장면 2: 사진 */
+  .photo {
+    left: 900px;
+    top: 200px;
+    width: 540px;
+    height: 680px;
+    border-radius: 26px;
+    padding: 10px;
+    background: #f4f1ea;
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.7);
+  }
+  .photo-in {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: repeating-conic-gradient(#27303a 0 25%, #1c232b 0 50%) 0 0 / 30px 30px;
+  }
+  .ph-bg {
+    position: absolute;
+    inset: 0;
+  }
+  .scan {
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    height: 6px;
+    top: 0;
+    background: linear-gradient(90deg, transparent, #7affdf 20%, #fff 50%, #7affdf 80%, transparent);
+    box-shadow: 0 0 30px 8px rgba(63, 209, 174, 0.65);
+    opacity: 0;
+  }
+  .scan::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 6px;
+    height: 140px;
+    background: linear-gradient(0deg, rgba(63, 209, 174, 0.28), transparent);
+  }
+  .cutout {
+    left: 940px;
+    top: 342px;
+    width: 480px;
+    height: 528px;
+    transform-origin: 50% 100%;
+  }
+  .tag {
+    left: 1290px;
+    top: 220px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    background: var(--emerald);
+    color: #04201a;
+    font-size: 30px;
+    white-space: nowrap;
+    box-shadow: 0 12px 30px -8px rgba(63, 209, 174, 0.6);
+  }
+
+  /* 히어로 카드 */
+  .hero {
+    z-index: 8;
+    left: 470px;
+    top: 190px;
+    width: 500px;
+    height: 700px;
+    perspective: 1600px;
+  }
+  .tilt {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+  }
+  .layer {
+    position: absolute;
+    inset: 0;
+  }
+  .layer svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+  .hero-shadow {
+    left: 520px;
+    top: 860px;
+    width: 400px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.7), transparent);
+    filter: blur(6px);
+  }
+  .glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.65) 47%, rgba(255, 255, 255, 0.1) 52%, rgba(255, 255, 255, 0.5) 56%, transparent 66%);
+    mix-blend-mode: overlay;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    opacity: 0;
+  }
+  .callout {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 34px;
+    white-space: nowrap;
+  }
+  .callout .lbl {
+    overflow: hidden;
+    display: block;
+  }
+  .callout .lbl span {
+    display: inline-block;
+  }
+  .callout .bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), rgba(242, 193, 78, 0.2));
+    transform-origin: 100% 50%;
+  }
+  .callout.r .bar {
+    background: linear-gradient(270deg, var(--gold), rgba(242, 193, 78, 0.2));
+    transform-origin: 0 50%;
+  }
+  .callout .dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 6px rgba(242, 193, 78, 0.25);
+  }
+
+  .roller {
+    height: 130px;
+    overflow: hidden;
+  }
+  .roller-in {
+    display: grid;
+  }
+  .roller-in div {
+    height: 130px;
+    font-size: 116px;
+    line-height: 130px;
+  }
+
+  /* 장면 5: 스쿼드 */
+  .pitchwrap {
+    z-index: 5;
+    left: 600px;
+    top: 112px;
+    width: 720px;
+    height: 936px;
+    transform-origin: 50% 60%;
+  }
+  .pitch3d {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+  }
+  .pitch3d > svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    box-shadow: 0 60px 120px -30px rgba(0, 0, 0, 0.8);
+  }
+  .slot {
+    position: absolute;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+  }
+  .pshadow {
+    position: absolute;
+    left: -58px;
+    top: -14px;
+    width: 116px;
+    height: 28px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.6), transparent);
+  }
+  .pcard {
+    position: absolute;
+    left: -58px;
+    bottom: 0;
+    width: 116px;
+    height: 162px;
+    transform-origin: 50% 100%;
+  }
+  .pcard svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+  .rating {
+    left: 1440px;
+    top: 330px;
+    width: 400px;
+    text-align: center;
+  }
+  .rating .lab {
+    font-size: 38px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .rating .num {
+    font-family: var(--font-num);
+    font-weight: 800;
+    font-size: 260px;
+    line-height: 0.9;
+    color: var(--gold);
+    text-shadow: 0 0 60px rgba(242, 193, 78, 0.35);
+  }
+  .rating .form {
+    font-family: var(--font-num);
+    font-weight: 700;
+    font-size: 44px;
+    letter-spacing: 0.08em;
+    color: #fff;
+  }
+
+  /* 장면 6: 폰 */
+  .phone {
+    z-index: 4;
+    left: 1035px;
+    top: 100px;
+    width: 410px;
+    height: 880px;
+    border-radius: 66px;
+    padding: 13px;
+    background: linear-gradient(145deg, #3a4247, #0e1214 40%, #2b3236);
+    box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.9), inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+  }
+  .screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 54px;
+    overflow: hidden;
+    background: radial-gradient(120% 70% at 50% 40%, #135243, #061612 60%, #030807);
+  }
+  .island {
+    position: absolute;
+    left: 50%;
+    top: 14px;
+    width: 120px;
+    height: 34px;
+    margin-left: -60px;
+    border-radius: 20px;
+    background: #000;
+  }
+  .scr-head {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 72px;
+    text-align: center;
+  }
+  .scr-head .t1 {
+    font-size: 40px;
+  }
+  .scr-head .t2 {
+    font-family: var(--font-num);
+    font-weight: 700;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.04em;
+  }
+  .sheet-wrap {
+    left: 1058px;
+    top: 0;
+    width: 364px;
+    height: 957px;
+    overflow: hidden;
+    border-radius: 0 0 44px 44px;
+    z-index: 6;
+    pointer-events: none;
+  }
+  .sheet {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 22px 22px 24px;
+    border-radius: 34px;
+    background: rgba(28, 34, 38, 0.94);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+  }
+  .sheet .st {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+  }
+  .apps {
+    display: flex;
+    justify-content: space-between;
+    margin: 18px 6px 20px;
+  }
+  .apps i {
+    width: 62px;
+    height: 62px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+  }
+  .apps svg {
+    width: 30px;
+    height: 30px;
+  }
+  .sharebtn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 70px;
+    border-radius: 20px;
+    background: var(--gold);
+    color: #1d1405;
+    font-size: 30px;
+  }
+  .ripple {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    opacity: 0;
+  }
+
+  /* 장면 7: 엔드 카드 */
+  .end {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    overflow: hidden;
+    background: radial-gradient(80% 90% at 50% 42%, #1b8f74 0%, #0b3d33 38%, #03100d 100%);
+    clip-path: circle(0px at 1240px 880px);
+  }
+  .end-rays {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width: 2600px;
+    height: 2600px;
+    margin: -1300px 0 0 -1300px;
+    background: repeating-conic-gradient(from 0deg, rgba(190, 255, 235, 0.09) 0deg 6deg, transparent 6deg 15deg);
+    -webkit-mask: radial-gradient(closest-side, #000 20%, transparent 75%);
+    mask: radial-gradient(closest-side, #000 20%, transparent 75%);
+  }
+  .logo-icon {
+    left: 885px;
+    top: 150px;
+    width: 150px;
+    height: 210px;
+  }
+  .wordmark {
+    left: 0;
+    right: 0;
+    top: 380px;
+    text-align: center;
+    font-family: var(--font-num);
+    font-weight: 800;
+    font-size: 250px;
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+  .wordmark .ch {
+    display: inline-block;
+  }
+  .wm-mask {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0 0.04em;
+  }
+  .tagline {
+    left: 0;
+    right: 0;
+    top: 680px;
+    text-align: center;
+    font-size: 58px;
+  }
+  .url {
+    left: 50%;
+    top: 800px;
+    transform: translateX(-50%);
+    padding: 16px 44px;
+    border-radius: 999px;
+    border: 3px solid rgba(242, 193, 78, 0.8);
+    font-family: var(--font-num);
+    font-weight: 700;
+    font-size: 46px;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .logo-shine {
+    position: absolute;
+    left: 0;
+    top: 360px;
+    width: 1920px;
+    height: 320px;
+    background: linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.55) 50%, transparent 60%);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  .poster-btn {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(2, 6, 6, 0.38);
+    border: 0;
+    cursor: pointer;
+    z-index: 60;
+    color: var(--fg);
+  }
+  .poster-btn span {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 28px 16px 20px;
+    border-radius: 999px;
+    background: var(--gold);
+    color: #1d1405;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(14px, 1.7vw, 18px);
+    box-shadow: 0 12px 40px -6px rgba(242, 193, 78, 0.55);
+    transition: transform 0.2s ease;
+  }
+  .poster-btn:hover span,
+  .poster-btn:focus-visible span {
+    transform: scale(1.05);
+  }
+  .poster-btn svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* 컨트롤 */
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .ctl {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--fg);
+    font: 600 14px/1 var(--font-body);
+    cursor: pointer;
+  }
+  .ctl:hover {
+    border-color: #2f4247;
+  }
+  .ctl:focus-visible,
+  .chip:focus-visible,
+  .scrub:focus-visible,
+  .poster-btn:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+  .ctl svg {
+    width: 16px;
+    height: 16px;
+  }
+  .ctl[aria-pressed='false'] {
+    color: var(--muted);
+  }
+  .time {
+    font-family: var(--font-num);
+    font-weight: 600;
+    font-size: 17px;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    min-width: 92px;
+    text-align: right;
+  }
+  .scrubrow {
+    flex: 1 1 260px;
+    min-width: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .scrub {
+    position: relative;
+    height: 26px;
+    cursor: pointer;
+    touch-action: none;
+  }
+  .track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 11px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--line);
+  }
+  .fill {
+    position: absolute;
+    left: 0;
+    top: 11px;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--emerald), var(--gold));
+  }
+  .knob {
+    position: absolute;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(242, 193, 78, 0.3);
+  }
+  .tick {
+    position: absolute;
+    top: 7px;
+    width: 2px;
+    height: 12px;
+    background: #3a5157;
+  }
+  .chapters {
+    position: relative;
+    height: 18px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .chapters button {
+    position: absolute;
+    top: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: 500 12px/1.4 var(--font-body);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .chapters button:hover {
+    color: var(--fg);
+  }
+  @media (max-width: 720px) {
+    .chapters {
+      display: none;
+    }
+  }
+
+  /* ── 설계 노트 ── */
+  .notes {
+    display: grid;
+    gap: 18px;
+  }
+  .notes h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+  }
+  .notes > p {
+    margin: 0;
+    color: var(--muted);
+    max-width: 64ch;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 12px;
+  }
+  .note {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 8px;
+    padding: 18px 18px 16px;
+    border-radius: 14px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    min-width: 0;
+  }
+  .note .n {
+    font-family: var(--font-num);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+  }
+  .note h3 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .note h3 small {
+    font-family: var(--font-num);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-left: 6px;
+  }
+  .note p {
+    margin: 0;
+    color: #b9c8c2;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid #27403c;
+    background: #0a1f1b;
+    color: var(--emerald);
+    font: 600 13px/1 var(--font-num);
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+  }
+  .chip:hover {
+    background: #0f2a25;
+  }
+  .chip svg {
+    width: 10px;
+    height: 10px;
+  }
+  .foot {
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+  }
+
+  /* ── 임베드 모드(?embed): 블로그 iframe 안에서 플레이어만 ── */
+  .embed-sound {
+    display: none;
+  }
+  html.embed,
+  html.embed body {
+    margin: 0;
+    background: #000;
+    overflow: hidden;
+  }
+  html.embed .wrap {
+    max-width: none;
+    padding: 0;
+    gap: 0;
+  }
+  html.embed .head,
+  html.embed .notes,
+  html.embed .foot,
+  html.embed .chapters,
+  html.embed .time {
+    display: none;
+  }
+  html.embed .player {
+    position: relative;
+    gap: 0;
+  }
+  html.embed .frame {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  html.embed .controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 70;
+    flex-wrap: nowrap;
+    padding: 32px 12px 10px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  html.embed .player:hover .controls,
+  html.embed .player:focus-within .controls,
+  html.embed.is-paused .controls {
+    opacity: 1;
+  }
+  html.embed .ctl {
+    height: 34px;
+    background: rgba(13, 20, 23, 0.8);
+  }
+  html.embed .scrubrow {
+    flex: 1 1 auto;
+  }
+  html.embed .embed-sound {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 65;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font: 600 13px/1 var(--font-body);
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+  html.embed .embed-sound svg {
+    width: 16px;
+    height: 16px;
+  }
+  @media (max-width: 520px) {
+    html.embed #restartBtn,
+    html.embed #soundBtn span {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .poster-btn span {
+      transition: none;
+    }
+  }
+</style>
+
+<main class="wrap">
+  <header class="head">
+    <p class="eyebrow">MOTION REEL · 15s SPOT</p>
+    <h1>SonFUT <em>15초</em> 광고</h1>
+    <p class="lede">
+      사진 한 장으로 나만의 축구 카드를 만드는 웹앱 SonFUT의 15초 스팟이에요. 모션그래픽 10원칙을 장면마다 설계했고,
+      사운드트랙도 브라우저에서 직접 합성해요. 화면 속 선수는 모두 가상의 일러스트예요.
+    </p>
+  </header>
+
+  <section class="player" aria-label="15초 광고 플레이어">
+    <div class="frame" id="frame">
+      <div class="stage" id="stage" aria-hidden="true"></div>
+      <button class="embed-sound" id="embedSound" type="button" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" /><path id="embedSoundWave" d="M17 9l4 6M21 9l-4 6" /></svg>
+        <span id="embedSoundLabel">소리 켜기</span>
+      </button>
+      <button class="poster-btn" id="posterBtn" type="button">
+        <span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z" /></svg>
+          소리와 함께 재생
+        </span>
+      </button>
+    </div>
+    <div class="controls">
+      <button class="ctl" id="playBtn" type="button" aria-label="재생">
+        <svg viewBox="0 0 24 24" fill="currentColor" id="playIcon"><path d="M8 5.5v13l11-6.5z" /></svg>
+        <span id="playLabel">재생</span>
+      </button>
+      <button class="ctl" id="restartBtn" type="button" aria-label="처음부터 재생">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4" /></svg>
+        처음부터
+      </button>
+      <div class="scrubrow">
+        <div class="scrub" id="scrub" role="slider" tabindex="0" aria-label="재생 위치" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0">
+          <div class="track"></div>
+          <div class="fill" id="fill"></div>
+          <div id="ticks"></div>
+          <div class="knob" id="knob"></div>
+        </div>
+        <div class="chapters" id="chapters"></div>
+      </div>
+      <span class="time" id="time">00.0 / 15.0</span>
+      <button class="ctl" id="soundBtn" type="button" aria-pressed="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" /></svg>
+        <span id="soundLabel">소리 켬</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="notes" aria-labelledby="notesTitle">
+    <h2 id="notesTitle">모션 설계 노트</h2>
+    <p>원칙마다 그 원칙이 가장 잘 보이는 순간의 타임코드를 붙였어요. 타임코드를 누르면 그 장면부터 재생돼요.</p>
+    <div class="grid" id="notes"></div>
+  </section>
+
+  <p class="foot">
+    SonFUT · sonfut.vercel.app — 카드 디자인(곡선 방패, 6가지 테마), 포메이션, 내보내기 화면은 실제 앱의 디자인 시스템을 그대로
+    옮겼어요.
+  </p>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+  ;(() => {
+    'use strict'
+
+    // 블로그 등에 iframe으로 넣을 땐 ?embed → 플레이어만, 보이면 무음 자동재생·반복
+    const EMBED = new URLSearchParams(location.search).has('embed') || document.documentElement.classList.contains('embed')
+    if (EMBED) document.documentElement.classList.add('embed')
+    let userPaused = false
+
+    /* ════════════════════════ 기본 도형 · 데이터 ════════════════════════ */
+
+    const r2 = (v) => Math.round(v * 100) / 100
+    function mirrorPath(start, right) {
+      const f = (p) => `${r2(p[0])} ${r2(p[1])}`
+      const m = (p) => [100 - p[0], p[1]]
+      let d = `M${f(start)}`
+      for (const [c1, c2, e] of right) d += `C${f(c1)} ${f(c2)} ${f(e)}`
+      const ends = [start, ...right.map((s) => s[2])]
+      for (let i = right.length - 1; i >= 0; i--) {
+        const [c1, c2] = right[i]
+        d += `C${f(m(c2))} ${f(m(c1))} ${f(m(ends[i]))}`
+      }
+      return d + 'Z'
+    }
+    // 앱과 같은 SonFUT 방패
+    const SHIELD = mirrorPath(
+      [50, 1.2],
+      [
+        [[55.5, 1.2], [58.5, 6.6], [64.5, 7]],
+        [[70.5, 7.4], [73.2, 3.2], [79.5, 3.2]],
+        [[86, 3.2], [90.2, 7], [94.4, 12.6]],
+        [[92.2, 24], [92.4, 36], [93.4, 48]],
+        [[94.6, 63], [95, 90], [93, 106]],
+        [[91, 118], [75, 124.5], [62, 130]],
+        [[56, 132.8], [52.6, 135.6], [50, 138.6]],
+      ],
+    )
+    const SHIELD_MASK = `url("data:image/svg+xml,${encodeURIComponent(
+      `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140' preserveAspectRatio='none'><path d='${SHIELD}'/></svg>`,
+    )}")`
+
+    const THEMES = {
+      gold: { label: '골드', rim: ['#5e3f0c', '#d6a53b', '#fff2bd', '#c08a26', '#6f4b10', '#ecca6a'], bg: ['#fff6cf', '#ecc254', '#a7711a'], ray: '#fffbe6', ribbon: ['#fff6cc', '#b07a16'], spark: '#fffbe6', ink: '#2a1a03', glow: 'rgba(255,246,210,.6)', chipBg: '#21170a', chipInk: '#ffe08a', special: false, swatch: '#f2c14e' },
+      silver: { label: '실버', rim: ['#3f4650', '#b4bcc6', '#ffffff', '#949daa', '#525a66', '#d9dee5'], bg: ['#ffffff', '#ccd3dc', '#7f8a98'], ray: '#ffffff', ribbon: ['#ffffff', '#8792a1'], spark: '#ffffff', ink: '#141920', glow: 'rgba(255,255,255,.6)', chipBg: '#1b2129', chipInk: '#eef2f6', special: false, swatch: '#cfd6de' },
+      bronze: { label: '브론즈', rim: ['#4a2a12', '#b0703a', '#f6c799', '#9a5c2a', '#55301a', '#d4955b'], bg: ['#ffe4c6', '#d79358', '#93522a'], ray: '#fff0dc', ribbon: ['#ffe0bf', '#9c5626'], spark: '#fff1df', ink: '#2b1408', glow: 'rgba(255,235,210,.55)', chipBg: '#2a160a', chipInk: '#ffd2a6', special: false, swatch: '#d4955b' },
+      crimson: { label: '크림슨', rim: ['#2a0507', '#c2202b', '#ffb3a3', '#7d0d16', '#1a0204', '#e04a4a'], bg: ['#ff6a50', '#a3101d', '#1a0205'], ray: '#ffd2c4', ribbon: ['#ffe2d6', '#ff2e22'], spark: '#ffc6b4', ink: '#ffffff', glow: 'rgba(30,0,4,.85)', chipBg: '#2a0508', chipInk: '#ffd6cb', special: true, swatch: '#ff4d3d' },
+      frost: { label: '프로스트', rim: ['#2b4c7e', '#9fd2ff', '#ffffff', '#5b9be0', '#1d3d6e', '#cfe9ff'], bg: ['#c4f0ff', '#3f8fe0', '#0b1f52'], ray: '#ffffff', ribbon: ['#ffffff', '#6fbfff'], spark: '#eefaff', ink: '#ffffff', glow: 'rgba(4,18,52,.9)', chipBg: '#0e2350', chipInk: '#dcf3ff', special: true, swatch: '#6fbfff' },
+      emerald: { label: '에메랄드', rim: ['#6b4a10', '#e9c25a', '#fff3c4', '#1f8f7d', '#0b4a44', '#e3b94e'], bg: ['#43d1b2', '#0e5d56', '#021618'], ray: '#b8ffee', ribbon: ['#fff0b8', '#c8901f'], spark: '#ffeeb0', ink: '#fffaf0', glow: 'rgba(0,20,18,.85)', chipBg: '#06302d', chipInk: '#ffe7a3', special: true, swatch: '#3fd1ae' },
+    }
+    const THEME_CYCLE = ['gold', 'silver', 'bronze', 'crimson', 'frost', 'emerald']
+
+    const ICONS = {
+      speedster: '<path d="M13.5 2 4.5 13.5h6.5L9.5 22l10-12.5H13z" fill="currentColor"/>',
+      finisher: '<g fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.2"/></g><circle cx="12" cy="12" r="1" fill="currentColor"/>',
+      technician: '<path d="M12 1.5 14.2 9.8 22.5 12l-8.3 2.2L12 22.5l-2.2-8.3L1.5 12l8.3-2.2z" fill="currentColor"/>',
+      killpass: '<path d="M2.5 11.5 21.5 3l-6.5 18.5-3.3-7.2z" fill="currentColor"/>',
+      wall: '<path d="M12 1.8 20.5 5v6.2c0 5.2-3.6 9.3-8.5 11-4.9-1.7-8.5-5.8-8.5-11V5z" fill="currentColor"/>',
+      engine: '<path d="M2 12.5h4.5L9 6l5 12 2.5-5.5H22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+      aerial: '<g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12.5 12 6l6.5 6.5"/><path d="M5.5 19.5 12 13l6.5 6.5"/></g>',
+      save: '<path d="M7.5 11.5V5.2a1.5 1.5 0 0 1 3 0V10.5M10.5 10V3.8a1.5 1.5 0 0 1 3 0V10.5M13.5 10.5V4.8a1.5 1.5 0 0 1 3 0v6.4M16.5 11.2V8.3a1.5 1.5 0 0 1 3 0v5.2c0 4.6-3.2 8-7.6 8-3.2 0-5.2-1.6-6.5-4.2L3.3 13.6a1.6 1.6 0 0 1 2.6-1.7l1.6 1.9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
+    }
+
+    const KIT = { k1: '#0f5d4e', k2: '#16806a', trim: '#f2c14e' }
+    const GK_KIT = { k1: '#e2622a', k2: '#f08a46', trim: '#1b1b1b' }
+
+    // 가상의 선수들 (실존 인물 아님)
+    const HERO = {
+      name: 'MINJUN', pos: 'ST', ovr: 91, theme: 'emerald', num: 10, foot: 'R', alts: ['LW', 'CF'],
+      stats: [['PAC', 93], ['SHO', 92], ['PAS', 84], ['DRI', 90], ['DEF', 45], ['PHY', 82]],
+      badges: ['speedster', 'finisher', 'technician'],
+      art: { skin: '#f0c8a4', hair: '#1d140f', style: 'fringe', kit: KIT },
+    }
+    const st = (a) => ['PAC', 'SHO', 'PAS', 'DRI', 'DEF', 'PHY'].map((k, i) => [k, a[i]])
+    const gk = (a) => ['DIV', 'HAN', 'KIC', 'REF', 'SPD', 'POS'].map((k, i) => [k, a[i]])
+    // 4-3-3 (앱의 포메이션 좌표 그대로), 착지 순서: 히어로 → 골키퍼 → 수비 → 미드 → 공격
+    const SQUAD = [
+      { slot: [50, 16], hero: true, ...HERO },
+      { slot: [50, 88], name: 'JIHO', pos: 'GK', ovr: 84, theme: 'frost', num: 1, foot: 'R', alts: [], stats: gk([86, 82, 75, 88, 60, 83]), badges: ['save', 'wall'], art: { skin: '#e3b48e', hair: '#2b1a10', style: 'crop', kit: GK_KIT } },
+      { slot: [12, 67], name: 'SIWOO', pos: 'LB', ovr: 79, theme: 'silver', num: 3, foot: 'L', alts: ['LWB'], stats: st([85, 58, 76, 78, 79, 74]), badges: ['engine'], art: { skin: '#c8946b', hair: '#120d0a', style: 'buzz', kit: KIT } },
+      { slot: [36, 71], name: 'DOYUN', pos: 'CB', ovr: 83, theme: 'gold', num: 4, foot: 'R', alts: [], stats: st([70, 45, 68, 62, 86, 85]), badges: ['wall', 'aerial'], art: { skin: '#f2cfb0', hair: '#3a2516', style: 'crop', kit: KIT } },
+      { slot: [64, 71], name: 'HAJUN', pos: 'CB', ovr: 81, theme: 'gold', num: 5, foot: 'R', alts: ['CDM'], stats: st([72, 48, 70, 64, 83, 84]), badges: ['wall'], art: { skin: '#8d5b3e', hair: '#0d0a08', style: 'curly', kit: KIT } },
+      { slot: [88, 67], name: 'EUNWOO', pos: 'RB', ovr: 78, theme: 'bronze', num: 2, foot: 'R', alts: ['RWB'], stats: st([84, 55, 74, 76, 78, 72]), badges: ['engine'], art: { skin: '#e9bc96', hair: '#4a2f1d', style: 'fringe', kit: KIT } },
+      { slot: [24, 47], name: 'YEJUN', pos: 'CM', ovr: 82, theme: 'gold', num: 6, foot: 'R', alts: ['CDM'], stats: st([74, 70, 84, 80, 74, 78]), badges: ['engine'], art: { skin: '#d9a37c', hair: '#1b130e', style: 'crop', kit: KIT } },
+      { slot: [50, 51], name: 'SEOJUN', pos: 'CM', ovr: 86, theme: 'crimson', num: 8, foot: 'R', alts: ['CAM'], stats: st([76, 79, 89, 86, 70, 74]), badges: ['killpass', 'engine'], art: { skin: '#f0c8a4', hair: '#2a1c12', style: 'fringe', kit: KIT } },
+      { slot: [76, 47], name: 'JUWON', pos: 'CM', ovr: 84, theme: 'emerald', num: 14, foot: 'L', alts: ['CAM'], stats: st([78, 76, 86, 85, 66, 72]), badges: ['killpass'], art: { skin: '#c08a63', hair: '#1b130e', style: 'curly', kit: KIT } },
+      { slot: [15, 22], name: 'GEONWOO', pos: 'LW', ovr: 85, theme: 'crimson', num: 7, foot: 'L', alts: ['LM'], stats: st([92, 82, 78, 88, 38, 70]), badges: ['speedster', 'technician'], art: { skin: '#f3d0b2', hair: '#d9a85b', style: 'crop', kit: KIT } },
+      { slot: [85, 22], name: 'WOOJIN', pos: 'RW', ovr: 83, theme: 'frost', num: 11, foot: 'R', alts: ['RM'], stats: st([90, 80, 76, 86, 40, 68]), badges: ['speedster'], art: { skin: '#e0ab84', hair: '#2b1a10', style: 'buzz', kit: KIT } },
+    ]
+
+    /* ════════════════════════ 색 · 일러스트 ════════════════════════ */
+
+    function mix(a, b, t) {
+      const p = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16))
+      const [x, y] = [p(a), p(b)]
+      return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join('')
+    }
+    let uidN = 0
+    const uid = () => 'u' + (++uidN).toString(36)
+
+    /** 가상의 선수 상반신 일러스트 (200 × 220) */
+    function playerArt(a, id) {
+      const { skin, hair, style, kit } = a
+      const skinD = mix(skin, '#000000', 0.16)
+      const hairL = mix(hair, '#ffffff', 0.22)
+      const torso = 'M6 220C9 182 30 160 64 149L85 140C90 151 95 155 100 155C105 155 110 151 115 140L136 149C170 160 191 182 194 220Z'
+      let hairSvg = ''
+      if (style === 'crop') {
+        hairSvg = `<path d="M69 88C65 58 80 44 100 44C121 44 135 58 131 88C128 74 123 67 116 65C108 70 92 70 84 65C77 68 72 76 69 88Z" fill="${hair}"/>
+          <path d="M80 55C88 49 104 47 116 52" stroke="${hairL}" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".55"/>`
+      } else if (style === 'fringe') {
+        hairSvg = `<path d="M69 88C65 57 80 43 100 43C121 43 135 57 131 88C129 70 120 60 100 58C83 58 72 68 69 88Z" fill="${hair}"/>
+          <path d="M71 76C74 56 90 47 106 48C121 49 131 60 130 79C124 69 116 64 107 64C99 72 86 76 74 77Z" fill="${hair}"/>
+          <path d="M84 56C94 51 108 51 118 57" stroke="${hairL}" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".5"/>`
+      } else if (style === 'buzz') {
+        hairSvg = `<path d="M71 82C70 58 84 48 100 48C117 48 130 58 129 82C124 68 112 62 100 62C88 62 76 68 71 82Z" fill="${hair}" opacity=".92"/>`
+      } else {
+        let c = ''
+        for (let i = 0; i <= 12; i++) {
+          const ang = Math.PI * (1.05 + (i / 12) * 0.9)
+          c += `<circle cx="${(100 + Math.cos(ang) * 30).toFixed(1)}" cy="${(72 + Math.sin(ang) * 27).toFixed(1)}" r="9.5"/>`
+        }
+        hairSvg = `<g fill="${hair}"><path d="M70 84C68 60 83 50 100 50C117 50 132 60 130 84C122 70 112 66 100 66C88 66 78 70 70 84Z"/>${c}</g>`
+      }
+      return `
+      <defs>
+        <linearGradient id="${id}k" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${kit.k2}"/><stop offset="1" stop-color="${mix(kit.k1, '#000000', 0.3)}"/></linearGradient>
+        <radialGradient id="${id}f" cx=".42" cy=".38" r=".75"><stop offset="0" stop-color="${mix(skin, '#ffffff', 0.14)}"/><stop offset=".6" stop-color="${skin}"/><stop offset="1" stop-color="${skinD}"/></radialGradient>
+        <clipPath id="${id}t"><path d="${torso}"/></clipPath>
+      </defs>
+      <path d="${torso}" fill="url(#${id}k)"/>
+      <g clip-path="url(#${id}t)">
+        <rect x="58" y="140" width="12" height="80" fill="${kit.k1}" opacity=".55"/>
+        <rect x="130" y="140" width="12" height="80" fill="${kit.k1}" opacity=".55"/>
+        <path d="M6 220C9 182 30 160 64 149L72 146C46 162 32 186 30 220Z" fill="#000" opacity=".22"/>
+        <path d="M194 220C191 182 170 160 136 149L128 146C154 162 168 186 170 220Z" fill="#000" opacity=".22"/>
+      </g>
+      <path d="M85 140C90 153 95 158 100 159C105 158 110 153 115 140" fill="none" stroke="${kit.trim}" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M124 170h14v8c0 5-3 8-7 10-4-2-7-5-7-10z" fill="${kit.trim}"/>
+      <path d="M87 112H113L115 141C109 149 91 149 85 141Z" fill="${skinD}"/>
+      <ellipse cx="71" cy="89" rx="6" ry="9" fill="${skinD}"/>
+      <ellipse cx="129" cy="89" rx="6" ry="9" fill="${skinD}"/>
+      <ellipse cx="100" cy="84" rx="29.5" ry="35" fill="url(#${id}f)"/>
+      ${hairSvg}
+      <path d="M84 77Q90 74 95 76.5M105 76.5Q110 74 116 77" stroke="${mix(hair, '#000000', 0.2)}" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+      <ellipse cx="90" cy="86" rx="2.7" ry="3.3" fill="#1b1410"/><ellipse cx="110" cy="86" rx="2.7" ry="3.3" fill="#1b1410"/>
+      <circle cx="91" cy="84.8" r=".9" fill="#fff"/><circle cx="111" cy="84.8" r=".9" fill="#fff"/>
+      <path d="M100 89Q103.5 96 99 98.5" stroke="${mix(skin, '#000000', 0.32)}" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+      <path d="M91.5 104Q100 111 108.5 104" stroke="#7a3b2e" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <circle cx="84" cy="98" r="5" fill="#ff7a6b" opacity=".16"/><circle cx="116" cy="98" r="5" fill="#ff7a6b" opacity=".16"/>`
+    }
+
+    /** 사진 장면 배경 (520 × 660): 하늘, 나무, 골대, 잔디 */
+    function photoBg() {
+      let net = ''
+      for (let x = 70; x <= 450; x += 22) net += `<path d="M${x} 250 L${x + (x - 260) * 0.08} 372" />`
+      for (let y = 262; y <= 372; y += 18) net += `<path d="M70 ${y} H450" />`
+      return `<svg viewBox="0 0 520 660" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc4f2"/><stop offset=".55" stop-color="#d7eefa"/></linearGradient>
+          <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ea34a"/><stop offset="1" stop-color="#2f6e2a"/></linearGradient>
+        </defs>
+        <rect width="520" height="660" fill="url(#sky)"/>
+        <g fill="#fff" opacity=".85"><ellipse cx="110" cy="96" rx="64" ry="20"/><ellipse cx="150" cy="84" rx="40" ry="22"/><ellipse cx="410" cy="140" rx="70" ry="18"/></g>
+        <g fill="#3b7a3a"><circle cx="20" cy="330" r="70"/><circle cx="120" cy="320" r="60"/><circle cx="230" cy="335" r="66"/><circle cx="340" cy="318" r="62"/><circle cx="450" cy="330" r="72"/><circle cx="530" cy="320" r="50"/></g>
+        <rect y="360" width="520" height="300" fill="url(#grass)"/>
+        <g stroke="#fff" stroke-opacity=".35" stroke-width="1.5">${net}</g>
+        <path d="M70 380V250H450V380" fill="none" stroke="#fff" stroke-width="9" stroke-linejoin="round"/>
+        <g fill="#fff" opacity=".1">${[0, 1, 2, 3, 4].map((i) => `<rect y="${400 + i * 60}" width="520" height="30"/>`).join('')}</g>
+        <circle cx="60" cy="600" r="28" fill="#fff"/><path d="M60 584l12 9-5 14H53l-5-14z" fill="#222"/>
+      </svg>`
+    }
+
+    /* ════════════════════════ 카드 SVG (앱 디자인 이식) ════════════════════════ */
+
+    function cardSVG(p, themeId, { lite = false } = {}) {
+      const t = THEMES[themeId]
+      const id = uid()
+      const u = (k) => `url(#${id}${k})`
+      const F = `font-family="'Barlow Condensed','Black Han Sans',sans-serif"`
+      const rays = Array.from({ length: 18 }, (_, i) => {
+        const a = (i / 18) * Math.PI * 2
+        const w = i % 2 ? 0.05 : 0.11
+        const q = (g) => `${(50 + Math.cos(g) * 120).toFixed(1)} ${(42 + Math.sin(g) * 120).toFixed(1)}`
+        return `<path d="M50 42L${q(a - w)}L${q(a + w)}Z" opacity="${i % 3 ? 0.55 : 1}"/>`
+      }).join('')
+      const sparks = [[22, 18, 1.6], [78, 22, 2.2], [86, 48, 1.2], [16, 64, 1.8], [70, 74, 1.4], [30, 40, 1], [62, 12, 1.2], [90, 70, 1.6], [12, 34, 1.1], [52, 60, 0.9]]
+        .slice(0, lite ? 5 : 10)
+        .map(([x, y, r], i) => `<circle cx="${x}" cy="${y}" r="${r}" opacity="${0.35 + (i % 3) * 0.2}"/>`)
+        .join('')
+      const star = (x, y, s) =>
+        `M${x} ${y - s}Q${x + s * 0.15} ${y - s * 0.15} ${x + s} ${y}Q${x + s * 0.15} ${y + s * 0.15} ${x} ${y + s}Q${x - s * 0.15} ${y + s * 0.15} ${x - s} ${y}Q${x - s * 0.15} ${y - s * 0.15} ${x} ${y - s}Z`
+      const name = p.name.toUpperCase()
+      const nameSize = Math.min(9.2, 68 / (name.length * 0.5))
+
+      const stats = p.stats
+        .map(([k, v], i) => {
+          const cx = r2(13 + (74 / 6) * (i + 0.5))
+          return `<g class="c-stat"><text x="${cx}" y="90.6" text-anchor="middle" font-size="4.1" font-weight="700" opacity=".88">${k}</text><text class="val" x="${cx}" y="98.8" text-anchor="middle" font-size="7.4" font-weight="800">${v}</text></g>`
+        })
+        .join('')
+
+      const chip = (x, y, w, text) =>
+        `<g class="c-chip"><rect x="${x}" y="${y}" width="${w}" height="6.4" rx="1.6" fill="${t.rim[1]}"/><rect x="${x + 0.5}" y="${y + 0.5}" width="${w - 1}" height="5.4" rx="1.2" fill="${t.chipBg}"/><text x="${x + w / 2}" y="${y + 4.75}" text-anchor="middle" font-size="4.3" font-weight="700" fill="${t.chipInk}" ${F}>${text}</text></g>`
+      const chips = [...p.alts.slice(0, 3).map((a, i) => chip(88, 14 + i * 7.7, 11.5, a)), chip(90, 64, 7.4, p.foot)].join('')
+      const badges = p.badges
+        .map(
+          (b, i) =>
+            `<g class="c-badge"><svg x="0.6" y="${r2(46 + i * 11.46)}" width="9.6" height="10.56" viewBox="0 0 40 44"><path d="M20 .8 38.5 11v22L20 43.2 1.5 33V11z" fill="${t.rim[1]}"/><path d="M20 3.4 36.2 12.4v19.2L20 40.6 3.8 31.6V12.4z" fill="${t.chipBg}"/><svg x="9" y="10" width="22" height="24" viewBox="0 0 24 24" color="${t.chipInk}">${ICONS[b]}</svg></svg></g>`,
+        )
+        .join('')
+      const flag = `<svg x="${r2(50 - 12.3 - 5.1)}" y="105.2" width="8.4" height="5.6" viewBox="0 0 36 24"><rect width="36" height="24" fill="#fff"/><g transform="rotate(33.7 18 12)"><path d="M12 12a6 6 0 0 1 12 0 3 3 0 0 1-6 0 3 3 0 0 0-6 0z" fill="#cd2e3a"/><path d="M12 12a6 6 0 0 0 12 0 3 3 0 0 0-6 0 3 3 0 0 1-6 0z" fill="#0047a0"/></g><g fill="#111"><rect x="4" y="3" width="5" height="1"/><rect x="4" y="5" width="5" height="1"/><rect x="27" y="3" width="5" height="1"/><rect x="27" y="18" width="5" height="1"/><rect x="4" y="18" width="5" height="1"/><rect x="27" y="20" width="5" height="1"/></g><rect width="36" height="24" fill="none" stroke="rgba(0,0,0,.25)" stroke-width=".8"/></svg>`
+      const crest = `<svg x="${r2(50 - 3.3 - 1.4)}" y="104.3" width="6.6" height="7.46" viewBox="0 0 30 34"><path d="M15 1 28 5v11c0 8-5.6 13.6-13 17C7.6 29.6 2 24 2 16V5z" fill="${t.rim[1]}"/><path d="M15 3 26.2 6.4v9.5c0 7-4.8 11.9-11.2 14.9C8.6 27.8 3.8 22.9 3.8 15.9V6.4z" fill="${t.chipBg}"/><text x="15" y="21" text-anchor="middle" font-size="10.5" font-weight="800" fill="${t.chipInk}" ${F}>SF</text></svg>`
+
+      return `<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="${id}clip"><path d="${SHIELD}"/></clipPath>
+        <radialGradient id="${id}bg" cx="50" cy="40" r="95" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="${t.bg[0]}"/><stop offset=".42" stop-color="${t.bg[1]}"/><stop offset="1" stop-color="${t.bg[2]}"/></radialGradient>
+        <radialGradient id="${id}ray" cx="50" cy="42" r="80" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="${t.ray}" stop-opacity=".75"/><stop offset=".6" stop-color="${t.ray}" stop-opacity=".12"/><stop offset="1" stop-color="${t.ray}" stop-opacity="0"/></radialGradient>
+        <radialGradient id="${id}glow" cx="50" cy="40" r="34" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="${t.spark}" stop-opacity=".85"/><stop offset="1" stop-color="${t.spark}" stop-opacity="0"/></radialGradient>
+        <linearGradient id="${id}rib" x1="56" y1="34" x2="62" y2="46" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="${t.ribbon[1]}"/><stop offset=".35" stop-color="${t.ribbon[0]}"/><stop offset=".55" stop-color="#fff"/><stop offset=".75" stop-color="${t.ribbon[0]}"/><stop offset="1" stop-color="${t.ribbon[1]}"/></linearGradient>
+        <linearGradient id="${id}shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="${t.special ? '#000' : t.bg[0]}" stop-opacity="0"/><stop offset=".8" stop-color="${t.special ? '#000' : t.bg[0]}" stop-opacity="${t.special ? 0.55 : 0.4}"/></linearGradient>
+        <linearGradient id="${id}rim" x1="0" y1="0" x2="1" y2="1">${t.rim.map((c, i) => `<stop offset="${i / (t.rim.length - 1)}" stop-color="${c}"/>`).join('')}</linearGradient>
+        <linearGradient id="${id}pf" x1="0" y1="0" x2="0" y2="1"><stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
+        <mask id="${id}pm" maskUnits="userSpaceOnUse" x="14" y="7" width="72" height="79"><rect x="14" y="7" width="72" height="79" fill="url(#${id}pf)"/></mask>
+        ${lite ? '' : `<filter id="${id}tg" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy=".35" stdDeviation=".8" flood-color="${t.glow}"/></filter><filter id="${id}bl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation=".5"/></filter>`}
+      </defs>
+      <g clip-path="${u('clip')}">
+        <g class="c-bg"><rect width="100" height="140" fill="${u('bg')}"/></g>
+        <g class="c-rays" fill="${u('ray')}" style="mix-blend-mode:screen">${rays}</g>
+        <g class="c-ribbon">
+          <path d="M106 14C84 28 62 56-6 66L-6 72C63 66 86 39 106 22Z" fill="${u('rib')}"/>
+          <path d="M106 14C84 28 62 56-6 66" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width=".4"/>
+          <path d="M106 26C86 38 66 62-6 78L-6 80.5C66 66 87 42 106 29Z" fill="${u('rib')}" opacity=".7"/>
+          <path d="M106 66C88 70 74 82 69 102L73 102C79 87 91 77 106 72Z" fill="${u('rib')}" opacity=".6"/>
+        </g>
+        <ellipse class="c-glow" cx="50" cy="40" rx="34" ry="34" fill="${u('glow')}"/>
+        <g class="c-sparks" fill="${t.spark}" ${lite ? '' : `filter="${u('bl')}"`}>${sparks}</g>
+        <g class="c-stars" fill="#fff"><path d="${star(80, 30, 2.6)}" opacity=".95"/><path d="${star(22, 58, 1.8)}" opacity=".8"/><path d="${star(70, 12, 1.4)}" opacity=".8"/></g>
+        <rect width="100" height="140" fill="${u('shade')}"/>
+      </g>
+      <g class="c-rim" clip-path="${u('clip')}" fill="none">
+        <path d="${SHIELD}" stroke="${t.rim[2]}" stroke-opacity=".55" stroke-width="8.6"/>
+        <path d="${SHIELD}" stroke="${t.rim[4]}" stroke-width="7.2"/>
+        <path d="${SHIELD}" stroke="${u('rim')}" stroke-width="6"/>
+      </g>
+      <path class="c-edge" d="${SHIELD}" fill="none" stroke="${t.rim[2]}" stroke-opacity=".8" stroke-width=".5"/>
+      <g class="c-photo" clip-path="${u('clip')}"><g mask="url(#${id}pm)"><svg x="14" y="7" width="72" height="79" viewBox="0 0 200 220" preserveAspectRatio="xMidYMax meet">${playerArt(p.art, id + 'a')}</svg></g></g>
+      <g class="c-text" fill="${t.ink}" ${F} ${lite ? '' : `filter="${u('tg')}"`}>
+        <text class="c-ovr" x="22.5" y="27" text-anchor="middle" font-size="17.5" font-weight="800" letter-spacing="-.6">${p.ovr}</text>
+        <text class="c-pos" x="22.5" y="35.4" text-anchor="middle" font-size="6.4" font-weight="700">${p.pos}</text>
+        <text class="c-name" x="50" y="${r2(81 + nameSize * 0.36)}" text-anchor="middle" font-size="${r2(nameSize)}" font-weight="800">${name}</text>
+        ${stats}
+        <text class="c-mark" x="50" y="121.6" text-anchor="middle" font-size="2.8" font-weight="800" letter-spacing="1.26" opacity=".45">SONFUT</text>
+      </g>
+      <g class="c-info">${flag}${crest}<text x="${r2(50 + 3.3 + 3.2 + 1.4)}" y="110.2" font-size="5.6" font-weight="800" fill="${t.ink}" ${F}>#${p.num}</text></g>
+      <g class="c-chips">${chips}</g>
+      <g class="c-badges">${badges}</g>
+      <path class="c-jewel" d="M50 2.6 52.6 5.4 50 8.2 47.4 5.4Z" fill="${t.chipBg}" stroke="${t.rim[2]}" stroke-width=".5"/>
+    </svg>`
+    }
+
+    function pitchSVG() {
+      const L = 'fill="none" stroke="rgba(255,255,255,.55)" stroke-width=".45"'
+      return `<svg viewBox="0 0 100 130" preserveAspectRatio="none">
+        <defs><radialGradient id="pl" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></radialGradient></defs>
+        <rect width="100" height="130" fill="#1d6b3c"/>
+        ${Array.from({ length: 13 }, (_, i) => (i % 2 ? `<rect y="${i * 10}" width="100" height="10" fill="#237443"/>` : '')).join('')}
+        <rect width="100" height="130" fill="url(#pl)"/>
+        <g class="pl-lines">
+          <rect x="3" y="3" width="94" height="124" ${L}/><path d="M3 65H97" ${L}/><circle cx="50" cy="65" r="9.5" ${L}/>
+          <rect x="22" y="3" width="56" height="18" ${L}/><rect x="37" y="3" width="26" height="6.5" ${L}/><path d="M41.5 21a9.5 9.5 0 0 0 17 0" ${L}/>
+          <rect x="22" y="109" width="56" height="18" ${L}/><rect x="37" y="120.5" width="26" height="6.5" ${L}/><path d="M41.5 109a9.5 9.5 0 0 1 17 0" ${L}/>
+        </g>
+      </svg>`
+    }
+
+    /* ════════════════════════ 무대 구성 ════════════════════════ */
+
+    const stage = document.getElementById('stage')
+    const h = (html) => {
+      const d = document.createElement('div')
+      d.innerHTML = html.trim()
+      return d.firstElementChild
+    }
+    const words = (text, cls = '') =>
+      `<span class="ln ${cls}">${text
+        .split(' ')
+        .map((w) => `<span class="w">${w}</span>`)
+        .join('<span class="w">&nbsp;</span>')}</span>`
+    const goldWords = (text, cls = 'big') =>
+      `<span class="ln ${cls}"><span class="w gold">${text.split(' ').join('</span><span class="w">&nbsp;</span><span class="w gold">')}</span></span>`
+
+    stage.innerHTML = `
+      <div id="dustLayer"></div>
+
+      <!-- 장면 1 -->
+      <div id="s1" class="abs" style="inset:0">
+        <div class="abs streak" id="streak" style="left:110px;top:520px"></div>
+        <svg class="abs" id="s1shield" viewBox="-4 -4 108 148" style="left:740px;top:150px;width:440px;height:616px;overflow:visible">
+          <path id="s1path" d="${SHIELD}" fill="rgba(242,193,78,.06)" stroke="#f2c14e" stroke-width="1.1"/>
+          <path id="s1jewel" d="M50 2.6 52.6 5.4 50 8.2 47.4 5.4Z" fill="#fff3c4"/>
+        </svg>
+        <div class="cap" id="cap1" style="left:0;right:0;top:820px;text-align:center;justify-items:center">
+          ${words('사진 한 장이면', 'mid')}
+        </div>
+      </div>
+
+      <!-- 장면 2 -->
+      <div id="s2" class="abs" style="inset:0">
+        <div class="abs photo" id="photo"><div class="photo-in"><div class="ph-bg" id="phbg">${photoBg()}</div><div class="scan" id="scan"></div></div></div>
+        <div class="abs cutout" id="cutout"><svg viewBox="0 0 200 220" width="100%" height="100%">${playerArt(HERO.art, 'cut')}</svg></div>
+        <div class="abs tag" id="tag">✓ 배경 제거 완료</div>
+        <div class="cap" id="cap2" style="left:140px;top:360px">
+          <span class="ln eye"><span class="w">AI 누끼</span></span>
+          ${words('배경은', 'big')}
+          ${goldWords('알아서 싹')}
+          <span class="ln sub"><span class="w">사진은 기기 밖으로 나가지 않아요</span></span>
+        </div>
+      </div>
+
+      <!-- 장면 3·4: 히어로 카드 -->
+      <div class="abs hero-shadow" id="heroShadow"></div>
+      <div class="abs hero" id="hero">
+        <div class="tilt" id="tilt">
+          <div class="layer" id="heroMain">${cardSVG(HERO, 'emerald')}</div>
+          ${THEME_CYCLE.slice(0, 5)
+            .map((th) => `<div class="layer theme-layer" data-theme="${th}">${cardSVG(HERO, th)}</div>`)
+            .join('')}
+          <div class="glare" id="glare" style="-webkit-mask-image:${SHIELD_MASK};mask-image:${SHIELD_MASK}"></div>
+        </div>
+      </div>
+      <div class="abs callout" id="co1" style="right:${1920 - 560}px;top:286px"><span class="lbl"><span>OVR 자동 계산</span></span><span class="bar" style="width:110px"></span><span class="dot"></span></div>
+      <div class="abs callout" id="co2" style="right:${1920 - 488}px;top:470px"><span class="lbl"><span>배지</span></span><span class="bar" style="width:150px"></span><span class="dot"></span></div>
+      <div class="abs callout" id="co3" style="right:${1920 - 590}px;top:640px"><span class="lbl"><span>능력치 6종</span></span><span class="bar" style="width:90px"></span><span class="dot"></span></div>
+      <div class="abs callout r" id="co4" style="left:955px;top:262px"><span class="dot"></span><span class="bar" style="width:80px"></span><span class="lbl"><span>보조 포지션</span></span></div>
+
+      <div class="cap" id="cap3" style="left:1150px;top:470px">
+        <span class="ln eye"><span class="w">카드 만들기</span></span>
+        ${words('나만의', 'big')}
+        ${goldWords('축구 카드')}
+        <span class="ln sub"><span class="w">포지션·능력치만 넣으면 끝</span></span>
+      </div>
+      <div class="cap" id="cap4" style="left:1150px;top:430px">
+        <span class="ln eye"><span class="w">THEMES</span></span>
+        ${words('테마 6종', 'big')}
+        <div class="roller" id="rollerBox"><div class="roller-in" id="roller">${THEME_CYCLE.map((th) => `<div style="color:${THEMES[th].swatch}">${THEMES[th].label}</div>`).join('')}</div></div>
+      </div>
+
+      <!-- 장면 5: 스쿼드 -->
+      <div class="abs pitchwrap" id="pitchwrap">
+        <div class="pitch3d" id="pitch3d">
+          ${pitchSVG()}
+          ${SQUAD.map(
+            (p, i) => `<div class="slot" style="left:${p.slot[0]}%;top:${p.slot[1]}%;z-index:${Math.round(p.slot[1])}" data-i="${i}"><div class="pshadow"></div><div class="pcard">${cardSVG(p, p.theme, { lite: true })}</div></div>`,
+          ).join('')}
+        </div>
+      </div>
+      <div class="abs rating" id="rating">
+        <div class="lab">팀 평점</div>
+        <div class="num" id="ratingNum">0</div>
+        <div class="form">4-3-3 · <span id="ratingCount">0</span>/11</div>
+      </div>
+      <div class="cap" id="cap5" style="left:110px;top:400px">
+        <span class="ln eye"><span class="w">스쿼드 빌더</span></span>
+        ${words('친구들과', 'mid')}
+        ${goldWords('우리 팀 완성', 'mid')}
+        <span class="ln sub"><span class="w">포메이션 11종 · 자유 배치</span></span>
+      </div>
+
+      <!-- 장면 6: 공유 -->
+      <div class="abs phone" id="phone">
+        <div class="screen" id="screen">
+          <div class="island"></div>
+          <div class="scr-head" id="scrHead"><div class="t1">SONFUT FC</div><div class="t2">4-3-3 · 팀 평점 <span class="gold">83</span></div></div>
+        </div>
+      </div>
+      <div class="abs sheet-wrap" id="sheetWrap">
+        <div class="sheet" id="sheet">
+            <div class="st">공유하기</div>
+            <div class="apps">
+              <i style="background:#2fd06b"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.6 3.4 6L5 21l4.2-2.3c.9.2 1.8.3 2.8.3 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg></i>
+              <i style="background:linear-gradient(45deg,#f9a33b,#e2336b,#8a3ab9)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></svg></i>
+              <i style="background:#3b82f6"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></i>
+              <i style="background:#4b5563"><svg viewBox="0 0 24 24" fill="#fff"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></i>
+            </div>
+            <div class="sharebtn" id="shareBtn">스토리로 공유<span class="ripple" id="ripple"></span></div>
+        </div>
+      </div>
+      <div class="cap" id="cap6" style="left:150px;top:400px">
+        <span class="ln eye"><span class="w">내보내기</span></span>
+        ${words('스토리로', 'big')}
+        ${goldWords('바로 공유')}
+        <span class="ln sub"><span class="w">PNG · 스토리 1080×1920 · 고해상도</span></span>
+      </div>
+
+      <!-- 장면 7: 엔드 카드 -->
+      <div class="end" id="end">
+        <div class="end-rays" id="endRays"></div>
+        <svg class="abs logo-icon" id="logoIcon" viewBox="-3 -3 106 146" style="overflow:visible">
+          <defs>
+            <linearGradient id="lgRim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b4a10"/><stop offset=".3" stop-color="#e9c25a"/><stop offset=".5" stop-color="#fff3c4"/><stop offset=".7" stop-color="#c8901f"/><stop offset="1" stop-color="#6b4a10"/></linearGradient>
+            <radialGradient id="lgFace" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#43d1b2"/><stop offset=".5" stop-color="#0e5d56"/><stop offset="1" stop-color="#021618"/></radialGradient>
+          </defs>
+          <path id="logoFill" d="${SHIELD}" fill="url(#lgFace)" stroke="url(#lgRim)" stroke-width="5"/>
+          <path id="logoStroke" d="${SHIELD}" fill="none" stroke="#fff3c4" stroke-width="1.2"/>
+          <path id="logoStar" d="M50 34 57.6 52.4 77.4 54 62.3 66.9 66.9 86.2 50 75.8 33.1 86.2 37.7 66.9 22.6 54 42.4 52.4Z" fill="#ffe08a" stroke="#6b4a10" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        <div class="abs wordmark" id="wordmark">${'SONFUT'
+          .split('')
+          .map((c, i) => `<span class="wm-mask"><span class="ch" style="color:${i < 3 ? '#fff' : 'var(--gold)'}">${c}</span></span>`)
+          .join('')}</div>
+        <div class="abs logo-shine" id="logoShine"></div>
+        <div class="cap" id="tagline" style="left:0;right:0;top:668px;text-align:center;justify-items:center">${words('사진 한 장으로 만드는 나만의 축구 카드', 'tag-l')}</div>
+        <div class="abs url" id="url">sonfut.vercel.app</div>
+      </div>
+
+      <div class="flash" id="flash"></div>
+      <div class="vignette"></div>
+      <div class="grain" id="grain"></div>
+    `
+    document.querySelectorAll('#tagline .ln').forEach((l) => (l.style.fontSize = '58px'))
+
+    // 떠다니는 빛망울 (분위기용, 타임라인과 별개)
+    const dustLayer = document.getElementById('dustLayer')
+    const dustTweens = []
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    for (let i = 0; i < 16; i++) {
+      const s = 10 + ((i * 37) % 50)
+      const d = h(`<div class="dust" style="width:${s}px;height:${s}px;left:${(i * 131) % 1900}px;top:${(i * 263) % 1060}px;opacity:${0.25 + (i % 4) * 0.12}"></div>`)
+      dustLayer.appendChild(d)
+      if (!reduce) dustTweens.push(gsap.to(d, { y: -60 - (i % 5) * 20, x: (i % 2 ? 1 : -1) * 30, duration: 6 + (i % 5), repeat: -1, yoyo: true, ease: 'sine.inOut' }))
+    }
+
+    /* ════════════════════════ 화면 맞춤 ════════════════════════ */
+
+    const frame = document.getElementById('frame')
+    let stageScale = 1
+    const fit = () => {
+      stageScale = frame.clientWidth / 1920
+      stage.style.transform = `scale(${stageScale})`
+    }
+    new ResizeObserver(fit).observe(frame)
+    fit()
+
+    /* ════════════════════════ 타임라인 ════════════════════════ */
+
+    const $ = (s, root = stage) => root.querySelector(s)
+    const $$ = (s, root = stage) => Array.from(root.querySelectorAll(s))
+    const EASE_IN = 'expo.out' // 등장
+    const EASE_OUT = 'power3.in' // 퇴장
+    const EASE_MOVE = 'power3.inOut' // 이동·전환
+
+    // 측정: 애니메이션 시작 전의 최종 배치 기준
+    const stageRectOf = (el) => {
+      const s = stage.getBoundingClientRect()
+      const r = el.getBoundingClientRect()
+      return { x: (r.left - s.left) / stageScale, y: (r.top - s.top) / stageScale, w: r.width / stageScale, h: r.height / stageScale }
+    }
+
+    let tl
+    const counters = {}
+    function build() {
+      const heroSvg = $('#heroMain svg')
+      const pcards = $$('.slot')
+      gsap.set('#pitch3d', { rotationX: 36, transformPerspective: 1700, transformOrigin: '50% 60%' })
+      gsap.set($$('.pcard'), { rotationX: -36, transformOrigin: '50% 100%' })
+      const stR = stageRectOf(pcards[0].querySelector('.pcard'))
+      const heroR = { x: 470, y: 190, w: 500, h: 700 }
+      const btnR = stageRectOf($('#shareBtn'))
+
+      tl = gsap.timeline({ paused: true, defaults: { ease: EASE_IN }, onUpdate: paint, onComplete: () => (Sound.stop(), ui(), onEnd()) })
+      const reveal = (cap, t, stagger = 0.05) => tl.from($$('.w', cap), { yPercent: 115, duration: 0.6, stagger }, t)
+      const hide = (cap, t) => tl.to($$('.w', cap), { yPercent: -115, duration: 0.32, ease: EASE_OUT, stagger: 0.015 }, t)
+      const show = (el, t, v = true) => tl.set(el, { autoAlpha: v ? 1 : 0 }, t)
+
+      // 초기 가시성
+      ;['#s2', '#hero', '#heroShadow', '#pitchwrap', '#rating', '#phone', '#sheetWrap', '#tag', '#co1', '#co2', '#co3', '#co4'].forEach((s) => gsap.set($(s), { autoAlpha: 0 }))
+      gsap.set($$('.theme-layer'), { autoAlpha: 0 })
+
+      /* ── 장면 1 (0–2.0): 빛줄기 → 방패 윤곽 ── */
+      const path = $('#s1path')
+      const len = path.getTotalLength()
+      gsap.set(path, { strokeDasharray: len, strokeDashoffset: len, fillOpacity: 0 })
+      tl.fromTo('#streak', { x: -1500, rotation: -24, opacity: 0 }, { x: 1600, opacity: 1, duration: 1.0, ease: 'power2.inOut' }, 0.05)
+      tl.to('#streak', { opacity: 0, duration: 0.2 }, 0.85)
+      tl.to(path, { strokeDashoffset: 0, duration: 1.0, ease: 'power2.inOut' }, 0.3)
+      tl.to(path, { fillOpacity: 1, duration: 0.5 }, 1.0)
+      tl.from('#s1jewel', { scale: 0, rotation: 90, transformOrigin: '50% 50%', duration: 0.45, ease: 'back.out(3)' }, 1.2)
+      reveal($('#cap1'), 0.55)
+      hide($('#cap1'), 1.62)
+      tl.to('#s1shield', { scale: 1.18, opacity: 0, duration: 0.3, ease: EASE_OUT, transformOrigin: '50% 50%' }, 1.72)
+      tl.to('#flash', { opacity: 0.95, duration: 0.08, ease: 'none' }, 1.92).to('#flash', { opacity: 0, duration: 0.45, ease: 'power2.out' }, 2.0)
+      show('#s1', 2.0, false)
+
+      /* ── 장면 2 (2.0–4.0): 사진 → AI 누끼 ── */
+      show('#s2', 2.0)
+      tl.from('#photo', { scale: 1.12, rotation: -5, duration: 0.7 }, 2.0)
+      tl.from('#cutout', { scale: 1.12, x: 15, duration: 0.7 }, 2.0)
+      reveal($('#cap2'), 2.15)
+      tl.set('#scan', { opacity: 1 }, 2.4)
+      tl.fromTo('#scan', { top: -6 }, { top: 664, duration: 0.85, ease: 'power1.inOut' }, 2.4)
+      tl.fromTo('#phbg', { clipPath: 'inset(0% 0% 0% 0%)' }, { clipPath: 'inset(100% 0% 0% 0%)', duration: 0.85, ease: 'power1.inOut' }, 2.43)
+      tl.set('#scan', { opacity: 0 }, 3.27)
+      tl.fromTo('#cutout', { filter: 'drop-shadow(0 0 0px rgba(122,255,223,0))' }, { filter: 'drop-shadow(0 0 22px rgba(122,255,223,.9))', duration: 0.25, ease: 'power2.out', yoyo: true, repeat: 1 }, 3.25)
+      show('#tag', 3.3)
+      tl.from('#tag', { scale: 0.4, y: 20, duration: 0.45, ease: 'back.out(2.2)' }, 3.3)
+      hide($('#cap2'), 3.55)
+      tl.to('#tag', { scale: 0.6, autoAlpha: 0, duration: 0.25, ease: EASE_OUT }, 3.6)
+      tl.to('#photo', { scale: 0.86, autoAlpha: 0, duration: 0.4, ease: EASE_OUT }, 3.58)
+      // 누끼가 카드 사진 자리로 이동 (모양·위치 이어받기)
+      const camR = { x: 940, y: 342, w: 480, h: 528 }
+      const tgtR = { x: heroR.x + 70, y: heroR.y + 35, w: 360, h: 396 }
+      tl.to('#cutout', { x: tgtR.x - camR.x + (tgtR.w - camR.w) / 2, y: tgtR.y + tgtR.h - (camR.y + camR.h), scale: tgtR.w / camR.w, duration: 0.45, ease: EASE_MOVE }, 3.55)
+      show('#s2', 4.0, false)
+
+      /* ── 장면 3 (4.0–7.0): 카드 조립 ── */
+      show('#hero', 4.0)
+      show('#heroShadow', 4.0)
+      tl.from('#hero', { scale: 1.1, duration: 0.6, ease: 'back.out(1.4)' }, 4.0)
+      tl.from('#heroShadow', { scale: 0.5, opacity: 0, duration: 0.6 }, 4.0)
+      tl.to('#flash', { opacity: 0.55, duration: 0.05, ease: 'none' }, 3.99).to('#flash', { opacity: 0, duration: 0.4, ease: 'power2.out' }, 4.04)
+      tl.from($('.c-bg', heroSvg), { opacity: 0, duration: 0.3 }, 4.0)
+      tl.from($('.c-rays', heroSvg), { scale: 0.2, rotation: -50, svgOrigin: '50 42', opacity: 0, duration: 1.0 }, 4.0)
+      tl.to($('.c-rays', heroSvg), { rotation: 14, svgOrigin: '50 42', duration: 3.6, ease: 'none' }, 4.95) // 은은한 회전 (선형은 배경 회전에만)
+      tl.from($('.c-ribbon', heroSvg), { x: 70, opacity: 0, duration: 0.75 }, 4.08)
+      tl.from($('.c-glow', heroSvg), { scale: 0, svgOrigin: '50 40', duration: 0.7 }, 4.05)
+      tl.from($$('.c-sparks circle, .c-stars path', heroSvg), { scale: 0, transformOrigin: '50% 50%', duration: 0.5, stagger: 0.04, ease: 'back.out(3)' }, 4.25)
+      tl.from([$('.c-rim', heroSvg), $('.c-edge', heroSvg)], { scale: 1.12, opacity: 0, svgOrigin: '50 70', duration: 0.5 }, 4.0)
+      tl.from($('.c-jewel', heroSvg), { scale: 0, rotation: 90, svgOrigin: '50 5.4', duration: 0.45, ease: 'back.out(3)' }, 4.4)
+      show('#cutout', 4.0, false)
+
+      // 위계: OVR → 포지션 → 능력치 → 배지/칩 → 이름 → 정보
+      const ovr = $('.c-ovr', heroSvg)
+      counters.ovr = { el: ovr, v: 0, to: HERO.ovr }
+      tl.from(ovr, { opacity: 0, y: 4, duration: 0.4 }, 4.15)
+      tl.to(counters.ovr, { v: HERO.ovr, duration: 0.7, ease: 'power2.out' }, 4.15)
+      tl.from($('.c-pos', heroSvg), { opacity: 0, y: 3, duration: 0.4 }, 4.35)
+      const statEls = $$('.c-stat', heroSvg)
+      counters.stats = statEls.map((g, i) => ({ el: $('.val', g), v: 0, to: HERO.stats[i][1] }))
+      statEls.forEach((g, i) => {
+        tl.from(g, { opacity: 0, y: 4, duration: 0.45 }, 4.3 + i * 0.06)
+        tl.to(counters.stats[i], { v: HERO.stats[i][1], duration: 0.5, ease: 'power2.out' }, 4.3 + i * 0.06)
+      })
+      tl.from($$('.c-badge', heroSvg), { x: 9, scale: 0.3, opacity: 0, transformOrigin: '50% 50%', duration: 0.5, stagger: 0.08, ease: 'back.out(2.2)' }, 4.6)
+      tl.from($$('.c-chip', heroSvg), { x: -9, opacity: 0, duration: 0.45, stagger: 0.08, ease: 'back.out(2)' }, 4.66)
+      const nameEl = $('.c-name', heroSvg)
+      counters.name = { el: nameEl, v: 0, text: HERO.name }
+      tl.from(nameEl, { opacity: 0, duration: 0.15 }, 4.82)
+      tl.to(counters.name, { v: 1, duration: 0.4, ease: 'none' }, 4.82)
+      tl.from($('.c-info', heroSvg), { opacity: 0, y: 3, duration: 0.45 }, 5.0)
+      tl.from($('.c-mark', heroSvg), { opacity: 0, duration: 0.4 }, 5.05)
+
+      reveal($('#cap3'), 5.0)
+      // 콜아웃: 기능 하나씩 짚기 (목적)
+      ;['#co1', '#co2', '#co3', '#co4'].forEach((s, i) => {
+        const el = $(s)
+        const t = 5.12 + i * 0.1
+        show(el, t)
+        tl.from($('.dot', el), { scale: 0, duration: 0.35, ease: 'back.out(3)' }, t)
+        tl.from($('.bar', el), { scaleX: 0, duration: 0.4 }, t + 0.05)
+        tl.from($('.lbl span', el), { yPercent: 110, duration: 0.45 }, t + 0.12)
+        tl.to(el, { autoAlpha: 0, y: -12, duration: 0.28, ease: EASE_OUT }, 5.9 + i * 0.03)
+      })
+      // 히어로 틸트 + 반사광
+      tl.to('#tilt', { rotationY: -17, rotationX: 5, duration: 0.42, ease: 'sine.inOut' }, 6.0)
+      tl.to('#tilt', { rotationY: 15, rotationX: -4, duration: 0.5, ease: 'sine.inOut' }, 6.42)
+      tl.to('#tilt', { rotationY: 0, rotationX: 0, duration: 0.3, ease: 'power2.out' }, 6.92)
+      tl.to('#heroShadow', { x: 40, duration: 0.42, ease: 'sine.inOut' }, 6.0).to('#heroShadow', { x: -30, duration: 0.5, ease: 'sine.inOut' }, 6.42).to('#heroShadow', { x: 0, duration: 0.3 }, 6.92)
+      tl.fromTo('#glare', { opacity: 1, xPercent: -90 }, { xPercent: 90, duration: 0.95, ease: 'sine.inOut', immediateRender: false }, 6.0)
+      tl.set('#glare', { opacity: 0 }, 6.96)
+
+      /* ── 장면 4 (7.0–8.5): 테마 6종, 8분음표마다 교체 ── */
+      hide($('#cap3'), 6.82)
+      reveal($('#cap4'), 6.98)
+      const layers = $$('.theme-layer')
+      THEME_CYCLE.forEach((th, i) => {
+        const t = 7.0 + i * 0.25
+        layers.forEach((l) => tl.set(l, { autoAlpha: l.dataset.theme === th ? 1 : 0 }, t))
+        tl.fromTo('#glare', { opacity: 1, xPercent: -110 }, { xPercent: 110, duration: 0.22, ease: 'power1.inOut', immediateRender: false }, t - 0.08)
+        tl.fromTo('#hero', { scale: 1.035 }, { scale: 1, duration: 0.24, ease: 'power2.out', immediateRender: false }, t)
+        if (i > 0) tl.to('#roller', { y: -130 * i, duration: 0.22, ease: 'power3.out' }, t)
+      })
+      tl.set('#glare', { opacity: 0 }, 8.4)
+      hide($('#cap4'), 8.32)
+      tl.fromTo('#rollerBox', { autoAlpha: 0, yPercent: 60 }, { autoAlpha: 1, yPercent: 0, duration: 0.5 }, 7.02)
+      tl.to('#rollerBox', { autoAlpha: 0, yPercent: -60, duration: 0.3, ease: EASE_OUT, immediateRender: false }, 8.32)
+
+      /* ── 장면 5 (8.5–12.0): 카드 → ST 자리, 스쿼드 완성 ── */
+      show('#pitchwrap', 8.42)
+      tl.from('#pitch3d', { rotationX: 75, y: 260, opacity: 0, duration: 0.85, transformPerspective: 1700 }, 8.42)
+      tl.from($$('.pl-lines > *', $('#pitch3d')), { opacity: 0, duration: 0.4, stagger: 0.03 }, 8.7)
+      $$('.slot').forEach((s) => gsap.set(s, { autoAlpha: 0 }))
+      // 히어로 카드가 ST 자리로 날아감
+      const hx = stR.x + stR.w / 2 - (heroR.x + heroR.w / 2)
+      const hy = stR.y + stR.h / 2 - (heroR.y + heroR.h / 2)
+      tl.to('#hero', { x: hx, y: hy, scale: stR.w / heroR.w, duration: 0.6, ease: EASE_MOVE }, 8.48)
+      tl.to('#heroShadow', { autoAlpha: 0, duration: 0.3 }, 8.48)
+      show('#hero', 9.08, false)
+      show(pcards[0], 9.08)
+
+      reveal($('#cap5'), 8.95)
+      show('#rating', 9.0)
+      tl.from('#rating', { y: 40, duration: 0.6 }, 9.0)
+      counters.rating = { el: $('#ratingNum'), v: 0 }
+      counters.count = { el: $('#ratingCount'), v: 0 }
+      const lands = [9.08, 9.18, 9.32, 9.4, 9.48, 9.56, 9.74, 9.82, 9.9, 10.06, 10.16]
+      let sum = 0
+      SQUAD.forEach((p, i) => {
+        const t = lands[i]
+        sum += p.ovr
+        if (i > 0) {
+          show(pcards[i], t - 0.3)
+          tl.from($('.pcard', pcards[i]), { y: -320, scale: 1.25, opacity: 0, duration: 0.42, ease: 'power2.in' }, t - 0.3)
+          tl.fromTo($('.pcard', pcards[i]), { scaleY: 0.86 }, { scaleY: 1, duration: 0.35, ease: 'back.out(3)', immediateRender: false }, t + 0.12)
+          tl.from($('.pshadow', pcards[i]), { scale: 0.2, opacity: 0, duration: 0.42, ease: 'power2.in' }, t - 0.3)
+        }
+        tl.to(counters.rating, { v: Math.round(sum / (i + 1)), duration: 0.22, ease: 'power2.out' }, t)
+        tl.to(counters.count, { v: i + 1, duration: 0.01, ease: 'none' }, t)
+      })
+      tl.fromTo('#ratingNum', { scale: 1.12 }, { scale: 1, duration: 0.4, ease: 'back.out(3)', immediateRender: false }, 10.2)
+      // 정지 구간: 읽을 시간 + 아주 느린 밀어 넣기
+      tl.to('#pitchwrap', { scale: 1.035, duration: 1.4, ease: 'sine.inOut' }, 10.5)
+
+      /* ── 장면 6 (12.0–13.0): 축구장 → 폰 화면 ── */
+      hide($('#cap5'), 11.8)
+      tl.to('#rating', { autoAlpha: 0, y: -30, duration: 0.3, ease: EASE_OUT }, 11.82)
+      show('#phone', 11.95)
+      tl.from('#phone', { x: 800, rotation: 8, duration: 0.6, ease: EASE_MOVE }, 11.95)
+      tl.to('#pitch3d', { rotationX: 0, duration: 0.6, ease: EASE_MOVE }, 11.95)
+      tl.to($$('.pcard'), { rotationX: 0, duration: 0.6, ease: EASE_MOVE }, 11.95)
+      tl.to('#pitchwrap', { x: 1240 - 960, y: 600 - 580, scale: 0.47, duration: 0.6, ease: EASE_MOVE }, 11.95)
+      tl.from('#scrHead > *', { yPercent: 120, opacity: 0, duration: 0.45, stagger: 0.06 }, 12.3)
+      reveal($('#cap6'), 12.1)
+      show('#sheetWrap', 12.38)
+      tl.from('#sheet', { yPercent: 115, duration: 0.45, ease: 'power3.out' }, 12.38)
+      tl.from('#sheet .apps i', { scale: 0, duration: 0.35, stagger: 0.04, ease: 'back.out(2.5)' }, 12.5)
+      tl.to('#shareBtn', { scale: 0.93, duration: 0.08, ease: 'power2.out' }, 12.72).to('#shareBtn', { scale: 1, duration: 0.25, ease: 'back.out(3)' }, 12.8)
+      tl.fromTo('#ripple', { scale: 0.3, opacity: 0.9 }, { scale: 3.2, opacity: 0, duration: 0.45, ease: 'power2.out' }, 12.74)
+
+      /* ── 장면 7 (13.0–15.0): 원형 와이프 → 로고, 그리고 정지 ── */
+      const ox = btnR.x + btnR.w / 2
+      const oy = btnR.y + btnR.h / 2
+      tl.fromTo('#end', { clipPath: `circle(0px at ${ox}px ${oy}px)` }, { clipPath: `circle(2300px at ${ox}px ${oy}px)`, duration: 0.55, ease: 'power3.in' }, 12.9)
+      hide($('#cap6'), 12.86)
+      tl.fromTo('#endRays', { rotation: 0 }, { rotation: 24, duration: 2.0, ease: 'none' }, 13.0)
+      const lf = $('#logoStroke')
+      const ll = lf.getTotalLength()
+      gsap.set(lf, { strokeDasharray: ll, strokeDashoffset: ll })
+      tl.from('#logoFill', { scale: 0.6, opacity: 0, transformOrigin: '50% 50%', duration: 0.6, ease: 'back.out(1.8)' }, 13.3)
+      tl.to(lf, { strokeDashoffset: 0, duration: 0.6, ease: 'power2.inOut' }, 13.3)
+      tl.from('#logoStar', { scale: 0, rotation: -120, transformOrigin: '50% 55%', duration: 0.6, ease: 'back.out(2.4)' }, 13.48)
+      tl.from($$('#wordmark .ch'), { yPercent: 105, duration: 0.6, stagger: 0.05 }, 13.4)
+      reveal($('#tagline'), 13.7, 0.04)
+      tl.from('#url', { y: 30, autoAlpha: 0, duration: 0.6 }, 13.92)
+      tl.fromTo('#logoShine', { xPercent: -100 }, { xPercent: 100, duration: 0.7, ease: 'power2.inOut' }, 14.3)
+      tl.set({}, {}, 15)
+    }
+
+    // 숫자 카운터·이름 스크램블은 직접 그린다 (되감기·탐색에도 정확하게)
+    const SCRAMBLE = 'ABCDEFGHJKLMNPRSTUVWXYZ'
+    function paint() {
+      if (counters.ovr) counters.ovr.el.textContent = Math.round(counters.ovr.v)
+      counters.stats?.forEach((s) => (s.el.textContent = Math.round(s.v)))
+      if (counters.name) {
+        const { el, v, text } = counters.name
+        const n = Math.floor(v * text.length)
+        el.textContent = v >= 1 ? text : text.slice(0, n) + Array.from(text.slice(n), (_, i) => SCRAMBLE[(i * 7 + Math.floor(v * 40)) % SCRAMBLE.length]).join('')
+      }
+      if (counters.rating) counters.rating.el.textContent = Math.round(counters.rating.v)
+      if (counters.count) counters.count.el.textContent = Math.round(counters.count.v)
+      ui()
+    }
+
+    /* ════════════════════════ 사운드 (Web Audio 합성, 120 BPM) ════════════════════════ */
+
+    const Sound = (() => {
+      let ctx, bus, rev, noise
+      let enabled = true
+      const makeNoise = (c) => {
+        const len = c.sampleRate * 1.5
+        const b = c.createBuffer(1, len, c.sampleRate)
+        const d = b.getChannelData(0)
+        for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1
+        return b
+      }
+      const ensure = () => {
+        if (!ctx) {
+          const AC = window.AudioContext || window.webkitAudioContext
+          if (!AC) return null
+          ctx = new AC()
+          noise = makeNoise(ctx)
+        }
+        return ctx
+      }
+      const impulse = () => {
+        const len = ctx.sampleRate * 2.4
+        const b = ctx.createBuffer(2, len, ctx.sampleRate)
+        for (let c = 0; c < 2; c++) {
+          const d = b.getChannelData(c)
+          for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2)
+        }
+        return b
+      }
+      const env = (g, at, a, peak, dec, end = 0.0001) => {
+        g.gain.setValueAtTime(0.0001, at)
+        g.gain.exponentialRampToValueAtTime(peak, at + a)
+        g.gain.exponentialRampToValueAtTime(end, at + a + dec)
+      }
+      const osc = (type, f, at, dur, peak, dest = bus, a = 0.005) => {
+        const o = ctx.createOscillator()
+        const g = ctx.createGain()
+        o.type = type
+        o.frequency.setValueAtTime(f, at)
+        env(g, at, a, peak, dur)
+        o.connect(g).connect(dest)
+        o.start(at)
+        o.stop(at + a + dur + 0.05)
+        return o
+      }
+      const nz = (at, dur, peak, filter, f, q = 1, dest = bus, a = 0.003) => {
+        const s = ctx.createBufferSource()
+        s.buffer = noise
+        const fl = ctx.createBiquadFilter()
+        fl.type = filter
+        fl.frequency.setValueAtTime(f, at)
+        fl.Q.value = q
+        const g = ctx.createGain()
+        env(g, at, a, peak, dur)
+        s.connect(fl).connect(g).connect(dest)
+        s.start(at)
+        s.stop(at + a + dur + 0.05)
+        return fl
+      }
+      const I = {
+        kick(at, big = 1) {
+          const o = osc('sine', 150 * big, at, 0.4 * big, 0.9)
+          o.frequency.exponentialRampToValueAtTime(42, at + 0.14)
+        },
+        clap(at) {
+          ;[0, 0.012, 0.024].forEach((d) => nz(at + d, 0.12, 0.35, 'bandpass', 1600, 1.2))
+          nz(at, 0.25, 0.12, 'bandpass', 1500, 1, rev)
+        },
+        hat(at, v = 0.1) {
+          nz(at, 0.045, v, 'highpass', 8000)
+        },
+        bass(at, f, dur) {
+          const o = ctx.createOscillator()
+          const fl = ctx.createBiquadFilter()
+          const g = ctx.createGain()
+          o.type = 'sawtooth'
+          o.frequency.setValueAtTime(f, at)
+          fl.type = 'lowpass'
+          fl.frequency.setValueAtTime(900, at)
+          fl.frequency.exponentialRampToValueAtTime(180, at + dur)
+          env(g, at, 0.01, 0.32, dur)
+          o.connect(fl).connect(g).connect(bus)
+          o.start(at)
+          o.stop(at + dur + 0.1)
+        },
+        ping(at, f, v = 0.16) {
+          osc('triangle', f, at, 0.35, v)
+          osc('sine', f * 2, at, 0.2, v * 0.4, rev)
+        },
+        whoosh(at, dur = 0.45, up = true) {
+          const fl = nz(at, dur, 0.28, 'bandpass', up ? 300 : 3200, 1.4, bus, dur * 0.7)
+          fl.frequency.exponentialRampToValueAtTime(up ? 3600 : 260, at + dur)
+        },
+        riser(at, dur) {
+          const fl = nz(at, 0.05, 0.3, 'bandpass', 200, 2, bus, dur)
+          fl.frequency.exponentialRampToValueAtTime(5000, at + dur)
+          const o = osc('sine', 180, at, 0.05, 0.12, rev, dur)
+          o.frequency.exponentialRampToValueAtTime(900, at + dur)
+        },
+        shutter(at) {
+          nz(at, 0.03, 0.5, 'highpass', 3000)
+          nz(at + 0.05, 0.05, 0.35, 'highpass', 2000)
+        },
+        scan(at, dur) {
+          const fl = nz(at, 0.05, 0.16, 'bandpass', 4000, 6, bus, dur)
+          fl.frequency.exponentialRampToValueAtTime(700, at + dur)
+        },
+        impact(at) {
+          I.kick(at, 1.25)
+          osc('sine', 48, at, 1.1, 0.5)
+          nz(at, 0.6, 0.35, 'lowpass', 900, 0.8, rev)
+        },
+        thump(at) {
+          const o = osc('sine', 130, at, 0.16, 0.42)
+          o.frequency.exponentialRampToValueAtTime(60, at + 0.12)
+          nz(at, 0.05, 0.1, 'lowpass', 1200)
+        },
+        click(at) {
+          osc('square', 1400, at, 0.03, 0.12)
+        },
+        pad(at, dur, freqs) {
+          freqs.forEach((f, i) => {
+            const o = ctx.createOscillator()
+            const fl = ctx.createBiquadFilter()
+            const g = ctx.createGain()
+            o.type = 'triangle'
+            o.frequency.value = f
+            o.detune.value = (i % 2 ? 1 : -1) * 7
+            fl.type = 'lowpass'
+            fl.frequency.value = 2400
+            g.gain.setValueAtTime(0.0001, at)
+            g.gain.exponentialRampToValueAtTime(0.06, at + 0.08)
+            g.gain.exponentialRampToValueAtTime(0.0001, at + dur)
+            o.connect(fl).connect(g)
+            g.connect(bus)
+            g.connect(rev)
+            o.start(at)
+            o.stop(at + dur + 0.1)
+          })
+        },
+      }
+      // 악보 [시간(초), 악기, 인자...]
+      const score = (() => {
+        const ev = []
+        const A = 55, F = 43.65, C = 65.41, G = 49
+        ev.push([0, 'riser', 1.9])
+        ev.push([2.0, 'shutter'])
+        ev.push([2.0, 'pad', 2.0, [220, 261.6, 329.6]])
+        ev.push([2.42, 'scan', 0.85])
+        ev.push([3.55, 'whoosh', 0.45, true])
+        for (let b = 2.0; b < 12.5; b += 0.5) {
+          if (b === 4.0) continue
+          if (b >= 4.0 || b === 2.0 || b === 3.0) ev.push([b, 'kick'])
+          if (b >= 4.0) ev.push([b + 0.25, 'hat', 0.09])
+          if (b >= 4.0 && ((b - 4.0) / 0.5) % 2 === 1) ev.push([b, 'clap'])
+        }
+        const roots = [A, F, C, G]
+        for (let bar = 0; bar < 4; bar++) {
+          const t0 = 4.0 + bar * 2
+          for (let k = 0; k < 8; k++) {
+            const t = t0 + k * 0.25
+            if (t >= 12.4) break
+            ev.push([t, 'bass', roots[bar % 4] * (k % 4 === 2 ? 2 : 1), 0.2])
+          }
+        }
+        ev.push([4.0, 'impact'])
+        ev.push([4.85, 'ping', 1318.5, 0.18])
+        const pent = [880, 987.8, 1108.7, 1318.5, 1480, 1760]
+        for (let i = 0; i < 6; i++) ev.push([4.78 + i * 0.06, 'ping', pent[i], 0.08])
+        for (let i = 0; i < 6; i++) ev.push([4.62 + i * 0.08, 'click'])
+        ev.push([5.95, 'whoosh', 0.5, true])
+        ev.push([6.42, 'whoosh', 0.45, false])
+        const sh = [1046.5, 1174.7, 1318.5, 1568, 1760, 2093]
+        for (let i = 0; i < 6; i++) ev.push([7.0 + i * 0.25, 'ping', sh[i], 0.13])
+        ev.push([8.42, 'whoosh', 0.55, false])
+        ;[9.08, 9.18, 9.32, 9.4, 9.48, 9.56, 9.74, 9.82, 9.9, 10.06, 10.16].forEach((t) => ev.push([t, 'thump']))
+        ev.push([10.2, 'ping', 1568, 0.16])
+        ev.push([11.92, 'whoosh', 0.55, true])
+        ev.push([12.74, 'click'])
+        ev.push([12.9, 'whoosh', 0.45, true])
+        ev.push([13.4, 'impact'])
+        ev.push([13.4, 'pad', 1.6, [220, 277.2, 329.6, 440, 493.9]])
+        ;[2093, 2637, 3136, 4186].forEach((f, i) => ev.push([14.3 + i * 0.07, 'ping', f, 0.05]))
+        return ev
+      })()
+
+      /** 출력 버스(컴프레서 + 리버브) 구성 */
+      function setupBus() {
+        bus = ctx.createGain()
+        bus.gain.value = 0.75
+        const comp = ctx.createDynamicsCompressor()
+        comp.threshold.value = -14
+        comp.ratio.value = 4
+        bus.connect(comp).connect(ctx.destination)
+        rev = ctx.createConvolver()
+        rev.buffer = impulse()
+        const rg = ctx.createGain()
+        rg.gain.value = 0.3
+        rev.connect(rg).connect(bus)
+      }
+      function schedule(t0, from) {
+        for (const [t, name, ...args] of score) {
+          if (t < from - 0.01) continue
+          I[name](t0 + t, ...args)
+        }
+      }
+      function start(from) {
+        if (!enabled || !ensure()) return
+        ctx.resume()
+        stop()
+        setupBus()
+        schedule(ctx.currentTime + 0.05 - from, from)
+      }
+      /** 영상 파일용: 사운드트랙 전체를 오프라인으로 렌더링해 WAV(base64)로 돌려준다 */
+      async function renderOffline(seconds, sr = 48000) {
+        const prev = { ctx, bus, rev, noise }
+        const off = new OfflineAudioContext(2, Math.ceil(seconds * sr), sr)
+        ctx = off
+        noise = makeNoise(off)
+        setupBus()
+        schedule(0, 0)
+        const buf = await off.startRendering()
+        ;({ ctx, bus, rev, noise } = prev)
+        return wavBase64(buf)
+      }
+      function wavBase64(buf) {
+        const ch = buf.numberOfChannels
+        const n = buf.length
+        const out = new DataView(new ArrayBuffer(44 + n * ch * 2))
+        const str = (o, t) => [...t].forEach((c, i) => out.setUint8(o + i, c.charCodeAt(0)))
+        str(0, 'RIFF'); out.setUint32(4, 36 + n * ch * 2, true); str(8, 'WAVEfmt ')
+        out.setUint32(16, 16, true); out.setUint16(20, 1, true); out.setUint16(22, ch, true)
+        out.setUint32(24, buf.sampleRate, true); out.setUint32(28, buf.sampleRate * ch * 2, true)
+        out.setUint16(32, ch * 2, true); out.setUint16(34, 16, true); str(36, 'data'); out.setUint32(40, n * ch * 2, true)
+        const data = [...Array(ch)].map((_, c) => buf.getChannelData(c))
+        let o = 44
+        for (let i = 0; i < n; i++)
+          for (let c = 0; c < ch; c++) {
+            const v = Math.max(-1, Math.min(1, data[c][i]))
+            out.setInt16(o, v < 0 ? v * 0x8000 : v * 0x7fff, true)
+            o += 2
+          }
+        const bytes = new Uint8Array(out.buffer)
+        let bin = ''
+        for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000))
+        return btoa(bin)
+      }
+      function stop() {
+        if (!bus) return
+        const b = bus
+        b.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.02)
+        setTimeout(() => b.disconnect(), 250)
+        bus = null
+      }
+      return {
+        start,
+        stop,
+        renderOffline,
+        get enabled() {
+          return enabled
+        },
+        set enabled(v) {
+          enabled = v
+          if (!v) stop()
+        },
+      }
+    })()
+
+    /* ════════════════════════ 컨트롤 ════════════════════════ */
+
+    const DUR = 15
+    const CHAPTERS = [
+      [0, '훅'],
+      [2.0, 'AI 누끼'],
+      [4.0, '카드'],
+      [7.0, '테마'],
+      [8.5, '스쿼드'],
+      [12.0, '공유'],
+      [13.0, '엔드'],
+    ]
+    const POSTER = 6.62
+    const els = {
+      poster: document.getElementById('posterBtn'),
+      play: document.getElementById('playBtn'),
+      playLabel: document.getElementById('playLabel'),
+      playIcon: document.getElementById('playIcon'),
+      restart: document.getElementById('restartBtn'),
+      scrub: document.getElementById('scrub'),
+      fill: document.getElementById('fill'),
+      knob: document.getElementById('knob'),
+      time: document.getElementById('time'),
+      sound: document.getElementById('soundBtn'),
+      soundLabel: document.getElementById('soundLabel'),
+    }
+    const ticks = document.getElementById('ticks')
+    const chapters = document.getElementById('chapters')
+    CHAPTERS.forEach(([t, label]) => {
+      if (t > 0) ticks.appendChild(h(`<div class="tick" style="left:${(t / DUR) * 100}%"></div>`))
+      const b = h(`<button type="button" style="left:${(t / DUR) * 100}%">${label}</button>`)
+      b.addEventListener('click', () => playFrom(t))
+      chapters.appendChild(b)
+    })
+
+    const PLAY = '<path d="M8 5.5v13l11-6.5z" />'
+    const PAUSE = '<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />'
+    function ui() {
+      if (!tl) return
+      const t = tl.time()
+      const p = (t / DUR) * 100
+      els.fill.style.width = p + '%'
+      els.knob.style.left = p + '%'
+      els.scrub.setAttribute('aria-valuenow', t.toFixed(1))
+      els.time.textContent = `${t.toFixed(1).padStart(4, '0')} / 15.0`
+      const playing = tl.isActive()
+      els.playIcon.innerHTML = playing ? PAUSE : PLAY
+      els.playLabel.textContent = playing ? '일시정지' : '재생'
+      els.play.setAttribute('aria-label', playing ? '일시정지' : '재생')
+      document.documentElement.classList.toggle('is-paused', !playing)
+    }
+    function seek(t) {
+      tl.pause()
+      Sound.stop()
+      tl.time(Math.max(0, Math.min(DUR, t)), false)
+      paint()
+    }
+    function playFrom(t) {
+      els.poster.hidden = true
+      seek(t >= DUR - 0.05 ? 0 : t)
+      tl.play()
+      Sound.start(tl.time())
+      ui()
+    }
+    function pause() {
+      tl.pause()
+      Sound.stop()
+      ui()
+    }
+
+    const embedSound = document.getElementById('embedSound')
+    function setSound(on) {
+      Sound.enabled = on
+      els.sound.setAttribute('aria-pressed', String(on))
+      els.soundLabel.textContent = on ? '소리 켬' : '소리 끔'
+      embedSound.setAttribute('aria-pressed', String(on))
+      document.getElementById('embedSoundLabel').textContent = on ? '소리 끄기' : '소리 켜기'
+      document.getElementById('embedSoundWave').setAttribute('d', on ? 'M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12' : 'M17 9l4 6M21 9l-4 6')
+    }
+    /** 끝까지 재생되면: 임베드에선 잠깐 로고를 보여준 뒤 처음부터 다시 */
+    function onEnd() {
+      if (!EMBED || userPaused || reduce) return
+      setTimeout(() => !tl.isActive() && !userPaused && playFrom(0), 1500)
+    }
+
+    els.poster.addEventListener('click', () => ((userPaused = false), playFrom(0)))
+    els.play.addEventListener('click', () => {
+      userPaused = tl.isActive()
+      userPaused ? pause() : playFrom(tl.time())
+    })
+    els.restart.addEventListener('click', () => ((userPaused = false), playFrom(0)))
+    els.sound.addEventListener('click', () => {
+      setSound(!Sound.enabled)
+      if (Sound.enabled && tl.isActive()) Sound.start(tl.time())
+    })
+    // 임베드: 소리를 켜면 사운드트랙을 처음부터 들려준다
+    embedSound.addEventListener('click', () => {
+      setSound(!Sound.enabled)
+      if (Sound.enabled) {
+        userPaused = false
+        playFrom(0)
+      } else Sound.stop()
+    })
+    const scrubTo = (e) => {
+      const r = els.scrub.getBoundingClientRect()
+      els.poster.hidden = true
+      seek(((e.clientX - r.left) / r.width) * DUR)
+    }
+    els.scrub.addEventListener('pointerdown', (e) => {
+      els.scrub.setPointerCapture(e.pointerId)
+      scrubTo(e)
+      const move = (ev) => scrubTo(ev)
+      const up = () => {
+        els.scrub.removeEventListener('pointermove', move)
+        els.scrub.removeEventListener('pointerup', up)
+      }
+      els.scrub.addEventListener('pointermove', move)
+      els.scrub.addEventListener('pointerup', up)
+    })
+    els.scrub.addEventListener('keydown', (e) => {
+      const d = e.key === 'ArrowRight' ? 0.5 : e.key === 'ArrowLeft' ? -0.5 : 0
+      if (d) {
+        e.preventDefault()
+        els.poster.hidden = true
+        seek(tl.time() + d)
+      }
+    })
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && !/INPUT|TEXTAREA|BUTTON/.test(document.activeElement?.tagName)) {
+        e.preventDefault()
+        tl.isActive() ? pause() : playFrom(tl.time())
+      }
+    })
+
+    /* ════════════════════════ 설계 노트 ════════════════════════ */
+
+    const NOTES = [
+      ['타이밍', 'Timing', '120BPM 박자 그리드(0.5초)에 모든 컷을 맞췄어요. 카드 조립은 0.6초로 짧고 강하게, 히어로 틸트는 0.95초로 길게 보여줘서 정보의 무게만큼 시간을 배분했어요.', [4.0, 6.0]],
+      ['이징', 'Easing', '등장은 expo.out(빠르게 와서 부드럽게 멈춤), 퇴장은 power3.in, 장면 이동은 power3.inOut 세 가지로만 썼어요. 카드 착지에는 back.out으로 무게감을 줬고, 선형 움직임은 배경 빛줄기 회전에만 남겼어요.', [4.0, 9.3]],
+      ['목적', 'Purpose', '움직임마다 기능 하나를 설명해요. 스캔라인은 AI 누끼, 숫자 카운트업은 OVR 자동 계산, 바깥으로 튀어나오는 칩은 배지와 보조 포지션, 떨어지는 카드는 스쿼드 배치예요.', [2.4, 4.6]],
+      ['위계', 'Hierarchy', '카드 안에서는 OVR → 포지션 → 능력치 → 배지 → 이름 순서로 시선을 끌어요. 스쿼드에서는 주인공 카드가 먼저 ST 자리에 앉고 나머지가 뒤따라요.', [4.15, 8.5]],
+      ['리듬과 음악', 'Rhythm & Sound', 'Web Audio로 직접 합성한 120BPM 트랙이에요. 킥은 컷, 8분음표 핑은 테마 교체, 낮은 쿵 소리는 카드 착지, 임팩트는 카드 완성과 로고에 맞췄어요.', [7.0, 9.1]],
+      ['오버래핑과 시차', 'Overlap & Offset', '능력치 6개는 0.06초 간격, 콜아웃 4개는 0.1초 간격으로 들어와요. 스쿼드 카드는 골키퍼 → 수비 → 미드 → 공격 라인 순서로 시간차를 두고 떨어져요.', [4.3, 9.15]],
+      ['일관성', 'Consistency', '모든 자막은 아래에서 마스크 안으로 올라와 위로 빠져요. 모든 칩은 카드 안쪽에서 바깥쪽으로 튀어나오고, 숫자는 모두 같은 카운트업 곡선을 따라요.', [2.15, 5.0]],
+      ['트랜지션', 'Transition', '방패 윤곽 → 셔터 플래시 → 사진, 누끼 → 카드 사진 자리, 카드 → 스쿼드 ST 자리, 축구장 → 폰 화면, 공유 버튼 → 원형 와이프 → 로고. 앞 장면의 모양과 위치를 이어받아요.', [3.55, 8.48, 11.95, 12.9]],
+      ['여백과 정지', 'Pause & Space', '스쿼드가 완성되면 약 1.3초, 로고가 뜬 뒤에는 1초 넘게 멈춰서 팀 평점과 주소를 읽을 시간을 줘요. 음악도 마지막엔 잔향만 남겨요.', [10.4, 14.0]],
+      ['디자인 기본기', 'Design Fundamentals', '어느 프레임에서 멈춰도 포스터가 되도록 1920×1080 위에 좌우 2단 그리드를 지켰어요. 카드는 실제 앱의 디자인 시스템(곡선 방패, 6가지 테마)을 그대로 썼어요.', [6.62, 14.6]],
+    ]
+    const notesEl = document.getElementById('notes')
+    NOTES.forEach(([ko, en, body, times], i) => {
+      const n = h(`<article class="note">
+        <div class="n">${String(i + 1).padStart(2, '0')}</div>
+        <h3>${ko}<small>${en}</small></h3>
+        <p>${body}</p>
+        <div class="chips">${times
+          .map((t) => `<button type="button" class="chip" data-t="${t}"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1v8l7-4z"/></svg>0:${t.toFixed(2).padStart(5, '0')}</button>`)
+          .join('')}</div>
+      </article>`)
+      notesEl.appendChild(n)
+    })
+    notesEl.addEventListener('click', (e) => {
+      const b = e.target.closest('.chip')
+      if (!b) return
+      document.getElementById('frame').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' })
+      playFrom(Math.max(0, +b.dataset.t - 0.6))
+    })
+
+    /* ════════════════════════ 시작 ════════════════════════ */
+
+    // 영상 파일 렌더링용 훅: 프레임 단위로 정확한 시점에 멈춰 세운다
+    window.__spot = {
+      duration: DUR,
+      seek(t) {
+        els.poster.hidden = true
+        seek(t)
+        dustTweens.forEach((tw) => tw.pause().totalTime(t + 3))
+      },
+      renderAudio: (seconds) => Sound.renderOffline(seconds),
+    }
+
+    const init = () => {
+      fit()
+      build()
+      seek(POSTER) // 정지 상태에서도 완성된 한 장면이 보이도록
+      els.poster.hidden = false
+      if (EMBED) {
+        setSound(false) // 브라우저는 소리 없는 자동재생만 허용
+        if (!reduce) {
+          let started = false
+          new IntersectionObserver(
+            ([e]) => {
+              if (e.intersectionRatio >= 0.4) {
+                if (!tl.isActive() && !userPaused) playFrom(started ? tl.time() : 0)
+                started = true
+              } else if (tl.isActive()) pause()
+            },
+            { threshold: [0, 0.4] },
+          ).observe(frame)
+        }
+      }
+    }
+    ;(document.fonts?.ready ?? Promise.resolve()).then(init)
+    gsap.ticker.add(() => tl && tl.isActive() && ui())
+  })()
+</script>
+
+</body>
+</html>
