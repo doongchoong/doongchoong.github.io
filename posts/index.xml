@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 28 Sep 2026 23:20:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 21:08:00 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>축구카드웹앱만들기</title>
+      <link>https://doongchoong.github.io/posts/%EC%B6%95%EA%B5%AC%EC%B9%B4%EB%93%9C%EC%9B%B9%EC%95%B1%EB%A7%8C%EB%93%A4%EA%B8%B0/</link>
+      <pubDate>Fri, 09 Oct 2026 21:08:00 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/%EC%B6%95%EA%B5%AC%EC%B9%B4%EB%93%9C%EC%9B%B9%EC%95%B1%EB%A7%8C%EB%93%A4%EA%B8%B0/</guid>
+      <description>&lt;figure style=&#34;margin:0 0 2rem&#34;&gt;&#xA;  &lt;div style=&#34;position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:12px; background:#000&#34;&gt;&#xA;    &lt;iframe&#xA;      src=&#34;https://doongchoong.github.io/embeds/sonfut-spot/?embed&#34;&#xA;      title=&#34;SonFUT 15초 광고&#34;&#xA;      loading=&#34;lazy&#34;&#xA;      allow=&#34;autoplay; fullscreen&#34;&#xA;      style=&#34;position:absolute; inset:0; width:100%; height:100%; border:0&#34;&#xA;    &gt;&lt;/iframe&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;figcaption style=&#34;margin-top:.5rem; font-size:.875rem; opacity:.7&#34;&gt;&#xA;    동영상 파일이 아니고. HTML·SVG·JavaScript(GSAP)로 브라우저에서 실시간으로 그리고, 사운드트랙도 Web Audio로 합성.&#xA;  &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;최근 GPT에서 클로드로 갈아탔다. 클로드가 프론트엔드 쪽에 강하다는 얘기를 들었는데&#xA;대충 말해도 &amp;ldquo;알잘딱&amp;rdquo; 알아서 잘 만들어준다는 것이다.&#xA;이 강점을 믿고 아들이 원했던 자기만의 축구카드를 만들어 보기로 했다.&lt;/p&gt;&#xA;&lt;p&gt;원래는 &lt;a href=&#34;https://www.fut.gg/&#34;&gt;fut.gg&lt;/a&gt;에서 카드를 봤는데 여기서는 내 사진으로 카드를 만들 수가 없다.&#xA;그래서 사진을 어렵게 합성해서 쓰고 있었다. 아들 사진을 찍고 애써서 누끼를 따고나서&#xA;futgg 사이트에서 개발자도구 켜서 수작업으로 위치조정을 하면서 만들었는데 너무 힘들었다. 그래서 사진만 넣으면 바로 카드가 나오고, 만든 카드로 스쿼드까지 짤 수 있는 앱이 있었으면 했다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>미니차트 스킬만들기</title>
       <link>https://doongchoong.github.io/posts/%EB%AF%B8%EB%8B%88%EC%B0%A8%ED%8A%B8%EC%8A%A4%ED%82%AC%EB%A7%8C%EB%93%A4%EA%B8%B0/</link>
