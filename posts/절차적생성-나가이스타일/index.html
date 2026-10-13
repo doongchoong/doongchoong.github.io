@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>절차적생성-나가이스타일 | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+    border-radius: 6px 6px 6px 6px;
+    margin: 1em 0;
+  }
+
+   
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;  
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+   
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+ 
+tr:last-child td {
+  border-bottom: none;
+}
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 1em auto;
+  padding: 20px 20px;
+}
+
+
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.user-bubble {
+  background-color: #e9e9eb;
+  border-radius: 20px;
+  padding: 0.8em 1.2em;
+
+   
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0.5em 0 0.5em auto;
+
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+
+   
+  left: auto;
+  right: -10px;
+  top: 10px;
+
+  border: 6px solid transparent;
+  border-left-color: #e9e9eb;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+
+   
+  .mermaid svg[aria-roledescription="gitGraph"] {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <a href="/" class="back-link">← Back to home</a>
+    <h1 class="post-title">절차적생성-나가이스타일</h1>
+    <div class="post-date">October 13, 2026</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-나가이-그림체">1. 나가이 그림체</a></li>
+    <li><a href="#2-결정트리">2. 결정트리</a></li>
+    <li><a href="#3-바이닐-앨범-제작">3. 바이닐 앨범 제작</a></li>
+    <li><a href="#4-후기">4. 후기</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>80년대 시티팝 바이닐 앨범커버 일러스트 중에 유명한 &ldquo;히로시 나가이(永井博)&rdquo; 스타일이 있다.
+오오타키 에이이치의 『A LONG VACATION』 커버가 대표적이다.</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Hiroshi_Nagai">Hiroshi Nagai - Wikipedia</a></li>
+</ul>
+<p>미니멀한 그림체와 여름 표현, 야자수와 바다, 그리고 자동차가 등장하는 형태인데
+문득 이를 &ldquo;절차적 생성&quot;으로, &ldquo;결정트리&rdquo; 기반으로 만들 수 있지 않을까 하는 생각이 들었다.
+그래서 아래 작업을 하였다.</p>
+<h2 id="1-나가이-그림체">1. 나가이 그림체</h2>
+
+<script src="/static/js/nagai-scene.min.js?v=1.5.0"></script>
+<figure style="margin:0 0 2rem">
+  <canvas id="nagai-main" style="display:block; width:100%; border-radius:8px"></canvas>
+  <div id="nagai-main-ctl" style="margin-top:.5rem; font-size:.875rem"></div>
+</figure>
+<script>
+NagaiScene.mount({ canvas: '#nagai-main', controls: '#nagai-main-ctl', seed: 42577, wind: 0.8 });
+</script>
+
+<p>시드를 주면 랜덤 생성된다. 같은 시드는 항상 같은 장면이 나오게 된다.</p>
+<ul>
+<li><strong>랜덤</strong>: 아무거나 / 맑은 오후 / 해질녘 / 저녁 중 하나를 고르면 그 분위기의 하늘이 나오는 시드를 찾아준다.</li>
+<li><strong>시드</strong>: 숫자를 넣고 Enter. 이전·다음 시드 버튼으로 하나씩 넘겨볼 수도 있다.</li>
+<li><strong>위치만 바꾸기</strong>: 구도는 그대로 두고 야자수, 건물, 자동차의 위치와 크기만 흔든다.</li>
+<li><strong>바람</strong>: 야자수가 흔들리는 세기. 파도와 물 위의 반짝임도 같이 움직인다.</li>
+<li><strong>상세 구도 고르기</strong>: 테마, 원경, 전경, 하늘 등을 직접 고정한다. 고정한 항목은 시드를 바꿔도 유지된다.</li>
+<li><strong>화면 비율</strong>: 가로(3:2), 모바일(9:16), 정사각(1:1). 비율마다 구도를 새로 짠다.</li>
+<li><strong>사진 저장</strong>: 지금 순간을 고해상도 PNG로 저장한다.</li>
+</ul>
+<p>장면 하나는 <code>83608-12 9:16 sky:violet</code> 같은 한 줄의 장면 코드로 표현되며
+시드, 위치 흔들기 값, 비율, 고정한 선택지를 이어 붙인 것인데 시드 칸에 그대로 붙여넣으면 똑같은 장면이 다시 나온다.</p>
+<p>깃헙 레포는 <a href="https://github.com/doongchoong/nagai-style">github.com/doongchoong/nagai-style</a>에 올려두었다.</p>
+<h2 id="2-결정트리">2. 결정트리</h2>
+<p>나가이 일러스트는 크게 오후, 해질녘, 저녁 등으로 이루어진다.
+오후는 파란 하늘과 야자수, 강한 대비 등이 주로 나타나며 해질녘은 핑크색 하늘, 저녁은 주로 야경이 나타난다.
+그래서 이를 결정트리로 장면을 구성하도록 하였다.</p>
+<p>같은 시드에 하늘만 고정해서 세 장면을 나란히 놓으면 아래와 같다.</p>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:.75rem; margin:0 0 2rem">
+  <figure style="margin:0"><canvas id="nagai-day" style="display:block; width:100%; border-radius:6px"></canvas><figcaption style="font-size:.8rem; opacity:.7; margin-top:.25rem">오후 · sky:deep</figcaption></figure>
+  <figure style="margin:0"><canvas id="nagai-dusk" style="display:block; width:100%; border-radius:6px"></canvas><figcaption style="font-size:.8rem; opacity:.7; margin-top:.25rem">해질녘 · sky:dusk</figcaption></figure>
+  <figure style="margin:0"><canvas id="nagai-eve" style="display:block; width:100%; border-radius:6px"></canvas><figcaption style="font-size:.8rem; opacity:.7; margin-top:.25rem">저녁 · sky:violet</figcaption></figure>
+</div>
+<script>
+[['#nagai-day', 'deep'], ['#nagai-dusk', 'dusk'], ['#nagai-eve', 'violet']].forEach(([id, sky]) => {
+  NagaiScene.mount({ canvas: id, seed: 1234, force: { sky }, wind: 0.5 });
+});
+</script>
+
+<ul>
+<li>하늘이 바뀌면 바닥 색도 따라간다. 오후는 모래색, 해질녘은 산호빛, 저녁은 자줏빛이다.</li>
+<li>저녁은 불 켜진 도시가 주인공급 배경이 되므로 원경을 항상 빌딩숲으로 바꾸고 자동차는 빼버린다.</li>
+<li>트리는 테마에서 시작해서 원경, 주인공 위치, 전경, 건물, 야자수, 하늘 순으로 내려간다.</li>
+</ul>
+<div class="mermaid">
+    
+graph TD
+S[시드] --> T{테마}
+T --> B[해변]
+T --> R[리조트]
+T --> P[수영장 마당]
+T --> C[해안 도로]
+B & R & P & C --> D[원경 · 주인공 위치 · 전경 · 건물 · 야자수]
+D --> K{하늘}
+K --> K1[짙은 파랑 / 맑음<br/>오후 · 모래색 바닥]
+K --> K2{저녁 하늘}
+K2 --> K3[분홍 해질녘<br/>산호빛 바닥]
+K2 --> K4[연보라 저녁<br/>자줏빛 바닥 · 빌딩숲 · 자동차 없음]
+
+    </div>
+<p>각 노드는 가중치가 붙은 선택지 목록이다. 테마마다 고를 수 있는 원경과 전경이 다르다.
+예를 들어 수영장 마당에는 생울타리가 나올 수 있지만 해변에는 나오지 않는다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">JAVASCRIPT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">COMPOSITION_TREE</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">theme</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;beach&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;resort&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;poolside&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;coastRoad&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">focal</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;left&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;center&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;right&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">sky</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;deep&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;bright&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;dusk&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">evening</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;dusk&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;violet&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">themes</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">beach</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">horizon</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">0.46</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0.55</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">far</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;sea&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;sea+city&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;sea+island&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">foreground</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;car&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;empty&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">palms</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;pair&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;cluster&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;even&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">resort</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">horizon</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">0.6</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0.67</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">far</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;sea&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;sea+city&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;sea+island&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">foreground</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;pool&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;wall&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;car&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">buildings</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">2</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">palms</span><span style="color:#0550ae">:</span> <span style="color:#1f2328">[[</span><span style="color:#0a3069">&#39;behind&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;cluster&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">],</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#39;even&#39;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">]],</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// poolside, coastRoad ...
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>  <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">};</span></span></span></code></pre></div>
+  </div>
+</div><p>하늘의 가중치는 오후가 5, 저녁이 1이다. 오후 장면이 가장 많이 나오도록 했다.
+저녁 하늘이 뽑히면 별도의 난수로 분홍 해질녘과 연보라 저녁 중 하나를 다시 고른다.</p>
+<h2 id="3-바이닐-앨범-제작">3. 바이닐 앨범 제작</h2>
+<p>위를 응용하여 진짜로 시티팝의 앨범커버를 제작해보면 어떻겠느냐 하는 클로드의 의견을 받았다.
+정사각 장면 위에 제목과 아티스트를 얹고, 일본 LP의 띠지(오비)를 두르고, 3000×3000 PNG로 저장할 수 있다.</p>
+<p>아래에서 해볼 수 있다.</p>
+<ul>
+<li>앨범 커버 생성기: <a href="https://nagai-style.vercel.app/cover/">nagai-style.vercel.app/cover</a></li>
+</ul>
+<h2 id="4-후기">4. 후기</h2>
+<p>클로드는 미적감각이 좋다고들 얘기하는데 나는 이 작업을 하면서 색감이 특히 더 마음에 들었다.</p>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:.75rem; margin:0 0 2rem; font-size:.8rem">
+  <div><div style="display:flex; height:56px; border-radius:6px; overflow:hidden"><span style="flex:1; background:#163f8e"></span><span style="flex:1; background:#2f66b8"></span><span style="flex:1; background:#8fb8e4"></span><span style="flex:1; background:#f1e6cf"></span></div><div style="margin-top:.25rem; opacity:.7">오후 · 짙은 파랑 + 모래색</div></div>
+  <div><div style="display:flex; height:56px; border-radius:6px; overflow:hidden"><span style="flex:1; background:#e77fae"></span><span style="flex:1; background:#f29bc0"></span><span style="flex:1; background:#f9c6d3"></span><span style="flex:1; background:#de5f6f"></span></div><div style="margin-top:.25rem; opacity:.7">해질녘 · 분홍 + 산호빛</div></div>
+  <div><div style="display:flex; height:56px; border-radius:6px; overflow:hidden"><span style="flex:1; background:#6a4cc0"></span><span style="flex:1; background:#a67fdc"></span><span style="flex:1; background:#efb8e6"></span><span style="flex:1; background:#7d2c42"></span></div><div style="margin-top:.25rem; opacity:.7">저녁 · 연보라 + 자줏빛</div></div>
+  <div><div style="display:flex; height:56px; border-radius:6px; overflow:hidden"><span style="flex:1; background:#a9dcc0"></span><span style="flex:1; background:#f4b6c8"></span><span style="flex:1; background:#f6c79a"></span><span style="flex:1; background:#c9b8e8"></span><span style="flex:1; background:#17131d"></span></div><div style="margin-top:.25rem; opacity:.7">건물 파스텔 + 그림자</div></div>
+</div>
+
+<p>색이 좋아 보이는 이유를 코드에서 찾아보면 몇 가지 규칙이 있다.</p>
+<ul>
+<li>그라데이션은 하늘과 바다에만 쓴다. 건물, 야자수, 자동차는 면마다 한 색이고 빛을 받는 정도에 따라 3~5단계로만 나눈다. 그래서 포스터처럼 깔끔하게 보인다.</li>
+<li>하늘이 바닥 색을 정한다. 파란 하늘에는 모래색, 분홍 하늘에는 산호빛, 연보라 하늘에는 자줏빛 바닥이 깔린다. 하늘과 땅이 같은 계열로 묶여서 장면 전체가 한 톤이 된다.</li>
+<li>건물은 민트, 핑크, 살구, 연보라 같은 파스텔 상자이고 창은 거의 검정이다. 야자수와 덤불도 거의 검은 녹색 실루엣을 먼저 깔고 빛 쪽에만 밝은 조각을 띄엄띄엄 올린다.</li>
+<li>그림자는 순수한 검정이 아니라 보랏빛이 살짝 도는 <code>#17131d</code>다. 파스텔과 짙은 그림자가 부딪히는 강한 대비가 한낮의 햇빛처럼 느껴진다.</li>
+</ul>
+<p>파도를 제작할 때는 사실 나가이의 파도 일러스트와는 좀 다른 편이다.
+일단 이렇게 단순 평면으로 보는 것으로 타협하였는데 추후에 파도 표현을 더 연구해봐야겠다.</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+ <script src="/static/js/mini-chart.js" ></script>
+  </body>
+</html>
