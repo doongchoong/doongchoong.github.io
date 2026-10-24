@@ -6,8 +6,15 @@
     <description>Recent content on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 13 Oct 2026 23:15:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 00:10:41 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tree</title>
+      <link>https://doongchoong.github.io/posts/tree/</link>
+      <pubDate>Sat, 24 Oct 2026 00:10:41 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/tree/</guid>
+      <description>&lt;p&gt;나무의 계절&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;mt-box&#34;&gt;&#xA;  &lt;div class=&#34;mt-stage&#34; id=&#34;mt-stage&#34;&gt;&lt;/div&gt;&#xA;  &lt;div class=&#34;mt-btns&#34; id=&#34;mt-btns&#34;&gt;&#xA;    &lt;button type=&#34;button&#34; data-season=&#34;spring&#34;&gt;봄&lt;/button&gt;&#xA;    &lt;button type=&#34;button&#34; data-season=&#34;summer&#34;&gt;여름&lt;/button&gt;&#xA;    &lt;button type=&#34;button&#34; data-season=&#34;autumn&#34;&gt;가을&lt;/button&gt;&#xA;    &lt;button type=&#34;button&#34; data-season=&#34;winter&#34;&gt;겨울&lt;/button&gt;&#xA;    &lt;button type=&#34;button&#34; data-new&gt;다른 나무&lt;/button&gt;&#xA;  &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;style&gt;&#xA;  .mt-box { width: 100%; }&#xA;  .mt-stage { width: 100%; aspect-ratio: 3 / 2; border-radius: 14px; overflow: hidden; background: #ffffff; /*#f4ecdd;*/ }&#xA;  .mt-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px; }&#xA;  .mt-btns button {&#xA;    font: inherit; font-size: 15px; padding: 8px 16px; min-width: 64px;&#xA;    border: 1px solid #e2d7c4; border-radius: 999px; background: #fbf6ec; color: #3b302a; cursor: pointer;&#xA;  }&#xA;  .mt-btns button.on { background: #c4602b; border-color: #c4602b; color: #fff; }&#xA;  .mt-btns button[data-new] { margin-left: 8px; }&#xA;&lt;/style&gt;&#xA;&#xA;&lt;script src=&#34;https://doongchoong.github.io/static/js/marker-tree.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script&gt;&#xA;  (function () {&#xA;    var tree = MarkerTree.mount(document.getElementById(&#39;mt-stage&#39;), { season: &#39;autumn&#39;, seed: 20261024 });&#xA;    var btns = document.getElementById(&#39;mt-btns&#39;);&#xA;    function mark() {&#xA;      btns.querySelectorAll(&#39;[data-season]&#39;).forEach(function (b) {&#xA;        b.classList.toggle(&#39;on&#39;, b.dataset.season === tree.options.season);&#xA;      });&#xA;    }&#xA;    btns.addEventListener(&#39;click&#39;, function (e) {&#xA;      var b = e.target.closest(&#39;button&#39;);&#xA;      if (!b) return;&#xA;      if (b.dataset.season) tree.set({ season: b.dataset.season });&#xA;      else tree.regenerate();&#xA;      mark();&#xA;    });&#xA;    mark();&#xA;  })();&#xA;&lt;/script&gt;&#xA;&lt;small&gt;(클로드 오푸스 5.5) &lt;/small&gt;</description>
+    </item>
     <item>
       <title>절차적생성-나가이스타일</title>
       <link>https://doongchoong.github.io/posts/%EC%A0%88%EC%B0%A8%EC%A0%81%EC%83%9D%EC%84%B1-%EB%82%98%EA%B0%80%EC%9D%B4%EC%8A%A4%ED%83%80%EC%9D%BC/</link>
