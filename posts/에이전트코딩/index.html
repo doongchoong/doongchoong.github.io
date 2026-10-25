@@ -196,8 +196,11 @@
       }
        
       .post-content {
-        overflow-x: auto;
-        overflow-y: visible;
+        overflow-x: clip;
+        overflow-wrap: break-word;
+      }
+      .post-content a {
+        overflow-wrap: anywhere;    
       }
       
        

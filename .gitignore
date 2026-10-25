@@ -9,3 +9,5 @@ blog/themes
 
 .DS_Store
 .agents
+
+.claude
