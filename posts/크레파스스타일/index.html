@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>크레파스스타일 | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+         
+        overflow-y: hidden !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        overflow: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: auto;
+        overflow-y: visible;
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+    border-radius: 6px 6px 6px 6px;
+    margin: 1em 0;
+  }
+
+   
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;  
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+   
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+ 
+tr:last-child td {
+  border-bottom: none;
+}
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 1em auto;
+  padding: 20px 20px;
+}
+
+
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.user-bubble {
+  background-color: #e9e9eb;
+  border-radius: 20px;
+  padding: 0.8em 1.2em;
+
+   
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0.5em 0 0.5em auto;
+
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+
+   
+  left: auto;
+  right: -10px;
+  top: 10px;
+
+  border: 6px solid transparent;
+  border-left-color: #e9e9eb;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+
+   
+  .mermaid svg[aria-roledescription="gitGraph"] {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <a href="/" class="back-link">← Back to home</a>
+    <h1 class="post-title">크레파스스타일</h1>
+    <div class="post-date">October 25, 2026</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-데모만들기">1. 데모만들기</a></li>
+    <li><a href="#2-레퍼런스-선택-주의점">2. 레퍼런스 선택 주의점</a></li>
+    <li><a href="#3-크레파스-제작-방식">3. 크레파스 제작 방식</a></li>
+    <li><a href="#4-비둘기">4. 비둘기</a></li>
+    <li><a href="#5-축구장면-만들기">5. 축구장면 만들기</a></li>
+    <li><a href="#6-후기">6. 후기</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>최근 클로드를 가지고 javascript로 canvas에 그림을 그리는 여러가지 방식을 만들어보고 있었는데
+인스타 릴스에서 도로 교통 장면을 애프터이펙트로 크레파스처럼 그린 영상을 보았다.
+이걸 canvas로 직접 구현해보고 싶어졌다.</p>
+<p>결과물부터 먼저 보면 다음과 같다.
+마우스를 움직이면 (모바일은 손가락으로 쓱쓱 그으면) 비둘기가 따라간다.</p>
+
+<crayon-pigeon seed="7" ratio="16/10"></crayon-pigeon>
+<script src="/static/js/crayon-pigeon.js"></script>
+
+<p>에셋을 만들어두기 위해 처음에 잠깐 로딩이 있다.</p>
+<h2 id="1-데모만들기">1. 데모만들기</h2>
+<p>릴스에서 영상을 캡쳐하고 이를 첨부해서
+일단 데모부터 만들어보면서 다듬어 나가기로 했다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. 크레파스 느낌이 전혀 아니야 , 벡터로 그리는 거니?  그냥 픽셀 컨트롤은 힘든가?</div></p>
+<p><strong>🤖 Claude:</strong></p>
+<p>네, 지금 버전은 벡터예요. <code>lineTo</code>로 선을 긋고 나중에 노이즈 마스크로 구멍만 뚫은 거라서, 크레파스라기보다 구멍 난 마커처럼 보여요. 픽셀 제어도 어렵지 않고, 오히려 그쪽이 정답에 가까워요. 경로(지그재그 플랜)만 벡터로 두고, 실제로 색이 묻는 건 픽셀 단위로 시뮬레이션하는 방식으로 바로 다시 만들어볼게요.</p>
+<p>픽셀 방식으로 다시 만들어서 같은 링크에 업데이트했어요. 이번엔 캔버스 API로는 선을 하나도 긋지 않아요. RGB 버퍼를 직접 계산해서 <code>putImageData</code>로 찍어요.</p>
+<p>(생략&hellip;)</p>
+<p><div class="user-bubble"><strong>User</strong>. 꽤 괜찮아졌어 , 어색한점은  뭔가 규칙적인 느낌이 나 노이즈? 에서 말이야,  그리고 검색을 해서 뭔가 방안이 있는지도 찾아본거니?</div></p>
+<p><strong>🤖 Claude:</strong></p>
+<p>아니요, 지난번엔 검색 없이 제가 아는 방식으로만 만들었어요. 지금 찾아볼게요.</p>
+<p>검색해 보니 참고할 만한 게 꽤 있었어요. 핵심만 반영해서 바로 고쳐볼게요.</p>
+<p>같은 링크에 업데이트했어요. 규칙적으로 보인 건 노이즈 탓이 맞았고, 원인은 이 다섯 가지였어요.</p>
+<ul>
+<li><strong>격자 노이즈</strong>: value noise의 모든 옥타브가 픽셀 격자와 같은 방향으로 정렬돼 있어서 네모난 뭉침이 반복됐어요.</li>
+<li><strong>sin 함수</strong>: 압력, 굵기, 흔들림을 sin으로 줘서 일정한 주기의 구슬 무늬가 생겼어요.</li>
+<li><strong>고정된 크레파스 끝</strong>: 끝의 단면을 표 하나로 고정해서, 한 획 내내 줄무늬가 똑같았어요.</li>
+<li><strong>균일한 간격</strong>: 지그재그 간격이 일정했어요.</li>
+<li><strong>같은 구멍</strong>: 모든 획이 같은 종이결을 읽어서 겹쳐 칠해도 같은 자리만 비었어요.</li>
+</ul>
+<p>검색에서 찾은 것 중 직접 반영한 건 이래요.</p>
+<p><strong>크레파스 시뮬레이션 논문</strong> (Rudolf·Mould·Neufeld, 2003): 종이를 높이맵으로, 크레파스를 종이와 닿으면서 변하는 2D 마스크로 표현하고, 왁스가 묻는 양을 접촉 형태, 누르는 힘, 마찰로 계산해요. 여기서 세 가지를 가져왔어요.</p>
+<ul>
+<li>종이결: 균일한 화이트 노이즈에 사분원 호를 컨볼루션한 &ldquo;lunar&rdquo; 텍스처로 바꿔서 격자 느낌을 없앴어요.</li>
+<li>마찰: 크레파스가 종이의 볼록한 부분을 만날 때 왁스를 남긴다는 점을 반영해, 진행 방향을 마주 보는 경사면에 더 묻게 했어요. 획 방향마다 빈 자리가 달라져요.</li>
+<li>먼지 자국: 논문은 먼지나 딱딱한 왁스 조각이 획에 점과 줄을 남기는 현상은 다루지 않았다고 했는데, 가끔 흰 줄이 생기게 따로 넣었어요. 크레파스 끝 단면도 획을 따라 서서히 변하게 바꿨어요.</li>
+</ul>
+<p><strong>Corel Painter</strong>: 반복 없는 자연스러운 자국을 위해 찍을 때마다 종이결 위치를 무작위로 바꾸거나 획마다 회전시키는 옵션이 있어요. 그래서 획마다 어긋난 종이결을 일부 섞었어요.</p>
+<p>(&hellip; 생략 &hellip;)</p>
+
+</div>
+<p>결국 리서치가 중요하다.
+아무리 레퍼런스를 주어도 구체적인 방식이 없다면 먼길만 돌아가게 될 뿐이다.</p>
+<h2 id="2-레퍼런스-선택-주의점">2. 레퍼런스 선택 주의점</h2>
+<p>그런데 함정이 하나 있었다.
+레퍼런스는 내가 릴스를 캡쳐한 것이라 내 눈에는 크레파스 느낌이 살아있지만
+확대해서 캡쳐하다 보니 클로드가 이걸 수치로 분석할때는
+뿌옇고 흐린 그림으로 인지하게 된다.</p>
+<p>내가 이 상태로 맞춰달라고 했으니
+확대된 흐린 상태 그대로 충실하게? 적용이 되었다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. 레퍼런스에 맞춰서 개선해줘</div></p>
+<p><strong>🤖 Claude:</strong></p>
+<p>레퍼런스 측정값을 목표로 잡고 진행할게요. 목표는 중간톤 0.65 이상, 큰 얼룩 비중 0.6 이상, 선명도 0.15 이하, 결 방향성 0.55 이상이에요. 이걸 맞추려고 바꿀 건 네 가지예요.</p>
+<ul>
+<li>연속 톤: 묻는 양을 이분법이 아니라 누르는 힘에 비례해 연속적으로 쌓이게 해요.</li>
+<li>큰 얼룩: 획마다 압력을 크게 다르게 주고, 간격을 넓혀서 획 단위 띠가 보이게 해요.</li>
+<li>결 방향: 크레파스 끝의 줄무늬를 강하게, 그리고 획을 따라 천천히 변하게 해요.</li>
+<li>부드러움: 낮은 해상도로 계산한 뒤 부드럽게 확대해서 보여줘요.</li>
+</ul>
+<p><div class="user-bubble"><strong>User</strong>. 미안하다 왜나하면 내가 캡쳐한것은  확대한것을 캡쳐한거라  뿌얘진거야  그걸 비교히라고 했으니 이건 내 잘못이야  결 방향설?  이런거만 보정하면 될까?</div></p>
+<p><strong>🤖 Claude:</strong></p>
+<p>괜찮아요. 확대 캡처인지 확인하지 않고 그대로 목표치로 쓴 제 책임도 있어요.</p>
+<p>그래서 확인 실험을 하나 해봤어요. 블러를 넣기 전 버전(v3) 렌더에 확대 캡처와 비슷한 조건(3배 확대 + 블러)을 씌우고 다시 측정했어요.</p>
+<table>
+  <thead>
+      <tr>
+          <th>지표</th>
+          <th>v3 원본</th>
+          <th>v3 확대+블러</th>
+          <th>레퍼런스</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>중간톤</td>
+          <td>0.07</td>
+          <td>0.25</td>
+          <td>0.75</td>
+      </tr>
+      <tr>
+          <td>큰 얼룩</td>
+          <td>0.36</td>
+          <td>0.44</td>
+          <td>0.62</td>
+      </tr>
+      <tr>
+          <td>선명도</td>
+          <td>0.47</td>
+          <td>0.13</td>
+          <td>0.15</td>
+      </tr>
+      <tr>
+          <td>결 방향성</td>
+          <td>0.25</td>
+          <td>0.62</td>
+          <td>0.56</td>
+      </tr>
+  </tbody>
+</table>
+<p>결과는 예상과 반대였어요. 결 방향성은 확대 블러만 씌워도 레퍼런스 수준까지 올라가요. 블러가 잔 알갱이를 지우면 긴 획 구조만 남기 때문이에요. 선명도도 마찬가지로 블러 때문이었어요. 반면 중간톤과 큰 얼룩은 블러를 씌워도 여전히 차이가 커요. 이 둘이 진짜 차이예요.</p>
+<p>그래서 결 방향성만 보정할 게 아니라, 이렇게 정리하는 게 맞아 보여요.</p>
+<ul>
+<li><strong>유지</strong>: v4의 연속 톤 증착, 획마다 다른 압력, 덧칠 패스. 진짜 차이였던 중간톤과 큰 얼룩을 겨냥한 변경이라 그대로 둬요.</li>
+<li><strong>되돌림</strong>: 블러와 저해상도 확대. 확대 캡처의 흐림을 따라 한 거라서, 빼고 종이결이 다시 또렷하게 보이게 해요.</li>
+<li><strong>측정 방식</strong>: 앞으로는 레퍼런스와 같은 캡처 조건을 제 렌더에도 씌운 다음 비교할게요.</li>
+</ul>
+<p>한 가지 한계가 있어요. 실제로 몇 배 확대했는지 모르니 &ldquo;3배&quot;는 추정이에요. 확대하지 않은 캡처를 한 장 주시면 그걸 기준으로 다시 재고 진행할게요.</p>
+
+</div>
+<p>즉 내눈으로 보정된? 캡쳐화면을 그대로 믿으면 되는것이 아니다.
+이는 언급을 하거나 혹은 캡쳐를 할때 본 해상도로 맞춰서 해야하는 부분이다.
+꼭 이 작업 뿐 아니라 다른작업 시에도 항상 기억해야 하는 부분인 것 같다.</p>
+<h2 id="3-크레파스-제작-방식">3. 크레파스 제작 방식</h2>
+<p>크레파스 스타일은 대략 세 단계로 진행된다.</p>
+<ol>
+<li>계획 : 선이 어디로 지나갈지 정한다. 색칠은 지그재그, 외곽선은 살짝 휘고 떨려서 실수가 잦은 아이의 색칠을 흉내낸다.</li>
+<li>묻히기 : 닳은 크레파스 끝을 그 경로를 따라 문지르며 종이 결에 왁스가 얼마나 걸리는지 픽셀마다 계산한다.</li>
+<li>보여주기 : 결과를 조금씩 흔들어서(boil) 손그림 애니메이션처럼 보여준다.</li>
+</ol>
+<p>핵심은 2번이다.</p>
+<p>아래는 클로드가 정리해준 것이다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><strong>🤖 Claude:</strong></p>
+<p>이제 핵심 로직만 떼어낸 독립 모듈을 작성할게요.</p>
+<p>모듈 단독으로도 같은 결과가 나와요. 데모도 업데이트할게요.</p>
+<p>데모는 같은 링크에서 납작한 끝 하나로 정리했어요. 핵심 로직은 장면과 UI를 뺀 독립 모듈 crayon-core.js로 뽑았고, 이 모듈만으로 집 장면을 그려서 데모와 같은 결과가 나오는 것까지 확인했어요.</p>
+<h3 id="전체-구조">전체 구조</h3>
+<p>세 단계로 나뉘어요.</p>
+<ol>
+<li><strong>계획 (벡터)</strong>: 손이 어디로 지나갈지 경로만 정해요.</li>
+<li><strong>묻히기 (픽셀)</strong>: 그 경로를 따라 크레파스 면을 찍으면서, 픽셀마다 왁스가 얼마나 묻는지 계산해요.</li>
+<li><strong>출력</strong>: 버퍼를 떨림 맵으로 살짝 밀어서 화면에 그려요.</li>
+</ol>
+<div class="code-block-wrapper">
+  <div class="code-title">JS</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">cr</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">createCrayon</span><span style="color:#1f2328">(</span><span style="color:#1f2328">canvas</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">cr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">resize</span><span style="color:#1f2328">(</span><span style="color:#1f2328">canvas</span><span style="color:#1f2328">.</span><span style="color:#1f2328">clientWidth</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">devicePixelRatio</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">strokes</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">...</span><span style="color:#1f2328">cr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">fill</span><span style="color:#1f2328">(</span><span style="color:#1f2328">poly</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;#f07814&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">{</span> <span style="color:#1f2328">angle</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">0.4</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">width</span><span style="color:#0550ae">:</span> <span style="color:#0550ae">18</span> <span style="color:#1f2328">}),</span> <span style="color:#57606a">// 2겹
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>  <span style="color:#1f2328">cr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">line</span><span style="color:#1f2328">(</span><span style="color:#1f2328">poly</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#39;#2a2521&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">{</span> <span style="color:#1f2328">closed</span><span style="color:#0550ae">:</span> <span style="color:#cf222e">true</span> <span style="color:#1f2328">}),</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">cr</span><span style="color:#1f2328">.</span><span style="color:#1f2328">schedule</span><span style="color:#1f2328">(</span><span style="color:#1f2328">strokes</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// 매 프레임: cr.update(strokes, t); cr.present(Math.floor(t * 8));
+</span></span></span></code></pre></div>
+  </div>
+</div><h3 id="1-종이-buildpaper">1. 종이 (<code>buildPaper</code>)</h3>
+<p>종이 돌기 높이맵 <code>heq</code>(0-1)를 미리 만들어요. 화이트 노이즈에 사분원 호를 컨볼루션한 &ldquo;lunar&rdquo; 텍스처가 기본이에요. 여기에 회전시킨 큰 노이즈 두 겹을 더하고, 히스토그램 평활화로 0-1에 고르게 펴요. 기울기 <code>GX</code>, <code>GY</code>는 마찰 계산에 써요.</p>
+<h3 id="2-계획-fill-zigzagverts">2. 계획 (<code>fill</code>, <code>zigzagVerts</code>)</h3>
+<p>도형을 원하는 각도로 돌린 뒤, 스캔라인과 만나는 양 끝점을 좌우 번갈아 이어 지그재그를 만들어요. 간격은 불규칙하고, 끝점은 경계에서 살짝 모자라거나 넘쳐요. <code>fill()</code>은 두 겹을 돌려줘요. 두 번째 겹은 각도를 10~20° 틀고, 더 듬성듬성하고, 더 가볍게 칠해요. 지그재그가 꺾이는 위치(<code>turns</code>)는 &ldquo;새로 한 번 지나가는 패스&quot;의 시작점으로 기록해둬요.</p>
+<h3 id="3-묻히기-stamp-가장-중요한-부분">3. 묻히기: <code>stamp</code> (가장 중요한 부분)</h3>
+<p>픽셀 하나에서 일어나는 일은 세 줄로 요약돼요.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">JS</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">P</span>   <span style="color:#0550ae">=</span> <span style="color:#1f2328">q</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">1</span> <span style="color:#0550ae">-</span> <span style="color:#1f2328">xr</span><span style="color:#0550ae">*</span><span style="color:#1f2328">xr</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">rk0</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">rk</span><span style="color:#0550ae">*</span><span style="color:#1f2328">row</span><span style="color:#1f2328">[</span><span style="color:#1f2328">bi</span><span style="color:#1f2328">]);</span>   <span style="color:#57606a">// 누르는 힘 × 단면 × 끝의 결
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">const</span> <span style="color:#1f2328">res</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#0550ae">1</span> <span style="color:#0550ae">-</span> <span style="color:#1f2328">h</span><span style="color:#1f2328">)</span><span style="color:#0550ae">*</span><span style="color:#1f2328">tau</span> <span style="color:#0550ae">-</span> <span style="color:#1f2328">fk</span><span style="color:#0550ae">*</span><span style="color:#1f2328">(</span><span style="color:#1f2328">GX</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span><span style="color:#0550ae">*</span><span style="color:#1f2328">tx</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">GY</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span><span style="color:#0550ae">*</span><span style="color:#1f2328">ty</span><span style="color:#1f2328">);</span> <span style="color:#57606a">// 종이 저항
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">let</span> <span style="color:#1f2328">c</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">clamp</span><span style="color:#1f2328">((</span><span style="color:#1f2328">P</span> <span style="color:#0550ae">-</span> <span style="color:#1f2328">res</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">gain</span><span style="color:#1f2328">);</span>                     <span style="color:#57606a">// 접촉량
+</span></span></span></code></pre></div>
+  </div>
+</div><ul>
+<li><strong>P (누르는 힘)</strong>: 획 중심에서 가장 세요. 크레파스 끝의 닳은 결(<code>row</code>)이 지나가는 줄에서는 약해져서 줄무늬가 생겨요.</li>
+<li><strong>res (종이 저항)</strong>: 돌기 골짜기일수록 커요. 진행 방향을 마주 보는 경사면에서는 작아져요(마찰로 왁스가 걸리는 효과).</li>
+<li><strong>c (접촉량)</strong>: 힘이 저항을 넘는 만큼 묻어요. 흰 알갱이는 여기서 생겨요.</li>
+</ul>
+<h4 id="가장자리-번짐을-없앤-평균-처리">가장자리 번짐을 없앤 평균 처리</h4>
+<div class="code-block-wrapper">
+  <div class="code-title">JS</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">MG</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">!==</span> <span style="color:#1f2328">gen</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span> <span style="color:#1f2328">MG</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span><span style="color:#0550ae">=</span><span style="color:#1f2328">gen</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">M</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span><span style="color:#0550ae">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">MS</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span><span style="color:#0550ae">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">MC</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span><span style="color:#0550ae">=</span><span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">MS</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">+=</span> <span style="color:#1f2328">c</span><span style="color:#1f2328">;</span> <span style="color:#1f2328">MC</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span><span style="color:#0550ae">++</span><span style="color:#1f2328">;</span>                       <span style="color:#57606a">// 이번 패스의 접촉 합과 횟수
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">const</span> <span style="color:#1f2328">target</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">-</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">exp</span><span style="color:#1f2328">(</span><span style="color:#0550ae">-</span><span style="color:#1f2328">kp</span> <span style="color:#0550ae">*</span> <span style="color:#1f2328">MS</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">/</span> <span style="color:#1f2328">MC</span><span style="color:#1f2328">[</span><span style="color:#1f2328">i</span><span style="color:#1f2328">]);</span></span></span></code></pre></div>
+  </div>
+</div><p>한 패스 안에서는 찍힌 횟수만큼 쌓지 않고 접촉의 평균을 써요. 그래서 덜 찍히는 가장자리와 끝이 에어브러시처럼 옅어지지 않아요. 지그재그가 꺾이면 <code>gen</code>이 바뀌고, 새 패스는 그 위에 쌓여요.</p>
+<h4 id="납작한-끝">납작한 끝</h4>
+<div class="code-block-wrapper">
+  <div class="code-title">JS</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#cf222e">const</span> <span style="color:#1f2328">pu</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">dx</span><span style="color:#0550ae">*</span><span style="color:#1f2328">cph</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">dy</span><span style="color:#0550ae">*</span><span style="color:#1f2328">sph</span><span style="color:#1f2328">)</span><span style="color:#0550ae">/</span><span style="color:#1f2328">a</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">pv</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">dy</span><span style="color:#0550ae">*</span><span style="color:#1f2328">cph</span> <span style="color:#0550ae">-</span> <span style="color:#1f2328">dx</span><span style="color:#0550ae">*</span><span style="color:#1f2328">sph</span><span style="color:#1f2328">)</span><span style="color:#0550ae">/</span><span style="color:#1f2328">b</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#1f2328">pu</span><span style="color:#0550ae">**</span><span style="color:#0550ae">4</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">pv</span><span style="color:#0550ae">**</span><span style="color:#0550ae">4</span> <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span> <span style="color:#cf222e">continue</span><span style="color:#1f2328">;</span>               <span style="color:#57606a">// 둥근 사각형 안쪽만
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">const</span> <span style="color:#1f2328">he</span> <span style="color:#0550ae">=</span> <span style="color:#6639ba">Math</span><span style="color:#1f2328">.</span><span style="color:#1f2328">sqrt</span><span style="color:#1f2328">(</span><span style="color:#1f2328">a</span><span style="color:#0550ae">*</span><span style="color:#1f2328">a</span><span style="color:#0550ae">*</span><span style="color:#1f2328">cn</span><span style="color:#0550ae">*</span><span style="color:#1f2328">cn</span> <span style="color:#0550ae">+</span> <span style="color:#1f2328">b</span><span style="color:#0550ae">*</span><span style="color:#1f2328">b</span><span style="color:#0550ae">*</span><span style="color:#1f2328">sn</span><span style="color:#0550ae">*</span><span style="color:#1f2328">sn</span><span style="color:#1f2328">);</span>   <span style="color:#57606a">// 이 방향 획의 반폭
+</span></span></span></code></pre></div>
+  </div>
+</div><p>닿는 면은 손 각도(<code>HAND</code>)에 고정된 둥근 사각형이에요. 획의 굵기 <code>he</code>는 그 면을 진행 방향의 수직으로 잰 폭이라서, 그리는 방향에 따라 달라지고 획 끝도 비스듬하게 잘려요.</p>
+<h3 id="4-획-따라가기-advance">4. 획 따라가기 (<code>advance</code>)</h3>
+<p>0.6px마다 한 번씩 찍으면서 다섯 가지를 바꿔줘요.</p>
+<ul>
+<li><strong>손 떨림</strong>: 경로에서 살짝 벗어나요.</li>
+<li><strong>끝의 결</strong>: <code>row</code>가 획을 따라 아주 천천히 변해서, 줄무늬가 생겼다 흐려졌다 해요.</li>
+<li><strong>먼지 자국</strong>: 가끔 흰 줄이 지나가요.</li>
+<li><strong>압력</strong>: 칠할 때는 패스마다 크게 바뀌어서 진하고 연한 띠가 생겨요. 외곽선에서는 선을 따라 서서히 바뀌어요.</li>
+<li><strong>시작과 끝</strong>: 눌러 들어갔다가 힘을 빼며 떼요.</li>
+</ul>
+<h3 id="5-출력-present">5. 출력 (<code>present</code>)</h3>
+<p>미리 만든 떨림 맵 3장 중 하나로 픽셀을 1~2px 밀어서 복사해요. AE의 Turbulent Displace + Posterize Time과 같은 역할이에요.</p>
+<h3 id="조절-손잡이">조절 손잡이</h3>
+<p>느낌을 바꿀 때 주로 만지는 값이에요.</p>
+<table>
+  <thead>
+      <tr>
+          <th>값</th>
+          <th>역할</th>
+          <th>칠하기 / 외곽선</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>tau</code></td>
+          <td>종이 저항. 높을수록 알갱이가 많아요</td>
+          <td>0.25 / 0.56</td>
+      </tr>
+      <tr>
+          <td><code>ridgeK</code></td>
+          <td>끝의 결(줄무늬) 세기</td>
+          <td>0.6 / 0.55</td>
+      </tr>
+      <tr>
+          <td><code>kPass</code></td>
+          <td>한 번 지날 때 진하기</td>
+          <td>3.4·2.4 / 3.8</td>
+      </tr>
+      <tr>
+          <td><code>resist</code></td>
+          <td>이미 칠한 색 위에 덧칠할 때의 저항</td>
+          <td>0.7 / 0.15</td>
+      </tr>
+      <tr>
+          <td><code>pa</code>, <code>pb</code></td>
+          <td>납작한 면의 장축·단축 비율</td>
+          <td>1.15·0.55 / 1.1·0.7</td>
+      </tr>
+      <tr>
+          <td><code>HAND</code></td>
+          <td>손 각도 (장면 전체 공통)</td>
+          <td>-0.55 rad</td>
+      </tr>
+  </tbody>
+</table>
+<p>데모는 같은 로직을 한 파일 안에 그대로 넣어둔 상태라서, 스킬로 만드실 때는 crayon-core.js 쪽을 기준으로 쓰시면 돼요.</p>
+
+</div>
+<p>위 설명은 0.6px마다 크레파스 면을 찍는 방식(stamp)인데
+실제 비둘기 데모는 <code>sweep</code> 모드로 돌린다.
+찍는 방식은 한 번 지나갈 때 픽셀 하나를 30번 넘게 계산하지만
+sweep은 경로에서 가장 가까운 점을 기준으로 한 번만 계산한다.
+모양은 같고 약 8배 빠르다.</p>
+<h2 id="4-비둘기">4. 비둘기</h2>
+<p>단순히 도로 교통을 크레파스로 그리는 것 뿐 아니라
+마우스 상호작용으로 비둘기를 넣어서 교통체증에 영향을 주도록 했다.</p>
+<ul>
+<li>마우스(모바일은 손가락)를 따라 걸으며 고개를 까딱인다. 가만히 있으면 땅을 쪼아댄다.</li>
+<li>멀리 떨어지면 날아오르고 가까워지면 내려앉는다.</li>
+<li>비둘기가 차 앞을 막으면 차가 멈춘다.</li>
+<li>옆이나 뒤에서 다가가면 차가 냅다 달아난다. 이때 차 위에 크레파스로 그린 &ldquo;!&ldquo;가 뜬다.</li>
+</ul>
+<p>비둘기 모델은 1.6m짜리인데 도로에서는 이걸 1.7배 키워서 그린다. 차가 피할만 하다.</p>
+<h2 id="5-축구장면-만들기">5. 축구장면 만들기</h2>
+<p>그 외 아들 축구 장면을 크레파스로 그려보면 좋을 것 같은 생각이 들었다.
+<a href="https://crayon-soccer.vercel.app">crayon-soccer.vercel.app</a></p>
+<h2 id="6-후기">6. 후기</h2>
+<p>최근 클로드를 사용하면서 Canvas를 사용하는 형태를 많이 만들어보고있는데
+사용하면서 이런 저런 시행착오를 많이 겪어보고 있다.
+마냥 잘 만든다고 의존하는 것이 아니고 사람이 계획을 잘 세워서
+좋은 순서로 물어보는것도 중요한 것 같다.</p>
+<p>토큰만 낭비하다가 클로드가 리서치를 해서 논문을 찾아 공식을 적용하는 순간부터
+퀄리티가 급격하게 올라간 것을 보면
+&ldquo;찾아본거니?(리서치를 해라)&rdquo; 이게 최종 퀄리티를 결정하는데에 결정적으로 영향을 끼친 것이다.</p>
+<p>&ldquo;이미 연구되어서 사람들이 잘 쓰고 있는 도구&rdquo;</p>
+<p>이런 종류를 다시 만들어보기 위해서는 리서치 단계를 먼저 두는것이 좋아보인다.</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+ <script src="/static/js/mini-chart.js" ></script>
+  </body>
+</html>

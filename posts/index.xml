@@ -6,8 +6,15 @@
     <description>Recent content in Posts on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sat, 24 Oct 2026 00:10:41 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 16:00:00 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>크레파스스타일</title>
+      <link>https://doongchoong.github.io/posts/%ED%81%AC%EB%A0%88%ED%8C%8C%EC%8A%A4%EC%8A%A4%ED%83%80%EC%9D%BC/</link>
+      <pubDate>Sun, 25 Oct 2026 16:00:00 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/%ED%81%AC%EB%A0%88%ED%8C%8C%EC%8A%A4%EC%8A%A4%ED%83%80%EC%9D%BC/</guid>
+      <description>&lt;p&gt;최근 클로드를 가지고 javascript로 canvas에 그림을 그리는 여러가지 방식을 만들어보고 있었는데&#xA;인스타 릴스에서 도로 교통 장면을 애프터이펙트로 크레파스처럼 그린 영상을 보았다.&#xA;이걸 canvas로 직접 구현해보고 싶어졌다.&lt;/p&gt;&#xA;&lt;p&gt;결과물부터 먼저 보면 다음과 같다.&#xA;마우스를 움직이면 (모바일은 손가락으로 쓱쓱 그으면) 비둘기가 따라간다.&lt;/p&gt;&#xA;&#xA;&lt;crayon-pigeon seed=&#34;7&#34; ratio=&#34;16/10&#34;&gt;&lt;/crayon-pigeon&gt;&#xA;&lt;script src=&#34;https://doongchoong.github.io/static/js/crayon-pigeon.js&#34;&gt;&lt;/script&gt;&#xA;&#xA;&lt;p&gt;에셋을 만들어두기 위해 처음에 잠깐 로딩이 있다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-데모만들기&#34;&gt;1. 데모만들기&lt;/h2&gt;&#xA;&lt;p&gt;릴스에서 영상을 캡쳐하고 이를 첨부해서&#xA;일단 데모부터 만들어보면서 다듬어 나가기로 했다.&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#34;chatlog&#34;&gt;&#xA;  &lt;p&gt;&lt;div class=&#34;user-bubble&#34;&gt;&lt;strong&gt;User&lt;/strong&gt;. 크레파스 느낌이 전혀 아니야 , 벡터로 그리는 거니?  그냥 픽셀 컨트롤은 힘든가?&lt;/div&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Tree</title>
       <link>https://doongchoong.github.io/posts/tree/</link>
