@@ -365,35 +365,68 @@ function resize() {
 }
 new ResizeObserver(resize).observe(stage);
 
-// 드래그로 이동, 휠로 확대
-let dragging = false, lx = 0, ly = 0;
-stage.addEventListener('pointerdown', (e) => {
-  dragging = true; lx = e.clientX; ly = e.clientY;
-  stage.classList.add('drag'); stage.setPointerCapture(e.pointerId);
-  $('tour').checked = false;
-});
-stage.addEventListener('pointerup', () => { dragging = false; stage.classList.remove('drag'); });
-stage.addEventListener('pointermove', (e) => {
-  if (!dragging) return;
+// 드래그로 이동, 휠로 확대. 터치에서는 두 손가락으로 벌리고 오므려 확대하고, 두 손가락 중점을 옮겨 이동한다.
+const ZOOM_MIN = 0.2, ZOOM_MAX = 3.5;
+const clampZoom = (z) => Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, z));
+const pts = new Map();                 // pointerId → {x, y}
+let dragging = false, lx = 0, ly = 0;  // 이동 기준점 (손가락 하나면 그 손가락, 둘이면 중점)
+let pinch = null;                      // {dist, zoom}
+
+function anchor() {
+  let x = 0, y = 0;
+  for (const p of pts.values()) { x += p.x; y += p.y; }
+  return [x / pts.size, y / pts.size];
+}
+function spread() {
+  const [a, b] = [...pts.values()];
+  return Math.hypot(a.x - b.x, a.y - b.y) || 1;
+}
+// 손가락 수가 바뀔 때마다 기준을 다시 잡아 화면이 튀지 않게 한다
+function regrip() {
+  dragging = pts.size > 0;
+  stage.classList.toggle('drag', dragging);
+  if (dragging) [lx, ly] = anchor();
+  pinch = pts.size >= 2 ? { dist: spread(), zoom: view.zoom } : null;
+}
+function panBy(px, py) {
   const u = (cam.right - cam.left) / stage.clientWidth;
-  const dx = (e.clientX - lx) * u, dy = (e.clientY - ly) * u / Math.sin(ISO_ELEV);
-  lx = e.clientX; ly = e.clientY;
+  const dx = px * u, dy = py * u / Math.sin(ISO_ELEV);
   const c = Math.cos(view.az), s = Math.sin(view.az);
-  view.tx += -c * dx - s * dy;
-  view.tz += s * dx - c * dy;
-  view.tx = Math.min(view.xmax, Math.max(view.xmin, view.tx));
-  view.tz = Math.min(view.zmax, Math.max(view.zmin, view.tz));
+  view.tx = Math.min(view.xmax, Math.max(view.xmin, view.tx - c * dx - s * dy));
+  view.tz = Math.min(view.zmax, Math.max(view.zmin, view.tz + s * dx - c * dy));
+}
+
+stage.addEventListener('pointerdown', (e) => {
+  pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  try { stage.setPointerCapture(e.pointerId); } catch (err) { /* 이미 끝난 포인터면 무시 */ }
+  $('tour').checked = false;
+  regrip();
 });
+const release = (e) => { if (pts.delete(e.pointerId)) regrip(); };
+stage.addEventListener('pointerup', release);
+stage.addEventListener('pointercancel', release);
+stage.addEventListener('pointermove', (e) => {
+  if (!pts.has(e.pointerId)) return;
+  pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  const [ax, ay] = anchor();
+  panBy(ax - lx, ay - ly);
+  lx = ax; ly = ay;
+  if (pinch) view.zoom = clampZoom(pinch.zoom * spread() / pinch.dist);
+});
+// 두 손가락일 때는 브라우저가 페이지 확대·스크롤로 가져가지 않게 막는다 (iOS Safari 포함)
+stage.addEventListener('touchmove', (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+stage.addEventListener('gesturestart', (e) => e.preventDefault());
+
 // 블로그 글에 iframe으로 들어가 있으면 그냥 휠은 페이지 스크롤로 넘기고, Ctrl/⌘ + 휠(트랙패드 핀치)일 때만 확대한다
 const embedded = window.self !== window.top;
-if (embedded) {
-  document.body.classList.add('embedded');
-  $('hint').textContent = '드래그로 이동 · Ctrl/⌘ + 휠로 확대';
-}
+const touch = matchMedia('(pointer: coarse)').matches;
+if (embedded) document.body.classList.add('embedded');
+$('hint').textContent = touch ? '드래그로 이동 · 두 손가락으로 확대'
+  : embedded ? '드래그로 이동 · Ctrl/⌘ + 휠로 확대' : '드래그로 이동 · 휠로 확대';
 stage.addEventListener('wheel', (e) => {
   if (embedded && !e.ctrlKey && !e.metaKey) return;
   e.preventDefault();
-  view.zoom = Math.min(3.5, Math.max(0.2, view.zoom * Math.exp(-e.deltaY * 0.0015)));
+  view.zoom = clampZoom(view.zoom * Math.exp(-e.deltaY * 0.0015));
 }, { passive: false });
 
 /* ---------- 측정: ?stats=1 이면 그리기 호출 수와 프레임 시간을 띄운다 ---------- */
