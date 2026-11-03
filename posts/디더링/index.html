@@ -506,8 +506,13 @@ tbody tr:nth-child(even) {
 <h2 id="1-디더링이-적용된-미니어처-마을">1. 디더링이 적용된 미니어처 마을</h2>
 <p>three.js로 isometric 시점의 미니어처 마을을 만들고 그 위에 디더링을 입혔다.</p>
 
+<style>
+  .dt-frame { position:relative; width:100%; aspect-ratio:4/3; overflow:hidden; border-radius:12px; background:#fff; }
+  /* 폰처럼 좁은 화면에서는 폭에 맞춘 4:3이 너무 낮아서 화면 높이를 기준으로 세로로 길게 */
+  @media (max-width: 640px) { .dt-frame { aspect-ratio:auto; height:min(82svh, 720px); } }
+</style>
 <figure style="margin:0 0 2rem">
-  <div style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden; border-radius:12px; background:#fff">
+  <div class="dt-frame">
     <iframe
       src="/embeds/dither-town/"
       title="디더링 미니어처 마을"
