@@ -14,18 +14,21 @@ export const yawOf = (vx, vz) => Math.atan2(-vz, vx);   // 로컬 +x가 앞이 �
 const limbGeo = new THREE.CylinderGeometry(1, 1, 1, 5);
 limbGeo.translate(0, -0.5, 0);                // 위쪽 끝이 관절
 const headGeo = new THREE.SphereGeometry(1, 8, 6);
-// 한두 픽셀 굵기라 그늘진 면만 잡히면 검게 보인다. 살짝 자체 발광시켜 피규어 도색처럼 띄운다.
-const glow = (color) => ({ emissive: color, emissiveIntensity: 0.35 });
 const SKINS = ['#e0b48f', '#c08a62', '#8d5a3b', '#5c3a26'];
 
+/* 사람은 수백 명이고 한 명이 메시 6개라, 하나씩 그리면 그리기 호출이 수천 번이 된다.
+   그래서 몸은 위치만 계산하는 뼈대(Object3D)로 두고, 실제로는 팔다리와 머리를
+   InstancedMesh 두 개로 한꺼번에 그린다 (createCrowd). */
+const crowd = { limbs: [], heads: [] };
+
 function limb(parent, r, len, color, x, y, z) {
-  const pivot = new THREE.Group();
+  const pivot = new THREE.Object3D();
   pivot.position.set(x, y, z);
-  const m = new THREE.Mesh(limbGeo, mat(color, glow(color)));
-  m.scale.set(r, len, r);
-  m.castShadow = true;
-  pivot.add(m);
+  const bone = new THREE.Object3D();
+  bone.scale.set(r, len, r);
+  pivot.add(bone);
   parent.add(pivot);
+  crowd.limbs.push({ obj: bone, color: new THREE.Color(color) });
   return pivot;
 }
 
@@ -39,13 +42,74 @@ export function makePerson(parent, { shirt = '#888', pants = '#2b2b2e', h = 1.8,
   const torso = limb(g, 0.15, 0.62 * k, shirt, 0, hip + 0.62 * k, 0);
   const armL = limb(g, 0.05, 0.62 * k, skin, 0, hip + 0.56 * k, 0.2);
   const armR = limb(g, 0.05, 0.62 * k, skin, 0, hip + 0.56 * k, -0.2);
-  const head = new THREE.Mesh(headGeo, mat(skin, glow(skin)));
+  const head = new THREE.Object3D();
   head.position.set(0, hip + 0.8 * k, 0);
   head.scale.setScalar(0.15 * k);
-  head.castShadow = true;
   g.add(head);
+  crowd.heads.push({ obj: head, color: new THREE.Color(skin) });
+  g.userData.dynamic = true;      // 잠시 서 있어도 언제든 움직이니 정적 합치기에서 뺀다
   parent.add(g);
   return { g, legL, legR, armL, armR, torso, head, hip, headY: hip + 0.8 * k, phase: Math.random() * 6, bob: 0 };
+}
+
+// 뼈대들의 현재 위치를 InstancedMesh에 옮겨 그린다. 매 프레임 render 직전에 update()를 부른다.
+// 숨겨진 타일의 사람은 건너뛰고, 장면에서 떨어져 나간 사람(보도 행인 재배치 등)은 목록에서 지운다.
+export function createCrowd(scene) {
+  // 사람은 한두 픽셀 굵기라 그늘진 면만 잡히면 검게 보인다.
+  // 자기 색으로 0.35만큼 자체 발광시켜 피규어 도색처럼 띄운다.
+  const material = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 1, metalness: 0, emissive: '#ffffff', emissiveIntensity: 0.35 });
+  material.onBeforeCompile = (shader) => {
+    shader.fragmentShader = shader.fragmentShader.replace(
+      '#include <emissivemap_fragment>',
+      // 프래그먼트 쪽에는 USE_INSTANCING_COLOR 대신 USE_COLOR가 정의된다
+      '#include <emissivemap_fragment>\n#ifdef USE_COLOR\n  totalEmissiveRadiance *= vColor;\n#endif');
+  };
+  const parts = [[crowd.limbs, limbGeo], [crowd.heads, headGeo]].map(([list, geo]) => ({ list, geo, mesh: null }));
+
+  function ensure(part, n) {
+    if (part.mesh && part.mesh.instanceMatrix.count >= n) return;
+    if (part.mesh) { scene.remove(part.mesh); part.mesh.dispose(); }
+    const cap = Math.ceil(n * 1.3) + 16;
+    part.mesh = new THREE.InstancedMesh(part.geo, material, cap);
+    // 색 속성은 처음 그리기 전에 있어야 셰이더가 인스턴스 색을 쓰도록 컴파일된다
+    part.mesh.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(cap * 3), 3);
+    part.mesh.castShadow = true;
+    part.mesh.frustumCulled = false;
+    scene.add(part.mesh);
+  }
+  // 1: 보임, 0: 숨김, -1: 장면에서 떨어져 나감
+  function state(o) {
+    for (; o; o = o.parent) {
+      if (o === scene) return 1;
+      if (!o.visible) return 0;
+    }
+    return -1;
+  }
+
+  return {
+    drawn: () => parts.map((p) => (p.mesh ? p.mesh.count : 0)),   // 측정용: 이번 프레임에 그린 팔다리·머리 수
+    update() {
+      for (const part of parts) {
+        const { list } = part;
+        ensure(part, list.length);
+        const mesh = part.mesh;
+        let n = 0, w = 0;
+        for (let i = 0; i < list.length; i++) {
+          const e = list[i], s = state(e.obj);
+          if (s < 0) continue;              // 목록에서 지운다
+          list[w++] = e;
+          if (s === 0) continue;
+          mesh.setMatrixAt(n, e.obj.matrixWorld);
+          mesh.setColorAt(n, e.color);
+          n++;
+        }
+        list.length = w;
+        mesh.count = n;
+        mesh.instanceMatrix.needsUpdate = true;
+        if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+      }
+    },
+  };
 }
 
 // 걷기·뛰기 자세. speed는 m/s. 몸이 위아래로 튀는 양은 p.bob에 넣어 두니 g.position.y에 더해 쓴다.

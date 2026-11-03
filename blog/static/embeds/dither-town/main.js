@@ -1,6 +1,6 @@
 // 디더링 미니어처 마을: 같은 크기(38 × 26 m)의 타일을 한 곳씩 보거나 x축으로 나란히 이어 본다.
 import * as THREE from 'three';
-import { makeKit, makePerson, walkPose, yawOf } from './kit.js';
+import { makeKit, makePerson, walkPose, yawOf, createCrowd } from './kit.js';
 
 const TILE_W = 38, TILE_D = 26;
 const SIDEWALK_Z = 11.5, SIDEWALK_D = 2.2;     // 모든 타일이 공유하는 앞쪽 보도
@@ -37,10 +37,62 @@ for (const id of wanted) {
     const content = new THREE.Group();
     group.add(content);
     const api = mod.build(makeKit(content), { W: TILE_W, D: TILE_D }) || {};
+    bakeStatic(group, api);
     tiles.push({ meta: mod.meta, group, api });
   } catch (err) {
     console.warn(`타일 ${id}을(를) 불러오지 못했습니다`, err);
   }
+}
+
+// 움직이지 않는 메시를 재질별로 한 덩어리로 합친다. 타일 하나에 메시가 수백 개라
+// 그대로 두면 그리기 호출이 수천 번이 되고, 모바일은 GPU보다 이 호출 수에서 먼저 막힌다.
+// 무엇이 움직이는지는 15초를 미리 돌려 보고 가려낸다. 사람(userData.dynamic)은 늘 뺀다.
+function bakeStatic(group, api) {
+  group.updateMatrixWorld(true);
+  const before = new Map();
+  group.traverse((o) => { if (o.isMesh) before.set(o, o.matrixWorld.clone()); });
+  if (api.update) for (let i = 0; i < 300; i++) api.update(1 / 20, i / 20);
+  group.updateMatrixWorld(true);
+
+  const inv = group.matrixWorld.clone().invert();
+  const buckets = new Map();
+  for (const [mesh, m0] of before) {
+    if (Array.isArray(mesh.material) || !mesh.matrixWorld.equals(m0)) continue;
+    let o = mesh, skip = false;
+    for (; o && o !== group; o = o.parent) if (!o.visible || o.userData.dynamic) { skip = true; break; }
+    if (skip || o !== group) continue;
+    const key = `${mesh.material.uuid}|${mesh.castShadow}|${mesh.receiveShadow}`;
+    if (!buckets.has(key)) buckets.set(key, { mesh, list: [] });
+    buckets.get(key).list.push(mesh);
+  }
+
+  const rel = new THREE.Matrix4();
+  for (const { mesh: first, list } of buckets.values()) {
+    if (list.length < 2) continue;
+    const pos = [], nor = [];
+    for (const mesh of list) {
+      let g = mesh.geometry.index ? mesh.geometry.toNonIndexed() : mesh.geometry.clone();
+      if (!g.attributes.normal) g.computeVertexNormals();
+      g.applyMatrix4(rel.multiplyMatrices(inv, mesh.matrixWorld));
+      pos.push(g.attributes.position.array);
+      nor.push(g.attributes.normal.array);
+      g.dispose();
+      mesh.parent.remove(mesh);
+    }
+    const merged = new THREE.BufferGeometry();
+    merged.setAttribute('position', new THREE.BufferAttribute(concat(pos), 3));
+    merged.setAttribute('normal', new THREE.BufferAttribute(concat(nor), 3));
+    const m = new THREE.Mesh(merged, first.material);
+    m.castShadow = first.castShadow;
+    m.receiveShadow = first.receiveShadow;
+    group.add(m);
+  }
+}
+function concat(arrays) {
+  const out = new Float32Array(arrays.reduce((n, a) => n + a.length, 0));
+  let o = 0;
+  for (const a of arrays) { out.set(a, o); o += a.length; }
+  return out;
 }
 
 // 타일마다 깔리는 흙 받침, 잔디, 보도. 나란히 놓으면 이음새 없이 이어진다.
@@ -102,7 +154,9 @@ scene.add(new THREE.HemisphereLight('#e4edf5', '#7a6f58', 1.1));
 const sun = new THREE.DirectionalLight('#fff1d6', 3.0);
 const SUN_OFFSET = new THREE.Vector3(-16, 24, -11);
 sun.castShadow = true;
-sun.shadow.mapSize.set(4096, 4096);
+// 터치 기기(폰·태블릿)는 그림자 맵을 줄여 메모리와 그림자 패스 부담을 던다
+const SHADOW = matchMedia('(pointer: coarse)').matches ? 2048 : 4096;
+sun.shadow.mapSize.set(SHADOW, SHADOW);
 sun.shadow.bias = -0.0005;
 sun.shadow.normalBias = 0.02;
 scene.add(sun, sun.target);
@@ -339,10 +393,44 @@ stage.addEventListener('wheel', (e) => {
   view.zoom = Math.min(3.5, Math.max(0.2, view.zoom * Math.exp(-e.deltaY * 0.0015)));
 }, { passive: false });
 
+/* ---------- 측정: ?stats=1 이면 그리기 호출 수와 프레임 시간을 띄운다 ---------- */
+const stats = params.get('stats') === '1' ? { el: document.createElement('div'), n: 0, cpu: 0, since: performance.now() } : null;
+if (stats) {
+  stats.el.style.cssText = 'position:absolute;right:8px;top:8px;padding:4px 8px;background:rgba(0,0,0,.7);color:#fff;font:11px/1.4 ui-monospace,monospace;white-space:pre;pointer-events:none';
+  stage.appendChild(stats.el);
+  renderer.info.autoReset = false;        // 장면 + 후처리 두 번의 render를 한 프레임으로 센다
+}
+function reportStats(cpu) {
+  stats.n++; stats.cpu += cpu;
+  const now = performance.now();
+  if (now - stats.since < 500) return;
+  const r = renderer.info.render, m = renderer.info.memory;
+  stats.el.textContent =
+    `fps   ${(stats.n * 1000 / (now - stats.since)).toFixed(0)}\n` +
+    `cpu   ${(stats.cpu / stats.n).toFixed(2)} ms\n` +
+    `calls ${r.calls}\n` +
+    `tris  ${(r.triangles / 1000).toFixed(0)}k\n` +
+    `geo   ${m.geometries}\n` +
+    `crowd ${crowd.drawn().join(' / ')}`;
+  stats.n = 0; stats.cpu = 0; stats.since = now;
+}
+
 /* ---------- 루프 ---------- */
+// 글을 스크롤해 화면 밖으로 나가면 멈춘다. iframe 안에서도 바깥 페이지 기준으로 판정된다.
+let onScreen = true;
+new IntersectionObserver((es) => { onScreen = es[0].isIntersecting; }).observe(stage);
+
+const crowd = createCrowd(scene);
 const clock = new THREE.Clock();
 let tourT = 0;
 function frameLoop() {
+  if (!onScreen) {
+    clock.getDelta();                       // 돌아왔을 때 시간이 한꺼번에 튀지 않게 흘려보낸다
+    requestAnimationFrame(frameLoop);
+    return;
+  }
+  const t0 = performance.now();
+  if (stats) renderer.info.reset();
   const dt = Math.min(clock.getDelta(), 0.05);
   const t = clock.elapsedTime;
   view.az += (view.azGoal - view.az) * Math.min(1, dt * 5);
@@ -359,12 +447,15 @@ function frameLoop() {
   for (const tile of tiles) if (tile.group.visible && tile.api.update) tile.api.update(dt, t);
   updateWalkers(dt, t);
   if (rt) {
+    scene.updateMatrixWorld();
+    crowd.update();
     renderer.setRenderTarget(rt);
     renderer.render(scene, cam);
     renderer.setRenderTarget(null);
     post.uniforms.tex.value = rt.texture;
     renderer.render(quadScene, quadCam);
   }
+  if (stats) reportStats(performance.now() - t0);
   requestAnimationFrame(frameLoop);
 }
 sync();
