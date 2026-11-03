@@ -192,13 +192,15 @@ function updateCamera() {
   sun.target.position.set(view.tx, 0, view.tz);
 }
 // 보이는 타일 전체가 들어오는 확대 배율
-function fitZoom() {
+// heightOnly: 세로로 긴 화면(폰)에서는 폭에 맞추면 마을이 위쪽에 작게 남으니 높이에만 맞추고,
+// 좌우로 넘치는 부분은 드래그로 본다
+function fitZoom(heightOnly = false) {
   const aspect = renderer.domElement.width / renderer.domElement.height;
   const wx = view.xmax - view.xmin, wz = view.zmax - view.zmin;
   const ca = Math.abs(Math.cos(view.azGoal)), sa = Math.abs(Math.sin(view.azGoal));
   const halfW = (wx * ca + wz * sa) / 2 + 1;
   const halfH = ((wx * sa + wz * ca) * Math.sin(ISO_ELEV) + 9 * Math.cos(ISO_ELEV)) / 2 + 1;
-  return Math.min(1, baseHalfH() / Math.max(halfH, halfW / aspect));
+  return Math.min(1, baseHalfH() / (heightOnly ? halfH : Math.max(halfH, halfW / aspect)));
 }
 
 /* ---------- 배치: 한 곳 / 한 줄 / 격자 ---------- */
@@ -240,7 +242,8 @@ function applyLayout(keepView = false) {
   $('tour').checked = many && params.get('tour') === '1';
   // 카메라 이동이 꺼져 있으면 여러 블록이 한 화면에 다 들어오게 시작한다
   view.tx = 0; view.tz = 0;
-  view.zoom = many && !$('tour').checked ? fitZoom() : 1;
+  const portrait = renderer.domElement.width < renderer.domElement.height;
+  view.zoom = many && !$('tour').checked ? fitZoom(portrait) : 1;
   $('pickWrap').style.display = many ? 'none' : '';
   $('rowOnly').style.display = many ? '' : 'none';
 }

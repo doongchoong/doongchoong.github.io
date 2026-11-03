@@ -33,6 +33,13 @@
   /* 글 안에 넣었을 때: 세로 스와이프는 페이지 스크롤에 양보, ui=0이면 조작 막대를 숨긴다 */
   body.embedded .stage { touch-action: pan-y; }
   body.noui .bar { display: none; }
+  /* 폰에서는 조작 막대가 여러 줄로 접히며 화면을 많이 먹으니 촘촘하게 */
+  @media (max-width: 520px) {
+    html, body { font-size: 12px; }
+    .bar { gap: 5px 10px; padding: 5px 8px; }
+    .bar select, .bar button { padding: 2px 5px; }
+    .bar input[type=range] { width: 56px; }
+  }
   .err { position: absolute; inset: 0; display: none; place-items: center; padding: 24px; text-align: center; color: #666; }
 </style>
 <script type="importmap">
