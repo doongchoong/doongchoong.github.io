@@ -6,8 +6,15 @@
     <description>Recent content on 둥충코딩</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Sun, 25 Oct 2026 16:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 00:30:00 +0900</lastBuildDate>
     <atom:link href="https://doongchoong.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>디더링</title>
+      <link>https://doongchoong.github.io/posts/%EB%94%94%EB%8D%94%EB%A7%81/</link>
+      <pubDate>Wed, 04 Nov 2026 00:30:00 +0900</pubDate>
+      <guid>https://doongchoong.github.io/posts/%EB%94%94%EB%8D%94%EB%A7%81/</guid>
+      <description>&lt;p&gt;예전 컴퓨터를 하거나 고전게임을 하다 보면&#xA;명암이 점을 흩뿌린 모양으로 표현되어 있는 걸 자주 보게 되는데&#xA;어렸을 때 이게 참 신기했다. 색은 몇 개 없는데 멀리서 보면 그라데이션처럼 보인다.&#xA;나중에서야 이걸 &lt;strong&gt;디더링(Dithering)&lt;/strong&gt; 이라고 부른다는 걸 알게 되었다.&lt;/p&gt;&#xA;&lt;p&gt;이번에 클로드의 도움을 받아 디더링을 직접 구현해 보았고 그 과정을 기록한다.&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-디더링이-적용된-미니어처-마을&#34;&gt;1. 디더링이 적용된 미니어처 마을&lt;/h2&gt;&#xA;&lt;p&gt;three.js로 isometric 시점의 미니어처 마을을 만들고 그 위에 디더링을 입혔다.&lt;/p&gt;&#xA;&#xA;&lt;figure style=&#34;margin:0 0 2rem&#34;&gt;&#xA;  &lt;div style=&#34;position:relative; width:100%; aspect-ratio:4/3; overflow:hidden; border-radius:12px; background:#fff&#34;&gt;&#xA;    &lt;iframe&#xA;      src=&#34;https://doongchoong.github.io/embeds/dither-town/&#34;&#xA;      title=&#34;디더링 미니어처 마을&#34;&#xA;      loading=&#34;lazy&#34;&#xA;      style=&#34;position:absolute; inset:0; width:100%; height:100%; border:0&#34;&#xA;    &gt;&lt;/iframe&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;figcaption style=&#34;margin-top:.5rem; font-size:.875rem; opacity:.7&#34;&gt;&#xA;    Bayer 4×4, 채널별 4단계 컬러 디더링&#xA;  &lt;/figcaption&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;h2 id=&#34;2-동작원리&#34;&gt;2. 동작원리&lt;/h2&gt;&#xA;&lt;p&gt;색을 몇 개로 줄여야 할 때 가장 단순한 방법은 기준값(0.5)보다 밝으면 흰색, 아니면 검은색으로 찍는 것이다.&#xA;그런데 이렇게 하면 부드럽던 그라데이션이 몇 개의 평평한 덩어리로 뚝뚝 끊긴다. (밴딩)&lt;/p&gt;</description>
+    </item>
     <item>
       <title>크레파스스타일</title>
       <link>https://doongchoong.github.io/posts/%ED%81%AC%EB%A0%88%ED%8C%8C%EC%8A%A4%EC%8A%A4%ED%83%80%EC%9D%BC/</link>

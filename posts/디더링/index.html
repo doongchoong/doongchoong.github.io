@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>디더링 | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+         
+        overflow-y: hidden !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        overflow: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: clip;
+        overflow-wrap: break-word;
+      }
+      .post-content a {
+        overflow-wrap: anywhere;    
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+    border-radius: 6px 6px 6px 6px;
+    margin: 1em 0;
+  }
+
+   
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;  
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+   
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+ 
+tr:last-child td {
+  border-bottom: none;
+}
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 1em auto;
+  padding: 20px 20px;
+}
+
+
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.user-bubble {
+  background-color: #e9e9eb;
+  border-radius: 20px;
+  padding: 0.8em 1.2em;
+
+   
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0.5em 0 0.5em auto;
+
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+
+   
+  left: auto;
+  right: -10px;
+  top: 10px;
+
+  border: 6px solid transparent;
+  border-left-color: #e9e9eb;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+
+   
+  .mermaid svg[aria-roledescription="gitGraph"] {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <a href="/" class="back-link">← Back to home</a>
+    <h1 class="post-title">디더링</h1>
+    <div class="post-date">November 4, 2026</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-디더링이-적용된-미니어처-마을">1. 디더링이 적용된 미니어처 마을</a></li>
+    <li><a href="#2-동작원리">2. 동작원리</a>
+      <ul>
+        <li><a href="#21-랜덤">2.1. 랜덤</a></li>
+        <li><a href="#22-bayer">2.2. Bayer</a></li>
+        <li><a href="#23-주의점-bayer-편향-보정">2.3. 주의점: Bayer 편향 보정</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-그외-방법">3. 그외 방법</a></li>
+    <li><a href="#4-후기">4. 후기</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>예전 컴퓨터를 하거나 고전게임을 하다 보면
+명암이 점을 흩뿌린 모양으로 표현되어 있는 걸 자주 보게 되는데
+어렸을 때 이게 참 신기했다. 색은 몇 개 없는데 멀리서 보면 그라데이션처럼 보인다.
+나중에서야 이걸 <strong>디더링(Dithering)</strong> 이라고 부른다는 걸 알게 되었다.</p>
+<p>이번에 클로드의 도움을 받아 디더링을 직접 구현해 보았고 그 과정을 기록한다.</p>
+<h2 id="1-디더링이-적용된-미니어처-마을">1. 디더링이 적용된 미니어처 마을</h2>
+<p>three.js로 isometric 시점의 미니어처 마을을 만들고 그 위에 디더링을 입혔다.</p>
+
+<figure style="margin:0 0 2rem">
+  <div style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden; border-radius:12px; background:#fff">
+    <iframe
+      src="/embeds/dither-town/"
+      title="디더링 미니어처 마을"
+      loading="lazy"
+      style="position:absolute; inset:0; width:100%; height:100%; border:0"
+    ></iframe>
+  </div>
+  <figcaption style="margin-top:.5rem; font-size:.875rem; opacity:.7">
+    Bayer 4×4, 채널별 4단계 컬러 디더링
+  </figcaption>
+</figure>
+
+<h2 id="2-동작원리">2. 동작원리</h2>
+<p>색을 몇 개로 줄여야 할 때 가장 단순한 방법은 기준값(0.5)보다 밝으면 흰색, 아니면 검은색으로 찍는 것이다.
+그런데 이렇게 하면 부드럽던 그라데이션이 몇 개의 평평한 덩어리로 뚝뚝 끊긴다. (밴딩)</p>
+<p>디더링의 아이디어는 일부 픽셀을 일부러 <strong>틀린</strong> 색으로 찍되
+그 빈도가 원래 밝기에 비례하게 만드는 것이다.
+30% 밝기의 영역이라면 대략 10개 중 3개만 흰 점으로 찍히고, 멀리서 보면 회색처럼 보인다.
+즉, 눈이 평균을 내는 것이다.</p>
+<h3 id="21-랜덤">2.1. 랜덤</h3>
+<p>픽셀마다 기준값을 랜덤으로 뽑는다.
+가장 쉬운 방법이지만 결과가 지글지글한 노이즈처럼 보이고
+점이 우연히 뭉치거나 비는 곳이 생긴다.</p>
+<h3 id="22-bayer">2.2. Bayer</h3>
+<p>랜덤 대신 <strong>픽셀 위치에 따라 정해진 기준값</strong>을 쓴다.
+기준값을 담은 표가 Bayer 행렬인데, 2×2에서 시작해 재귀적으로 4×4, 8×8로 키운다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>2×2       4×4
+</span></span><span style="display:flex;"><span>0 2        0  8  2 10
+</span></span><span style="display:flex;"><span>3 1       12  4 14  6
+</span></span><span style="display:flex;"><span>           3 11  1  9
+</span></span><span style="display:flex;"><span>          15  7 13  5      (÷ 행렬 칸 수)</span></span></code></pre></div>
+  </div>
+</div><p>이 표를 화면에 타일처럼 깔고, 픽셀 밝기를 해당 칸의 값과 비교한다.
+위치만 알면 계산이 끝나서 픽셀끼리 서로 기다릴 필요가 없다.
+고로 GPU 셰이더에서 모든 픽셀을 한꺼번에 처리할 수 있다.
+미니어처 마을도 3D 장면을 텍스처에 먼저 그린 다음, 화면 전체에 아래 셰이더를 한 번 돌린다.</p>
+<div class="code-block-wrapper">
+  <div class="code-title">GLSL</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-glsl" data-lang="glsl"><span style="display:flex;"><span><span style="color:#57606a">// 2x2 Bayer의 닫힌 식. 이걸 재귀로 쌓으면 4x4, 8x8이 된다.</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">float</span> bayer2<span style="color:#1f2328">(</span><span style="color:#cf222e">vec2</span> a<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span> a <span style="color:#0550ae">=</span> floor<span style="color:#1f2328">(</span>a<span style="color:#1f2328">);</span> <span style="color:#cf222e">return</span> fract<span style="color:#1f2328">(</span>a<span style="color:#1f2328">.</span>x <span style="color:#0550ae">/</span> <span style="color:#0550ae">2.0</span> <span style="color:#0550ae">+</span> a<span style="color:#1f2328">.</span>y <span style="color:#0550ae">*</span> a<span style="color:#1f2328">.</span>y <span style="color:#0550ae">*</span> <span style="color:#0550ae">0.75</span><span style="color:#1f2328">);</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">float</span> bayer4<span style="color:#1f2328">(</span><span style="color:#cf222e">vec2</span> a<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span> <span style="color:#cf222e">return</span> bayer2<span style="color:#1f2328">(</span><span style="color:#0550ae">0.5</span> <span style="color:#0550ae">*</span> a<span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> <span style="color:#0550ae">0.25</span> <span style="color:#0550ae">+</span> bayer2<span style="color:#1f2328">(</span>a<span style="color:#1f2328">);</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">float</span> bayer8<span style="color:#1f2328">(</span><span style="color:#cf222e">vec2</span> a<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span> <span style="color:#cf222e">return</span> bayer4<span style="color:#1f2328">(</span><span style="color:#0550ae">0.5</span> <span style="color:#0550ae">*</span> a<span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> <span style="color:#0550ae">0.25</span> <span style="color:#0550ae">+</span> bayer2<span style="color:#1f2328">(</span>a<span style="color:#1f2328">);</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">float</span> threshold<span style="color:#1f2328">(</span><span style="color:#cf222e">vec2</span> p<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>mode <span style="color:#0550ae">==</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">)</span> <span style="color:#cf222e">return</span> hash<span style="color:#1f2328">(</span>p<span style="color:#1f2328">);</span>                  <span style="color:#57606a">// 랜덤</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>mode <span style="color:#0550ae">==</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">)</span> <span style="color:#cf222e">return</span> bayer4<span style="color:#1f2328">(</span>p<span style="color:#1f2328">)</span> <span style="color:#0550ae">+</span> <span style="color:#0550ae">0.5</span> <span style="color:#0550ae">/</span> <span style="color:#0550ae">16.0</span><span style="color:#1f2328">;</span>   <span style="color:#57606a">// Bayer 4x4</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>mode <span style="color:#0550ae">==</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">)</span> <span style="color:#cf222e">return</span> bayer8<span style="color:#1f2328">(</span>p<span style="color:#1f2328">)</span> <span style="color:#0550ae">+</span> <span style="color:#0550ae">0.5</span> <span style="color:#0550ae">/</span> <span style="color:#0550ae">64.0</span><span style="color:#1f2328">;</span>   <span style="color:#57606a">// Bayer 8x8</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">return</span> <span style="color:#0550ae">0.5</span><span style="color:#1f2328">;</span>                                     <span style="color:#57606a">// 고정 임계값</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">void</span> main<span style="color:#1f2328">()</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">vec3</span> x <span style="color:#0550ae">=</span> texture2D<span style="color:#1f2328">(</span>tex<span style="color:#1f2328">,</span> vUv<span style="color:#1f2328">).</span>rgb<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">float</span> t <span style="color:#0550ae">=</span> threshold<span style="color:#1f2328">(</span>gl_FragCoord<span style="color:#1f2328">.</span>xy<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">float</span> L <span style="color:#0550ae">=</span> levels <span style="color:#0550ae">-</span> <span style="color:#0550ae">1.0</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">vec3</span> q <span style="color:#0550ae">=</span> floor<span style="color:#1f2328">(</span>x <span style="color:#0550ae">*</span> L <span style="color:#0550ae">+</span> t<span style="color:#1f2328">)</span> <span style="color:#0550ae">/</span> L<span style="color:#1f2328">;</span>                  <span style="color:#57606a">// 채널마다 levels 단계로 양자화</span>
+</span></span><span style="display:flex;"><span>  gl_FragColor <span style="color:#0550ae">=</span> <span style="color:#cf222e">vec4</span><span style="color:#1f2328">(</span>q<span style="color:#1f2328">,</span> <span style="color:#0550ae">1.0</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+  </div>
+</div><p><code>floor(x * L + t)</code>에서 <code>t</code>가 기준값 역할을 한다.
+<code>t</code>가 0.5로 고정이면 그냥 반올림이고, 위치마다 달라지면 디더링이 된다.
+단계(<code>levels</code>)를 2로 두면 흑백 두 색, 4로 두면 채널마다 네 단계가 된다.</p>
+<h3 id="23-주의점-bayer-편향-보정">2.3. 주의점: Bayer 편향 보정</h3>
+<p>코드에서 <code>+ 0.5 / 16.0</code> 부분이 Bayer의 편향 보정이다.</p>
+<p>Bayer 행렬 값은 <code>0/16 ~ 15/16</code>이라 평균이 0.5보다 살짝 작다.
+그래서 행렬 값을 그대로 쓰면 전체 밝기가 한쪽으로 치우치는데
+흔히 쓰는 <code>밝기 &gt; 행렬값</code> 비교라면 흰 점이 더 찍혀서 원본보다 밝아지고
+위 코드처럼 더하는 방식이라면 반대로 살짝 어두워진다.
+특히 단계가 적을수록 티가 많이 난다.</p>
+<p>그래서 칸 크기의 절반(<code>0.5 / 칸 수</code>)을 더해 평균을 정확히 0.5에 맞춘다.
+이렇게 해야 디더링 전과 후의 평균 밝기가 같아진다.</p>
+<h2 id="3-그외-방법">3. 그외 방법</h2>
+<p>처음에는 디더링을 어떻게 하는지 잘 몰라서 일단 클로드에게 자료조사부터 부탁했다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><div class="user-bubble"><strong>User</strong>. 디더링에 대해서 글을 쓰고 싶은데 일단 자료조사를 하고 내가 좀 이해하고 싶어</div></p>
+<p><strong>🤖 Claude:</strong></p>
+<p>(생략)</p>
+<h2 id="알고리즘은-세-갈래">알고리즘은 세 갈래</h2>
+<table>
+  <thead>
+      <tr>
+          <th>갈래</th>
+          <th>방식</th>
+          <th>특징</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>랜덤</strong></td>
+          <td>임계값 비교 전에 노이즈를 더함</td>
+          <td>거칠고, 점이 뭉치거나 비는 곳이 생김</td>
+      </tr>
+      <tr>
+          <td><strong>정렬(ordered)</strong></td>
+          <td>임계값을 픽셀 위치에 따라 바꿈(Bayer 행렬)</td>
+          <td>점 연산이라 GPU에서 빠르고, 애니메이션에 안정적임. 격자 무늬가 눈에 띔</td>
+      </tr>
+      <tr>
+          <td><strong>오차 확산</strong></td>
+          <td>양자화 후 남은 오차를 이웃 픽셀에 나눠 줌</td>
+          <td>톤 재현이 좋고 엣지가 살아남. 순차 처리라 병렬화가 어렵고, 움직이면 흔들림</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Bayer 행렬</strong>은 2×2 <code>[0 2; 3 1]/4</code>에서 재귀적으로 키워 갑니다.</p>
+<p><strong>오차 확산 커널</strong>(<code>*</code>은 현재 픽셀)은 다음과 같습니다.</p>
+<ul>
+<li><strong>Floyd–Steinberg</strong>: <code>* 7 / 3 5 1</code>을 16으로 나눕니다.</li>
+<li><strong>Atkinson</strong>: 이웃 6곳에 각 1/8씩 줍니다. 합이 6/8이라 오차의 1/4를 일부러 버립니다. 그래서 하이라이트와 섀도가 날아가고 대비가 센, 초기 Mac 특유의 룩이 나옵니다.</li>
+<li><strong>Jarvis–Judice–Ninke</strong>(12탭, ÷48)와 <strong>Stucki</strong>(12탭, ÷42)는 커널이 큽니다. 더 부드럽지만 느리고 덜 선명합니다.</li>
+</ul>
+<h2 id="현대-기법">현대 기법</h2>
+<ul>
+<li><strong>블루노이즈 임계값 맵</strong>은 고주파만 있고 저주파 패턴이 없어서 가장 덜 거슬립니다. void-and-cluster 알고리즘으로 생성합니다.</li>
+<li><strong>Interleaved Gradient Noise</strong>는 텍스처 없이 수식 한 줄로 블루노이즈 비슷한 값을 냅니다: <code>fract(52.9829189 * fract(dot(p, vec2(0.06711056, 0.00583715))))</code>. 실시간 렌더링에서 밴딩 제거용으로 씁니다.</li>
+<li><strong>Return of the Obra Dinn</strong>은 3D를 1비트로 렌더링하면서 Bayer와 블루노이즈를 병용했습니다. 움직일 때 패턴이 흔들리는 문제 때문에 카메라 회전에 맞춰 패턴을 오프셋하는 등 여러 방법을 시도했습니다.</li>
+</ul>
+<p>(생략)</p>
+
+</div>
+<p>대략 감이 잡혔다. 크게 보면 기준값을 바꾸는쪽(랜덤, Bayer, 블루노이즈)과
+오차를 이웃에게 떠넘기는 쪽(Floyd–Steinberg, Atkinson, Jarvis–Judice–Ninke)으로 나뉜다.</p>
+<p>오차 확산은 앞 픽셀의 오차를 받아야 다음 픽셀을 계산할 수 있어서 순서대로 처리해야 한다.
+정지된 그림 한 장이라면 톤이 가장 정확하게 나오지만
+매 프레임 움직이는 3D 장면에서는 쓰기 어렵다.
+미니어처 마을은 위치만으로 계산이 끝나는 Bayer를 골랐다.</p>
+<p>Atkinson이 오차의 1/4를 일부러 버린다는 점이 재미있다.
+정확함을 조금 포기하고 대비를 얻었다고 하며,
+초기 맥킨토시 느낌이라고 한다.</p>
+<p>같은 그라데이션에 방법별로 흑백 두 색 디더링 적용된것은 아래와 같다.</p>
+
+<div id="dg-box" class="dg-box"></div>
+<style>
+  .dg-box { display: grid; grid-template-columns: 9.5em 1fr; gap: 6px 10px; align-items: center; margin: 0 0 2rem; font-size: .85rem; }
+  .dg-box span { opacity: .75; white-space: nowrap; }
+  .dg-box canvas { width: 100%; height: auto; display: block; image-rendering: pixelated; border-radius: 3px; }
+</style>
+<script>
+(function () {
+  var W = 240, H = 18;
+  // 화면에 보이는 그라데이션(sRGB)을 빛의 양(선형)으로 바꿔 디더링해야 멀리서 본 밝기가 원본과 맞는다
+  function toLin(c) { return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+  function bayer(n) {
+    var m = [[0]];
+    for (var s = 1; s < n; s *= 2) {
+      var next = [];
+      for (var y = 0; y < s * 2; y++) {
+        next.push([]);
+        for (var x = 0; x < s * 2; x++) next[y].push(4 * m[y % s][x % s] + [0, 2, 3, 1][(y >= s ? 2 : 0) + (x >= s ? 1 : 0)]);
+      }
+      m = next;
+    }
+    return m;
+  }
+  var B4 = bayer(4), B8 = bayer(8);
+  function ordered(th) {
+    return function (v) {
+      var out = new Uint8Array(W * H);
+      for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) out[y * W + x] = v[y * W + x] > th(x, y) ? 1 : 0;
+      return out;
+    };
+  }
+  // [dx, dy, 가중치] 목록으로 오차를 이웃에게 나눠 준다
+  function diffuse(kernel) {
+    return function (v) {
+      var buf = Float32Array.from(v), out = new Uint8Array(W * H);
+      for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+        var i = y * W + x, q = buf[i] > 0.5 ? 1 : 0, e = buf[i] - q;
+        out[i] = q;
+        for (var k = 0; k < kernel.length; k++) {
+          var nx = x + kernel[k][0], ny = y + kernel[k][1];
+          if (nx >= 0 && nx < W && ny < H) buf[ny * W + nx] += e * kernel[k][2];
+        }
+      }
+      return out;
+    };
+  }
+  var JJN = [[1,0,7],[2,0,5],[-2,1,3],[-1,1,5],[0,1,7],[1,1,5],[2,1,3],[-2,2,1],[-1,2,3],[0,2,5],[1,2,3],[2,2,1]]
+    .map(function (k) { return [k[0], k[1], k[2] / 48]; });
+  var METHODS = [
+    ['원본', null],
+    ['고정 임계값', ordered(function () { return 0.5; })],
+    ['랜덤', ordered(function () { return Math.random(); })],
+    ['Bayer 4×4', ordered(function (x, y) { return (B4[y & 3][x & 3] + 0.5) / 16; })],
+    ['Bayer 8×8', ordered(function (x, y) { return (B8[y & 7][x & 7] + 0.5) / 64; })],
+    ['IGN', ordered(function (x, y) { var t = 0.06711056 * x + 0.00583715 * y; t -= Math.floor(t); t *= 52.9829189; return t - Math.floor(t); })],
+    ['Floyd–Steinberg', diffuse([[1, 0, 7 / 16], [-1, 1, 3 / 16], [0, 1, 5 / 16], [1, 1, 1 / 16]])],
+    ['Atkinson', diffuse([[1, 0, 1 / 8], [2, 0, 1 / 8], [-1, 1, 1 / 8], [0, 1, 1 / 8], [1, 1, 1 / 8], [0, 2, 1 / 8]])],
+    ['Jarvis–Judice–Ninke', diffuse(JJN)]
+  ];
+
+  var src = new Float32Array(W * H);
+  for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) src[y * W + x] = toLin(x / (W - 1));
+
+  var box = document.getElementById('dg-box');
+  METHODS.forEach(function (m) {
+    var label = document.createElement('span');
+    label.textContent = m[0];
+    var cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    var ctx = cv.getContext('2d'), img = ctx.createImageData(W, H);
+    var bits = m[1] ? m[1](src) : null;
+    for (var i = 0; i < W * H; i++) {
+      var c = bits ? bits[i] * 255 : Math.round((i % W) / (W - 1) * 255);
+      img.data[i * 4] = img.data[i * 4 + 1] = img.data[i * 4 + 2] = c;
+      img.data[i * 4 + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+    box.appendChild(label);
+    box.appendChild(cv);
+  });
+})();
+</script>
+
+<ul>
+<li>고정 임계값은 그라데이션이 그냥 흑백 두 덩어리로 갈린다. (경계가 가운데보다 오른쪽인 건 빛의 양 기준 50%가 화면 밝기로는 70% 쯤이라서)</li>
+<li>랜덤은 점이 뭉치고 비는 곳이 생겨 지저분하다.</li>
+<li>Bayer는 격자 무늬가 규칙적으로 깔린다. 8×8이 단계가 더 촘촘하다.</li>
+<li>Floyd–Steinberg는 점이 벌레처럼 구불구불 이어지는 무늬가 보인다.</li>
+<li>Atkinson은 어두운 쪽은 까맣게, 밝은 쪽은 하얗게 일찍 날아간다. 가운데만 디더링되는 느낌.</li>
+<li>Jarvis–Judice–Ninke는 오차를 넓게 퍼지게해서  그런지 가장 고르게 섞인다.</li>
+</ul>
+<h2 id="4-후기">4. 후기</h2>
+<p>디더링은 참 신기하다.
+색이 몇 개 없는데도 없는 색을 보이게 해주고
+색을 줄이면서 생기는 밴딩 같은 시각적 결함을 보상해 준다.</p>
+<p>요즘은 색이 부족할 일이 거의 없는데도
+레트로 느낌을 내거나 옛 추억을 떠올리게 하려고 일부러 디더링을 쓰기도 한다.</p>
+<p>기술적으로도, 문화적으로도 참 괜찮은 &ldquo;도구&quot;인 것 같다.</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+ <script src="/static/js/mini-chart.js" ></script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>디더링 미니어처 마을</title>
+<style>
+  :root {
+    --bg: #101214;
+    --panel: #181b1e;
+    --line: #2a2f33;
+    --fg: #e8ece9;
+    --muted: #8d9892;
+    --accent: #f2c14e;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+    font: 13px/1.4 system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
+  .app { display: flex; flex-direction: column; height: 100%; }
+  .stage { position: relative; flex: 1; min-height: 0; overflow: hidden; cursor: grab; touch-action: none; background: #fff; }
+  .stage.drag { cursor: grabbing; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated; }
+  .hint { position: absolute; left: 10px; top: 8px; font-size: 11px; color: #000; opacity: .45; pointer-events: none; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px 14px; padding: 7px 12px; background: var(--panel);
+    border-top: 1px solid var(--line); align-items: center; }
+  .bar label, .bar .grp { display: flex; align-items: center; gap: 6px; color: var(--muted); white-space: nowrap; }
+  .bar select, .bar button { background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; font: inherit; cursor: pointer; }
+  .bar input { accent-color: var(--accent); }
+  .bar input[type=range] { width: 72px; }
+  .bar output { color: var(--fg); min-width: 1.2em; text-align: right; font-variant-numeric: tabular-nums; }
+  /* 글 안에 넣었을 때: 세로 스와이프는 페이지 스크롤에 양보, ui=0이면 조작 막대를 숨긴다 */
+  body.embedded .stage { touch-action: pan-y; }
+  body.noui .bar { display: none; }
+  .err { position: absolute; inset: 0; display: none; place-items: center; padding: 24px; text-align: center; color: #666; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div class="app">
+  <div class="stage" id="stage">
+    <canvas id="view"></canvas>
+    <div class="hint" id="hint">드래그로 이동 · 휠로 확대</div>
+    <div class="err" id="err">WebGL을 사용할 수 없습니다.</div>
+  </div>
+  <div class="bar">
+    <label>보기
+      <select id="layout">
+        <option value="one">한 곳</option>
+        <option value="grid">격자</option>
+        <option value="row">한 줄</option>
+      </select>
+    </label>
+    <label id="pickWrap">장소 <select id="pick"></select></label>
+    <span class="grp" id="rowOnly">
+      <label><input id="tour" type="checkbox" /> 카메라 이동</label>
+      <button type="button" id="fit">전체</button>
+      <button type="button" id="shuffle">섞기</button>
+    </span>
+    <span class="grp">회전 <button type="button" id="rotL" aria-label="왼쪽으로 90도">⟲</button><button type="button" id="rotR" aria-label="오른쪽으로 90도">⟳</button></span>
+  </div>
+  <div class="bar">
+    <label>방식
+      <select id="mode">
+        <option value="0">원본</option>
+        <option value="1">고정 임계값</option>
+        <option value="2">랜덤</option>
+        <option value="3" selected>Bayer 4×4</option>
+        <option value="4">Bayer 8×8</option>
+        <option value="5">IGN</option>
+      </select>
+    </label>
+    <label>팔레트
+      <select id="pal">
+        <option value="4" selected>컬러</option>
+        <option value="0">흑백</option>
+        <option value="1">잉크</option>
+        <option value="2">게임보이</option>
+      </select>
+    </label>
+    <label>단계 <input id="levels" type="range" min="2" max="8" value="4" /><output id="levelsOut">4</output></label>
+    <label>픽셀 <input id="px" type="range" min="1" max="6" value="1" /><output id="pxOut">1</output></label>
+    <label><input id="tilt" type="checkbox" /> 틸트시프트</label>
+    <label><input id="lin" type="checkbox" checked /> 선형 공간</label>
+  </div>
+</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>
