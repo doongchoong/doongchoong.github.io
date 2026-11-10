@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="ko-kr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI로만든것들 | 둥충코딩</title>
+    <meta name="description" content="" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+      
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+    <style>
+
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+         
+        font:400 16px 'Noto Serif KR', serif;
+        line-height: 1.6;
+        color: #4a4b4f;
+        background-color: #fbfbfb;
+      }
+
+      .container {
+        max-width: 780px;  
+        margin: 0 auto;
+        padding: 20px 5px;
+      }
+
+      h1 {
+        margin: 0 0 40px 0;
+        color: #4a4b4f;
+      }
+
+      p {
+        margin: 0 0 20px 0;
+        line-height: 1.7;
+      }
+
+      a {
+        color: #8f6a60;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+
+      a:hover {
+        color: #6b5046;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .works-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #4a4b4f;
+      }
+
+      .work-item {
+        margin-bottom: 12px;
+        line-height: 1.6;
+      }
+
+      .work-link {
+        display: block;
+        text-decoration: none;
+        color: #4a4b4f;
+      }
+
+      .work-link:hover {
+        opacity: 0.8;
+      }
+
+      .work-title {
+        font-weight: 500;
+      }
+
+      .publication {
+        color: #8f6a60;
+      }
+
+      .year {
+        color: #9d9d9d;
+      }
+
+      .description {
+        color: #9d9d9d;
+        font-style: italic;
+        margin-top: 4px;
+      }
+
+      .contact {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .footer-image {
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      .footer-image img {
+        width: 60px;
+        height: auto;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        body {
+          font-size: 15px;
+        }
+      }
+      
+       
+      pre {
+        background-color: #f5f5f5;
+        padding: 4px;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 0px 0;
+      }
+      
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+      }
+      
+      pre code {
+        display: block;
+        white-space: pre !important;
+        word-wrap: normal !important;
+        word-break: normal;
+        overflow-x: auto;
+      }
+      
+       
+      p code, li code, h1 code, h2 code, h3 code {
+        background-color: #f5f5f5;
+        padding: 3px 5px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+       
+      .post-content mjx-container[display="true"] {
+        display: block;
+        text-align: center;
+        margin: 1em 0;
+        overflow-x: auto !important;
+         
+        overflow-y: hidden !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        min-height: unset;
+      }
+       
+      .post-content mjx-container[display="true"] mjx-math {
+        min-width: 0 !important;
+        overflow: visible !important;
+        white-space: pre;
+        box-sizing: border-box;
+        min-height: unset;
+      }
+       
+      .post-content {
+        overflow-x: clip;
+        overflow-wrap: break-word;
+      }
+      .post-content a {
+        overflow-wrap: anywhere;    
+      }
+      
+       
+      .post-content img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+      }
+      
+       
+      .post-content img + em {
+        display: block;
+        text-align: center;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: -1em;
+        margin-bottom: 1.5em;
+      }
+
+        .toc {
+    border: thin solid ;
+    padding: 1rem;
+    border-radius: 6px 6px 6px 6px;
+    margin: 1em 0;
+  }
+
+   
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;  
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+   
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+ 
+tr:last-child td {
+  border-bottom: none;
+}
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+thead {
+  background-color: #f0f0f5;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+    </style>
+
+    <style>
+ 
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 1em auto;
+  padding: 20px 20px;
+}
+
+
+
+ 
+.chatlog pre {
+  background-color: #f5f5f7;
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: #2c3e50;
+}
+
+ 
+.chatlog p code {
+  background-color: #eef1f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.user-bubble {
+  background-color: #e9e9eb;
+  border-radius: 20px;
+  padding: 0.8em 1.2em;
+
+   
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0.5em 0 0.5em auto;
+
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  position: relative;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+
+   
+  left: auto;
+  right: -10px;
+  top: 10px;
+
+  border: 6px solid transparent;
+  border-left-color: #e9e9eb;
+}
+
+.gpt-line {
+  margin: 0.5em 0;
+}
+
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;    
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;           
+  padding: 4px 8px;    
+}
+
+   
+  .mermaid svg[aria-roledescription="gitGraph"] {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+<style>
+  .post-container {
+    max-width: 780px;  
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+  
+  .post-header {
+    margin-bottom: 40px;
+  }
+  
+  .post-title {
+    margin-bottom: 10px;
+    color: #4a4b4f;
+  }
+  
+  .post-date {
+    color: #9d9d9d;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .post-description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+  
+  .post-content {
+    line-height: 1.8;
+  }
+  
+  .post-content h2 {
+    margin: 30px 0 20px 0;
+    color: #4a4b4f;
+  }
+  
+  .post-content p {
+    margin-bottom: 20px;
+  }
+  
+  .post-content img {
+    display: block;
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 4px;
+  }
+  
+   
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .post-content em {
+    color: #666;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #8f6a60;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  
+  .back-link:hover {
+    color: #6b5046;
+  }
+</style>
+
+<div class="post-container">
+  <div class="post-header">
+    <a href="/" class="back-link">← Back to home</a>
+    <h1 class="post-title">AI로만든것들</h1>
+    <div class="post-date">November 10, 2026</div>
+  </div>
+  
+    
+        <aside  class="toc" >
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mts-목업-빌더">MTS 목업 빌더</a></li>
+    <li><a href="#winforms-목업-빌더">WinForms 목업 빌더</a></li>
+    <li><a href="#규정-검색-스킬">규정 검색 스킬</a></li>
+    <li><a href="#proc-태그기반-vscode-확장">Pro*C 태그기반 VSCode 확장</a></li>
+    <li><a href="#deepseek-워커">DeepSeek 워커</a></li>
+    <li><a href="#그-외">그 외</a></li>
+    <li><a href="#후기">후기</a></li>
+  </ul>
+</nav>
+        </aside>
+    
+
+  <div class="post-content">
+    <p>AI를 쓰고 난 이후 상당히 많은 것들을 만들었다.
+개인적으로 쓰는 것들도 있지만 (블로그 글들..)
+회사에서 업무 보조하는 툴도 상당수 만들었다.</p>
+<h2 id="mts-목업-빌더">MTS 목업 빌더</h2>
+<p>증권사에서 현업들은 요건서를 작성하는데, 제도와 규정 등을 담당하는 현업들은
+사실 전문 디자인 툴 다룰줄 모르거나 필요없기도 하다.
+그래서 목업 툴을 만들었다.</p>
+<p><strong>&ldquo;목업(mockup)은 주로 실제 기능을 구현하지 않고, 제품·화면·디자인의 시각적 형태나 구조를 보여주기 위해 만든 정적 모형 또는 시안이다.&rdquo;</strong></p>
+<p><a href="https://mock-mockmts.vercel.app">https://mock-mockmts.vercel.app</a></p>
+<p><img src="/static/img/02-mts.png" alt="MTS 목업 빌더"></p>
+<ul>
+<li>회사의 디자인 시스템이 별도로 있으니까, 일반적으로 통용되는 요소들을 넣었다.</li>
+<li>UI/UX 내용이 아니니까 디테일이 있는 요소(차트 등..)는 생략된다.</li>
+<li>화면에 격자영역 (4x10)에서 원하는 부분을 마우스로 드래그 선택해서 채워넣는 방식이다.</li>
+<li>요건등을 번호로 주석을 달아서 표현할수 있다.</li>
+</ul>
+<p>만들어서 요건서에 첨부할때 더 정확한 내용이 담기게 된다. (더 예쁜? )
+그냥 네모도형으로만 요건쓰다가 보면 좀더 깔끔하게 쓸수 있을것 같다.
+이것조차 좀 어려워하면 어쩔수 없고&hellip;</p>
+<h2 id="winforms-목업-빌더">WinForms 목업 빌더</h2>
+<p>현업은 HTS 및 회사 업무화면등에서도 쓰는 목업툴도 만들었다.</p>
+<p>사실 이걸 먼저 만들었다.
+만든 계기는&hellip; 엑셀로 한땀한땀 정교한 화면을 그려내는것을 보고 경악해서 🫣</p>
+<p><img src="/static/img/01-winforms.png" alt="WinForms 목업 빌더"></p>
+<h2 id="규정-검색-스킬">규정 검색 스킬</h2>
+<p>여기에 공유할 순 없지만 이는 클로드 스킬이다.
+현업에게 스킬 방법을 알려주니까 오히려 더 고도로 활용을 잘 하고 있다. 😁</p>
+<p>금투협, KRX, 법제처 등이 소스고
+금융회사(증권사)가 준수해야할 어떤 포인트를 그냥 물어봤을때
+다른 곳 검색 없이 딱 위 3군데의 소스만 가지고 찾아서
+연관있다고 생각하는 법령 및 조문  그리고 얼마나 최신인지 요약해준다.</p>
+<p><strong>판단은 하지 않고 근거자료만 찾는다</strong></p>
+<div class="code-block-wrapper">
+  <div class="code-title">TXT</div>
+  <div class="highlight_wrap">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>&#34;전문투자자에 대해서 투자자정보 만료되었을때 주의해야할 점 알려줘&#34;</span></span></code></pre></div>
+  </div>
+</div><p>출력:
+<img src="/static/img/03-skill.png" alt="스킬1">
+<img src="/static/img/04-skill.png" alt="스킬2"></p>
+<p>그럼 아래와 같은 방식으로 처리한다.</p>
+
+
+
+
+
+
+
+
+<div class="chatlog">
+  <p><strong>🤖 Claude:</strong></p>
+<ol>
+<li>Claude가 질문의 생활어를 규정에 실제로 쓰이는 용어로 바꿔요 (&ldquo;고객 몰래 매매&rdquo; → <code>임의매매</code>)</li>
+<li>스크립트가 세 사이트의 규정 목록과 검색으로 후보 규정을 뽑아요.</li>
+<li>후보 조문은 헤드리스 Chrome으로 사이트에서 매번 다시 열어서 본문과 개정일을 확인해요.</li>
+<li>답변 끝에 이 경로를 이력으로 확정할지 묻고, 사람이 승인한 것만 사례로 쌓아요.</li>
+</ol>
+</div>
+<p>이 스킬은 현업 PC에 Python이 없어도 돌도록
+Windows용 embeddable Python을 스킬 안에 통째로 넣었다.</p>
+<p>그냥 zip 풀고 그 폴더를 프로젝트 폴더로 잡으면 끝. 바로 사용가능하다.</p>
+<h2 id="proc-태그기반-vscode-확장">Pro*C 태그기반 VSCode 확장</h2>
+<p>이건 내가 쓰기 위해서 만든것인데, 레거시 오라클 기반 대형 C/Pro*C 소스 네이게이터이다.</p>
+<p><a href="https://github.com/doongchoong/vstags">https://github.com/doongchoong/vstags</a></p>
+<p>예전에 ctags + cscope로 하던 일을 VSCode 기능으로 옮긴 것.</p>
+<ul>
+<li>회사에선 보안으로 랭기지서버가 동작하지 않는다.</li>
+<li>서버환경의 소스를 로컬에서 개발한다.</li>
+<li>Pro*C가 섞인 문법을 쓰다보면 기존 확장은 깨져버린다.</li>
+</ul>
+<p>이러한 악조건 속 그동안 vscode를 못쓰고 있다가.
+초기화권을 소모하는 겸 클로드에게 시켜봤는데&hellip; 생각보다 너무 잘 만들어서 깜짝 놀랐다.</p>
+<p>회사코드 업무하나 3500개  심볼 16만개, 참조 200만개</p>
+<p>디버거도 넣고, 린터(컨벤션검사)도 넣고 하고싶은거 다 넣어놓았다.</p>
+<h2 id="deepseek-워커">DeepSeek 워커</h2>
+<p>이건 업무 도구는 아니고 Claude Code를 쓰면서 만든 것.
+Claude Code에서 DeepSeek를 저렴한 워커로 부리는 플러그인이다.</p>
+<p><a href="https://github.com/doongchoong/claude-deepseek-worker">https://github.com/doongchoong/claude-deepseek-worker</a></p>
+
+<div style="width:100%; max-width:600px; margin:24px auto;">
+  <svg viewBox="0 0 600 530" width="100%" role="img"
+       aria-label="Claude DeepSeek Worker 구조: 사용자 → Claude → DeepSeek 도구 4개 → 결과 파일 또는 요약 보고"
+       style="font-family: Pretendard, 'Noto Sans KR', sans-serif;">
+    <style>
+      .dw-box { fill: #f3f8fd; }
+      .dw-group { fill: #fff; stroke: #e3e6e3; stroke-width: 1.5; }
+      .dw-title { fill: #222; font-size: 19px; font-weight: 600; }
+      .dw-code { fill: #222; font-size: 17px; font-weight: 600; font-family: ui-monospace, Menlo, Consolas, monospace; }
+      .dw-sub { fill: #777; font-size: 14px; }
+      .dw-arrow { stroke: #666; stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+
+    <!-- 사용자 -->
+    <rect class="dw-box" x="10" y="8" width="580" height="52" rx="10"/>
+    <text class="dw-title" x="300" y="41" text-anchor="middle">사용자</text>
+
+    <path class="dw-arrow" d="M300 68 V88 M294 82 L300 88 L306 82"/>
+
+    <!-- Claude -->
+    <rect class="dw-box" x="10" y="96" width="580" height="68" rx="10"/>
+    <text class="dw-title" x="300" y="125" text-anchor="middle">Claude (메인 에이전트)</text>
+    <text class="dw-sub" x="300" y="150" text-anchor="middle">설계 · 판단 · 원인 분석 · 최종 검수</text>
+
+    <path class="dw-arrow" d="M300 172 V190 M294 184 L300 190 L306 184"/>
+    <text class="dw-sub" x="300" y="212" text-anchor="middle">작업 위임</text>
+
+    <!-- DeepSeek 도구 -->
+    <rect class="dw-group" x="10" y="226" width="580" height="174" rx="10"/>
+
+    <rect class="dw-box" x="22" y="238" width="272" height="70" rx="8"/>
+    <text class="dw-code" x="38" y="267">deepseek_chat</text>
+    <text class="dw-sub" x="38" y="292">단일 작업, 결과를 파일로</text>
+
+    <rect class="dw-box" x="306" y="238" width="272" height="70" rx="8"/>
+    <text class="dw-code" x="322" y="267">deepseek_batch</text>
+    <text class="dw-sub" x="322" y="292">여러 작업을 병렬로</text>
+
+    <rect class="dw-box" x="22" y="318" width="272" height="70" rx="8"/>
+    <text class="dw-code" x="38" y="347">deepseek_agent</text>
+    <text class="dw-sub" x="38" y="372">고치고 확인까지, 작은 에이전트</text>
+
+    <rect class="dw-box" x="306" y="318" width="272" height="70" rx="8"/>
+    <text class="dw-code" x="322" y="347">deepseek_research</text>
+    <text class="dw-sub" x="322" y="372">웹 조사, 출처 달린 정리</text>
+
+    <!-- 위아래 화살표 -->
+    <path class="dw-arrow" d="M292 410 V436 M286 430 L292 436 L298 430"/>
+    <path class="dw-arrow" d="M308 436 V410 M302 416 L308 410 L314 416"/>
+
+    <!-- 결과 -->
+    <rect class="dw-box" x="10" y="446" width="580" height="72" rx="10"/>
+    <text class="dw-title" x="300" y="477" text-anchor="middle">결과 파일 또는 짧은 보고</text>
+    <text class="dw-sub" x="300" y="503" text-anchor="middle">Claude 컨텍스트로는 경로와 요약만</text>
+  </svg>
+</div>
+
+<h2 id="그-외">그 외</h2>
+<ul>
+<li>넥스트레이드 전문 설계서 사이트: <code>.xlsm</code>으로 나오는 표준전문 설계서를 파싱해서 정적 웹페이지로 만든다.</li>
+<li>마켓메이커 봇: 호가창 시뮬레이터와 거기에 주문을 넣는 봇. 만든 과정은 <a href="/posts/%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8%EC%BD%94%EB%94%A9/">에이전트코딩</a>에 정리했다.</li>
+</ul>
+<h2 id="후기">후기</h2>
+<p><strong>&ldquo;바퀴를 재발명하지 마라&rdquo;</strong></p>
+<p>프로그래밍에서 유명한 격언이다. 이미 기술/방법이 있는데도
+일부러 무시하고 다시 만드는 행위를 말하며
+거의 금기시 되다시피 하는 내용이였는데.</p>
+<p>AI가 코딩 속도가 더 빠르고 정확하게 프로그램을 만드는 이후부터는
+간단하게 사용할 수 있는 툴은  그냥 즉석에서 만들어 쓸수 있게 되었다.
+이제는</p>
+<p><strong>&ldquo;간단한건 그냥 만들어 써라&rdquo;</strong></p>
+<p>이렇게 되는게 아닐까?</p>
+
+  </div>
+  
+  <a href="/" class="back-link">← Back to home</a>
+</div>
+
+    </div>
+    
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+ <script src="/static/js/mini-chart.js" ></script>
+  </body>
+</html>

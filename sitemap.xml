@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://doongchoong.github.io/posts/ai%EB%A1%9C%EB%A7%8C%EB%93%A0%EA%B2%83%EB%93%A4/</loc>
+    <lastmod>2026-11-10T12:00:00+09:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>https://doongchoong.github.io/posts/</loc>
-    <lastmod>2026-11-04T00:30:00+09:00</lastmod>
+    <lastmod>2026-11-10T12:00:00+09:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://doongchoong.github.io/</loc>
-    <lastmod>2026-11-04T00:30:00+09:00</lastmod>
+    <lastmod>2026-11-10T12:00:00+09:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url><url>
