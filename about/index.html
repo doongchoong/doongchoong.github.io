@@ -6,13 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>둥충코딩 | 둥충코딩</title>
 <meta name="description" content="" />
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.22537a035e08bf8397e9db6bdb760e01a967fbe0a4d85511a3a8a0ec22abe61f.css" integrity="sha256-IlN6A14Iv4OX6dtr23YOAaln&#43;&#43;Ck2FURo6ig7CKr5h8=">
+<link rel="stylesheet" href="/css/site.5c606b7619b8e89419f89e3d1d5f3c8b8c94babcf5e5580885e7ef93f6502e23.css" integrity="sha256-XGBrdhm46JQZ&#43;J49HV88i4yUurz15VgIhefvk/ZQLiM=">
 
   </head>
   <body>
+    <button class="theme-toggle" type="button" aria-label="테마 바꾸기">
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
     <div class="container">
       
 <div class="post-container">
@@ -35,6 +40,24 @@
 
     </div>
     
+<script>
+(function () {
+  var root = document.documentElement, mq = matchMedia('(prefers-color-scheme: dark)');
+  function saved() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
+  function set(t, save) {
+    root.setAttribute('data-theme', t);
+    if (save) try { localStorage.setItem('theme', t); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('themechange'));
+  }
+  document.querySelector('.theme-toggle').addEventListener('click', function () {
+    set(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+  });
+  
+  mq.addEventListener && mq.addEventListener('change', function (e) {
+    if (!saved()) set(e.matches ? 'dark' : 'light', false);
+  });
+})();
+</script>
 
   </body>
 </html>
