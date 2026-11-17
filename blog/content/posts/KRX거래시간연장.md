@@ -4,6 +4,7 @@ date: 2026-09-15T20:10:41+09:00
 draft: false
 toc : true
 tocBorder : true
+theme: light
 ---
 
 26.09.14 KRX 거래시간 연장 + NXT제도변경  오픈하였다. 
