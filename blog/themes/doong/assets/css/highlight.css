@@ -1,7 +1,8 @@
 /* 코드 하이라이트 (chroma). hugo.toml의 markup.highlight noClasses = false.
    밝은 쪽은 github, 어두운 쪽은 github-dark. 다시 만들려면:
      hugo gen chromastyles --style=github / --style=github-dark
-   바탕색은 스타일 것을 쓰지 않고 --code-panel 변수를 쓴다. */
+   바탕색은 스타일 것을 쓰지 않고 --code-panel 변수를 쓴다.
+   다시 만들면 맨 아래 "github-dark에는 없는 토큰" 블록을 다시 확인한다. */
 .chroma {
   background-color: var(--code-panel);
   -moz-tab-size: 4;
@@ -152,3 +153,15 @@
 :root[data-theme="dark"] .chroma .gt { color:#ff7b72 }
 :root[data-theme="dark"] .chroma .gl { text-decoration:underline }
 :root[data-theme="dark"] .chroma .w { color:#6e7681 }
+
+/* github에는 색이 있고 github-dark에는 없는 토큰. 그대로 두면 밝은 쪽 색(#1f2328 등)이
+   어두운 바탕에 남으므로 기본 글자색을 따르게 한다. */
+:root[data-theme="dark"] .chroma .na,
+:root[data-theme="dark"] .chroma .nb,
+:root[data-theme="dark"] .chroma .bp,
+:root[data-theme="dark"] .chroma .nx,
+:root[data-theme="dark"] .chroma .vc,
+:root[data-theme="dark"] .chroma .vg,
+:root[data-theme="dark"] .chroma .vi,
+:root[data-theme="dark"] .chroma .p,
+:root[data-theme="dark"] .chroma .ge { color: inherit }
