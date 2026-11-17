@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
+<link rel="stylesheet" href="/css/site.22537a035e08bf8397e9db6bdb760e01a967fbe0a4d85511a3a8a0ec22abe61f.css" integrity="sha256-IlN6A14Iv4OX6dtr23YOAaln&#43;&#43;Ck2FURo6ig7CKr5h8=">
 
   </head>
   <body>
@@ -94,9 +94,9 @@ SOR 첫 도입시 이슈가 되었던 Split 정정에 대한 이슈가 있다.</
 <div class="code-block-wrapper">
   <div class="code-title">TXT</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>SOR주문 30주 ( KRX  20주 , NXT  10주 )
-</span></span><span style="display:flex;"><span>=&gt; 정정판단  KRX 10주, NXT 20주 
-</span></span><span style="display:flex;"><span>SOR정정 30주 ( KRX 10,  KRX10취소 -&gt; NXT신규,  NXT정정10) </span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">SOR주문 30주 ( KRX  20주 , NXT  10주 )
+</span></span><span class="line"><span class="cl">=&gt; 정정판단  KRX 10주, NXT 20주 
+</span></span><span class="line"><span class="cl">SOR정정 30주 ( KRX 10,  KRX10취소 -&gt; NXT신규,  NXT정정10) </span></span></code></pre></div>
   </div>
 </div><p>이 내용은 SOR정정시에 자녀주문에 대해 2-&gt;3개로 Split 되며 정정이 반복될때<br>
 계속 Split 이 될수 있다는 내용이다. 이론상으로는 주문수량만큼 전부 Split이다. (100주면 자녀주문 100개)</p>
@@ -117,26 +117,26 @@ SOR 첫 도입시 이슈가 되었던 Split 정정에 대한 이슈가 있다.</
 <div class="code-block-wrapper">
   <div class="code-title">JSON</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;title&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;New Order Case 1&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;desc&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;..... &#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;prgm&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;order&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;sby&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;buy&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;qty&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">10</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;ratio&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">0.5</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">},</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;kcfm&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;qty&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">5</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">},</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;ncfm&#34;</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#0550ae">&#34;qty&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">5</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">]</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;New Order Case 1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;desc&#34;</span><span class="p">:</span> <span class="s2">&#34;..... &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;prgm&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;order&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;sby&#34;</span><span class="p">:</span> <span class="s2">&#34;buy&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;qty&#34;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;ratio&#34;</span><span class="p">:</span> <span class="mf">0.5</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;kcfm&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;qty&#34;</span><span class="p">:</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;ncfm&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;qty&#34;</span><span class="p">:</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><ul>
 <li>매수주문 10주 분할 50%</li>
@@ -180,7 +180,7 @@ SOR관리모듈을 만들어놓고 보니 모든 잔여전문들이 완료되어
 <div class="code-block-wrapper">
   <div class="code-title">TXT</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Excel -&gt; Json -&gt; Html </span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Excel -&gt; Json -&gt; Html </span></span></code></pre></div>
   </div>
 </div><ul>
 <li>vscode 등에서 venv 모드로 설치하면 깔끔하게 해당 라이브러리만 세팅 가능</li>
@@ -237,11 +237,11 @@ NXT 측에서 부하를 발생시켜 달라고 요청했고
 <div class="code-block-wrapper">
   <div class="code-title">TXT</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Cleaning 알고리즘
-</span></span><span style="display:flex;"><span>1. 내가 깔아놓을 매도호가 건수만큼 많은 매수 주문수량을 채워서 순차적으로 위로 올린다.
-</span></span><span style="display:flex;"><span>2. 위로 올라간 위치 (매도10호가)에서 다시 매도수량을 채워서 순차적으로 아래로 내린다.
-</span></span><span style="display:flex;"><span>3. 아래 위치(매수10호가)에서 다시 올린다. 
-</span></span><span style="display:flex;"><span>4. 일제 취소  </span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Cleaning 알고리즘
+</span></span><span class="line"><span class="cl">1. 내가 깔아놓을 매도호가 건수만큼 많은 매수 주문수량을 채워서 순차적으로 위로 올린다.
+</span></span><span class="line"><span class="cl">2. 위로 올라간 위치 (매도10호가)에서 다시 매도수량을 채워서 순차적으로 아래로 내린다.
+</span></span><span class="line"><span class="cl">3. 아래 위치(매수10호가)에서 다시 올린다. 
+</span></span><span class="line"><span class="cl">4. 일제 취소  </span></span></code></pre></div>
   </div>
 </div><ul>
 <li>VI가 걸리지 말아야 한다.</li>
@@ -257,11 +257,11 @@ NXT 측에서 부하를 발생시켜 달라고 요청했고
 <div class="code-block-wrapper">
   <div class="code-title">TXT</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>        - Read =&gt; 0
-</span></span><span style="display:flex;"><span>-------+- Read =&gt; 0
-</span></span><span style="display:flex;"><span>0000000 - Read =&gt;
-</span></span><span style="display:flex;"><span>-------+- Read =&gt; 0
-</span></span><span style="display:flex;"><span>        - Read =&gt; </span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">        - Read =&gt; 0
+</span></span><span class="line"><span class="cl">-------+- Read =&gt; 0
+</span></span><span class="line"><span class="cl">0000000 - Read =&gt;
+</span></span><span class="line"><span class="cl">-------+- Read =&gt; 0
+</span></span><span class="line"><span class="cl">        - Read =&gt; </span></span></code></pre></div>
   </div>
 </div><h3 id="최대-tps-가-도대체-뭐지">최대 TPS? 가 도대체 뭐지?</h3>
 <p>&ldquo;버틸수 있는 최대한계&rdquo; 이런 말은 관점에 따라 참 다양한 것 같다.
@@ -308,10 +308,10 @@ SOR 서버 헬스체크를 하는 백그라운드 스레드랑 경합한다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6639ba">lock</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>mutex<span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">send</span><span style="color:#1f2328">(...);</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">recv</span><span style="color:#1f2328">(...);</span>
-</span></span><span style="display:flex;"><span><span style="color:#6639ba">unlock</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>mutex<span style="color:#1f2328">);</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">send</span><span class="p">(...);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">recv</span><span class="p">(...);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span></span></span></code></pre></div>
   </div>
 </div><p>간단하게 뮤텍스 가드로 처리후 평상시나  적당한 강도로 주문집행시에도 문제없음을 확인했으나
 대규모 부하를 발생시키니 0.001% 확률로 TCP버퍼가 깨지는 이상한 현상이 발생했다.</p>
@@ -336,7 +336,7 @@ LB와 연관된다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">TXT</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>&#34;노오력하세요~&#34; </span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">&#34;노오력하세요~&#34; </span></span></code></pre></div>
   </div>
 </div><p><strong>준비된 자가 쟁취한다.</strong>
 연결이 끊어진 친구는 복구중이라 준비가 되지 않았다. 남은 친구들이 경쟁하여 SOR요청을 받아가는데

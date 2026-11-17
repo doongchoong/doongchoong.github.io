@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
+<link rel="stylesheet" href="/css/site.22537a035e08bf8397e9db6bdb760e01a967fbe0a4d85511a3a8a0ec22abe61f.css" integrity="sha256-IlN6A14Iv4OX6dtr23YOAaln&#43;&#43;Ck2FURo6ig7CKr5h8=">
 
   </head>
   <body>
@@ -65,23 +65,23 @@ yyjson에서는 이를 repeat 매크로로 풀어낸다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* Macros used for loop unrolling and other purpose. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat2(x)  { x x }
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat3(x)  { x x x }
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat4(x)  { x x x x }
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat8(x)  { x x x x x x x x }
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat16(x) { x x x x x x x x x x x x x x x x }
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat4_incr(x)  { x(0) x(1) x(2) x(3) }
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat8_incr(x)  { x(0) x(1) x(2) x(3) x(4) x(5) x(6) x(7) }
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat16_incr(x) { x(0) x(1) x(2) x(3) x(4) x(5) x(6) x(7) \
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">                           x(8) x(9) x(10) x(11) x(12) x(13) x(14) x(15) }
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#define repeat_in_1_18(x) { x(1) x(2) x(3) x(4) x(5) x(6) x(7) \
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">                            x(8) x(9) x(10) x(11) x(12) x(13) x(14) x(15) \
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">                            x(16) x(17) x(18) }</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Macros used for loop unrolling and other purpose. */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define repeat2(x)  { x x }
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define repeat3(x)  { x x x }
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define repeat4(x)  { x x x x }
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define repeat8(x)  { x x x x x x x x }
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define repeat16(x) { x x x x x x x x x x x x x x x x }
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define repeat4_incr(x)  { x(0) x(1) x(2) x(3) }
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define repeat8_incr(x)  { x(0) x(1) x(2) x(3) x(4) x(5) x(6) x(7) }
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define repeat16_incr(x) { x(0) x(1) x(2) x(3) x(4) x(5) x(6) x(7) \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                           x(8) x(9) x(10) x(11) x(12) x(13) x(14) x(15) }
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define repeat_in_1_18(x) { x(1) x(2) x(3) x(4) x(5) x(6) x(7) \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                            x(8) x(9) x(10) x(11) x(12) x(13) x(14) x(15) \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                            x(16) x(17) x(18) }</span></span></span></code></pre></div>
   </div>
 </div><p>이는 소스코드에선 하나의 코드를 쓰지만 repeat 매크로를 사용하여
 자동으로 반복되도록 확장하는 일종의 snippets 이다.</p>
@@ -93,23 +93,23 @@ unlikely 등으로 사용한다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* likely */</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#ifndef yyjson_likely
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#   if yyjson_has_builtin(__builtin_expect) || YYJSON_GCC_VER &gt;= 4
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#       define yyjson_likely(expr) __builtin_expect(!!(expr), 1)
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#   else
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#       define yyjson_likely(expr) (expr)
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#   endif
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#endif
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/* unlikely */</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#ifndef yyjson_unlikely
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#   if yyjson_has_builtin(__builtin_expect) || YYJSON_GCC_VER &gt;= 4
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#       define yyjson_unlikely(expr) __builtin_expect(!!(expr), 0)
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#   else
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#       define yyjson_unlikely(expr) (expr)
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#   endif
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#endif</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* likely */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifndef yyjson_likely
+</span></span></span><span class="line"><span class="cl"><span class="cp">#   if yyjson_has_builtin(__builtin_expect) || YYJSON_GCC_VER &gt;= 4
+</span></span></span><span class="line"><span class="cl"><span class="cp">#       define yyjson_likely(expr) __builtin_expect(!!(expr), 1)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#   else
+</span></span></span><span class="line"><span class="cl"><span class="cp">#       define yyjson_likely(expr) (expr)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#   endif
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* unlikely */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifndef yyjson_unlikely
+</span></span></span><span class="line"><span class="cl"><span class="cp">#   if yyjson_has_builtin(__builtin_expect) || YYJSON_GCC_VER &gt;= 4
+</span></span></span><span class="line"><span class="cl"><span class="cp">#       define yyjson_unlikely(expr) __builtin_expect(!!(expr), 0)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#   else
+</span></span></span><span class="line"><span class="cl"><span class="cp">#       define yyjson_unlikely(expr) (expr)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#   endif
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></div>
   </div>
 </div><p>사실 위 매크로중 중요한 것은 <code>__builtin_expect(!!(expr), 0)</code> 이것이다.
 1이면 likely , 0이면 unlikely이다. 이를 지원하는 컴파일러에 여부에 따라
@@ -117,11 +117,11 @@ unlikely 등으로 사용한다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* Macros used to provide branch prediction information for compiler. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#undef  likely
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define likely(x)       yyjson_likely(x)
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#undef  unlikely
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#define unlikely(x)     yyjson_unlikely(x)</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Macros used to provide branch prediction information for compiler. */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#undef  likely
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define likely(x)       yyjson_likely(x)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#undef  unlikely
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define unlikely(x)     yyjson_unlikely(x)</span></span></span></code></pre></div>
   </div>
 </div><p>이렇게 축약하여 사용한다. 지원하지 않는 컴파일러라면 성능이 급격히 떨어지게 되므로
 될 수 있는 한 해당 기능을 지원하는 컴파일러를 쓰는 것이 좋다. 위 코드처럼
@@ -134,25 +134,25 @@ likely , unlikely를 적당히 버무려 사용하면 된다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">skip_ascii_end</span><span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#57606a">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     GCC may store src[i] in a register at each line of expr_jump(i) above.
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     These instructions are useless and will degrade performance.
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     This inline asm is a hint for gcc: &#34;the memory has been modified,
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     do not cache it&#34;.
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     */</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#if YYJSON_IS_REAL_GCC
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#cf222e">__asm</span> <span style="color:#cf222e">volatile</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;&#34;</span><span style="color:#0550ae">:</span><span style="color:#0a3069">&#34;=m&#34;</span><span style="color:#1f2328">(</span><span style="color:#0550ae">*</span>src<span style="color:#1f2328">)</span><span style="color:#0550ae">::</span><span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#endif
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">likely</span><span style="color:#1f2328">(</span><span style="color:#0550ae">*</span>src <span style="color:#0550ae">==</span> <span style="color:#0a3069">&#39;&#34;&#39;</span><span style="color:#1f2328">))</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        val<span style="color:#0550ae">-&gt;</span>tag <span style="color:#0550ae">=</span> <span style="color:#1f2328">((</span>u64<span style="color:#1f2328">)(</span>src <span style="color:#0550ae">-</span> cur<span style="color:#1f2328">)</span> <span style="color:#0550ae">&lt;&lt;</span> YYJSON_TAG_BIT<span style="color:#1f2328">)</span> <span style="color:#0550ae">|</span> YYJSON_TYPE_STR<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        val<span style="color:#0550ae">-&gt;</span>uni<span style="color:#1f2328">.</span>str <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">const</span> <span style="color:#cf222e">char</span> <span style="color:#0550ae">*</span><span style="color:#1f2328">)</span>cur<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">*</span>src <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;\0&#39;</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">*</span>end <span style="color:#0550ae">=</span> src <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">return</span> <span style="color:#6639ba">true</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="nl">skip_ascii_end</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">     GCC may store src[i] in a register at each line of expr_jump(i) above.
+</span></span></span><span class="line"><span class="cl"><span class="cm">     These instructions are useless and will degrade performance.
+</span></span></span><span class="line"><span class="cl"><span class="cm">     This inline asm is a hint for gcc: &#34;the memory has been modified,
+</span></span></span><span class="line"><span class="cl"><span class="cm">     do not cache it&#34;.
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if YYJSON_IS_REAL_GCC
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="kr">__asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="o">:</span><span class="s">&#34;=m&#34;</span><span class="p">(</span><span class="o">*</span><span class="n">src</span><span class="p">)</span><span class="o">::</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">if</span> <span class="p">(</span><span class="nf">likely</span><span class="p">(</span><span class="o">*</span><span class="n">src</span> <span class="o">==</span> <span class="sc">&#39;&#34;&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">val</span><span class="o">-&gt;</span><span class="n">tag</span> <span class="o">=</span> <span class="p">((</span><span class="n">u64</span><span class="p">)(</span><span class="n">src</span> <span class="o">-</span> <span class="n">cur</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">YYJSON_TAG_BIT</span><span class="p">)</span> <span class="o">|</span> <span class="n">YYJSON_TYPE_STR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">val</span><span class="o">-&gt;</span><span class="n">uni</span><span class="p">.</span><span class="n">str</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">src</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">end</span> <span class="o">=</span> <span class="n">src</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><p>매우 난해한 코드이다. 인라인 어셈블리로 주석을 잘 읽어보자.</p>
 <h2 id="goto-문">Goto 문</h2>
@@ -163,51 +163,51 @@ likely , unlikely를 적당히 버무려 사용하면 된다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>static_inline <span style="color:#cf222e">bool</span> <span style="color:#6639ba">read_string</span><span style="color:#1f2328">(</span>u8 <span style="color:#0550ae">*</span>cur<span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>                               u8 <span style="color:#0550ae">**</span>end<span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>                               yyjson_val <span style="color:#0550ae">*</span>val<span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>                               <span style="color:#cf222e">const</span> <span style="color:#cf222e">char</span> <span style="color:#0550ae">**</span>msg<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">// ... 수많은 코드 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
-</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">skip_ascii</span><span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#57606a">/* Most strings have no escaped characters, so we can jump them quickly. */</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">skip_ascii_begin</span><span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#57606a">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     We want to make loop unrolling, as shown in the following code. Some
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     compiler may not generate instructions as expected, so we rewrite it with
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     explicit goto statements. We hope the compiler can generate instructions
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     like this: https://godbolt.org/z/8vjsYq
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">         while (true) repeat16({
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">            if (likely(!(char_is_ascii_stop(*src)))) src++;
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">            else break;
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">         });
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">     */</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#define expr_jump(i) \
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">    if (likely(!char_is_ascii_stop(src[i]))) {} \
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">    else goto skip_ascii_stop##i;
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#define expr_stop(i) \
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">    skip_ascii_stop##i: \
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">    src += i; \
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">    goto skip_ascii_end;
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">repeat16_incr</span><span style="color:#1f2328">(</span>expr_jump<span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span>    src <span style="color:#0550ae">+=</span> <span style="color:#0550ae">16</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">goto</span> skip_ascii_begin<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">repeat16_incr</span><span style="color:#1f2328">(</span>expr_stop<span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#undef expr_jump
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#undef expr_stop
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    
-</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">skip_ascii_end</span><span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">// ... 수많은 코드 ...
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">static_inline</span> <span class="kt">bool</span> <span class="nf">read_string</span><span class="p">(</span><span class="n">u8</span> <span class="o">*</span><span class="n">cur</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">u8</span> <span class="o">**</span><span class="n">end</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="n">yyjson_val</span> <span class="o">*</span><span class="n">val</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                               <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ... 수많은 코드 ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nl">skip_ascii</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Most strings have no escaped characters, so we can jump them quickly. */</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="nl">skip_ascii_begin</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">     We want to make loop unrolling, as shown in the following code. Some
+</span></span></span><span class="line"><span class="cl"><span class="cm">     compiler may not generate instructions as expected, so we rewrite it with
+</span></span></span><span class="line"><span class="cl"><span class="cm">     explicit goto statements. We hope the compiler can generate instructions
+</span></span></span><span class="line"><span class="cl"><span class="cm">     like this: https://godbolt.org/z/8vjsYq
+</span></span></span><span class="line"><span class="cl"><span class="cm">     
+</span></span></span><span class="line"><span class="cl"><span class="cm">         while (true) repeat16({
+</span></span></span><span class="line"><span class="cl"><span class="cm">            if (likely(!(char_is_ascii_stop(*src)))) src++;
+</span></span></span><span class="line"><span class="cl"><span class="cm">            else break;
+</span></span></span><span class="line"><span class="cl"><span class="cm">         });
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define expr_jump(i) \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    if (likely(!char_is_ascii_stop(src[i]))) {} \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    else goto skip_ascii_stop##i;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    
+</span></span><span class="line"><span class="cl"><span class="cp">#define expr_stop(i) \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    skip_ascii_stop##i: \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    src += i; \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    goto skip_ascii_end;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    
+</span></span><span class="line"><span class="cl">    <span class="nf">repeat16_incr</span><span class="p">(</span><span class="n">expr_jump</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">src</span> <span class="o">+=</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">goto</span> <span class="n">skip_ascii_begin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">repeat16_incr</span><span class="p">(</span><span class="n">expr_stop</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="cp">#undef expr_jump
+</span></span></span><span class="line"><span class="cl"><span class="cp">#undef expr_stop
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    
+</span></span><span class="line"><span class="cl"><span class="nl">skip_ascii_end</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ... 수많은 코드 ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><p><code>skip_ascii</code>, <code>skip_ascii_begin</code>, <code>skip_ascii_end</code>
 등을 라벨을 사용하여 goto문으로 상태이동을 표현하였다.</p>
@@ -217,35 +217,35 @@ likely , unlikely를 적당히 버무려 사용하면 된다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">skip_ascii_begin</span><span style="color:#1f2328">:</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">// repeat16_incr(expr_jump); // 이게 풀리면
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">likely</span><span style="color:#1f2328">(</span><span style="color:#0550ae">!</span><span style="color:#6639ba">char_is_ascii_stop</span><span style="color:#1f2328">(</span>src<span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">])))</span> <span style="color:#1f2328">{}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">else</span> <span style="color:#cf222e">goto</span> skip_ascii_stop0<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">likely</span><span style="color:#1f2328">(</span><span style="color:#0550ae">!</span><span style="color:#6639ba">char_is_ascii_stop</span><span style="color:#1f2328">(</span>src<span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">])))</span> <span style="color:#1f2328">{}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">else</span> <span style="color:#cf222e">goto</span> skip_ascii_stop1<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">likely</span><span style="color:#1f2328">(</span><span style="color:#0550ae">!</span><span style="color:#6639ba">char_is_ascii_stop</span><span style="color:#1f2328">(</span>src<span style="color:#1f2328">[</span><span style="color:#0550ae">2</span><span style="color:#1f2328">])))</span> <span style="color:#1f2328">{}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">else</span> <span style="color:#cf222e">goto</span> skip_ascii_stop2<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">likely</span><span style="color:#1f2328">(</span><span style="color:#0550ae">!</span><span style="color:#6639ba">char_is_ascii_stop</span><span style="color:#1f2328">(</span>src<span style="color:#1f2328">[</span><span style="color:#0550ae">3</span><span style="color:#1f2328">])))</span> <span style="color:#1f2328">{}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">else</span> <span style="color:#cf222e">goto</span> skip_ascii_stop3<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">....</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">likely</span><span style="color:#1f2328">(</span><span style="color:#0550ae">!</span><span style="color:#6639ba">char_is_ascii_stop</span><span style="color:#1f2328">(</span>src<span style="color:#1f2328">[</span><span style="color:#0550ae">15</span><span style="color:#1f2328">])))</span> <span style="color:#1f2328">{}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">else</span> <span style="color:#cf222e">goto</span> skip_ascii_stop15<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>src <span style="color:#0550ae">+=</span> <span style="color:#0550ae">16</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">goto</span> skip_ascii_begin<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">skip_ascii_stop0</span><span style="color:#1f2328">:</span> 
-</span></span><span style="display:flex;"><span>src <span style="color:#0550ae">+=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">goto</span> skip_ascii_end<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">skip_ascii_stop1</span><span style="color:#1f2328">:</span> 
-</span></span><span style="display:flex;"><span>src <span style="color:#0550ae">+=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">goto</span> skip_ascii_end<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span><span style="color:#57606a">// ... 수많은 코드 ...
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">skip_ascii_begin</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// repeat16_incr(expr_jump); // 이게 풀리면
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nf">likely</span><span class="p">(</span><span class="o">!</span><span class="nf">char_is_ascii_stop</span><span class="p">(</span><span class="n">src</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">goto</span> <span class="n">skip_ascii_stop0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">likely</span><span class="p">(</span><span class="o">!</span><span class="nf">char_is_ascii_stop</span><span class="p">(</span><span class="n">src</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">goto</span> <span class="n">skip_ascii_stop1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">likely</span><span class="p">(</span><span class="o">!</span><span class="nf">char_is_ascii_stop</span><span class="p">(</span><span class="n">src</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">goto</span> <span class="n">skip_ascii_stop2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">likely</span><span class="p">(</span><span class="o">!</span><span class="nf">char_is_ascii_stop</span><span class="p">(</span><span class="n">src</span><span class="p">[</span><span class="mi">3</span><span class="p">])))</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">goto</span> <span class="n">skip_ascii_stop3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">....</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">likely</span><span class="p">(</span><span class="o">!</span><span class="nf">char_is_ascii_stop</span><span class="p">(</span><span class="n">src</span><span class="p">[</span><span class="mi">15</span><span class="p">])))</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">goto</span> <span class="n">skip_ascii_stop15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">src</span> <span class="o">+=</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">goto</span> <span class="n">skip_ascii_begin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">skip_ascii_stop0</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">src</span> <span class="o">+=</span> <span class="mi">0</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="k">goto</span> <span class="n">skip_ascii_end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">skip_ascii_stop1</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">src</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="k">goto</span> <span class="n">skip_ascii_end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl"><span class="c1">// ... 수많은 코드 ...
 </span></span></span></code></pre></div>
   </div>
 </div><p>무려 if문이 16번이나 연속 되므로 분기가 많아 느릴것 같아보이지만
@@ -255,17 +255,17 @@ if문 안에는 전부 likely매크로가 달려 있어 CPU에 true 힌트를 �
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/** 16/32/64-bit vector union, used for unaligned memory access on modern CPU */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">typedef</span> <span style="color:#cf222e">union</span> v16_uni <span style="color:#1f2328">{</span> v16 v<span style="color:#1f2328">;</span> u16 u<span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span> v16_uni<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">typedef</span> <span style="color:#cf222e">union</span> v32_uni <span style="color:#1f2328">{</span> v32 v<span style="color:#1f2328">;</span> u32 u<span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span> v32_uni<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">typedef</span> <span style="color:#cf222e">union</span> v64_uni <span style="color:#1f2328">{</span> v64 v<span style="color:#1f2328">;</span> u64 u<span style="color:#1f2328">;</span> <span style="color:#1f2328">}</span> v64_uni<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>static_inline <span style="color:#cf222e">bool</span> <span style="color:#6639ba">byte_match_4</span><span style="color:#1f2328">(</span><span style="color:#cf222e">void</span> <span style="color:#0550ae">*</span>buf<span style="color:#1f2328">,</span> <span style="color:#cf222e">const</span> <span style="color:#cf222e">char</span> <span style="color:#0550ae">*</span>pat<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    v32_uni u1<span style="color:#1f2328">,</span> u2<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    u1<span style="color:#1f2328">.</span>v <span style="color:#0550ae">=</span> <span style="color:#0550ae">*</span><span style="color:#1f2328">(</span>v32 <span style="color:#0550ae">*</span><span style="color:#1f2328">)</span>pat<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    u2<span style="color:#1f2328">.</span>v <span style="color:#0550ae">=</span> <span style="color:#0550ae">*</span><span style="color:#1f2328">(</span>v32 <span style="color:#0550ae">*</span><span style="color:#1f2328">)</span>buf<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> u1<span style="color:#1f2328">.</span>u <span style="color:#0550ae">==</span> u2<span style="color:#1f2328">.</span>u<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/** 16/32/64-bit vector union, used for unaligned memory access on modern CPU */</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">union</span> <span class="n">v16_uni</span> <span class="p">{</span> <span class="n">v16</span> <span class="n">v</span><span class="p">;</span> <span class="n">u16</span> <span class="n">u</span><span class="p">;</span> <span class="p">}</span> <span class="n">v16_uni</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">union</span> <span class="n">v32_uni</span> <span class="p">{</span> <span class="n">v32</span> <span class="n">v</span><span class="p">;</span> <span class="n">u32</span> <span class="n">u</span><span class="p">;</span> <span class="p">}</span> <span class="n">v32_uni</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">union</span> <span class="n">v64_uni</span> <span class="p">{</span> <span class="n">v64</span> <span class="n">v</span><span class="p">;</span> <span class="n">u64</span> <span class="n">u</span><span class="p">;</span> <span class="p">}</span> <span class="n">v64_uni</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">static_inline</span> <span class="kt">bool</span> <span class="nf">byte_match_4</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pat</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v32_uni</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u1</span><span class="p">.</span><span class="n">v</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">v32</span> <span class="o">*</span><span class="p">)</span><span class="n">pat</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">u2</span><span class="p">.</span><span class="n">v</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">v32</span> <span class="o">*</span><span class="p">)</span><span class="n">buf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">u1</span><span class="p">.</span><span class="n">u</span> <span class="o">==</span> <span class="n">u2</span><span class="p">.</span><span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><p>json 에서  &rsquo;true&rsquo;, &rsquo;null&rsquo; 등의 토큰은 사실 바이트단위로
 4번이나 비교할 필요가 없다. 4바이트이므로 그냥 바로 통째로
@@ -278,67 +278,67 @@ if문 안에는 전부 likely매크로가 달려 있어 CPU에 true 힌트를 �
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span> <span style="color:#0a3069">&#39;{&#39;</span> <span style="color:#0550ae">==</span> ch <span style="color:#0550ae">||</span> <span style="color:#0a3069">&#39;[&#39;</span> <span style="color:#0550ae">==</span> ch <span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#57606a">// char type Container
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">switch</span><span style="color:#1f2328">(</span>ch<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">case</span> <span style="color:#0a3069">&#39;\n&#39;</span><span style="color:#0550ae">:</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">case</span> <span style="color:#0a3069">&#39;\r&#39;</span><span style="color:#0550ae">:</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">case</span> <span style="color:#0a3069">&#39;\0&#39;</span><span style="color:#0550ae">:</span>
-</span></span><span style="display:flex;"><span>		<span style="color:#57606a">// char type line END
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>		<span style="color:#cf222e">break</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span> <span class="sc">&#39;{&#39;</span> <span class="o">==</span> <span class="n">ch</span> <span class="o">||</span> <span class="sc">&#39;[&#39;</span> <span class="o">==</span> <span class="n">ch</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// char type Container
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">switch</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="sc">&#39;\n&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="sc">&#39;\r&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="sc">&#39;\0&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// char type line END
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><p>위 소스는 분기 및 비교가 많다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/** Whitespace character: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">const</span> char_type CHAR_TYPE_SPACE      <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** Number character: &#39;-&#39;, [0-9]. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">const</span> char_type CHAR_TYPE_NUMBER     <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** JSON Escaped character: &#39;&#34;&#39;, &#39;\&#39;, [0x00-0x1F]. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">const</span> char_type CHAR_TYPE_ESC_ASCII  <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** Non-ASCII character: [0x80-0xFF]. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">const</span> char_type CHAR_TYPE_NON_ASCII  <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">3</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** JSON container character: &#39;{&#39;, &#39;[&#39;. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">const</span> char_type CHAR_TYPE_CONTAINER  <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** Comment character: &#39;/&#39;. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">const</span> char_type CHAR_TYPE_COMMENT    <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">5</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** Line end character &#39;\\n&#39;, &#39;\\r&#39;, &#39;\0&#39;. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">const</span> char_type CHAR_TYPE_LINE_END   <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span> <span style="color:#0550ae">&lt;&lt;</span> <span style="color:#0550ae">6</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** Character type table (generate with misc/make_tables.c) */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">const</span> char_type char_table<span style="color:#1f2328">[</span><span style="color:#0550ae">256</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">0x44</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x05</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x45</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x45</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0x04</span><span style="color:#1f2328">,</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">//...
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//... 256 개의 사전 정의된 types
-</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#1f2328">};</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** Match a character with specified type. */</span>
-</span></span><span style="display:flex;"><span>static_inline <span style="color:#cf222e">bool</span> <span style="color:#6639ba">char_is_type</span><span style="color:#1f2328">(</span>u8 c<span style="color:#1f2328">,</span> char_type type<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#1f2328">(</span>char_table<span style="color:#1f2328">[</span>c<span style="color:#1f2328">]</span> <span style="color:#0550ae">&amp;</span> type<span style="color:#1f2328">)</span> <span style="color:#0550ae">!=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** Match a whitespace: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
-</span></span><span style="display:flex;"><span>static_inline <span style="color:#cf222e">bool</span> <span style="color:#6639ba">char_is_space</span><span style="color:#1f2328">(</span>u8 c<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#6639ba">char_is_type</span><span style="color:#1f2328">(</span>c<span style="color:#1f2328">,</span> CHAR_TYPE_SPACE<span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/** Match a whitespace or comment: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;, &#39;/&#39;. */</span>
-</span></span><span style="display:flex;"><span>static_inline <span style="color:#cf222e">bool</span> <span style="color:#6639ba">char_is_space_or_comment</span><span style="color:#1f2328">(</span>u8 c<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> <span style="color:#6639ba">char_is_type</span><span style="color:#1f2328">(</span>c<span style="color:#1f2328">,</span> CHAR_TYPE_SPACE <span style="color:#0550ae">|</span> CHAR_TYPE_COMMENT<span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/** Whitespace character: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="n">char_type</span> <span class="n">CHAR_TYPE_SPACE</span>      <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** Number character: &#39;-&#39;, [0-9]. */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="n">char_type</span> <span class="n">CHAR_TYPE_NUMBER</span>     <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** JSON Escaped character: &#39;&#34;&#39;, &#39;\&#39;, [0x00-0x1F]. */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="n">char_type</span> <span class="n">CHAR_TYPE_ESC_ASCII</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** Non-ASCII character: [0x80-0xFF]. */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="n">char_type</span> <span class="n">CHAR_TYPE_NON_ASCII</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** JSON container character: &#39;{&#39;, &#39;[&#39;. */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="n">char_type</span> <span class="n">CHAR_TYPE_CONTAINER</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** Comment character: &#39;/&#39;. */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="n">char_type</span> <span class="n">CHAR_TYPE_COMMENT</span>    <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** Line end character &#39;\\n&#39;, &#39;\\r&#39;, &#39;\0&#39;. */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="n">char_type</span> <span class="n">CHAR_TYPE_LINE_END</span>   <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** Character type table (generate with misc/make_tables.c) */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="n">char_type</span> <span class="n">char_table</span><span class="p">[</span><span class="mi">256</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="mh">0x44</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x45</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x45</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1">//... 256 개의 사전 정의된 types
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** Match a character with specified type. */</span>
+</span></span><span class="line"><span class="cl"><span class="n">static_inline</span> <span class="kt">bool</span> <span class="nf">char_is_type</span><span class="p">(</span><span class="n">u8</span> <span class="n">c</span><span class="p">,</span> <span class="n">char_type</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">char_table</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">type</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** Match a whitespace: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;. */</span>
+</span></span><span class="line"><span class="cl"><span class="n">static_inline</span> <span class="kt">bool</span> <span class="nf">char_is_space</span><span class="p">(</span><span class="n">u8</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">char_is_type</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">CHAR_TYPE_SPACE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** Match a whitespace or comment: &#39; &#39;, &#39;\\t&#39;, &#39;\\n&#39;, &#39;\\r&#39;, &#39;/&#39;. */</span>
+</span></span><span class="line"><span class="cl"><span class="n">static_inline</span> <span class="kt">bool</span> <span class="nf">char_is_space_or_comment</span><span class="p">(</span><span class="n">u8</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">char_is_type</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">CHAR_TYPE_SPACE</span> <span class="o">|</span> <span class="n">CHAR_TYPE_COMMENT</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><p>위 코드처럼 사전정의된 테이블을 가지고 문자의 종류 판단을 하게 된다.
 비트Mask를 활용한 것도 유용하다.</p>

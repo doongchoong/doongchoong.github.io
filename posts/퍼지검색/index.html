@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
+<link rel="stylesheet" href="/css/site.22537a035e08bf8397e9db6bdb760e01a967fbe0a4d85511a3a8a0ec22abe61f.css" integrity="sha256-IlN6A14Iv4OX6dtr23YOAaln&#43;&#43;Ck2FURo6ig7CKr5h8=">
 
   </head>
   <body>
@@ -133,13 +133,13 @@
 <div class="code-block-wrapper">
   <div class="code-title">TXT</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>    pat:[rr]
-</span></span><span style="display:flex;"><span>    txt:[ReadMe]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    | R, e, a, d, M, e
-</span></span><span style="display:flex;"><span>   -+-----------------
-</span></span><span style="display:flex;"><span>   r|
-</span></span><span style="display:flex;"><span>   r|</span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">    pat:[rr]
+</span></span><span class="line"><span class="cl">    txt:[ReadMe]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    | R, e, a, d, M, e
+</span></span><span class="line"><span class="cl">   -+-----------------
+</span></span><span class="line"><span class="cl">   r|
+</span></span><span class="line"><span class="cl">   r|</span></span></code></pre></div>
   </div>
 </div><h3 id="패턴을-전부-매칭시키는-방법">패턴을 전부 매칭시키는 방법</h3>
 <p>방법은 위로가는 방향은 빼고  대각선, 왼쪽 두방향으로만 검색해서 최대값을 기록해 나가면 된다.
@@ -147,11 +147,11 @@
 <div class="code-block-wrapper">
   <div class="code-title">TXT</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>     --t--tt---t-----tt
-</span></span><span style="display:flex;"><span>    r-&gt;\
-</span></span><span style="display:flex;"><span>    r----&gt;\
-</span></span><span style="display:flex;"><span>    r      \--------&gt;\
-</span></span><span style="display:flex;"><span>    r           \----&gt;\</span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">     --t--tt---t-----tt
+</span></span><span class="line"><span class="cl">    r-&gt;\
+</span></span><span class="line"><span class="cl">    r----&gt;\
+</span></span><span class="line"><span class="cl">    r      \--------&gt;\
+</span></span><span class="line"><span class="cl">    r           \----&gt;\</span></span></code></pre></div>
   </div>
 </div><p>대략 위와 같은 느낌으로 이해하면 된다.
 패턴문자(row)는 하나도 빠짐없이 매칭 되며  매칭되었을때는 대각선으로 하강한다.
@@ -210,9 +210,9 @@ T(r, c-1) 도 마찬가지다. 이는 재귀적 구조를 지니고 있어 <a hr
 <div class="code-block-wrapper">
   <div class="code-title">TXT</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span> pat:    tic
-</span></span><span style="display:flex;"><span> txt:    /thits/iis/testcCase
-</span></span><span style="display:flex;"><span> result: /[t]hits/[i]is/testc[C]ase</span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl"> pat:    tic
+</span></span><span class="line"><span class="cl"> txt:    /thits/iis/testcCase
+</span></span><span class="line"><span class="cl"> result: /[t]hits/[i]is/testc[C]ase</span></span></code></pre></div>
   </div>
 </div><p>위와 같은 사례를 보면 앞 디렉토리명에서 t 는 두번 나오지만 /t 와 같이 경계에 붙어있는 문자로 선택을 하도록 유도한다.
 testcCase 도 마찬가지로 대문자C 앞에 소문자c가 먼저 나왔지만 CamelCase 를 더 선호하기 때문에 C를 선택한다.</p>
@@ -240,31 +240,31 @@ matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번�
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> colsize <span style="color:#0550ae">=</span> <span style="color:#6639ba">strlen</span><span style="color:#1f2328">(</span>txt<span style="color:#1f2328">)</span> <span style="color:#0550ae">+</span> START_IDX<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> rowsize <span style="color:#0550ae">=</span> <span style="color:#6639ba">strlen</span><span style="color:#1f2328">(</span>pat<span style="color:#1f2328">)</span> <span style="color:#0550ae">+</span> START_IDX<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">#define IDX(r,c) (((r) * colsize) + (c))</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">colsize</span> <span class="o">=</span> <span class="nf">strlen</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="o">+</span> <span class="n">START_IDX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">rowsize</span> <span class="o">=</span> <span class="nf">strlen</span><span class="p">(</span><span class="n">pat</span><span class="p">)</span> <span class="o">+</span> <span class="n">START_IDX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define IDX(r,c) (((r) * colsize) + (c))</span></span></span></code></pre></div>
   </div>
 </div><h3 id="보너스-사전정보">보너스 사전정보</h3>
 <p>경계문자, CamelCase, no-alnum 등은 사실 입력텍스트만 보고도 기록해 놓을 수 있다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#57606a">/* 보너스 계산 */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">char</span> t_cur<span style="color:#1f2328">,</span> t_pre <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> col <span style="color:#0550ae">=</span> START_IDX<span style="color:#1f2328">;</span> col <span style="color:#0550ae">&lt;</span> colsize<span style="color:#1f2328">;</span> col<span style="color:#0550ae">++</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        t_cur <span style="color:#0550ae">=</span> txt<span style="color:#1f2328">[</span>col<span style="color:#0550ae">-</span>START_IDX<span style="color:#1f2328">];</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span><span style="color:#6639ba">isalnum</span><span style="color:#1f2328">(</span>t_pre<span style="color:#1f2328">)</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#6639ba">isalnum</span><span style="color:#1f2328">(</span>t_cur<span style="color:#1f2328">))</span>
-</span></span><span style="display:flex;"><span>            bonus<span style="color:#1f2328">[</span>col<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> g_bonus_boundary<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">else</span> <span style="color:#6639ba">if</span><span style="color:#1f2328">(</span><span style="color:#6639ba">isalnum</span><span style="color:#1f2328">(</span>t_cur<span style="color:#1f2328">)</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>            bonus<span style="color:#1f2328">[</span>col<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> g_bonus_no_alnum<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">else</span> <span style="color:#6639ba">if</span><span style="color:#1f2328">(</span><span style="color:#6639ba">islower</span><span style="color:#1f2328">(</span>t_pre<span style="color:#1f2328">)</span> <span style="color:#0550ae">&amp;&amp;</span> <span style="color:#6639ba">isupper</span><span style="color:#1f2328">(</span>t_cur<span style="color:#1f2328">))</span>
-</span></span><span style="display:flex;"><span>            bonus<span style="color:#1f2328">[</span>col<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> g_bonus_camel<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        t_pre <span style="color:#0550ae">=</span> t_cur<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cm">/* 보너스 계산 */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">t_cur</span><span class="p">,</span> <span class="n">t_pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="n">START_IDX</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">colsize</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t_cur</span> <span class="o">=</span> <span class="n">txt</span><span class="p">[</span><span class="n">col</span><span class="o">-</span><span class="n">START_IDX</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nf">isalnum</span><span class="p">(</span><span class="n">t_pre</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nf">isalnum</span><span class="p">(</span><span class="n">t_cur</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bonus</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_bonus_boundary</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="nf">isalnum</span><span class="p">(</span><span class="n">t_cur</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bonus</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_bonus_no_alnum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="nf">islower</span><span class="p">(</span><span class="n">t_pre</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nf">isupper</span><span class="p">(</span><span class="n">t_cur</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bonus</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_bonus_camel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">t_pre</span> <span class="o">=</span> <span class="n">t_cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><h3 id="각-row에서-첫번째-col-정하기">각 Row에서 첫번째 col 정하기</h3>
 <p>첫번째 패턴문자를 일치부분을 끝내고 그 다음 패턴문자를 가지고 작업할때
@@ -273,25 +273,25 @@ matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번�
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">int</span> first_col_in_a_row <span style="color:#0550ae">=</span> START_IDX<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">...</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> row<span style="color:#0550ae">=</span>START_IDX<span style="color:#1f2328">;</span> row <span style="color:#0550ae">&lt;</span> rowsize<span style="color:#1f2328">;</span> row<span style="color:#0550ae">++</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">...</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> is_first <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#57606a">/* false */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">...</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> col <span style="color:#0550ae">=</span> first_col_in_a_row<span style="color:#1f2328">;</span> col <span style="color:#0550ae">&lt;</span> colsize<span style="color:#1f2328">;</span> col<span style="color:#0550ae">++</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">...</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#57606a">/* match */</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span><span style="color:#6639ba">tolower</span><span style="color:#1f2328">(</span>p_cur<span style="color:#1f2328">)</span> <span style="color:#0550ae">==</span> <span style="color:#6639ba">tolower</span><span style="color:#1f2328">(</span>t_cur<span style="color:#1f2328">))</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#57606a">/* 첫번째 시작 col 기록 */</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>is_first <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>                is_first <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>                first_col_in_a_row <span style="color:#0550ae">=</span> col<span style="color:#0550ae">+</span><span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">first_col_in_a_row</span> <span class="o">=</span> <span class="n">START_IDX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="n">START_IDX</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">rowsize</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">is_first</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* false */</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="n">first_col_in_a_row</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">colsize</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* match */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nf">tolower</span><span class="p">(</span><span class="n">p_cur</span><span class="p">)</span> <span class="o">==</span> <span class="nf">tolower</span><span class="p">(</span><span class="n">t_cur</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="cm">/* 첫번째 시작 col 기록 */</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">is_first</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">is_first</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">first_col_in_a_row</span> <span class="o">=</span> <span class="n">col</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><h3 id="대각선-왼쪽-선택하기">대각선, 왼쪽 선택하기</h3>
 <p>위에서 설계한 대로 고르되 중요한 점은 <strong>대각선을 선택할 시에는 지금 패턴을 매칭하였을 때</strong> 인 것이고
@@ -299,84 +299,84 @@ matrix는 가로,세로 하나씩 큰 값으로 선택하여 0번째 row, 0번�
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* 왼쪽 점수 결정 */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>is_gap<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    left_score <span style="color:#0550ae">+=</span> g_penalty_ingap<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">else</span>
-</span></span><span style="display:flex;"><span>    left_score <span style="color:#0550ae">+=</span> g_penalty_firstgap<span style="color:#1f2328">;</span> <span style="color:#57606a">/* 첫 연속 실패시 패널티가 크다. */</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/* 매칭시 */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span><span style="color:#6639ba">tolower</span><span style="color:#1f2328">(</span>p_cur<span style="color:#1f2328">)</span> <span style="color:#0550ae">==</span> <span style="color:#6639ba">tolower</span><span style="color:#1f2328">(</span>t_cur<span style="color:#1f2328">))</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">...</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#57606a">/* 대각선 */</span>
-</span></span><span style="display:flex;"><span>    diag_score <span style="color:#0550ae">+=</span> g_score_match<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#57606a">/* 보너스 결정 */</span>
-</span></span><span style="display:flex;"><span>    bonus_score <span style="color:#0550ae">=</span> bonus<span style="color:#1f2328">[</span>col<span style="color:#1f2328">];</span>
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">...</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#57606a">/* 대각선이 더 큰경우 패턴 선택 */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>left_score <span style="color:#0550ae">&lt;</span> diag_score <span style="color:#0550ae">+</span> bonus_score<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        is_select <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span> <span style="color:#57606a">/* true */</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/* 선택되면 대각선, 안될경우 왼쪽 선택한다. */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>is_select<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    is_gap <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> <span style="color:#57606a">/* false */</span>
-</span></span><span style="display:flex;"><span>    matrix<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>row<span style="color:#1f2328">,</span> col<span style="color:#1f2328">)]</span> <span style="color:#0550ae">=</span> diag_score <span style="color:#0550ae">+</span> bonus_score<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">...</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">else</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    is_gap <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span> <span style="color:#57606a">/* true */</span>
-</span></span><span style="display:flex;"><span>    matrix<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>row  <span style="color:#1f2328">,</span> col<span style="color:#1f2328">)]</span> <span style="color:#0550ae">=</span> left_score <span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/* 음수값 처리 */</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>matrix<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>row  <span style="color:#1f2328">,</span> col<span style="color:#1f2328">)]</span> <span style="color:#0550ae">&lt;</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    matrix<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>row  <span style="color:#1f2328">,</span> col<span style="color:#1f2328">)]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* 왼쪽 점수 결정 */</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">is_gap</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">left_score</span> <span class="o">+=</span> <span class="n">g_penalty_ingap</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">left_score</span> <span class="o">+=</span> <span class="n">g_penalty_firstgap</span><span class="p">;</span> <span class="cm">/* 첫 연속 실패시 패널티가 크다. */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* 매칭시 */</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nf">tolower</span><span class="p">(</span><span class="n">p_cur</span><span class="p">)</span> <span class="o">==</span> <span class="nf">tolower</span><span class="p">(</span><span class="n">t_cur</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="cm">/* 대각선 */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">diag_score</span> <span class="o">+=</span> <span class="n">g_score_match</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* 보너스 결정 */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bonus_score</span> <span class="o">=</span> <span class="n">bonus</span><span class="p">[</span><span class="n">col</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* 대각선이 더 큰경우 패턴 선택 */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">left_score</span> <span class="o">&lt;</span> <span class="n">diag_score</span> <span class="o">+</span> <span class="n">bonus_score</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">is_select</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* true */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* 선택되면 대각선, 안될경우 왼쪽 선택한다. */</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">is_select</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">is_gap</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* false */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">matrix</span><span class="p">[</span><span class="nf">IDX</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)]</span> <span class="o">=</span> <span class="n">diag_score</span> <span class="o">+</span> <span class="n">bonus_score</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">is_gap</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* true */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">matrix</span><span class="p">[</span><span class="nf">IDX</span><span class="p">(</span><span class="n">row</span>  <span class="p">,</span> <span class="n">col</span><span class="p">)]</span> <span class="o">=</span> <span class="n">left_score</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* 음수값 처리 */</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="nf">IDX</span><span class="p">(</span><span class="n">row</span>  <span class="p">,</span> <span class="n">col</span><span class="p">)]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">matrix</span><span class="p">[</span><span class="nf">IDX</span><span class="p">(</span><span class="n">row</span>  <span class="p">,</span> <span class="n">col</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></span></span></code></pre></div>
   </div>
 </div><h3 id="연속처리">연속처리</h3>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">/* 연속 개수 선정 */</span>
-</span></span><span style="display:flex;"><span>cont_cnt <span style="color:#0550ae">=</span> cont<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>row<span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> col<span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)]</span> <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/* 대각선 */</span>
-</span></span><span style="display:flex;"><span>diag_score <span style="color:#0550ae">+=</span> g_score_match<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#57606a">/* 보너스 결정 */</span>
-</span></span><span style="display:flex;"><span>bonus_score <span style="color:#0550ae">=</span> bonus<span style="color:#1f2328">[</span>col<span style="color:#1f2328">];</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>cont_cnt <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#57606a">/* 연속이면 현재보너스, 연속보너스점수, 연속시작문자보너스 중 최대값을 선정해서 정함 */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>bonus_score <span style="color:#0550ae">&lt;</span> g_bonus_continuous<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>        bonus_score <span style="color:#0550ae">=</span> g_bonus_continuous<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>bonus_score <span style="color:#0550ae">&lt;</span> bonus<span style="color:#1f2328">[</span>col <span style="color:#0550ae">-</span> cont_cnt <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">])</span>
-</span></span><span style="display:flex;"><span>        bonus_score <span style="color:#0550ae">=</span> bonus<span style="color:#1f2328">[</span>col <span style="color:#0550ae">-</span> cont_cnt <span style="color:#0550ae">+</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">];</span>
-</span></span><span style="display:flex;"><span>    bonus_score <span style="color:#0550ae">+=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* 연속 개수 선정 */</span>
+</span></span><span class="line"><span class="cl"><span class="n">cont_cnt</span> <span class="o">=</span> <span class="n">cont</span><span class="p">[</span><span class="nf">IDX</span><span class="p">(</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* 대각선 */</span>
+</span></span><span class="line"><span class="cl"><span class="n">diag_score</span> <span class="o">+=</span> <span class="n">g_score_match</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* 보너스 결정 */</span>
+</span></span><span class="line"><span class="cl"><span class="n">bonus_score</span> <span class="o">=</span> <span class="n">bonus</span><span class="p">[</span><span class="n">col</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">cont_cnt</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* 연속이면 현재보너스, 연속보너스점수, 연속시작문자보너스 중 최대값을 선정해서 정함 */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">bonus_score</span> <span class="o">&lt;</span> <span class="n">g_bonus_continuous</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bonus_score</span> <span class="o">=</span> <span class="n">g_bonus_continuous</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">bonus_score</span> <span class="o">&lt;</span> <span class="n">bonus</span><span class="p">[</span><span class="n">col</span> <span class="o">-</span> <span class="n">cont_cnt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bonus_score</span> <span class="o">=</span> <span class="n">bonus</span><span class="p">[</span><span class="n">col</span> <span class="o">-</span> <span class="n">cont_cnt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bonus_score</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><h3 id="역추적해서-패턴-위치-알아내기">역추적해서 패턴 위치 알아내기</h3>
 <p>기록해온 것의 반대방향으로 하면 된다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">C</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#57606a">/* 역추적 */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> back_row <span style="color:#0550ae">=</span> rowsize <span style="color:#0550ae">-</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">int</span> back_col <span style="color:#0550ae">=</span> max_col<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">while</span><span style="color:#1f2328">(</span>back_row <span style="color:#0550ae">&gt;=</span> START_IDX<span style="color:#1f2328">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span><span style="color:#1f2328">(</span>matrix<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>back_row<span style="color:#1f2328">,</span> back_col<span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">)]</span> <span style="color:#0550ae">&lt;=</span> matrix<span style="color:#1f2328">[</span><span style="color:#6639ba">IDX</span><span style="color:#1f2328">(</span>back_row<span style="color:#1f2328">,</span> back_col<span style="color:#1f2328">)])</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">{</span>
-</span></span><span style="display:flex;"><span>            back_row<span style="color:#0550ae">--</span><span style="color:#1f2328">;</span> 
-</span></span><span style="display:flex;"><span>            position<span style="color:#1f2328">[</span>back_col <span style="color:#0550ae">-</span> START_IDX<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">}</span>
-</span></span><span style="display:flex;"><span>        back_col <span style="color:#0550ae">--</span><span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="cm">/* 역추적 */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">back_row</span> <span class="o">=</span> <span class="n">rowsize</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">back_col</span> <span class="o">=</span> <span class="n">max_col</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">back_row</span> <span class="o">&gt;=</span> <span class="n">START_IDX</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="nf">IDX</span><span class="p">(</span><span class="n">back_row</span><span class="p">,</span> <span class="n">back_col</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">&lt;=</span> <span class="n">matrix</span><span class="p">[</span><span class="nf">IDX</span><span class="p">(</span><span class="n">back_row</span><span class="p">,</span> <span class="n">back_col</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">back_row</span><span class="o">--</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">position</span><span class="p">[</span><span class="n">back_col</span> <span class="o">-</span> <span class="n">START_IDX</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">back_col</span> <span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></div>
   </div>
 </div><h2 id="구현결과">구현결과</h2>
 <p><a href="https://github.com/doongchoong/fzc">fzc</a> 라는 툴을 만들었다.

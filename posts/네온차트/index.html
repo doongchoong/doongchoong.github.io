@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko-kr">
+<html lang="ko-kr" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
 <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
+<link rel="stylesheet" href="/css/site.22537a035e08bf8397e9db6bdb760e01a967fbe0a4d85511a3a8a0ec22abe61f.css" integrity="sha256-IlN6A14Iv4OX6dtr23YOAaln&#43;&#43;Ck2FURo6ig7CKr5h8=">
 
   </head>
   <body>
@@ -429,27 +429,27 @@
 <div class="code-block-wrapper">
   <div class="code-title">GLSL</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-glsl" data-lang="glsl"><span style="display:flex;"><span><span style="color:#cf222e">vec3</span> baseColor <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>bodyData<span style="color:#1f2328">.</span>z <span style="color:#0550ae">&gt;</span> <span style="color:#0550ae">0.0</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">?</span> <span style="color:#cf222e">vec3</span><span style="color:#1f2328">(</span><span style="color:#0550ae">1.0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0.05</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0.35</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">:</span> <span style="color:#cf222e">vec3</span><span style="color:#1f2328">(</span><span style="color:#0550ae">0.0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0.55</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1.0</span><span style="color:#1f2328">);</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-glsl" data-lang="glsl"><span class="line"><span class="cl"><span class="k">vec3</span> <span class="n">baseColor</span> <span class="o">=</span> <span class="p">(</span><span class="n">bodyData</span><span class="p">.</span><span class="n">z</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">?</span> <span class="k">vec3</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">)</span> <span class="o">:</span> <span class="k">vec3</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span></span></span></code></pre></div>
   </div>
 </div><p>전달된 차트데이터에서 .z는 부호이다. 음수는 하락봉을 나타내며 상승봉, 하락봉에 따라 색상을 다르게 선택한다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">GLSL</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-glsl" data-lang="glsl"><span style="display:flex;"><span><span style="color:#cf222e">float</span> bodyDist <span style="color:#0550ae">=</span> sdBox<span style="color:#1f2328">(...);</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">float</span> wickDist <span style="color:#0550ae">=</span> sdSegment<span style="color:#1f2328">(...));</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">float</span> dist <span style="color:#0550ae">=</span> min<span style="color:#1f2328">(</span>bodyDist<span style="color:#1f2328">,</span> wickDist<span style="color:#1f2328">);</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-glsl" data-lang="glsl"><span class="line"><span class="cl"><span class="k">float</span> <span class="n">bodyDist</span> <span class="o">=</span> <span class="n">sdBox</span><span class="p">(...);</span>
+</span></span><span class="line"><span class="cl"><span class="k">float</span> <span class="n">wickDist</span> <span class="o">=</span> <span class="n">sdSegment</span><span class="p">(...));</span>
+</span></span><span class="line"><span class="cl"><span class="k">float</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">bodyDist</span><span class="p">,</span> <span class="n">wickDist</span><span class="p">);</span></span></span></code></pre></div>
   </div>
 </div><p>해당 픽셀이 봉에 속하는지 판별하기 위한 거리이다. 음수면 봉에 속하는 것이다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">GLSL</div>
   <div class="highlight_wrap">
-    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-glsl" data-lang="glsl"><span style="display:flex;"><span><span style="color:#cf222e">vec3</span> candleLight <span style="color:#0550ae">=</span> baseColor <span style="color:#0550ae">*</span> glow <span style="color:#0550ae">*</span> intensity<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">float</span> coreMask <span style="color:#0550ae">=</span> smoothstep<span style="color:#1f2328">(</span><span style="color:#0550ae">0.004</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">-</span><span style="color:#0550ae">0.004</span><span style="color:#1f2328">,</span> dist<span style="color:#1f2328">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#cf222e">vec3</span> coreColor <span style="color:#0550ae">=</span> baseColor <span style="color:#0550ae">*</span> intensity <span style="color:#0550ae">*</span> <span style="color:#0550ae">1.3</span><span style="color:#1f2328">;</span> <span style="color:#57606a">// 코어 밝기 계수 하향 (1.6 -&gt; 1.3)</span>
-</span></span><span style="display:flex;"><span>coreColor <span style="color:#0550ae">+=</span> <span style="color:#cf222e">vec3</span><span style="color:#1f2328">(</span><span style="color:#0550ae">0.9</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0.9</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1.0</span><span style="color:#1f2328">)</span> <span style="color:#0550ae">*</span> coreMask <span style="color:#0550ae">*</span> <span style="color:#0550ae">0.4</span> <span style="color:#0550ae">*</span> intensity<span style="color:#1f2328">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>finalColor <span style="color:#0550ae">+=</span> mix<span style="color:#1f2328">(</span>candleLight<span style="color:#1f2328">,</span> coreColor<span style="color:#1f2328">,</span> coreMask<span style="color:#1f2328">);</span></span></span></code></pre></div>
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-glsl" data-lang="glsl"><span class="line"><span class="cl"><span class="k">vec3</span> <span class="n">candleLight</span> <span class="o">=</span> <span class="n">baseColor</span> <span class="o">*</span> <span class="n">glow</span> <span class="o">*</span> <span class="n">intensity</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl"><span class="k">float</span> <span class="n">coreMask</span> <span class="o">=</span> <span class="n">smoothstep</span><span class="p">(</span><span class="mf">0.004</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.004</span><span class="p">,</span> <span class="n">dist</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">vec3</span> <span class="n">coreColor</span> <span class="o">=</span> <span class="n">baseColor</span> <span class="o">*</span> <span class="n">intensity</span> <span class="o">*</span> <span class="mf">1.3</span><span class="p">;</span> <span class="c1">// 코어 밝기 계수 하향 (1.6 -&gt; 1.3)</span>
+</span></span><span class="line"><span class="cl"><span class="n">coreColor</span> <span class="o">+=</span> <span class="k">vec3</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">coreMask</span> <span class="o">*</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">intensity</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">finalColor</span> <span class="o">+=</span> <span class="n">mix</span><span class="p">(</span><span class="n">candleLight</span><span class="p">,</span> <span class="n">coreColor</span><span class="p">,</span> <span class="n">coreMask</span><span class="p">);</span></span></span></code></pre></div>
   </div>
 </div><p>두가지 색을 결정한다.  candleLight, coreColor 여기서 봉 외부이면 coreMask가 0이 되며
 candleLight가 선택된다(mix에 의해) 그러면 glow효과가 적용되어 봉 주면 밝기 번지는 효과가 적용된다.
