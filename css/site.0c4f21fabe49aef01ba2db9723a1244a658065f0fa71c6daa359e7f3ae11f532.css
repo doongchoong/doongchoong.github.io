@@ -1,0 +1,813 @@
+/* 기본: 색, 글꼴, 본문 폭, 링크 */
+:root {
+  --text: #4a4b4f;
+  --muted: #9d9d9d;
+  --subtle: #666;
+  --caption: #777;
+  --bg: #fbfbfb;
+  --link: #8f6a60;
+  --link-hover: #6b5046;
+  --line: #ddd;
+  --code-bg: #f5f5f5;
+  --code-panel: #fff;
+  --code-title: #555;
+  --code-title-bg: #f0f0f0;
+  --table-head: #f0f0f5;
+  --table-stripe: #fafafa;
+  --chat-text: #333;
+  --chat-pre-bg: #f5f5f7;
+  --chat-code: #2c3e50;
+  --chat-code-bg: #eef1f5;
+  --bubble: #e9e9eb;
+  --line-soft: #e5e5e5;
+  --line-faint: #eee;
+}
+
+/* 어두운 테마. <html data-theme="dark">: 상단 버튼이나 OS 설정(head.html), 또는 front matter theme: dark로 고정 */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --text: #d6d3ce;
+  --muted: #8a8680;
+  --subtle: #aaa59e;
+  --caption: #9a968f;
+  --bg: #1c1b1a;
+  --link: #c9a093;
+  --link-hover: #e2bdaf;
+  --line: #3a3836;
+  --code-bg: #2a2826;
+  --code-panel: #222120;
+  --code-title: #aaa59e;
+  --code-title-bg: #2a2826;
+  --table-head: #2a2826;
+  --table-stripe: #222120;
+  --chat-text: #d6d3ce;
+  --chat-pre-bg: #2a2826;
+  --chat-code: #c9d4e0;
+  --chat-code-bg: #2e2c2a;
+  --bubble: #34322f;
+  --line-soft: #302e2c;
+  --line-faint: #2c2a28;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font: 400 16px 'Noto Serif KR', serif;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 20px 5px;
+}
+
+h1 {
+  margin: 0 0 40px 0;
+  color: var(--text);
+}
+
+p {
+  margin: 0 0 20px 0;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  body { font-size: 15px; }
+  h1 { font-size: 22px; }
+  .container { padding: 40px 20px; }
+}
+
+/* 테마 전환 버튼 (baseof.html) */
+.theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+.theme-toggle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle .i-sun,
+[data-theme="dark"] .theme-toggle .i-moon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .i-sun {
+  display: block;
+}
+/* 코드 */
+pre {
+  background-color: var(--code-bg);
+  padding: 4px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 0;
+}
+
+code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+pre code {
+  display: block;
+  white-space: pre !important;
+  word-wrap: normal !important;
+  word-break: normal;
+  overflow-x: auto;
+}
+
+/* 인라인 코드 */
+p code, li code, h1 code, h2 code, h3 code {
+  background-color: var(--code-bg);
+  padding: 3px 5px;
+  border-radius: 3px;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* 코드블록 위 언어 이름 (layouts/_default/_markup/render-codeblock.html) */
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: var(--code-title-bg);
+  color: var(--code-title);
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid var(--line);
+  border-radius: 0 0 6px 6px;
+  background: var(--code-panel);
+}
+
+.highlight {
+  margin: 0;
+  padding: 4px 8px;
+}
+/* 코드 하이라이트 (chroma). hugo.toml의 markup.highlight noClasses = false.
+   밝은 쪽은 github, 어두운 쪽은 github-dark. 다시 만들려면:
+     hugo gen chromastyles --style=github / --style=github-dark
+   바탕색은 스타일 것을 쓰지 않고 --code-panel 변수를 쓴다.
+   다시 만들면 맨 아래 "github-dark에는 없는 토큰" 블록을 다시 확인한다. */
+.chroma {
+  background-color: var(--code-panel);
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+}
+
+/* github */
+.chroma .err { color:#f6f8fa;background-color:#82071e }
+.chroma .lnlinks { outline:none;text-decoration:none;color:inherit }
+.chroma .lntd { vertical-align:top;padding:0;margin:0;border:0 }
+.chroma .lntable { border-spacing:0;padding:0;margin:0;border:0 }
+.chroma .hl { background-color:#e5e5e5 }
+.chroma .lnt { white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f }
+.chroma .ln { white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f }
+.chroma .line { display:flex }
+.chroma .k { color:#cf222e }
+.chroma .kc { color:#cf222e }
+.chroma .kd { color:#cf222e }
+.chroma .kn { color:#cf222e }
+.chroma .kp { color:#cf222e }
+.chroma .kr { color:#cf222e }
+.chroma .kt { color:#cf222e }
+.chroma .na { color:#1f2328 }
+.chroma .nb { color:#6639ba }
+.chroma .bp { color:#6a737d }
+.chroma .nc { color:#1f2328 }
+.chroma .no { color:#0550ae }
+.chroma .nd { color:#0550ae }
+.chroma .ni { color:#6639ba }
+.chroma .nf { color:#6639ba }
+.chroma .nl { color:#900;font-weight:bold }
+.chroma .nn { color:#24292e }
+.chroma .nx { color:#1f2328 }
+.chroma .nt { color:#0550ae }
+.chroma .nv { color:#953800 }
+.chroma .vc { color:#953800 }
+.chroma .vg { color:#953800 }
+.chroma .vi { color:#953800 }
+.chroma .s { color:#0a3069 }
+.chroma .sa { color:#0a3069 }
+.chroma .sb { color:#0a3069 }
+.chroma .sc { color:#0a3069 }
+.chroma .dl { color:#0a3069 }
+.chroma .sd { color:#0a3069 }
+.chroma .s2 { color:#0a3069 }
+.chroma .se { color:#0a3069 }
+.chroma .sh { color:#0a3069 }
+.chroma .si { color:#0a3069 }
+.chroma .sx { color:#0a3069 }
+.chroma .sr { color:#0a3069 }
+.chroma .s1 { color:#0a3069 }
+.chroma .ss { color:#032f62 }
+.chroma .m { color:#0550ae }
+.chroma .mb { color:#0550ae }
+.chroma .mf { color:#0550ae }
+.chroma .mh { color:#0550ae }
+.chroma .mi { color:#0550ae }
+.chroma .il { color:#0550ae }
+.chroma .mo { color:#0550ae }
+.chroma .o { color:#0550ae }
+.chroma .ow { color:#0550ae }
+.chroma .p { color:#1f2328 }
+.chroma .c { color:#57606a }
+.chroma .ch { color:#57606a }
+.chroma .cm { color:#57606a }
+.chroma .c1 { color:#57606a }
+.chroma .cs { color:#57606a }
+.chroma .cp { color:#57606a }
+.chroma .cpf { color:#57606a }
+.chroma .gd { color:#82071e;background-color:#ffebe9 }
+.chroma .ge { color:#1f2328 }
+.chroma .gi { color:#116329;background-color:#dafbe1 }
+.chroma .go { color:#1f2328 }
+.chroma .gl { text-decoration:underline }
+.chroma .w { color:#fff }
+
+/* github-dark: theme: dark인 글 */
+:root[data-theme="dark"] .bg { color:#e6edf3 }
+:root[data-theme="dark"] .chroma { color:#e6edf3 }
+:root[data-theme="dark"] .chroma .err { color:#f85149 }
+:root[data-theme="dark"] .chroma .lnlinks { outline:none;text-decoration:none;color:inherit }
+:root[data-theme="dark"] .chroma .lntd { vertical-align:top;padding:0;margin:0;border:0 }
+:root[data-theme="dark"] .chroma .lntable { border-spacing:0;padding:0;margin:0;border:0 }
+:root[data-theme="dark"] .chroma .hl { background-color:#6e7681 }
+:root[data-theme="dark"] .chroma .lnt { white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#737679 }
+:root[data-theme="dark"] .chroma .ln { white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#6e7681 }
+:root[data-theme="dark"] .chroma .line { display:flex }
+:root[data-theme="dark"] .chroma .k { color:#ff7b72 }
+:root[data-theme="dark"] .chroma .kc { color:#79c0ff }
+:root[data-theme="dark"] .chroma .kd { color:#ff7b72 }
+:root[data-theme="dark"] .chroma .kn { color:#ff7b72 }
+:root[data-theme="dark"] .chroma .kp { color:#79c0ff }
+:root[data-theme="dark"] .chroma .kr { color:#ff7b72 }
+:root[data-theme="dark"] .chroma .kt { color:#ff7b72 }
+:root[data-theme="dark"] .chroma .nc { color:#f0883e;font-weight:bold }
+:root[data-theme="dark"] .chroma .no { color:#79c0ff;font-weight:bold }
+:root[data-theme="dark"] .chroma .nd { color:#d2a8ff;font-weight:bold }
+:root[data-theme="dark"] .chroma .ni { color:#ffa657 }
+:root[data-theme="dark"] .chroma .ne { color:#f0883e;font-weight:bold }
+:root[data-theme="dark"] .chroma .nf { color:#d2a8ff;font-weight:bold }
+:root[data-theme="dark"] .chroma .nl { color:#79c0ff;font-weight:bold }
+:root[data-theme="dark"] .chroma .nn { color:#ff7b72 }
+:root[data-theme="dark"] .chroma .py { color:#79c0ff }
+:root[data-theme="dark"] .chroma .nt { color:#7ee787 }
+:root[data-theme="dark"] .chroma .nv { color:#79c0ff }
+:root[data-theme="dark"] .chroma .l { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .ld { color:#79c0ff }
+:root[data-theme="dark"] .chroma .s { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .sa { color:#79c0ff }
+:root[data-theme="dark"] .chroma .sb { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .sc { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .dl { color:#79c0ff }
+:root[data-theme="dark"] .chroma .sd { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .s2 { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .se { color:#79c0ff }
+:root[data-theme="dark"] .chroma .sh { color:#79c0ff }
+:root[data-theme="dark"] .chroma .si { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .sx { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .sr { color:#79c0ff }
+:root[data-theme="dark"] .chroma .s1 { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .ss { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .m { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .mb { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .mf { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .mh { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .mi { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .il { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .mo { color:#a5d6ff }
+:root[data-theme="dark"] .chroma .o { color:#ff7b72;font-weight:bold }
+:root[data-theme="dark"] .chroma .ow { color:#ff7b72;font-weight:bold }
+:root[data-theme="dark"] .chroma .c { color:#8b949e;font-style:italic }
+:root[data-theme="dark"] .chroma .ch { color:#8b949e;font-style:italic }
+:root[data-theme="dark"] .chroma .cm { color:#8b949e;font-style:italic }
+:root[data-theme="dark"] .chroma .c1 { color:#8b949e;font-style:italic }
+:root[data-theme="dark"] .chroma .cs { color:#8b949e;font-weight:bold;font-style:italic }
+:root[data-theme="dark"] .chroma .cp { color:#8b949e;font-weight:bold;font-style:italic }
+:root[data-theme="dark"] .chroma .cpf { color:#8b949e;font-weight:bold;font-style:italic }
+:root[data-theme="dark"] .chroma .gd { color:#ffa198;background-color:#490202 }
+:root[data-theme="dark"] .chroma .ge { font-style:italic }
+:root[data-theme="dark"] .chroma .gr { color:#ffa198 }
+:root[data-theme="dark"] .chroma .gh { color:#79c0ff;font-weight:bold }
+:root[data-theme="dark"] .chroma .gi { color:#56d364;background-color:#0f5323 }
+:root[data-theme="dark"] .chroma .go { color:#8b949e }
+:root[data-theme="dark"] .chroma .gp { color:#8b949e }
+:root[data-theme="dark"] .chroma .gs { font-weight:bold }
+:root[data-theme="dark"] .chroma .gu { color:#79c0ff }
+:root[data-theme="dark"] .chroma .gt { color:#ff7b72 }
+:root[data-theme="dark"] .chroma .gl { text-decoration:underline }
+:root[data-theme="dark"] .chroma .w { color:#6e7681 }
+
+/* github에는 색이 있고 github-dark에는 없는 토큰. 그대로 두면 밝은 쪽 색(#1f2328 등)이
+   어두운 바탕에 남으므로 기본 글자색을 따르게 한다. */
+:root[data-theme="dark"] .chroma .na,
+:root[data-theme="dark"] .chroma .nb,
+:root[data-theme="dark"] .chroma .bp,
+:root[data-theme="dark"] .chroma .nx,
+:root[data-theme="dark"] .chroma .vc,
+:root[data-theme="dark"] .chroma .vg,
+:root[data-theme="dark"] .chroma .vi,
+:root[data-theme="dark"] .chroma .p,
+:root[data-theme="dark"] .chroma .ge { color: inherit }
+/* 글 페이지 */
+.post-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 5px;
+}
+
+.post-header {
+  margin-bottom: 40px;
+}
+
+.post-title {
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.post-date {
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.toc {
+  border: thin solid;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1em 0;
+}
+
+/* 본문.
+   overflow-x: clip — auto면 iOS에서 몇 px만 넘쳐도 글 전체가 옆으로 밀렸다.
+   넓은 코드·수식은 각자 상자 안에서 스크롤한다. */
+.post-content {
+  line-height: 1.8;
+  overflow-x: clip;
+  overflow-wrap: break-word;
+}
+
+.post-content h2 {
+  margin: 30px 0 20px 0;
+  color: var(--text);
+}
+
+.post-content p {
+  margin-bottom: 20px;
+}
+
+.post-content a {
+  overflow-wrap: anywhere; /* 링크 글자로 쓴 긴 URL */
+}
+
+.post-content em {
+  color: var(--subtle);
+}
+
+/* 그림과 그 아래 *캡션* */
+.post-content img {
+  display: block;
+  width: 80%;
+  max-width: 80%;
+  height: auto;
+  margin: 2rem auto;
+  border-radius: 4px;
+}
+
+.post-content img + em {
+  display: block;
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--caption);
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* 표 */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+thead {
+  background-color: var(--table-head);
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--table-stripe);
+}
+
+/* MathJax 블록 수식: 넓으면 가로 스크롤, 위아래 여백으로 높은 글리프 공간 확보 */
+.post-content mjx-container[display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  min-height: unset;
+}
+
+/* 안쪽 수식은 스크롤하지 않음 (글리프가 1px 튀어나와서) */
+.post-content mjx-container[display="true"] mjx-math {
+  min-width: 0 !important;
+  overflow: visible !important;
+  white-space: pre;
+  box-sizing: border-box;
+  min-height: unset;
+}
+
+/* Mermaid gitGraph를 폭에 맞춤 (Dex, 2026) */
+.mermaid svg[aria-roledescription="gitGraph"] {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  margin: 0 auto;
+}
+/* 첫 페이지: 소개 + 글 목록 */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content-column {
+  width: 100%;
+  max-width: 580px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.works-title {
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--text);
+}
+
+.work-item {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.work-link {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.work-link:hover {
+  opacity: 0.8;
+}
+
+.work-title {
+  font-weight: 500;
+}
+
+.year {
+  color: var(--muted);
+}
+
+.description {
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.contact {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid var(--line-soft);
+}
+
+/* /posts/ 목록 */
+.posts-container {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.posts-header {
+  margin-bottom: 40px;
+}
+
+.posts-title {
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.posts-description {
+  color: var(--subtle);
+  margin-bottom: 30px;
+}
+
+.post-list {
+  margin-bottom: 40px;
+}
+
+.post-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line-faint);
+}
+
+.post-item:last-child {
+  border-bottom: none;
+}
+
+.post-link {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.post-link:hover .post-item-title {
+  color: var(--link);
+}
+
+.post-item-title {
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+
+.post-item-date {
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.post-item-description {
+  color: var(--subtle);
+  line-height: 1.5;
+}
+
+.posts-container .back-link {
+  margin-top: 20px;
+}
+
+/* 404 (JS가 꺼져 있을 때만 보임) */
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.not-found-title {
+  margin: 0 0 30px 0;
+}
+
+.not-found-message {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.not-found-link {
+  display: inline-block;
+  font-size: 15px;
+  padding: 8px 16px;
+  border: 1px solid var(--text);
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.not-found-link:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}
+/* chatlog 숏코드 (layouts/shortcodes/chatlog.html) */
+.chatlog {
+  font-family: 'Inter', 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--chat-text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  max-width: 580px;
+  margin: 1em auto;
+  padding: 20px;
+}
+
+.chatlog pre {
+  padding: 4px;
+  overflow-x: auto;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 4px;
+}
+
+/* 하이라이트된 코드블록(.chroma)은 --code-panel 바탕을 쓴다 */
+.chatlog pre:not(.chroma) {
+  background-color: var(--chat-pre-bg);
+}
+
+.chatlog code {
+  font-family: 'Courier New', monospace;
+  color: var(--chat-code);
+}
+
+.chatlog p code {
+  background-color: var(--chat-code-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+/* 사용자 말풍선: 오른쪽 정렬, 오른쪽 꼬리 */
+.user-bubble {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0.5em 0 0.5em auto;
+  padding: 0.8em 1.2em;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: var(--bubble);
+  overflow-wrap: anywhere;
+}
+
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 10px;
+  border: 6px solid transparent;
+  border-left-color: var(--bubble);
+}
+
+/* 말풍선 안에 문단이 여러 개일 때 */
+.chatlog .user-bubble > p {
+  margin: 0;
+}
+
+.chatlog .user-bubble > * + * {
+  margin-top: 0.6em;
+}
+
+/* 말풍선 ↔ 터미널 전환 버튼 (static/js/chatlog.js가 붙인다) */
+.chatlog-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin: -10px -10px 4px 0;
+}
+
+.chatlog-toggle {
+  font: 12px/1.4 'Inter', sans-serif;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+.chatlog-toggle:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+/* CRT 모드: 상자 테두리를 걷고 화면만 */
+.chatlog.is-crt {
+  border-color: transparent;
+  max-width: none;
+  padding: 0;
+}
+
+.chatlog.is-crt .chatlog-bar {
+  margin: 0 0 6px;
+}
+
+.chatlog.is-crt > .chatlog-body,
+.chatlog:not(.is-crt) > .crt {
+  display: none;
+}
+
+/* CRT 화면 (static/js/crt-terminal.js) */
+.crt {
+  position: relative;
+  width: calc(100% - 20px);
+  aspect-ratio: 4 / 3;
+  margin: 10px 10px 30px;
+  border-radius: 18px;
+  background: #060606;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 0 1px #1d1d1f, 0 0 0 9px #101012, 0 0 0 10px #26262a, 0 22px 50px rgba(0, 0, 0, .35);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.crt:focus-visible {
+  box-shadow: 0 0 0 1px #1d1d1f, 0 0 0 9px #101012, 0 0 0 11px #6a6a70, 0 22px 50px rgba(0, 0, 0, .35);
+}
+
+.crt > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
