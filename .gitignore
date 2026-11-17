@@ -5,8 +5,6 @@ blog/public
 blog/resources
 blog/server
 blog/static/img
-blog/themes/*
-!blog/themes/doong/
 
 .DS_Store
 .agents
