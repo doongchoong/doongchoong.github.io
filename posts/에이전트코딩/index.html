@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -56,17 +56,11 @@ Plus요금제를 쓰고 있는데 Codex란 것을 알게되었고. 그리고 에
 듣고 한번 시도를 해보았다.
 토이프로젝트 수준에 과한것 같긴 하지만 굉장히 만족스러웠기 때문에 기록으로
 남기고자 한다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 에이전트 코딩에 대해 간략하게 요약해줘</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2026-08-10">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 에이전트 코딩에 대해 간략하게 요약해줘</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 에이전트 코딩(Agentic Coding)은 AI가 단순히 코드를 제안하는 것을 넘어, 개발 목표를 이해하고 작업을 자율적으로 수행하는 방식입니다.</p>
 <ul>
 <li>코드베이스와 요구사항을 분석합니다.</li>
@@ -76,8 +70,10 @@ Plus요금제를 쓰고 있는데 Codex란 것을 알게되었고. 그리고 에
 <li>중요한 선택이나 권한이 필요한 작업은 사용자와 협의합니다.</li>
 </ul>
 <p>즉, 일반적인 코드 자동완성이 “다음 코드를 써주는 도구”라면, 에이전트 코딩은 <strong>문제 해결 과정 전체를 함께 수행하는 개발 파트너</strong>에 가깝습니다. 다만 잘못된 가정이나 과도한 변경 가능성이 있으므로, 명확한 목표·작업 범위·검증 기준과 사람의 최종 검토가 중요합니다.</p>
-
 </div>
+</div>
+</div>
+
 <h2 id="마켓메이킹-봇">마켓메이킹 봇</h2>
 <p>회사에서 거래소 테스트 시스템에 접속하여 테스트 장시간에 맞추어
 주식시장을 본다&hellip;  하지만 아무 거래가 없기때문에 이를 대비 스크립트들을 준비해놓았다.
@@ -100,21 +96,17 @@ Plus요금제를 쓰고 있는데 Codex란 것을 알게되었고. 그리고 에
 </ul>
 <h3 id="1-코덱스에서-에이전트-구성해줘">1. 코덱스에서 &ldquo;에이전트 구성해줘&rdquo;</h3>
 <p>처음엔 잘 모르니 무조건 &ldquo;해줘&rdquo; 를 시도한다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 에이전트 코딩 하려고 하는데 구성해줘</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2026-08-10">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 에이전트 코딩 하려고 하는데 구성해줘</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 좋아요. 먼저 에이전트가 맡을 일을 정의해볼게요.
 어떤 목표를 달성해야 하는지, 어디까지 자율적으로 행동해도 되는지, 사람의 확인이 필요한 순간은 언제인지, 무엇을 완료로 볼지 알려주세요. 이를 바탕으로 역할과 작업 절차, 사용할 도구, 검증 방법, 예외 상황에서의 행동 원칙까지 구성하겠습니다.</p>
-
 </div>
+</div>
+</div>
+
 <p>GPT가 AGENTS.md파일을 구성하는데 대략 이런식이다.</p>
 <div class="code-block-wrapper">
   <div class="code-title">MARKDOWN</div>

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -41,21 +41,17 @@
     
 
   <div class="post-content">
-    
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 스트랭글러 피그 패턴이 뭐야?</div></p>
-<p><strong>🤖 Gemini:</strong></p>
+    <div class="chatlog" data-style="bubble" data-date="2026-02-03">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 스트랭글러 피그 패턴이 뭐야?</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Gemini"><p><strong>🤖 Gemini:</strong></p>
 <p><strong>스트랭글러 피그(Strangler Fig) 패턴</strong>은 이름에서 알 수 있듯이, 거대한 나무를 감싸며 자라 결국은 나무를 완전히 대체해버리는 &lsquo;교살자 무화과나무&rsquo;의 생태에서 착안한 아키텍처 이주 전략입니다.</p>
 <p>한마디로 요약하면 **&ldquo;한 번에 다 갈아엎지(Big Bang) 말고, 야금야금 갉아먹듯 바꿔라&rdquo;**는 뜻입니다.</p>
-
 </div>
+</div>
+</div>
+
 <h2 id="1-서비스화">1. 서비스화</h2>
 <p>금융권은 레거시 코드가 많아서 전통적인 방식으로 구현된 곳이 많다.
 다만 이러한 방법론을 바탕으로 오랜시간동안 안정화를 해왔지만 기본 구조 자체가
@@ -164,16 +160,9 @@ FEP2 --> |call| 처리서비스([처리서비스])
 워낙 많은 비즈니스가 녹아있어서 이를 분리하는것도 쉽지 않으며  굳이? 분리를 해야하나 싶은 것이다.
 모놀리딕으로도 회사 역사상 최대 이벤트도 버텼는데
 금융에서 가장 중요한 정합성에 대한 위험을 키울 필요는 없을 것이다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><strong>🤖 Gemini:</strong></p>
+<div class="chatlog" data-style="bubble" data-date="2026-02-03">
+<div class="chatlog-body">
+<div class="chat-turn" data-role="ai" data-who="Gemini"><p><strong>🤖 Gemini:</strong></p>
 <p>사용자님의 아키텍처는 **&ldquo;서비스 지향적으로 진화한 모듈형 시스템&rdquo;**이라고 볼 수 있습니다.</p>
 <ul>
 <li><strong>MSA인가?</strong> 절반의 성공입니다. 서비스의 분리와 비동기 통신은 MSA답지만, 데이터베이스 레벨에서의 강한 결합(트랜잭션)은 MSA의 완전한 독립성과는 거리가 있습니다.</li>
@@ -185,8 +174,10 @@ FEP2 --> |call| 처리서비스([처리서비스])
 <p><strong>다음 단계로 고민해보실 점:</strong>
 만약 나중에 이 &lsquo;핵심 로직&rsquo;마저 쪼개야 하는 상황이 온다면, 그때는 DB 트랜잭션 대신 **&lsquo;보상 트랜잭션(Compensating Transaction)&rsquo;**이나 **&lsquo;Saga 패턴&rsquo;**을 공부해보시는 것이 좋습니다.</p>
 <p>현재 이 구조에서 배포할 때, 핵심 로직(DB)과 외부 서비스들 간에 <strong>배포 순서나 의존성</strong> 때문에 고생하신 적은 없으신가요? 이 부분에 대해 말씀해주시면 배포 전략에 대해서도 이야기를 나눠볼 수 있을 것 같습니다.</p>
-
 </div>
+</div>
+</div>
+
 <h2 id="3-스트랭글러-피그는-계속-진행된다">3. 스트랭글러 피그는 계속 진행된다</h2>
 <p>현재는 공유DB트랜잭션을 기반으로 한 레거시의 거대한 서비스 2개
 그리고 작게 쪼개져서 외부와의 연결을 담당하는 작은서비스 여러개가 혼용되어 있지만

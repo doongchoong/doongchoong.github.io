@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -118,17 +118,11 @@ end
 <p>(개발을 하다보니 KRX가 프리마켓을 포기하기도 하며, 미처 파악하지 못하는 영향도가 발견되기도 한다.)</p>
 <p>※ 수정사항은 하나의 단위로 여러개의 소스파일 및 설정등이 포함될 수 있는 추상적인 개념.</p>
 <h3 id="21-엑셀작업">2.1. 엑셀작업</h3>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 엑셀에서  12,27, 38 이런식으로 적혀있는 셀에서 숫자를 발라내어  해당 페이지가 커버되었다. 를 알아내기 위해  1부터 400페이지까지의 행을 만들고 O , X등으로 표기하는 방법</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2026-09-15">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 엑셀에서  12,27, 38 이런식으로 적혀있는 셀에서 숫자를 발라내어  해당 페이지가 커버되었다. 를 알아내기 위해  1부터 400페이지까지의 행을 만들고 O , X등으로 표기하는 방법</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 가능해. 가장 간단하게는 1~400 페이지 목록을 만들고, 기존 셀들에 해당 숫자가 있으면 O / 없으면 X로 표시하면 돼.</p>
 <p>(&hellip;생략&hellip;)</p>
 <ol start="2">
@@ -140,8 +134,10 @@ end
   <div class="highlight_wrap">
     <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>=IF(ISNUMBER(SEARCH(&#34;,&#34;&amp;A2&amp;&#34;,&#34;,&#34;,&#34;&amp;SUBSTITUTE(TEXTJOIN(&#34;,&#34;,TRUE,$D$2:$D$100),&#34; &#34;,&#34;&#34;)&amp;&#34;,&#34;)),&#34;O&#34;,&#34;X&#34;)</span></span></code></pre></div>
   </div>
+</div></div>
 </div>
 </div>
+
 <h3 id="22-수정사항의-숫자">2.2. 수정사항의 숫자</h3>
 <p>현업 요건 총량에 대해서 정리된 수정사항의 수는
 효율적이건, 비효율적이건 우리회사의 시스템 아키텍쳐 자체가 그정도의 변화에 대응하여
@@ -951,17 +947,11 @@ graph LR
 <p><code>이 부분은 필히 시스템이 마련되어야 한다.</code></p>
 <p>현업도 총괄이 있기 때문에 정말 다행히도 현업사이드에서 취합작업을 해주었다. PM은 개발자 사이드에서의 루틴을 돌려서 부담이 조금 덜했다.</p>
 <h3 id="42-오류현황-엑셀">4.2. 오류현황 엑셀</h3>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 엑셀에서 리스트를 가지고  unique 한 일자를 다 추출한뒤 정렬해서 표출하는 방법</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2026-09-15">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 엑셀에서 리스트를 가지고  unique 한 일자를 다 추출한뒤 정렬해서 표출하는 방법</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 엑셀 365/2021 이상이면 가장 간단하게 <strong><code>UNIQUE</code> + <code>SORT</code></strong> 조합 쓰면 돼.</p>
 <p>빈 셀이 섞여 있으면 이게 더 깔끔해:</p>
 <div class="code-block-wrapper">
@@ -969,8 +959,10 @@ graph LR
   <div class="highlight_wrap">
     <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>=SORT(UNIQUE(FILTER(A2:A1000,A2:A1000&lt;&gt;&#34;&#34;)))</span></span></code></pre></div>
   </div>
+</div></div>
 </div>
 </div>
+
 <p>일자별 현황, 즉 과거에 오류사항이 있었는데 안고치고 리스트가 많아서 개발자들이 전부 놓쳤다.
 그러면 현황을 통해 잡아낼수 있도록 하는 것이다. 그래서 unique한 일자 추출해내고
 그 일자에 처리 되는 건들의 숫자를 해서 아직 처리안된 건을 찾아내거나 할수 있다.</p>

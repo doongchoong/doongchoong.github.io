@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -50,17 +50,11 @@
 그래서 적용하는 과정을 GPT와 대화하면서 시행착오 끝에 적용하는 과정을
 기록한다.</p>
 <h2 id="1-물어보기">1. 물어보기</h2>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 내가 hugo 블로그를 쓰고 있는데 너와의 대화를 블로그에 남기고 싶어</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2025-07-26">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 내가 hugo 블로그를 쓰고 있는데 너와의 대화를 블로그에 남기고 싶어</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 좋아, Hugo 블로그에 너와 나의 대화를 남기려면 몇 가지 방식이 있어. 예쁘게 포맷팅된 대화 형태로 남기고 싶다면 <strong>마크다운(Markdown)</strong> 과 함께 <strong>CSS</strong> 또는 <strong>Hugo의 shortcode</strong>를 활용하는 게 좋아.</p>
 <hr>
 <h3 id="-1-대화-내용-마크다운-예시">✅ 1. 대화 내용 마크다운 예시</h3>
@@ -113,22 +107,18 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#1f2328">markup</span><span style="color:#1f2328">.</span><span style="color:#1f2328">goldmark</span><span style="color:#1f2328">.</span><span style="color:#1f2328">renderer</span><span style="color:#1f2328">]</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#1f2328">unsafe</span> <span style="color:#1f2328">=</span> <span style="color:#cf222e">true</span></span></span></code></pre></div>
   </div>
+</div></div>
 </div>
 </div>
+
 <p>대략 보기좋게 잘 꾸미고자 한다면 마크다운 형태로 저장하고
 이를 css를 통해 꾸미는데 이를 hugo의 숏코드를 사용하자는 얘기인 듯 하다.</p>
 <h3 id="11-숏코드">1.1. 숏코드</h3>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. hugo 블로그에 너와의 대화내용을 적용할때 shortcode를 어떻게 작성해야 할까</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2025-07-26">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. hugo 블로그에 너와의 대화내용을 적용할때 shortcode를 어떻게 작성해야 할까</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 좋은 질문이야! Hugo 블로그에 GPT 대화를 더 깔끔하게, 반복적으로 적용하려면 <strong>Shortcode</strong>를 사용하는 게 아주 좋아. 사용자 메시지와 GPT 메시지를 각각 <code>user.html</code>과 <code>gpt.html</code> 같은 Shortcode로 만들어두면, 마치 블로그 포스트에 마크업처럼 쉽게 쓸 수 있어.</p>
 <hr>
 <h2 id="-1-shortcode-파일-만들기">✅ 1. Shortcode 파일 만들기</h2>
@@ -176,8 +166,10 @@
 <h2 id="-보너스-blockquote처럼-보이게-하고-싶다면">💡 보너스: blockquote처럼 보이게 하고 싶다면?</h2>
 <p>Shortcode 내부를 <code>&lt;blockquote&gt;</code>로 감싸거나, tailwind 등을 활용한 디자인도 가능해.</p>
 <hr>
-
 </div>
+</div>
+</div>
+
 <p>대략 어떻게 해야할지 감이 잡혔다.
 GPT는 대단한게 진짜 완전 뜬금없는 주제로 아무렇게나 물어봐도 구체적인 방향으로
 이끌어준다. 대단하다. 👍</p>
@@ -192,17 +184,11 @@ GPT는 대단한게 진짜 완전 뜬금없는 주제로 아무렇게나 물어�
 <p>GPT가 만들어준 숏코드와 스타일을 잘 적용 했으나
 불만족스러운 부분은  내 질문이 그냥 텍스트로 한줄 딸랑 나온다는 점이였다.
 별개의 말풍선으로 빼고 싶었다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. hugo 블로그에 숏코드를 통해 GPT대화내용을 마크다운 형태로 입력할 건데 user 부분만 말풍선 효과를 주려면 이미 렌더링 된 내용을 가지고 치환해야하나?</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2025-07-26">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. hugo 블로그에 숏코드를 통해 GPT대화내용을 마크다운 형태로 입력할 건데 user 부분만 말풍선 효과를 주려면 이미 렌더링 된 내용을 가지고 치환해야하나?</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 좋은 질문이야. Hugo 블로그에서 shortcode를 사용해서 GPT 대화 내용을 렌더링한 뒤, 특정 부분(예: User만)을 말풍선 스타일로 꾸미고 싶다면, 어떻게 처리하느냐에 따라 달라져. 아래에서 두 가지 접근 방식을 소개할게:</p>
 <h2 id="-1-shortcode-단계에서-말풍선-적용-권장-방식">✅ 1. Shortcode 단계에서 말풍선 적용 (권장 방식)</h2>
 <p>(생략)</p>
@@ -216,15 +202,19 @@ GPT는 대단한게 진짜 완전 뜬금없는 주제로 아무렇게나 물어�
 </ul>
 <p>(생략)</p>
 <hr>
-<p><div class="user-bubble"><strong>User</strong>. 그런데 한번의 마크다운 입력으로 같은 대화내용을 한 div에 넣고 싶은데 숏코드를 따로 하면 div 가 분리되잖아 어쩔수 없는거 아니야?</div></p>
-<p><strong>ChatGPT:</strong><br>
+</div>
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 그런데 한번의 마크다운 입력으로 같은 대화내용을 한 div에 넣고 싶은데 숏코드를 따로 하면 div 가 분리되잖아 어쩔수 없는거 아니야?</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>ChatGPT:</strong><br>
 맞아, 아주 중요한 포인트 짚었어.<br>
 <strong>Hugo에서 여러 <code>shortcode</code>를 사용하면 각각이 독립적으로 HTML <code>&lt;div&gt;</code> 블록으로 렌더링</strong>되기 때문에,<br>
 <strong>하나의 마크다운 파일에서 연속된 대화 내용을 하나의 <code>&lt;div&gt;</code>로 묶기는 어렵다</strong>는 제약이 있어.</p>
 <hr>
 <h2 id="-해결-방법-하나의-shortcode-안에서-전체-대화를-구성">✅ 해결 방법: <strong>하나의 shortcode 안에서 전체 대화를 구성</strong></h2>
-
 </div>
+</div>
+</div>
+
 <p>내가 원하는 것은</p>
 <ol>
 <li>대화내용을 그대로 마크다운 형태로 추출 <code>**User**</code> 와 지피티의 대답이 표기됨</li>

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -133,17 +133,11 @@
 이렇게 해야 디더링 전과 후의 평균 밝기가 같아진다.</p>
 <h2 id="3-그외-방법">3. 그외 방법</h2>
 <p>처음에는 디더링을 어떻게 하는지 잘 몰라서 일단 클로드에게 자료조사부터 부탁했다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 디더링에 대해서 글을 쓰고 싶은데 일단 자료조사를 하고 내가 좀 이해하고 싶어</div></p>
-<p><strong>🤖 Claude:</strong></p>
+<div class="chatlog" data-style="bubble" data-date="2026-11-04">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 디더링에 대해서 글을 쓰고 싶은데 일단 자료조사를 하고 내가 좀 이해하고 싶어</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong></p>
 <p>(생략)</p>
 <h2 id="알고리즘은-세-갈래">알고리즘은 세 갈래</h2>
 <table>
@@ -186,8 +180,10 @@
 <li><strong>Return of the Obra Dinn</strong>은 3D를 1비트로 렌더링하면서 Bayer와 블루노이즈를 병용했습니다. 움직일 때 패턴이 흔들리는 문제 때문에 카메라 회전에 맞춰 패턴을 오프셋하는 등 여러 방법을 시도했습니다.</li>
 </ul>
 <p>(생략)</p>
-
 </div>
+</div>
+</div>
+
 <p>대략 감이 잡혔다. 크게 보면 기준값을 바꾸는쪽(랜덤, Bayer, 블루노이즈)과
 오차를 이웃에게 떠넘기는 쪽(Floyd–Steinberg, Atkinson, Jarvis–Judice–Ninke)으로 나뉜다.</p>
 <p>오차 확산은 앞 픽셀의 오차를 받아야 다음 픽셀을 계산할 수 있어서 순서대로 처리해야 한다.

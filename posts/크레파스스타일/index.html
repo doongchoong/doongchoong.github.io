@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -51,22 +51,18 @@
 <h2 id="1-데모만들기">1. 데모만들기</h2>
 <p>릴스에서 영상을 캡쳐하고 이를 첨부해서
 일단 데모부터 만들어보면서 다듬어 나가기로 했다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 크레파스 느낌이 전혀 아니야 , 벡터로 그리는 거니?  그냥 픽셀 컨트롤은 힘든가?</div></p>
-<p><strong>🤖 Claude:</strong></p>
+<div class="chatlog" data-style="bubble" data-date="2026-10-25">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 크레파스 느낌이 전혀 아니야 , 벡터로 그리는 거니?  그냥 픽셀 컨트롤은 힘든가?</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong></p>
 <p>네, 지금 버전은 벡터예요. <code>lineTo</code>로 선을 긋고 나중에 노이즈 마스크로 구멍만 뚫은 거라서, 크레파스라기보다 구멍 난 마커처럼 보여요. 픽셀 제어도 어렵지 않고, 오히려 그쪽이 정답에 가까워요. 경로(지그재그 플랜)만 벡터로 두고, 실제로 색이 묻는 건 픽셀 단위로 시뮬레이션하는 방식으로 바로 다시 만들어볼게요.</p>
 <p>픽셀 방식으로 다시 만들어서 같은 링크에 업데이트했어요. 이번엔 캔버스 API로는 선을 하나도 긋지 않아요. RGB 버퍼를 직접 계산해서 <code>putImageData</code>로 찍어요.</p>
 <p>(생략&hellip;)</p>
-<p><div class="user-bubble"><strong>User</strong>. 꽤 괜찮아졌어 , 어색한점은  뭔가 규칙적인 느낌이 나 노이즈? 에서 말이야,  그리고 검색을 해서 뭔가 방안이 있는지도 찾아본거니?</div></p>
-<p><strong>🤖 Claude:</strong></p>
+</div>
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 꽤 괜찮아졌어 , 어색한점은  뭔가 규칙적인 느낌이 나 노이즈? 에서 말이야,  그리고 검색을 해서 뭔가 방안이 있는지도 찾아본거니?</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong></p>
 <p>아니요, 지난번엔 검색 없이 제가 아는 방식으로만 만들었어요. 지금 찾아볼게요.</p>
 <p>검색해 보니 참고할 만한 게 꽤 있었어요. 핵심만 반영해서 바로 고쳐볼게요.</p>
 <p>같은 링크에 업데이트했어요. 규칙적으로 보인 건 노이즈 탓이 맞았고, 원인은 이 다섯 가지였어요.</p>
@@ -86,8 +82,10 @@
 </ul>
 <p><strong>Corel Painter</strong>: 반복 없는 자연스러운 자국을 위해 찍을 때마다 종이결 위치를 무작위로 바꾸거나 획마다 회전시키는 옵션이 있어요. 그래서 획마다 어긋난 종이결을 일부 섞었어요.</p>
 <p>(&hellip; 생략 &hellip;)</p>
-
 </div>
+</div>
+</div>
+
 <p>결국 리서치가 중요하다.
 아무리 레퍼런스를 주어도 구체적인 방식이 없다면 먼길만 돌아가게 될 뿐이다.</p>
 <h2 id="2-레퍼런스-선택-주의점">2. 레퍼런스 선택 주의점</h2>
@@ -97,17 +95,11 @@
 뿌옇고 흐린 그림으로 인지하게 된다.</p>
 <p>내가 이 상태로 맞춰달라고 했으니
 확대된 흐린 상태 그대로 충실하게? 적용이 되었다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 레퍼런스에 맞춰서 개선해줘</div></p>
-<p><strong>🤖 Claude:</strong></p>
+<div class="chatlog" data-style="bubble" data-date="2026-10-25">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 레퍼런스에 맞춰서 개선해줘</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong></p>
 <p>레퍼런스 측정값을 목표로 잡고 진행할게요. 목표는 중간톤 0.65 이상, 큰 얼룩 비중 0.6 이상, 선명도 0.15 이하, 결 방향성 0.55 이상이에요. 이걸 맞추려고 바꿀 건 네 가지예요.</p>
 <ul>
 <li>연속 톤: 묻는 양을 이분법이 아니라 누르는 힘에 비례해 연속적으로 쌓이게 해요.</li>
@@ -115,8 +107,10 @@
 <li>결 방향: 크레파스 끝의 줄무늬를 강하게, 그리고 획을 따라 천천히 변하게 해요.</li>
 <li>부드러움: 낮은 해상도로 계산한 뒤 부드럽게 확대해서 보여줘요.</li>
 </ul>
-<p><div class="user-bubble"><strong>User</strong>. 미안하다 왜나하면 내가 캡쳐한것은  확대한것을 캡쳐한거라  뿌얘진거야  그걸 비교히라고 했으니 이건 내 잘못이야  결 방향설?  이런거만 보정하면 될까?</div></p>
-<p><strong>🤖 Claude:</strong></p>
+</div>
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 미안하다 왜나하면 내가 캡쳐한것은  확대한것을 캡쳐한거라  뿌얘진거야  그걸 비교히라고 했으니 이건 내 잘못이야  결 방향설?  이런거만 보정하면 될까?</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong></p>
 <p>괜찮아요. 확대 캡처인지 확인하지 않고 그대로 목표치로 쓴 제 책임도 있어요.</p>
 <p>그래서 확인 실험을 하나 해봤어요. 블러를 넣기 전 버전(v3) 렌더에 확대 캡처와 비슷한 조건(3배 확대 + 블러)을 씌우고 다시 측정했어요.</p>
 <table>
@@ -163,8 +157,10 @@
 <li><strong>측정 방식</strong>: 앞으로는 레퍼런스와 같은 캡처 조건을 제 렌더에도 씌운 다음 비교할게요.</li>
 </ul>
 <p>한 가지 한계가 있어요. 실제로 몇 배 확대했는지 모르니 &ldquo;3배&quot;는 추정이에요. 확대하지 않은 캡처를 한 장 주시면 그걸 기준으로 다시 재고 진행할게요.</p>
-
 </div>
+</div>
+</div>
+
 <p>즉 내눈으로 보정된? 캡쳐화면을 그대로 믿으면 되는것이 아니다.
 이는 언급을 하거나 혹은 캡쳐를 할때 본 해상도로 맞춰서 해야하는 부분이다.
 꼭 이 작업 뿐 아니라 다른작업 시에도 항상 기억해야 하는 부분인 것 같다.</p>
@@ -177,16 +173,9 @@
 </ol>
 <p>핵심은 2번이다.</p>
 <p>아래는 클로드가 정리해준 것이다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><strong>🤖 Claude:</strong></p>
+<div class="chatlog" data-style="bubble" data-date="2026-10-25">
+<div class="chatlog-body">
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong></p>
 <p>이제 핵심 로직만 떼어낸 독립 모듈을 작성할게요.</p>
 <p>모듈 단독으로도 같은 결과가 나와요. 데모도 업데이트할게요.</p>
 <p>데모는 같은 링크에서 납작한 끝 하나로 정리했어요. 핵심 로직은 장면과 UI를 뺀 독립 모듈 crayon-core.js로 뽑았고, 이 모듈만으로 집 장면을 그려서 데모와 같은 결과가 나오는 것까지 확인했어요.</p>
@@ -303,8 +292,10 @@
   </tbody>
 </table>
 <p>데모는 같은 로직을 한 파일 안에 그대로 넣어둔 상태라서, 스킬로 만드실 때는 crayon-core.js 쪽을 기준으로 쓰시면 돼요.</p>
-
 </div>
+</div>
+</div>
+
 <p>위 설명은 0.6px마다 크레파스 면을 찍는 방식(stamp)인데
 실제 비둘기 데모는 <code>sweep</code> 모드로 돌린다.
 찍는 방식은 한 번 지나갈 때 픽셀 하나를 30번 넘게 계산하지만

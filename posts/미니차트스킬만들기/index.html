@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -247,17 +247,11 @@ graph LR
 </div>
 
 <h2 id="3-gpt에게-요청">3. GPT에게 요청</h2>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. KRX거래시간연장.md 파일은 새로운 블로그 글이야 , 여기서  라인차트는 GPT6 도움을 받아서 svg 및 스크립트로 html 엘리먼트로 바로 만든거야 , 그래서 내 생각에 이런 라인차트, 막대차트를 만드는 라이브러리를 블로그에 심고 나는 그냥 데이터부분만 만들어서 블로그 글에 넣으면 되지 않을까 하는데</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2026-09-28">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. KRX거래시간연장.md 파일은 새로운 블로그 글이야 , 여기서  라인차트는 GPT6 도움을 받아서 svg 및 스크립트로 html 엘리먼트로 바로 만든거야 , 그래서 내 생각에 이런 라인차트, 막대차트를 만드는 라이브러리를 블로그에 심고 나는 그냥 데이터부분만 만들어서 블로그 글에 넣으면 되지 않을까 하는데</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 블로그에 공통 차트 기능을 한 번 넣고, 글에는 데이터만 적는 방향에 동의해요. 지금 글처럼 매번 SVG와 스크립트를 넣으면 글보다 차트 코드가 길어지고, 색이나 글자 크기를 바꿀 때도 차트마다 수정해야 하니까요.</p>
 <p>핵심은 글을 쓰는 방식과 차트를 그리는 방식을 분리하는 것이에요.</p>
 <div class="code-block-wrapper">
@@ -270,8 +264,10 @@ graph LR
 </span></span><span style="display:flex;"><span>       공통 스타일로 차트 표시</span></span></code></pre></div>
   </div>
 </div><p>(&hellip;생략&hellip;)</p>
-<p><div class="user-bubble"><strong>User</strong>. 차트의 스타일은 개발 진척률 같이 하면 좋은데 특별히 점선으로 표현한것 있잖아, &ldquo;계획진척률&rdquo; 이나 &ldquo;예상오류율&rdquo;  보면 빨간색이나 노란색으로 특이하게 눈에 띄는 형태로 강조를 한거야 ,  그래서 라인 차트는 기본은 꺽은선이고 원과 라인 있잖아 , 그리고 선의 색은 3개로 고정하고 돌려가면서 쓰는거지, 하지만 점선을 써야하는 경우는 특이하게 강조색을 넣는거고 , 빨간색과 겨자색? 이렇게 두개로, 일단 기본이 그렇지만 색을 입력하면 입력한 색으로 지정할수 있도록 하는거고</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+</div>
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 차트의 스타일은 개발 진척률 같이 하면 좋은데 특별히 점선으로 표현한것 있잖아, &ldquo;계획진척률&rdquo; 이나 &ldquo;예상오류율&rdquo;  보면 빨간색이나 노란색으로 특이하게 눈에 띄는 형태로 강조를 한거야 ,  그래서 라인 차트는 기본은 꺽은선이고 원과 라인 있잖아 , 그리고 선의 색은 3개로 고정하고 돌려가면서 쓰는거지, 하지만 점선을 써야하는 경우는 특이하게 강조색을 넣는거고 , 빨간색과 겨자색? 이렇게 두개로, 일단 기본이 그렇지만 색을 입력하면 입력한 색으로 지정할수 있도록 하는거고</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 네. <strong>기본 계열은 3색을 순환하는 실선과 원형 점으로, 강조 계열은 빨강·겨자색을 사용하는 점선으로</strong> 정리하면 되겠어요. 전체 스타일은 개발 진척률 차트를 기준으로 하고요.</p>
 <table>
   <thead>
@@ -326,8 +322,10 @@ graph LR
 </span></span><span style="display:flex;"><span><span style="color:#1f2328">]</span></span></span></code></pre></div>
   </div>
 </div><p>즉, <strong>아무 옵션 없이 데이터를 넣으면 기본 스타일</strong>, <code>dashed</code>를 지정하면 점선과 강조색이 함께 적용되고, <code>color</code>를 넣으면 색만 덮어쓰는 방식입니다. 기본 3색의 정확한 색상값은 나중에 개발 진척률 차트와 맞춰 정하면 되겠어요.</p>
-<p><div class="user-bubble"><strong>User</strong>. 그리고 중요한거 하나 있어 , 내가 너한테  &ldquo;~스킬을 사용해서 차트를 그릴거야&rdquo; 라고 말할거야 그러면 차트에 그려질 데이터를 만들어줄수 있도록 스킬도 만들어야 해</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+</div>
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 그리고 중요한거 하나 있어 , 내가 너한테  &ldquo;~스킬을 사용해서 차트를 그릴거야&rdquo; 라고 말할거야 그러면 차트에 그려질 데이터를 만들어줄수 있도록 스킬도 만들어야 해</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 네. 그러면 <strong>차트를 그리는 JS 라이브러리와, 그 라이브러리용 데이터를 작성하는 스킬을 함께 만드는 것</strong>까지 범위에 포함하겠습니다.</p>
 <p>사용 흐름은 이렇게 됩니다.</p>
 <div class="code-block-wrapper">
@@ -351,8 +349,10 @@ graph LR
 <li>항목과 값의 개수, <code>null</code>, 색상 및 옵션 유효성 확인</li>
 <li><strong>완성된 Shortcode를 제공하거나, 요청한 글에 삽입</strong></li>
 </ul>
-
 </div>
+</div>
+</div>
+
 <p>여러 문답을 통해서 특징을 다 정하고 만들었다.</p>
 <h2 id="4-후기">4. 후기</h2>
 <p><code>AI시대에는 복잡한 js라이브러리 익힐 필요없이 필요하면 그냥 만들어쓴다.</code></p>

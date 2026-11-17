@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -92,17 +92,11 @@ sleep하는 것.</p>
 이제 더 정확한 tps를 만들수 있나? 라는 궁금증이 생겼다.</p>
 <h2 id="3-정밀도를-더-높인-버젼">3. 정밀도를 더 높인 버젼</h2>
 <p>일단 GPT에게 한번 물어보았다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 굉장히 미세한 구간에서 약간 일찍 sleep을 끝내고 busy-waiting해도 되나?</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2026-01-09">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 굉장히 미세한 구간에서 약간 일찍 sleep을 끝내고 busy-waiting해도 되나?</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 짧은 답부터 말하면 **“된다, 그리고 그게 정석이다”**야.
 다만 <strong>어디까지 허용하느냐</strong>가 중요해.</p>
 <hr>
@@ -193,25 +187,21 @@ sleep하는 것.</p>
   </tbody>
 </table>
 <p>👉 처음엔 <strong>0.5ms</strong>로 두고 측정하는 게 베스트</p>
-
 </div>
+</div>
+</div>
+
 <p>그래 너무 좋다. threshold가 워낙 작은 값이라 spin은 굉장히 짧게 돌게 된다.
 굉장히 정확한 타이밍으로 tps가 쪼개져 호출될 것이다.</p>
 <h2 id="4-adaptive-tps">4. Adaptive TPS</h2>
 <p>문득 이런생각이 들었다. sync 방식 콜링하는 서비스를 측정하면 기대하는 tps를 높게 적어도
 실질 tps가 굉장히 느릴텐데. 이런 경우 동적으로 tps가 줄어들어 적절한 tps로 변화하는 방법은 없을까 생각했다.
 물론 async 콜링같이 굉장히 빠른 케이스는 그대로 기대tps를 사용하도록 한다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 대부분 tps_throttle을 쓰는 대상은 async로 시스템콜만 하는 거라서 빠른데, 간혹 내가 아닌 다른사람이 blocking 서비스를 호출할수도 있어 그러면 기대하는 tps보다 훨씬 낮은 실제 tps가 나올텐데 이런 경우를 대비해서 adaptive하게 조절 하는 방법이 있을까?</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2026-01-09">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 대부분 tps_throttle을 쓰는 대상은 async로 시스템콜만 하는 거라서 빠른데, 간혹 내가 아닌 다른사람이 blocking 서비스를 호출할수도 있어 그러면 기대하는 tps보다 훨씬 낮은 실제 tps가 나올텐데 이런 경우를 대비해서 adaptive하게 조절 하는 방법이 있을까?</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 이건 <strong>“TPS 발생기 + 느린 소비자”가 섞일 때 반드시 생기는 문제</strong>고,
 해결책은 <strong>타이밍 기법이 아니라 “제어(컨트롤)” 문제</strong>야.</p>
 <p>결론부터 말하면:</p>
@@ -259,8 +249,10 @@ sleep하는 것.</p>
 </span></span><span style="display:flex;"><span>    last_yield <span style="color:#0550ae">=</span> t
 </span></span><span style="display:flex;"><span>    next_tick <span style="color:#0550ae">+=</span> interval</span></span></code></pre></div>
   </div>
-</div><p><div class="user-bubble"><strong>User</strong>. 회복을 계속 하나? tps를 조금씩 올리다가 1.5배 넘으면 갑자기 70% 감쇠되잖아 수렴하게 해야지</div></p>
-<p><strong>🤖 ChatGPT:</strong><br>
+</div></div>
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 회복을 계속 하나? tps를 조금씩 올리다가 1.5배 넘으면 갑자기 70% 감쇠되잖아 수렴하게 해야지</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="ChatGPT"><p><strong>🤖 ChatGPT:</strong><br>
 맞아. <strong>지금 구조 그대로면 “왔다 갔다(oscillation)” 할 수 있어.</strong>
 네가 정확히 짚은 포인트는 <strong>제어 이론 문제</strong>고, 해결 키워드는 딱 두 개야:</p>
 <blockquote>
@@ -393,8 +385,10 @@ sleep하는 것.</p>
 </span></span><span style="display:flex;"><span>        last_yield <span style="color:#0550ae">=</span> now
 </span></span><span style="display:flex;"><span>        next_tick <span style="color:#0550ae">+=</span> interval</span></span></code></pre></div>
   </div>
+</div></div>
 </div>
 </div>
+
 <p>이렇게 하면 기존에 async 콜링하는 경우 500tps에 육박해도 문제없이 정확한 타이밍에 call되고
 간혹 느리고 편차가 큰 서비스를 콜링하여 실질tps가 가늠이 안잡힐때는 adaptive가 작동하며
 수렴될 것이다.</p>

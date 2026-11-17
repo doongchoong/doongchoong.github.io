@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -44,17 +44,11 @@
 
   <div class="post-content">
     <p>파동함수붕괴 WFC(Wave Function Collapse)는 유명한 맵,지형 등을 절차적으로 생성하는 알고리즘이다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. wfc 알고리즘에 대해 설명해줘</div></p>
-<p><strong>🤖 Chat GPT:</strong></p>
+<div class="chatlog" data-style="bubble" data-date="2026-09-10">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. wfc 알고리즘에 대해 설명해줘</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Chat GPT"><p><strong>🤖 Chat GPT:</strong></p>
 <p>WFC(Wave Function Collapse)는 **“각 칸이 가질 수 있는 후보를 점점 줄여가며, 주변 규칙을 만족하는 전체 배치를 만들어내는 절차적 생성 알고리즘”**이라고 보면 됩니다.</p>
 <p>이름은 양자역학에서 따왔지만, 실제로 게임 맵이나 건물 배치에 쓸 때는 양자역학을 알 필요는 없습니다. 핵심은 <strong>아직 결정되지 않은 칸에는 여러 후보가 동시에 가능하고, 하나를 결정하면 그 영향으로 주변 후보들이 줄어든다</strong>는 개념입니다.</p>
 <p>(&hellip; 생략 &hellip;)</p>
@@ -78,8 +72,10 @@
 선택한 타일 때문에 불가능해진 주변 후보를 제거합니다. 주변 후보가 줄면서 또 다른 주변 칸까지 연쇄적으로 영향을 받습니다.</p>
 </li>
 </ol>
-
 </div>
+</div>
+</div>
+
 <p>WFC를 설명할때 가장 기본적인 것은 길잇기, 파이프, 회로도 연결하기 등
 격자의 동서남북 방향에서 인접한 셀이 이어질수 있는 후보들을 계속 연결하여
 하는 예제가 가장 대표적이다.</p>
@@ -463,25 +459,21 @@ GPT가 만들어준 이 예제는 재시도를 하여 처리하며
 <p>절차적 방식으로 만들수 있는것이 또 무엇이 있을까 고민하다가.
 공장을 만들어 보기로 결정하고 최근에 나온  GPT6-Astra 성능도 점검할 겸.
 초기화권도 써볼겸 해서 3D로 만들어 보고자 하였다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 다음 이미지는 wfc 알고리즘을 이용한 3d 공장 생성 프로토타입이야 , 이걸 three.js를 사용해서 html에서 볼수 있도록 만들어줘.</div></p>
-<p><strong>🤖 Codex:</strong>
+<div class="chatlog" data-style="bubble" data-date="2026-09-10">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 다음 이미지는 wfc 알고리즘을 이용한 3d 공장 생성 프로토타입이야 , 이걸 three.js를 사용해서 html에서 볼수 있도록 만들어줘.</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Codex"><p><strong>🤖 Codex:</strong>
 완성했습니다. HTML 파일을 브라우저에서 열면 인터넷 없이 실행됩니다.</p>
 <ul>
 <li>단일 HTML 파일</li>
 <li>전체 소스 ZIP</li>
 </ul>
 <p>시드 기반 WFC 생성, 회전·확대, 층별·분해 보기, 로봇 애니메이션, PNG 저장을 지원합니다. 90가지 설정에서 연결 규칙과 재현성을 검증했습니다.</p>
-<p><div class="user-bubble"><strong>User</strong>. 너무 맘에 들긴하는데 이거 그래픽이 맘에 안들어 에셋으로 만들려면 어떻게 해야해?</div></p>
-<p><strong>🤖 Codex:</strong>
+</div>
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 너무 맘에 들긴하는데 이거 그래픽이 맘에 안들어 에셋으로 만들려면 어떻게 해야해?</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Codex"><p><strong>🤖 Codex:</strong>
 로봇 셀·CNC 머신·컨베이어·적재 랙·배관 스키드이며, 재질 이미지와 WFC 배치 정보를 포함했습니다. 로봇에는 관절 애니메이션도 있습니다.</p>
 <ul>
 <li>3D 에셋 미리보기 — 개별 회전·확대 가능</li>
@@ -489,8 +481,10 @@ GPT가 만들어준 이 예제는 재시도를 하여 처리하며
 </ul>
 <p>Blender에서 기본 <strong>파일 → 가져오기 → glTF 2.0</strong>으로 열어 수정할 수 있습니다. 별도 플러그인이 필요하지 않습니다.</p>
 <p>이번 결과는 <strong>현재 상세 모델을 독립 에셋으로 정리한 1차 키트</strong>입니다. 첨부 이미지 수준으로 올리려면 이 모델의 비례·곡면·표면 디테일을 더 다듬는 작업이 필요합니다.</p>
-
 </div>
+</div>
+</div>
+
 <p>내컴에는 Blender가 없다. 그런데 어떻게 만들었는지는 모르겠지만
 GPT6-Astra는 3D모델을 만들어냈고 뷰어도 중간에 만들어서 와이어프레임으로도 볼수 있었다.
 공장의 요소는 컨베이어벨트, 로봇팔, CNC기계, 선반 등으로 이루어진다.</p>

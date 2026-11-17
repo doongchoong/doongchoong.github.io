@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Noto&#43;Serif&#43;KR:wght@400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.e7bca186de7585c918d2fff3853d9131cc3570c9c821f3525ad9f4487f18234c.css" integrity="sha256-57yhht51hckY0v/zhT2RMcw1cMnIIfNSWtn0SH8YI0w=">
+<link rel="stylesheet" href="/css/site.263c1e227252b7d78ce7e3cc0334efaa19ea73feb7ec1df88a698254a4fd9e5b.css" integrity="sha256-JjweInJSt9eM5&#43;PMAzTvqhnqc/637B34immCVKT9nls=">
 
   </head>
   <body>
@@ -65,16 +65,9 @@
 futgg 사이트에서 개발자도구 켜서 수작업으로 위치조정을 하면서 만들었는데 너무 힘들었다. 그래서 사진만 넣으면 바로 카드가 나오고, 만든 카드로 스쿼드까지 짤 수 있는 앱이 있었으면 했다.</p>
 <p>이렇게 만든 것이 <a href="https://sonfut.vercel.app">sonfut</a>이다.</p>
 <h2 id="1-웹앱-생성">1. 웹앱 생성</h2>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 아들 사진으로 축구카드를 만들고, 만든 카드들을 축구장 포지션에
+<div class="chatlog" data-style="bubble" data-date="2026-10-09">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 아들 사진으로 축구카드를 만들고, 만든 카드들을 축구장 포지션에
 배치하는 웹앱을 만들고 싶어. fut.gg의 카드 생성 기능 같은 느낌이야.
 바로 만들지 말고, 먼저 내게 필요한 질문을 10개 내외로 해줘.
 (사용 기기, 카드 디자인, 능력치, 사진 처리, 축구장 기능, 저장 방식,
@@ -82,8 +75,9 @@ futgg 사이트에서 개발자도구 켜서 수작업으로 위치조정을 하
 내가 답하면:
 1.답변 내용을 SPEC.md로 정리하고
 2.화면 구성과 개발 단계 계획을 보여줘
-3.내가 승인하면 1단계부터 하나씩 만들어줘</div></p>
-<p><strong>🤖 Claude:</strong><br>
+3.내가 승인하면 1단계부터 하나씩 만들어줘</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong><br>
 좋아요! 바로 만들지 않고, 먼저 질문 드릴게요. 해당 번호에 답만 주시면 돼요. 잘 모르겠으면 **&ldquo;추천대로&rdquo;**라고 쓰셔도 됩니다. 괄호 안이 제 추천안이에요.</p>
 <hr>
 <h3 id="1-사용-기기">1. 사용 기기</h3>
@@ -148,8 +142,10 @@ futgg 사이트에서 개발자도구 켜서 수작업으로 위치조정을 하
 <p>카드 뽑기(팩 오픈) 애니메이션, 반짝이는 홀로그램 효과, 카드 뒤집기 같은 연출이 있으면 좋을까요?</p>
 <hr>
 <p>답을 주시면 <strong>SPEC.md 작성 → 화면 구성과 개발 단계 계획 제시 → 승인 후 1단계부터 개발</strong> 순서로 진행할게요.</p>
-
 </div>
+</div>
+</div>
+
 <p>내가 생각한것보다 훨씬 자세한 내용을
 다 정리해서 물어봐준다. 이게 &ldquo;알잘딱&rdquo;? 인가 ㅎㅎ</p>
 <p>대화하다 보니 알게 된 것이 <a href="https://github.com/imgly/background-removal-js">imgly/background-removal</a>이다.
@@ -161,17 +157,11 @@ AI 모델로 사진의 배경을 날려준다. 흔히 말하는 누끼 따기다
 <h3 id="11-카드생성">1.1. 카드생성</h3>
 <p>처음에는 정말 구리게 만들었다. 직각직각한 방패 모양이었다.</p>
 <p><strong>마음에 들지 않은 카드디자인</strong></p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 지금 fut.gg의 트렌딩을 캡쳐한 것인데  방패모양이 더 굴곡과 유려한 모양이고 뒤 배경이 더 화려하고 멋지잖아 , 그리고 사이드에 붙은 배지들이 속에 들어간것이 아니고 말이야,  일단 디자인에 대한 내용은 이렇고 진행해줘</div></p>
-<p><strong>🤖 Claude:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2026-10-09">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 지금 fut.gg의 트렌딩을 캡쳐한 것인데  방패모양이 더 굴곡과 유려한 모양이고 뒤 배경이 더 화려하고 멋지잖아 , 그리고 사이드에 붙은 배지들이 속에 들어간것이 아니고 말이야,  일단 디자인에 대한 내용은 이렇고 진행해줘</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong><br>
 디자인 방향 알겠어요. 정리하면 이렇게 반영할게요.</p>
 <ol>
 <li>카드 모양: 곡선이 살아 있는 유려한 방패</li>
@@ -181,22 +171,17 @@ AI 모델로 사진의 배경을 날려준다. 흔히 말하는 누끼 따기다
 </ol>
 <p>카드 디자인 리뉴얼</p>
 <p>(&hellip; 생략 &hellip;)</p>
-
 </div>
+</div>
+</div>
+
 <p>fut.gg 트렌딩 카드를 캡쳐해서 보여주면서 대충 말했을 뿐인데 여기서 &ldquo;알잘딱&quot;이 나왔다. 알아서 빛줄기, 리본, 반짝임까지 넣어서 배경을 화려하게 바꾸었다.</p>
 <h3 id="12-스쿼드-기능">1.2. 스쿼드 기능</h3>
 <p>알잘딱 모드가 켜진 채로 계속 진행했다.
 스쿼드 기능도 생각했던것보다 기능이 더 탄탄했다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><strong>🤖 Claude:</strong></p>
+<div class="chatlog" data-style="bubble" data-date="2026-10-09">
+<div class="chatlog-body">
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong></p>
 <p>5단계(스쿼드 빌더)를 시작할게요.</p>
 <p>(&hellip; 생략 &hellip;)</p>
 <p>5단계(스쿼드 빌더)가 끝났어요. 화면 위쪽에 <strong>카드 | 스쿼드</strong> 탭이 생겼어요.</p>
@@ -240,8 +225,10 @@ AI 모델로 사진의 배경을 날려준다. 흔히 말하는 누끼 따기다
   </tbody>
 </table>
 <p>(&hellip; 생략 &hellip;)</p>
-
 </div>
+</div>
+</div>
+
 <p>GPT였으면 이렇게 알아서 만들어줬을까? ㅎㅎ 호불호가 갈리는 부분인데
 시키지 않은 기능까지 건드린다고 싫어하는 사람도 있는 모양이다.
 내가 직접 컨트롤하고 싶은 부분이 많다면 오히려 불편할 수 있을 것 같다.</p>
@@ -272,17 +259,11 @@ github.io처럼 정적 파일을 서빙해 주는 호스팅인데 할 수 있는
 간단한 모션그래픽 제작은 대략 2~3샷이면 끝난다.
 먼저 좋은 모션그래픽에 필요한 중요 요소 10가지를 설명해 달라고 한다.
 그다음 그 요소를 바탕으로 역할을 주고 만들게 한다. 모션릴 제작자로서 &ldquo;카드앱&rdquo; 홍보 영상을 최선을 다해 만들라는 식이다.</p>
-
-
-
-
-
-
-
-
-<div class="chatlog">
-  <p><div class="user-bubble"><strong>User</strong>. 모션그래픽을 할 때 너가 가장 중요하다고 생각하는 10가지를 꼽아서 단순하게 설명해줘</div></p>
-<p><strong>🤖 Claude:</strong><br>
+<div class="chatlog" data-style="bubble" data-date="2026-10-09">
+<div class="chatlog-body">
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 모션그래픽을 할 때 너가 가장 중요하다고 생각하는 10가지를 꼽아서 단순하게 설명해줘</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong><br>
 모션그래픽에서 가장 중요한 10가지</p>
 <ol>
 <li>
@@ -328,12 +309,16 @@ github.io처럼 정적 파일을 서빙해 주는 호스팅인데 할 수 있는
 </ol>
 <hr>
 <p><strong>한 줄 요약:</strong> 이유 있는 움직임을, 자연스러운 속도로, 시선이 갈 곳이 분명하게 만드세요.</p>
-<p><div class="user-bubble"><strong>User</strong>. 이 10가지 중요한 점을 바탕으로 이력서용 쇼릴처럼 당신의 뛰어난 모션 디자이너로서의 면모를 보여주면서도 이 축구카드 웹앱을 설명하는 15초짜리 역동적인 광고를 만들어주세요 당신의 모든 걸 쏟아부으세요.</div></p>
-<p><strong>🤖 Claude:</strong></p>
+</div>
+<div class="chat-turn user-bubble" data-role="user"><p><strong>User</strong>. 이 10가지 중요한 점을 바탕으로 이력서용 쇼릴처럼 당신의 뛰어난 모션 디자이너로서의 면모를 보여주면서도 이 축구카드 웹앱을 설명하는 15초짜리 역동적인 광고를 만들어주세요 당신의 모든 걸 쏟아부으세요.</p>
+</div>
+<div class="chat-turn" data-role="ai" data-who="Claude"><p><strong>🤖 Claude:</strong></p>
 <p>15초 광고 모션 제작</p>
 <p>(&hellip; 생략 &hellip;)</p>
-
 </div>
+</div>
+</div>
+
 <p>맨 위의 홍보영상이 이렇게 만든 결과다.</p>
 <h2 id="3-후기">3. 후기</h2>
 <p>클로드는 만족스러웠다.
