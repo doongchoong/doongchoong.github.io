@@ -1,11 +1,48 @@
-{{ $content := .Inner | markdownify }}
+{{- /*
+  대화 기록. 줄 맨 앞의 화자 표기로 턴을 나눈다(코드블록 안은 무시).
+    사용자: **User**, **🙋 사용자:**
+    AI:     **🤖 ChatGPT:**, **🤖 Claude:** 처럼 🤖로 시작하는 것 (또는 **ChatGPT:**)
+  보기 방식: style="…" > front matter chatStyle > hugo.toml params.chatStyle > bubble
+    bubble  말풍선만 (기본)
+    crt     CRT 터미널 화면으로
+    toggle  말풍선으로 보여주고 "터미널로 보기" 버튼을 붙인다
+  crt/toggle일 때만 static/js/chatlog.js를 불러온다(partials/scripts.html).
+*/ -}}
+{{- $style := or (.Get "style") (.Page.Params.chatStyle) (site.Params.chatStyle) "bubble" -}}
+{{- if in (slice "crt" "toggle") $style }}{{ .Page.Store.Set "chatlogJS" true }}{{ end -}}
+{{- $label := `^\*\*(User|🙋[^*]*|🤖[^*]*|ChatGPT:?)\*\*` -}}
 
-{{/* 이제 HTML 안에서 <strong>User</strong> 찾기 */}}
-{{ $pattern := `<strong>User</strong>\.?\s*([^<]*)` }}
-{{ $replace := `<div class="user-bubble"><strong>User</strong>. $1</div>` }}
+{{- /* 줄 단위로 턴 나누기 */ -}}
+{{- $turns := slice -}}
+{{- $cur := "" -}}
+{{- $fence := false -}}
+{{- range split .Inner "\n" -}}
+  {{- if findRE (printf "^\\s*(%s|~~~)" "```") . 1 }}{{ $fence = not $fence }}{{ end -}}
+  {{- if and (not $fence) (findRE $label . 1) -}}
+    {{- $turns = $turns | append $cur -}}
+    {{- $cur = . -}}
+  {{- else -}}
+    {{- $cur = printf "%s\n%s" $cur . -}}
+  {{- end -}}
+{{- end -}}
+{{- $turns = $turns | append $cur -}}
 
-{{ $final := replaceRE $pattern $replace $content }}
-
-<div class="chatlog">
-  {{ $final | safeHTML }}
+<div class="chatlog" data-style="{{ $style }}" data-date="{{ .Page.Date.Format "2006-01-02" }}">
+<div class="chatlog-body">
+{{- range $turns }}
+  {{- $c := trim . "\n\r\t " }}
+  {{- if not $c }}{{ continue }}{{ end }}
+  {{- $m := findRESubmatch `^\*\*([^*\n]+)\*\*:?[ \t]*` $c 1 }}
+  {{- $name := cond (gt (len $m) 0) (index (index $m 0) 1) "" }}
+  {{- if not (findRE $label $c 1) }}
+<div class="chat-turn" data-role="sys">{{ $.Page.RenderString (dict "display" "block") $c }}</div>
+  {{- else if or (eq $name "User") (hasPrefix $name "🙋") }}
+    {{- $body := trim (strings.TrimPrefix (index (index $m 0) 0) $c) "\n\r\t " }}
+    {{- $dot := cond (hasSuffix $name ":") " " ". " }}
+<div class="chat-turn user-bubble" data-role="user">{{ $.Page.RenderString (dict "display" "block") (printf "**%s**%s%s" $name $dot $body) }}</div>
+  {{- else }}
+<div class="chat-turn" data-role="ai" data-who="{{ trim (replaceRE `^🤖` "" $name) " :" }}">{{ $.Page.RenderString (dict "display" "block") $c }}</div>
+  {{- end }}
+{{- end }}
+</div>
 </div>

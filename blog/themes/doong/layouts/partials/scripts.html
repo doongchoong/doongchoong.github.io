@@ -30,3 +30,8 @@
 {{- if strings.Contains $raw "mini-chart" }}
 <script src="/static/js/mini-chart.js"></script>
 {{- end }}
+
+{{- /* chatlog를 style="crt|toggle"로 쓴 글만 (숏코드가 표시해 둔다). CRT 본체는 chatlog.js가 필요할 때 불러온다. */ -}}
+{{- if .Store.Get "chatlogJS" }}
+<script src="/static/js/chatlog.js" defer></script>
+{{- end }}

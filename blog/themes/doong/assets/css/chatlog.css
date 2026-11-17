@@ -56,6 +56,76 @@
   border-left-color: #e9e9eb;
 }
 
-.gpt-line {
-  margin: 0.5em 0;
+/* 말풍선 안에 문단이 여러 개일 때 */
+.chatlog .user-bubble > p {
+  margin: 0;
+}
+
+.chatlog .user-bubble > * + * {
+  margin-top: 0.6em;
+}
+
+/* 말풍선 ↔ 터미널 전환 버튼 (static/js/chatlog.js가 붙인다) */
+.chatlog-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin: -10px -10px 4px 0;
+}
+
+.chatlog-toggle {
+  font: 12px/1.4 'Inter', sans-serif;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+.chatlog-toggle:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+/* CRT 모드: 상자 테두리를 걷고 화면만 */
+.chatlog.is-crt {
+  border-color: transparent;
+  max-width: none;
+  padding: 0;
+}
+
+.chatlog.is-crt .chatlog-bar {
+  margin: 0 0 6px;
+}
+
+.chatlog.is-crt > .chatlog-body,
+.chatlog:not(.is-crt) > .crt {
+  display: none;
+}
+
+/* CRT 화면 (static/js/crt-terminal.js) */
+.crt {
+  position: relative;
+  width: calc(100% - 20px);
+  aspect-ratio: 4 / 3;
+  margin: 10px 10px 30px;
+  border-radius: 18px;
+  background: #060606;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 0 1px #1d1d1f, 0 0 0 9px #101012, 0 0 0 10px #26262a, 0 22px 50px rgba(0, 0, 0, .35);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.crt:focus-visible {
+  box-shadow: 0 0 0 1px #1d1d1f, 0 0 0 9px #101012, 0 0 0 11px #6a6a70, 0 22px 50px rgba(0, 0, 0, .35);
+}
+
+.crt > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
