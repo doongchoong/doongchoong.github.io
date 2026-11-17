@@ -1,0 +1,8 @@
+name = "doong"
+license = "MIT"
+description = "둥충코딩 블로그 전용 테마. ddritzenhoff/ritzy(MIT)에서 출발했다."
+
+[original]
+  name = "ritzy"
+  homepage = "https://github.com/ddritzenhoff/ritzy"
+  author = "Dominik Ritzenhoff"

@@ -4,6 +4,7 @@ date: 2025-08-20T22:56:20+09:00
 draft: false
 toc : true
 tocBorder : true
+math: true
 ---
 
 페인트와 같이 점성이 높은 액체 방울을 떨어뜨렸을때
@@ -17,7 +18,7 @@ tocBorder : true
 ## 1. 공식
 
 $$
-C + (P - C) \cdot sqrt \left( 1 + \frac{r^2}{ \|\| P - C \|\|^2 } \right)
+C + (P - C) \cdot \sqrt{ 1 + \frac{r^2}{ \lVert P - C \rVert^2 } }
 $$
 
 원래 있던 방울 P 가 새로운 C 방울이 떨어졌을때 대한 내용이다. 

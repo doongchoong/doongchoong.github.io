@@ -1,0 +1,65 @@
+/* 코드 */
+pre {
+  background-color: var(--code-bg);
+  padding: 4px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 0;
+}
+
+code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+pre code {
+  display: block;
+  white-space: pre !important;
+  word-wrap: normal !important;
+  word-break: normal;
+  overflow-x: auto;
+}
+
+/* 인라인 코드 */
+p code, li code, h1 code, h2 code, h3 code {
+  background-color: var(--code-bg);
+  padding: 3px 5px;
+  border-radius: 3px;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* 코드블록 위 언어 이름 (layouts/_default/_markup/render-codeblock.html) */
+.code-block-wrapper {
+  margin: 1em 0;
+}
+
+.code-title {
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  min-height: 1.5em;
+}
+
+.highlight_wrap {
+  border: 1px solid var(--line);
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+}
+
+.highlight {
+  margin: 0;
+  padding: 4px 8px;
+}

@@ -1,7 +1,7 @@
 baseURL = "https://doongchoong.github.io"
 languageCode = "ko-kr"
 title = "둥충코딩"
-theme = "ritzy" 
+theme = "doong"
 publishDir = "../"
 staticDir="static"
 

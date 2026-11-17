@@ -1,0 +1,164 @@
+/* 첫 페이지: 소개 + 글 목록 */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content-column {
+  width: 100%;
+  max-width: 580px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.works-title {
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--text);
+}
+
+.work-item {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.work-link {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.work-link:hover {
+  opacity: 0.8;
+}
+
+.work-title {
+  font-weight: 500;
+}
+
+.year {
+  color: var(--muted);
+}
+
+.description {
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.contact {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* /posts/ 목록 */
+.posts-container {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.posts-header {
+  margin-bottom: 40px;
+}
+
+.posts-title {
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.posts-description {
+  color: var(--subtle);
+  margin-bottom: 30px;
+}
+
+.post-list {
+  margin-bottom: 40px;
+}
+
+.post-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.post-item:last-child {
+  border-bottom: none;
+}
+
+.post-link {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.post-link:hover .post-item-title {
+  color: var(--link);
+}
+
+.post-item-title {
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+
+.post-item-date {
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.post-item-description {
+  color: var(--subtle);
+  line-height: 1.5;
+}
+
+.posts-container .back-link {
+  margin-top: 20px;
+}
+
+/* 404 (JS가 꺼져 있을 때만 보임) */
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.not-found-title {
+  margin: 0 0 30px 0;
+}
+
+.not-found-message {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.not-found-link {
+  display: inline-block;
+  font-size: 15px;
+  padding: 8px 16px;
+  border: 1px solid var(--text);
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.not-found-link:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}

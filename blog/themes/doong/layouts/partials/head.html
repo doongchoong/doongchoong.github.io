@@ -1,0 +1,22 @@
+<meta charset="UTF-8" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ .Site.Params.description }}" />
+
+{{- /* 본문은 Noto Serif KR 400 하나. 굵은 글씨는 브라우저가 400을 두껍게 그린다(지금 모양 그대로).
+       Inter는 chatlog에서만 쓴다. */ -}}
+{{- $fonts := "family=Noto+Serif+KR:wght@400" }}
+{{- if .HasShortcode "chatlog" }}{{ $fonts = printf "family=Inter:wght@400;700&%s" $fonts }}{{ end }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="{{ printf "https://fonts.googleapis.com/css2?%s&display=swap" $fonts | safeURL }}" rel="stylesheet">
+
+{{- $css := slice
+  (resources.Get "css/base.css")
+  (resources.Get "css/code.css")
+  (resources.Get "css/post.css")
+  (resources.Get "css/pages.css")
+  (resources.Get "css/chatlog.css")
+  | resources.Concat "css/site.css" | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">

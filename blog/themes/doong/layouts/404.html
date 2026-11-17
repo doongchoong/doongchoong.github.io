@@ -1,0 +1,16 @@
+{{ define "main" }}
+<script>
+  // Immediately redirect to the homepage
+  window.location.href = "/";
+</script>
+<noscript>
+  <!-- Fallback for users with JavaScript disabled -->
+  <meta http-equiv="refresh" content="0;url=/" />
+  
+  <div class="not-found-container">
+    <h1 class="not-found-title">Page Not Found</h1>
+    <p class="not-found-message">The page you're looking for doesn't exist. You will be redirected to the homepage shortly.</p>
+    <a href="/" class="not-found-link">Go to Homepage</a>
+  </div>
+</noscript>
+{{ end }}
