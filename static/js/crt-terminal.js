@@ -1,5 +1,5 @@
 /* CRT 터미널: 대화를 옛날 CRT 화면에서 재생한다.
- * 원본: 이 파일 (blog/static/static/js/crt-terminal.js). 데모는 blog/static/embeds/crt-terminal.html
+ * 원본: 이 파일 (blog/static/static/js/crt-terminal.js). 웹챗에서 만든 데모에서 출발했다.
  * 사용: CRT.mount(el, [{role:'user'|'ai'|'sys', text}]) 또는 <div class="crt"><div class="crt-src">…</div></div>
  * chatlog 숏코드에서는 static/js/chatlog.js가 필요할 때 이 파일을 불러온다. */
 (function(){
