@@ -1,10 +1,41 @@
 {{- /* 글에서 쓰는 것만 불러온다. */ -}}
 {{- $raw := .RawContent -}}
 
+{{- /* 테마 전환 버튼 (theme이 고정된 글에는 버튼이 없다) */ -}}
+{{- if not .Params.theme }}
+<script>
+(function () {
+  var root = document.documentElement, mq = matchMedia('(prefers-color-scheme: dark)');
+  function saved() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
+  function set(t, save) {
+    root.setAttribute('data-theme', t);
+    if (save) try { localStorage.setItem('theme', t); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('themechange'));
+  }
+  document.querySelector('.theme-toggle').addEventListener('click', function () {
+    set(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+  });
+  // 직접 고른 적이 없으면 OS 설정이 바뀔 때 따라간다
+  mq.addEventListener && mq.addEventListener('change', function (e) {
+    if (!saved()) set(e.matches ? 'dark' : 'light', false);
+  });
+})();
+</script>
+{{- end }}
+
 {{- if .HasShortcode "mermaid" }}
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true{{ if eq .Params.theme "dark" }}, theme: 'dark'{{ end }} });
+  // 테마가 바뀌면 원문으로 되돌려 다시 그린다
+  const els = [...document.querySelectorAll('.mermaid')];
+  els.forEach(e => { e.dataset.src = e.innerHTML; });
+  async function draw() {
+    mermaid.initialize({ startOnLoad: false, theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default' });
+    els.forEach(e => { e.removeAttribute('data-processed'); e.innerHTML = e.dataset.src; });
+    await mermaid.run({ nodes: els });
+  }
+  draw();
+  document.addEventListener('themechange', draw);
 </script>
 {{- end }}
 

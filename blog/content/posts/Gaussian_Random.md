@@ -4,6 +4,7 @@ date: 2013-08-06T23:55:58+09:00
 draft: false
 toc : false
 tocBorder : true
+theme: light
 ---
 
 {{< raw >}}

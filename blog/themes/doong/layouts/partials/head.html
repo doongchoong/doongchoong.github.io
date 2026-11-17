@@ -3,6 +3,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ .Site.Params.description }}" />
+{{- /* 테마: front matter theme이 있으면 그 글은 고정(baseof.html). 없으면 저장된 선택 > OS 설정.
+       CSS보다 먼저 정해야 흰 화면이 번쩍이지 않는다. */ -}}
+{{- if not .Params.theme }}
+<script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
+{{- end }}
 
 {{- /* 본문은 Noto Serif KR 400 하나. 굵은 글씨는 브라우저가 400을 두껍게 그린다(지금 모양 그대로).
        Inter는 chatlog에서만 쓴다. */ -}}

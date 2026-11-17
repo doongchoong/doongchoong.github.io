@@ -56,7 +56,7 @@
 .contact {
   margin-top: 50px;
   padding-top: 30px;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--line-soft);
 }
 
 /* /posts/ 목록 */
@@ -87,7 +87,7 @@
 .post-item {
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--line-faint);
 }
 
 .post-item:last-child {

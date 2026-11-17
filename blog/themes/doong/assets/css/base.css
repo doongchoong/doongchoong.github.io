@@ -19,9 +19,11 @@
   --chat-code: #2c3e50;
   --chat-code-bg: #eef1f5;
   --bubble: #e9e9eb;
+  --line-soft: #e5e5e5;
+  --line-faint: #eee;
 }
 
-/* 어두운 글: front matter에 theme: dark (baseof.html이 <html data-theme="dark">로 붙인다) */
+/* 어두운 테마. <html data-theme="dark">: 상단 버튼이나 OS 설정(head.html), 또는 front matter theme: dark로 고정 */
 :root[data-theme="dark"] {
   color-scheme: dark;
   --text: #d6d3ce;
@@ -43,6 +45,8 @@
   --chat-code: #c9d4e0;
   --chat-code-bg: #2e2c2a;
   --bubble: #34322f;
+  --line-soft: #302e2c;
+  --line-faint: #2c2a28;
 }
 
 body {
@@ -91,4 +95,44 @@ a:hover {
   body { font-size: 15px; }
   h1 { font-size: 22px; }
   .container { padding: 40px 20px; }
+}
+
+/* 테마 전환 버튼 (baseof.html) */
+.theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+.theme-toggle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle .i-sun,
+[data-theme="dark"] .theme-toggle .i-moon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .i-sun {
+  display: block;
 }
