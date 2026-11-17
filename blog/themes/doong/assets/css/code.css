@@ -39,8 +39,8 @@ p code, li code, h1 code, h2 code, h3 code {
 }
 
 .code-title {
-  background: #f0f0f0;
-  color: #555;
+  background: var(--code-title-bg);
+  color: var(--code-title);
   font-size: 0.8rem;
   font-weight: bold;
   font-family: monospace;
@@ -56,7 +56,7 @@ p code, li code, h1 code, h2 code, h3 code {
 .highlight_wrap {
   border: 1px solid var(--line);
   border-radius: 0 0 6px 6px;
-  background: #fff;
+  background: var(--code-panel);
 }
 
 .highlight {

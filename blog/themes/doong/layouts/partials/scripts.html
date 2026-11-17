@@ -4,7 +4,7 @@
 {{- if .HasShortcode "mermaid" }}
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true });
+  mermaid.initialize({ startOnLoad: true{{ if eq .Params.theme "dark" }}, theme: 'dark'{{ end }} });
 </script>
 {{- end }}
 

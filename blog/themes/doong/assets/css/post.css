@@ -102,12 +102,12 @@ td:last-child {
 }
 
 thead {
-  background-color: #f0f0f5;
+  background-color: var(--table-head);
   font-weight: 600;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #fafafa;
+  background-color: var(--table-stripe);
 }
 
 /* MathJax 블록 수식: 넓으면 가로 스크롤, 위아래 여백으로 높은 글리프 공간 확보 */
